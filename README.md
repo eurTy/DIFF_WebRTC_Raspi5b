@@ -5,8 +5,9 @@
 当前版本定位：
 
 - 树莓派端负责摄像头原生 MJPEG 采集、WebRTC 网关和信令服务。
-- PC 浏览器当前作为中间测试端。
-- 后续手机端复用同一套浏览器 viewer 协议接入。
+- PC 浏览器当前作为中间测试端和协议验证平台。
+- 最终目标不是网页端，而是自研手机 App 的极低延迟视频接收与控制系统。
+- 后续手机 App 将采用“不确定性视频传输 + 确定性控制传输”的双通道架构。
 - 当前优化重点是控制码率、限制 DataChannel 缓冲堆积、减少日志和控制消息洪泛。
 
 当前发布版本：
@@ -15,6 +16,7 @@
 Web client version: 20260607b
 Target viewer: PC browser now, mobile browser next
 Pi address in current test LAN: 192.168.3.19
+Final target: native mobile App
 ```
 
 ## 技术路线
@@ -38,6 +40,67 @@ USB 摄像头
 - `webrtc-gateway`：读取共享内存，创建 WebRTC PeerConnection，通过 `control` 和 `video` 两个 DataChannel 发送数据。
 - `signaling-server`：Node.js + `ws`，提供网页和 WebSocket 信令转发。
 - `public/index.html`：浏览器 viewer，处理 offer/answer、ICE、DataChannel、JPEG 分片重组和渲染。
+
+## 最终手机 App 规划
+
+当前 WebRTC 网页 viewer 是验证平台，用于快速验证摄像头采集、JPEG 分片、重组、渲染、码率和延迟统计。最终产品形态规划为自研手机 App，传输层会从浏览器友好的 WebRTC DataChannel 逐步过渡到 App 可直接接收的 UDP 视频通道。
+
+最终目标架构：
+
+```text
+Raspberry Pi 5
+  -> UGREEN Camera native MJPEG
+  -> video-processor latest-frame shared memory
+  -> low-latency sender
+       |                                  |
+       | UDP unreliable video channel      | reliable control channel
+       v                                  v
+Mobile App
+  -> latest-only JPEG reassembly/render    -> state/control/heartbeat/latency feedback
+```
+
+### 不确定性视频通道
+
+视频通道以极低延迟为目标，允许丢包、丢帧和乱序，不做视频分片重传。
+
+设计规则：
+
+- 每帧都是独立 MJPEG/JPEG 图像，不依赖前后帧。
+- 新 `frame_id` 到达时，App 端立即删除更旧的未完成帧。
+- 缺分片超过短时间窗口后直接丢弃该帧，不等待、不补帧。
+- 树莓派端发送队列有积压时直接丢旧帧，只发送最新帧。
+- UDP 包大小目标控制在约 1200 bytes，避免 IP 层分片。
+
+该通道的目标不是完整保存每一帧，而是让手机端永远尽可能显示最新画面。
+
+### 确定性控制通道
+
+可靠控制通道不承载主视频，只负责必须到达的控制与状态信息。
+
+计划承载：
+
+- start / stop / reconnect
+- 心跳与在线状态
+- 摄像头分辨率、帧率、曝光、增益、锐度参数
+- 端到端 latency、fps、Mbps、drop rate 统计
+- App 端反馈的网络拥塞状态
+- 请求关键帧或请求降低码率
+
+初期可使用 TCP 或 WebSocket，后续可以评估 QUIC。控制通道可靠，视频通道不可靠，两者职责必须分离。
+
+### 与 H264/H265 的差异化
+
+传统 H264/H265 侧重压缩率，通常依赖 GOP、参考帧、编码缓冲和解码缓冲；在弱网或拥塞时，旧帧可能继续排队，导致显示延迟累积。
+
+本项目的差异化目标：
+
+- 延迟优先，不追求最高压缩率。
+- 每帧独立，旧帧无价值，可随时丢弃。
+- 传输策略主动丢旧帧，而不是排队等待。
+- App 端渲染 latest-only，不重传视频分片。
+- 后续扩展 `DIFF-MJPEG / ROI tile`，静态背景低频整帧，运动区域高频局部更新。
+
+因此本项目不是复刻传统视频编码链路，而是面向低延迟视觉状态同步的传输方案。
 
 ## 仓库结构
 
@@ -355,8 +418,10 @@ docker compose restart webrtc-gateway video-processor
 
 ## 下一步计划
 
-- 在 PC 端确认 `fps`、`Mbps` 和延迟稳定后，再切到手机浏览器。
-- 手机端继续使用 `role=viewer`，不改变树莓派侧协议。
-- 根据手机端实际表现继续调整 `CAMERA_FPS`、`CAMERA_SHARPNESS`、曝光/增益、`FRAGMENT_MAX_SIZE` 和 `VIDEO_BUFFER_HIGH_WATERMARK`。
-- 增加丢帧/丢分片统计，区分“网关主动丢帧”和“浏览器缺分片未渲染”。
-- 评估是否增加 WebSocket/JPEG fallback，用于非 WebRTC 环境下的诊断。
+- 保留 WebRTC 网页 viewer 作为验证平台，用于观察 `fps`、`Mbps`、画面质量和初步延迟。
+- 新增 App 专用 `udp-video-sender`，读取共享内存最新 MJPEG 帧，以约 1200 bytes UDP packet 分片发送。
+- 手机 App 端实现 latest-only 重组策略：新帧到达即丢弃旧帧，缺分片超时即丢帧，不做视频重传。
+- 可靠控制通道先采用 TCP 或 WebSocket，承载心跳、摄像头参数、延迟统计和拥塞反馈。
+- 每帧加入 `capture_timestamp_ms`，App 渲染时计算端到端 `latency_ms`。
+- 根据 App 实测继续调整 `CAMERA_FPS`、`CAMERA_SHARPNESS`、曝光/增益、UDP 分片大小和发送端高水位。
+- 第二阶段评估 `DIFF-MJPEG / ROI tile`，减少静止区域重复发送，形成区别于传统 H264/H265 的低延迟视觉同步方案。
