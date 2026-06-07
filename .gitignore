@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+webrtc_test/
+.venv/
+venv/
+__pycache__/
+
+# Build outputs
+build/
+cmake-build-*/
+dist/
+out/
+*.o
+*.so
+*.a
+*.exe
+
+# Runtime artifacts
+*.log
+*.pid
+*.bak-*
+*.tmp
+*.swp
+
+# Local media and captures
+_video_frames/
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets
+.env
+.env.*
+id_rsa
+id_ed25519

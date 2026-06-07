@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pi WebRTC Video</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #101418;
+      color: #eef4f8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background: #101418;
+    }
+
+    header,
+    footer {
+      padding: 12px 14px;
+      background: #1a2229;
+      border-color: #2c3943;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #2c3943;
+      gap: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 650;
+    }
+
+    .status {
+      font-size: 13px;
+      color: #9ed7ff;
+      white-space: nowrap;
+    }
+
+    main {
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 1280px;
+      max-height: calc(100vh - 116px);
+      object-fit: contain;
+      background: #06080a;
+      border: 1px solid #26333d;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid #2c3943;
+      font-size: 12px;
+      color: #b9c7d0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pi WebRTC Video</h1>
+    <div class="status" id="status">connecting</div>
+  </header>
+
+  <main>
+    <img id="video" alt="video stream">
+  </main>
+
+  <footer>
+    <span id="frames">0 frames</span>
+    <span id="bytes">0 KB</span>
+  </footer>
+
+  <script>
+    const MAGIC = 0x56504631;
+    const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260606b`;
+    const statusEl = document.getElementById('status');
+    const frameEl = document.getElementById('frames');
+    const bytesEl = document.getElementById('bytes');
+    const videoEl = document.getElementById('video');
+
+    let pc;
+    let ws;
+    let controlChannel;
+    let videoChannel;
+    let lastObjectUrl;
+    let frameCount = 0;
+    let byteCount = 0;
+    let signalQueue = Promise.resolve();
+    const pendingCandidates = [];
+    const frames = new Map();
+
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    function ensureFrame(frameId, totalFragments, totalBytes) {
+      if (!frames.has(frameId)) {
+        frames.set(frameId, {
+          totalFragments,
+          totalBytes,
+          chunks: new Array(totalFragments),
+          received: 0,
+          receivedBytes: 0,
+          createdAt: Date.now(),
+        });
+      }
+      return frames.get(frameId);
+    }
+
+    function pruneFrames() {
+      const now = Date.now();
+      for (const [frameId, frame] of frames) {
+        if (now - frame.createdAt > 2000 || frames.size > 8) {
+          frames.delete(frameId);
+        }
+      }
+    }
+
+    function renderFrame(frameId) {
+      const frame = frames.get(frameId);
+      if (!frame || frame.received !== frame.totalFragments) {
+        return;
+      }
+
+      const blob = new Blob(frame.chunks, { type: 'image/jpeg' });
+      const url = URL.createObjectURL(blob);
+      videoEl.src = url;
+      if (lastObjectUrl) {
+        URL.revokeObjectURL(lastObjectUrl);
+      }
+      lastObjectUrl = url;
+
+      frameCount += 1;
+      byteCount += frame.receivedBytes;
+      frameEl.textContent = `${frameCount} frames`;
+      bytesEl.textContent = `${Math.round(byteCount / 1024)} KB`;
+      setStatus(`streaming ${frameId}`);
+      frames.delete(frameId);
+    }
+
+    function handleControlMessage(text) {
+      const msg = JSON.parse(text);
+      if (msg.type === 'frame_start') {
+        ensureFrame(msg.frame_id, msg.total_fragments, msg.total_bytes || 0);
+      } else if (msg.type === 'frame_end') {
+        renderFrame(msg.frame_id);
+      } else if (msg.type === 'skip_frame') {
+        if (frameCount === 0) {
+          setStatus(`waiting frame ${msg.frame_id}`);
+        }
+      }
+      pruneFrames();
+    }
+
+    async function handleVideoMessage(data) {
+      const buffer = data instanceof ArrayBuffer ? data : await data.arrayBuffer();
+      if (buffer.byteLength < 16) {
+        return;
+      }
+
+      const view = new DataView(buffer);
+      if (view.getUint32(0) !== MAGIC) {
+        return;
+      }
+
+      const frameId = view.getUint32(4);
+      const fragIdx = view.getUint16(8);
+      const fragTotal = view.getUint16(10);
+      const payloadLen = view.getUint32(12);
+      const payload = buffer.slice(16, 16 + payloadLen);
+      const frame = ensureFrame(frameId, fragTotal, 0);
+
+      if (!frame.chunks[fragIdx]) {
+        frame.chunks[fragIdx] = payload;
+        frame.received += 1;
+        frame.receivedBytes += payloadLen;
+      }
+
+      if (frame.received === frame.totalFragments) {
+        renderFrame(frameId);
+      }
+      pruneFrames();
+    }
+
+    function closePeerConnection() {
+      if (pc) {
+        pc.onicecandidate = null;
+        pc.onconnectionstatechange = null;
+        pc.ondatachannel = null;
+        pc.close();
+      }
+      pc = null;
+      controlChannel = null;
+      videoChannel = null;
+      pendingCandidates.length = 0;
+    }
+
+    function setupPeerConnection() {
+      pc = new RTCPeerConnection({
+        iceServers: [{ urls: 'stun:stun.l.google.com:19302' }],
+      });
+
+      pc.onicecandidate = ({ candidate }) => {
+        if (candidate && ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({
+            candidate: candidate.candidate,
+            sdpMid: candidate.sdpMid,
+            sdpMLineIndex: candidate.sdpMLineIndex,
+          }));
+        }
+      };
+
+      pc.onconnectionstatechange = () => {
+        setStatus(pc.connectionState);
+      };
+
+      pc.ondatachannel = ({ channel }) => {
+        channel.binaryType = 'arraybuffer';
+        if (channel.label === 'control') {
+          controlChannel = channel;
+          controlChannel.onmessage = (event) => handleControlMessage(event.data);
+        } else if (channel.label === 'video') {
+          videoChannel = channel;
+          videoChannel.onmessage = (event) => handleVideoMessage(event.data);
+        }
+        channel.onopen = () => setStatus(`${channel.label} open`);
+        channel.onclose = () => setStatus(`${channel.label} closed`);
+      };
+    }
+
+    function normalizeCandidate(msg) {
+      let candidate = msg.candidate || '';
+      if (candidate.startsWith('a=candidate:')) {
+        candidate = candidate.substring(2);
+      }
+      return {
+        candidate,
+        sdpMid: msg.sdpMid || '0',
+        sdpMLineIndex: msg.sdpMLineIndex ?? 0,
+      };
+    }
+
+    async function addRemoteCandidate(msg) {
+      const candidate = normalizeCandidate(msg);
+      if (!pc.remoteDescription) {
+        pendingCandidates.push(candidate);
+        return;
+      }
+      await pc.addIceCandidate(candidate);
+    }
+
+    async function flushPendingCandidates() {
+      while (pendingCandidates.length > 0 && pc.remoteDescription) {
+        await pc.addIceCandidate(pendingCandidates.shift());
+      }
+    }
+
+    async function handleSignal(text) {
+      const msg = JSON.parse(text);
+      if (msg.type === 'server_warning') {
+        setStatus(msg.message || 'server warning');
+        return;
+      }
+      if (msg.type === 'offer' && msg.sdp) {
+        if (pc.remoteDescription || pc.signalingState !== 'stable') {
+          closePeerConnection();
+          setupPeerConnection();
+        }
+        await pc.setRemoteDescription({ type: 'offer', sdp: msg.sdp });
+        await flushPendingCandidates();
+        const answer = await pc.createAnswer();
+        await pc.setLocalDescription(answer);
+        ws.send(JSON.stringify({ type: 'answer', sdp: answer.sdp }));
+      } else if (msg.type === 'answer' && msg.sdp) {
+        await pc.setRemoteDescription({ type: 'answer', sdp: msg.sdp });
+        await flushPendingCandidates();
+      } else if (msg.candidate) {
+        await addRemoteCandidate(msg);
+      }
+    }
+
+    function connect() {
+      closePeerConnection();
+      signalQueue = Promise.resolve();
+      setupPeerConnection();
+      ws = new WebSocket(wsUrl);
+      ws.onopen = () => setStatus('signaling open');
+      ws.onmessage = (event) => {
+        signalQueue = signalQueue.then(() => handleSignal(event.data)).catch((error) => {
+          console.error(error);
+          setStatus('signal error');
+        });
+      };
+      ws.onclose = () => {
+        setStatus('signaling closed');
+      };
+      ws.onerror = () => setStatus('ws error');
+    }
+
+    connect();
+  </script>
+</body>
+</html>

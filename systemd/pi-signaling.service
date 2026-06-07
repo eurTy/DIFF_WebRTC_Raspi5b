@@ -1,0 +1,16 @@
+[Unit]
+Description=Pi WebRTC signaling server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=eur
+WorkingDirectory=/home/eur/signaling-server
+ExecStart=/usr/bin/node /home/eur/signaling-server/server.js
+Restart=always
+RestartSec=2
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
