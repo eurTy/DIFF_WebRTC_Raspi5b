@@ -1,10 +1,10 @@
 # DIFF WebRTC Raspi5B
 
-树莓派 5 低延迟视频传输项目。当前版本已经完成从 USB 摄像头采集、共享内存传递、WebRTC DataChannel 建连、浏览器端 JPEG 重组显示的端到端联调，并进入第二阶段长时间运行优化。
+树莓派 5 低延迟视频传输项目。当前版本已经完成从 USB 摄像头原生 MJPEG 采集、共享内存传递、WebRTC DataChannel 建连、浏览器端 JPEG 重组显示的端到端联调，并进入第二阶段长时间运行优化。
 
 当前版本定位：
 
-- 树莓派端负责摄像头采集、帧差判断、WebRTC 网关和信令服务。
+- 树莓派端负责摄像头原生 MJPEG 采集、WebRTC 网关和信令服务。
 - PC 浏览器当前作为中间测试端。
 - 后续手机端复用同一套浏览器 viewer 协议接入。
 - 当前优化重点是控制码率、限制 DataChannel 缓冲堆积、减少日志和控制消息洪泛。
@@ -12,7 +12,7 @@
 当前发布版本：
 
 ```text
-Web client version: 20260607a
+Web client version: 20260607b
 Target viewer: PC browser now, mobile browser next
 Pi address in current test LAN: 192.168.3.19
 ```
@@ -24,7 +24,7 @@ Pi address in current test LAN: 192.168.3.19
 ```text
 USB 摄像头
   -> video-processor 容器
-  -> MJPEG/JPEG 帧 + 帧差检测
+  -> V4L2 mmap 读取摄像头原生 MJPEG 压缩帧
   -> /dev/shm/video_shm 共享内存
   -> webrtc-gateway 容器
   -> WebRTC DataChannel
@@ -34,7 +34,7 @@ USB 摄像头
 
 主要组件：
 
-- `video-processor`：OpenCV 读取 `/dev/video0`，检测画面变化，周期性生成关键帧，写入共享内存。
+- `video-processor`：V4L2 读取 `/dev/video0` 原生 MJPEG bytes，直接写入共享内存，不再做 OpenCV 解码和二次 JPEG 编码。
 - `webrtc-gateway`：读取共享内存，创建 WebRTC PeerConnection，通过 `control` 和 `video` 两个 DataChannel 发送数据。
 - `signaling-server`：Node.js + `ws`，提供网页和 WebSocket 信令转发。
 - `public/index.html`：浏览器 viewer，处理 offer/answer、ICE、DataChannel、JPEG 分片重组和渲染。
@@ -91,7 +91,7 @@ MJPG 1280x720 30fps
 MJPG 640x480 30fps
 ```
 
-当前代码按 `1280x720`、`30fps`、`MJPG` 方向采集，实际发送由帧差、关键帧间隔和网关缓冲控制共同决定。
+当前代码按 `1280x720`、`10fps`、`MJPG` 方向采集，优先使用摄像头自身 MJPEG 压缩能力。实际发送仍受网关 `bufferedAmount()` 流控保护。
 
 ## 部署步骤
 
@@ -162,15 +162,18 @@ docker compose logs --tail=80 webrtc-gateway
 已改为成功渲染后显示 streaming <frame_id>。
 ```
 
-第二阶段优化已经开始：
+第二阶段优化已经完成第一轮：
 
-- 降低 JPEG 质量到 70，减少局域网带宽和浏览器解码压力。
+- `video-processor` 从 OpenCV `VideoCapture + imencode` 改为 V4L2 `mmap` 原生 MJPEG 读取。
+- 移除树莓派端二次 JPEG 压缩，减少 CPU、延迟和重压缩画质损失。
+- 默认采集参数改为 `1280x720@10fps MJPG`，更适合后续手机端先跑通。
 - 将应用层视频分片从 60KB 降到 24KB，降低 DataChannel 单包过大导致的抖动风险。
 - `webrtc-gateway` 增加 `bufferedAmount()` 高水位保护，视频通道积压超过 512KB 时丢弃旧帧，优先保持实时性。
+- 共享内存增加 `write_idx` 写入序号语义，网关避免读取半写入帧，降低花屏/破帧概率。
 - 浏览器 footer 增加实时 `fps` 和 `Mbps` 统计，后续可以用它判断手机端是否稳定。
 - 页面状态只在真实渲染后显示 `streaming <frame_id>`，避免 `skip_frame` 误导为断线。
 
-本轮录屏暴露的问题不是“连接失败”，而是“端到端已经跑通后，长时间传输需要限码率和限缓冲”。因此当前优化方向不是重写架构，而是在既有架构上做流控。
+本轮录屏暴露的问题不是“连接失败”，而是“端到端已经跑通后，长时间传输需要限码率、限缓冲和避免重压缩”。因此当前优化方向不是重写架构，而是在既有架构上改为摄像头 MJPEG 直通。
 
 ## 关键协议
 
@@ -185,7 +188,7 @@ ws://127.0.0.1:8080/?role=gateway
 浏览器连接：
 
 ```text
-ws://<pi-ip>:8080/?role=viewer&v=20260607a
+ws://<pi-ip>:8080/?role=viewer&v=20260607b
 ```
 
 ### DataChannel
@@ -215,20 +218,22 @@ struct VideoFragmentHeader {
 
 ### video-processor
 
-当前发送策略保留帧差检测，同时加入最小关键帧间隔，避免运动画面下无限制发送：
+当前发送策略直接读取摄像头原生 MJPEG 压缩帧：
 
 ```cpp
 const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
-const int jpeg_quality = 70;
-const int target_video_fps = 10;
-const uint32_t keyframe_interval_frames = 60;
+CAMERA_WIDTH=1280
+CAMERA_HEIGHT=720
+CAMERA_FPS=10
+CAMERA_SHARPNESS=4
 ```
 
 含义：
 
-- 静止画面下约每 2 秒有周期关键帧刷新。
-- 运动画面下最多按约 10fps 方向输出关键帧。
-- JPEG 质量先降到 70，优先换取稳定性和手机端可用性。
+- 摄像头自己输出 MJPEG，不再由树莓派二次 JPEG 编码。
+- 默认 10fps 是为了先保证手机端稳定性；PC 端稳定后可以尝试 15fps。
+- `CAMERA_SHARPNESS=4` 比摄像头默认值 5 略低，用于减少边缘过锐和锯齿感。
+- 如需锁定曝光，可通过环境变量增加 `CAMERA_EXPOSURE`、`CAMERA_GAIN`、`CAMERA_BACKLIGHT`。
 
 ### webrtc-gateway
 
@@ -288,14 +293,14 @@ Chrome/Edge 会把局域网 IP 隐藏为 mDNS `.local` 地址，树莓派端 lib
 
 ### 5. 静止画面长期只有跳帧
 
-`video-processor` 当前使用帧号周期关键帧作为双保险：
+旧版本 `video-processor` 使用帧差检测和周期关键帧：
 
 ```cpp
 const uint32_t keyframe_interval_frames = 60;
 bool is_periodic_keyframe = (frame_id <= 1) || (frame_id % keyframe_interval_frames == 0);
 ```
 
-即使画面静止，也会约每 2 秒发送一次 JPEG 关键帧。
+当前原生 MJPEG 版本不再做帧差检测，而是让摄像头按 `CAMERA_FPS` 直接输出压缩帧。这样减少 CPU 和重压缩损失，但会牺牲静止画面下的极限省流量能力。
 
 ### 6. 长时间运行日志和 skip 控制消息洪泛
 
@@ -352,6 +357,6 @@ docker compose restart webrtc-gateway video-processor
 
 - 在 PC 端确认 `fps`、`Mbps` 和延迟稳定后，再切到手机浏览器。
 - 手机端继续使用 `role=viewer`，不改变树莓派侧协议。
-- 根据手机端实际表现继续调整 `jpeg_quality`、`target_video_fps`、`FRAGMENT_MAX_SIZE` 和 `VIDEO_BUFFER_HIGH_WATERMARK`。
+- 根据手机端实际表现继续调整 `CAMERA_FPS`、`CAMERA_SHARPNESS`、曝光/增益、`FRAGMENT_MAX_SIZE` 和 `VIDEO_BUFFER_HIGH_WATERMARK`。
 - 增加丢帧/丢分片统计，区分“网关主动丢帧”和“浏览器缺分片未渲染”。
 - 评估是否增加 WebSocket/JPEG fallback，用于非 WebRTC 环境下的诊断。

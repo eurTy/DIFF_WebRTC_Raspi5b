@@ -11,7 +11,6 @@ RUN sed -i 's/ports.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
-    libopencv-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 创建工作目录
@@ -24,6 +23,5 @@ COPY src/ ./src/
 # 编译程序
 RUN mkdir build && cd build && cmake .. && make
 
-# 设置运行时路径（如果使用动态库，但 OpenCV 已安装到系统路径，无需额外设置）
 # CMD 运行编译好的可执行文件
 CMD ["./build/video_processor"]

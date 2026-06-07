@@ -52,6 +52,29 @@ struct __attribute__((packed)) VideoFragmentHeader {
 const uint32_t VIDEO_FRAGMENT_MAGIC = 0x56504631; // "VPF1"
 const size_t VIDEO_BUFFER_HIGH_WATERMARK = 512 * 1024;
 const uint32_t VIDEO_DROP_LOG_INTERVAL = 30;
+const uint32_t VIDEO_SEND_LOG_INTERVAL = 30;
+
+bool readStableHeader(const ShmHeader* header, ShmHeader& out) {
+    for (int attempt = 0; attempt < 3; ++attempt) {
+        const uint32_t seq1 = header->write_idx;
+        if ((seq1 & 1U) != 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            continue;
+        }
+
+        std::atomic_thread_fence(std::memory_order_acquire);
+        ShmHeader snapshot = *header;
+        std::atomic_thread_fence(std::memory_order_acquire);
+
+        const uint32_t seq2 = header->write_idx;
+        if (seq1 == seq2 && (seq2 & 1U) == 0) {
+            out = snapshot;
+            return true;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    }
+    return false;
+}
 
 // ==================== WebSocket 信令客户端 ====================
 static struct lws_context* context = nullptr;
@@ -348,10 +371,19 @@ int main() {
     const uint32_t skip_log_interval_frames = 60;
 
     while (running) {
-        ShmHeader h = *header;
+        ShmHeader h{};
+        if (!readStableHeader(header, h)) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+            continue;
+        }
+        if (h.frame_size == 0 && h.frag_total == 0 && h.flags == 0) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            continue;
+        }
         if (h.frame_id != last_frame_id) {
             const bool is_skip_frame = (h.flags & 1) != 0;
-            if (!is_skip_frame || h.frame_id % skip_log_interval_frames == 0) {
+            if ((!is_skip_frame && h.frame_id % VIDEO_SEND_LOG_INTERVAL == 0) ||
+                (is_skip_frame && h.frame_id % skip_log_interval_frames == 0)) {
                 std::cout << "[Gateway] New frame detected: id=" << h.frame_id
                           << ", flags=" << h.flags
                           << ", fragments=" << h.frag_total
@@ -400,10 +432,12 @@ int main() {
                 start["total_bytes"] = h.frame_size;
                 reliableChannel->send(start.dump());
 
-                std::cout << "[Gateway] Sending frame " << h.frame_id
-                          << ", fragments=" << h.frag_total
-                          << ", bytes=" << h.frame_size
-                          << ", buffered=" << bufferedAmount << std::endl;
+                if (h.frame_id % VIDEO_SEND_LOG_INTERVAL == 0) {
+                    std::cout << "[Gateway] Sending frame " << h.frame_id
+                              << ", fragments=" << h.frag_total
+                              << ", bytes=" << h.frame_size
+                              << ", buffered=" << bufferedAmount << std::endl;
+                }
 
                 // 发送每个分片
                 for (uint32_t i = 0; i < h.frag_total; ++i) {

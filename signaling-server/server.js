@@ -6,7 +6,7 @@ const WebSocket = require('ws');
 
 const PORT = Number(process.env.PORT || 8080);
 const PUBLIC_DIR = path.join(__dirname, 'public');
-const CLIENT_VERSION = '20260607a';
+const CLIENT_VERSION = '20260607b';
 
 const MIME_TYPES = {
     '.html': 'text/html; charset=utf-8',
