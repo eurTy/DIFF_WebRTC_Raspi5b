@@ -24,7 +24,7 @@ struct ShmHeader {
 const char* SHM_NAME = "/video_shm";
 const size_t SHM_SIZE = 128 * 1024 * 1024;  // 128MB
 const size_t HEADER_SIZE = sizeof(ShmHeader);
-const size_t FRAGMENT_MAX_SIZE = 60 * 1024; // 60KB
+const size_t FRAGMENT_MAX_SIZE = 24 * 1024; // Keep DataChannel messages small for mobile clients.
 
 float motionDetection(const cv::Mat& prev, const cv::Mat& curr) {
     cv::Mat diff, thresh;
@@ -69,8 +69,11 @@ int main() {
     cv::Mat frame, gray, prev_gray;
     uint32_t frame_id = 0;
     const float motion_threshold = 0.05f;
+    const int jpeg_quality = 70;
+    const int target_video_fps = 10;
     const int keyframe_interval_sec = 30;
     const uint32_t keyframe_interval_frames = 60; // Debug-safe refresh: about 2 seconds at 30 fps.
+    const auto min_keyframe_interval = std::chrono::milliseconds(1000 / target_video_fps);
     auto last_keyframe_time = std::chrono::steady_clock::now();
 
     while (true) {
@@ -86,11 +89,14 @@ int main() {
         prev_gray = gray.clone();
 
         auto now = std::chrono::steady_clock::now();
-        bool is_periodic_keyframe = (frame_id <= 1) || (frame_id % keyframe_interval_frames == 0);
+        bool is_initial_keyframe = (frame_id <= 1);
+        bool is_periodic_keyframe = (frame_id % keyframe_interval_frames == 0);
         bool is_timed_keyframe = std::chrono::duration_cast<std::chrono::seconds>(now - last_keyframe_time).count() >= keyframe_interval_sec;
-        bool is_keyframe = is_periodic_keyframe ||
-                           (change_ratio >= motion_threshold) ||
-                           is_timed_keyframe;
+        bool is_candidate_keyframe = is_periodic_keyframe ||
+                                     (change_ratio >= motion_threshold) ||
+                                     is_timed_keyframe;
+        bool interval_ready = (now - last_keyframe_time) >= min_keyframe_interval;
+        bool is_keyframe = is_initial_keyframe || (is_candidate_keyframe && interval_ready);
 
         if (!is_keyframe) {
             // 跳帧
@@ -108,7 +114,7 @@ int main() {
         } else {
             // 编码为 JPEG
             std::vector<uchar> jpeg_buf;
-            cv::imencode(".jpg", frame, jpeg_buf, {cv::IMWRITE_JPEG_QUALITY, 85});
+            cv::imencode(".jpg", frame, jpeg_buf, {cv::IMWRITE_JPEG_QUALITY, jpeg_quality});
             size_t data_len = jpeg_buf.size();
             uint32_t frag_total = (data_len + FRAGMENT_MAX_SIZE - 1) / FRAGMENT_MAX_SIZE;
 
@@ -127,7 +133,9 @@ int main() {
             header->keyframe_interval = keyframe_interval_sec;
             header->last_feedback_time = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
             header->frame_id = frame_id;
-            std::cout << "Send keyframe " << frame_id << ", fragments=" << frag_total << std::endl;
+            std::cout << "Send keyframe " << frame_id
+                      << ", bytes=" << data_len
+                      << ", fragments=" << frag_total << std::endl;
             last_keyframe_time = now;
         }
         ++frame_id;

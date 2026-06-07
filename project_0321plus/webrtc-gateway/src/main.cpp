@@ -39,7 +39,7 @@ struct ShmHeader {
 const char* SHM_NAME = "/video_shm";
 const size_t SHM_SIZE = 128 * 1024 * 1024;
 const size_t HEADER_SIZE = sizeof(ShmHeader);
-const size_t FRAGMENT_MAX_SIZE = 60 * 1024;
+const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
 
 struct __attribute__((packed)) VideoFragmentHeader {
     uint32_t magic;
@@ -50,6 +50,8 @@ struct __attribute__((packed)) VideoFragmentHeader {
 };
 
 const uint32_t VIDEO_FRAGMENT_MAGIC = 0x56504631; // "VPF1"
+const size_t VIDEO_BUFFER_HIGH_WATERMARK = 512 * 1024;
+const uint32_t VIDEO_DROP_LOG_INTERVAL = 30;
 
 // ==================== WebSocket 信令客户端 ====================
 static struct lws_context* context = nullptr;
@@ -380,6 +382,16 @@ int main() {
                     continue;
                 }
 
+                const size_t bufferedAmount = unreliableChannel->bufferedAmount();
+                if (bufferedAmount > VIDEO_BUFFER_HIGH_WATERMARK) {
+                    if (h.frame_id % VIDEO_DROP_LOG_INTERVAL == 0) {
+                        std::cerr << "[Gateway] Video channel buffered=" << bufferedAmount
+                                  << " bytes, dropping frame " << h.frame_id << std::endl;
+                    }
+                    last_frame_id = h.frame_id;
+                    continue;
+                }
+
                 // 关键帧：发送元数据
                 json start;
                 start["type"] = "frame_start";
@@ -387,6 +399,11 @@ int main() {
                 start["total_fragments"] = h.frag_total;
                 start["total_bytes"] = h.frame_size;
                 reliableChannel->send(start.dump());
+
+                std::cout << "[Gateway] Sending frame " << h.frame_id
+                          << ", fragments=" << h.frag_total
+                          << ", bytes=" << h.frame_size
+                          << ", buffered=" << bufferedAmount << std::endl;
 
                 // 发送每个分片
                 for (uint32_t i = 0; i < h.frag_total; ++i) {
@@ -404,8 +421,6 @@ int main() {
                     memcpy(packet.data(), &fragmentHeader, sizeof(VideoFragmentHeader));
                     memcpy(packet.data() + sizeof(VideoFragmentHeader), data_start + offset, len);
 
-                    std::cout << "[Gateway] Sending fragment " << i << "/" << h.frag_total
-                              << ", size=" << len << std::endl;
                     unreliableChannel->send(packet.data(), packet.size());
                 }
 

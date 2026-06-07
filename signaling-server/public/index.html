@@ -90,15 +90,17 @@
 
   <footer>
     <span id="frames">0 frames</span>
+    <span id="stats">0.0 fps | 0.00 Mbps</span>
     <span id="bytes">0 KB</span>
   </footer>
 
   <script>
     const MAGIC = 0x56504631;
-    const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260606b`;
+    const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260607a`;
     const statusEl = document.getElementById('status');
     const frameEl = document.getElementById('frames');
     const bytesEl = document.getElementById('bytes');
+    const statsEl = document.getElementById('stats');
     const videoEl = document.getElementById('video');
 
     let pc;
@@ -108,6 +110,9 @@
     let lastObjectUrl;
     let frameCount = 0;
     let byteCount = 0;
+    let statsStart = performance.now();
+    let statsFrames = 0;
+    let statsBytes = 0;
     let signalQueue = Promise.resolve();
     const pendingCandidates = [];
     const frames = new Map();
@@ -155,8 +160,19 @@
 
       frameCount += 1;
       byteCount += frame.receivedBytes;
+      statsFrames += 1;
+      statsBytes += frame.receivedBytes;
       frameEl.textContent = `${frameCount} frames`;
       bytesEl.textContent = `${Math.round(byteCount / 1024)} KB`;
+      const elapsed = (performance.now() - statsStart) / 1000;
+      if (elapsed >= 1) {
+        const fps = statsFrames / elapsed;
+        const mbps = (statsBytes * 8) / elapsed / 1024 / 1024;
+        statsEl.textContent = `${fps.toFixed(1)} fps | ${mbps.toFixed(2)} Mbps`;
+        statsStart = performance.now();
+        statsFrames = 0;
+        statsBytes = 0;
+      }
       setStatus(`streaming ${frameId}`);
       frames.delete(frameId);
     }

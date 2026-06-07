@@ -1,12 +1,21 @@
 # DIFF WebRTC Raspi5B
 
-树莓派 5 低延迟视频传输第一版。当前版本已经完成从 USB 摄像头采集、共享内存传递、WebRTC DataChannel 建连、浏览器端 JPEG 重组显示的端到端联调。
+树莓派 5 低延迟视频传输项目。当前版本已经完成从 USB 摄像头采集、共享内存传递、WebRTC DataChannel 建连、浏览器端 JPEG 重组显示的端到端联调，并进入第二阶段长时间运行优化。
 
 当前版本定位：
 
 - 树莓派端负责摄像头采集、帧差判断、WebRTC 网关和信令服务。
 - PC 浏览器当前作为中间测试端。
 - 后续手机端复用同一套浏览器 viewer 协议接入。
+- 当前优化重点是控制码率、限制 DataChannel 缓冲堆积、减少日志和控制消息洪泛。
+
+当前发布版本：
+
+```text
+Web client version: 20260607a
+Target viewer: PC browser now, mobile browser next
+Pi address in current test LAN: 192.168.3.19
+```
 
 ## 技术路线
 
@@ -82,7 +91,7 @@ MJPG 1280x720 30fps
 MJPG 640x480 30fps
 ```
 
-当前代码按 `1280x720`、`30fps`、`MJPG` 方向运行。
+当前代码按 `1280x720`、`30fps`、`MJPG` 方向采集，实际发送由帧差、关键帧间隔和网关缓冲控制共同决定。
 
 ## 部署步骤
 
@@ -153,6 +162,16 @@ docker compose logs --tail=80 webrtc-gateway
 已改为成功渲染后显示 streaming <frame_id>。
 ```
 
+第二阶段优化已经开始：
+
+- 降低 JPEG 质量到 70，减少局域网带宽和浏览器解码压力。
+- 将应用层视频分片从 60KB 降到 24KB，降低 DataChannel 单包过大导致的抖动风险。
+- `webrtc-gateway` 增加 `bufferedAmount()` 高水位保护，视频通道积压超过 512KB 时丢弃旧帧，优先保持实时性。
+- 浏览器 footer 增加实时 `fps` 和 `Mbps` 统计，后续可以用它判断手机端是否稳定。
+- 页面状态只在真实渲染后显示 `streaming <frame_id>`，避免 `skip_frame` 误导为断线。
+
+本轮录屏暴露的问题不是“连接失败”，而是“端到端已经跑通后，长时间传输需要限码率和限缓冲”。因此当前优化方向不是重写架构，而是在既有架构上做流控。
+
 ## 关键协议
 
 ### 信令角色
@@ -166,7 +185,7 @@ ws://127.0.0.1:8080/?role=gateway
 浏览器连接：
 
 ```text
-ws://<pi-ip>:8080/?role=viewer&v=20260606b
+ws://<pi-ip>:8080/?role=viewer&v=20260607a
 ```
 
 ### DataChannel
@@ -191,6 +210,53 @@ struct VideoFragmentHeader {
 ```
 
 浏览器端按 `frame_id` 聚合所有分片，收齐后生成 JPEG Blob 并显示到 `<img>`。
+
+## 关键参数
+
+### video-processor
+
+当前发送策略保留帧差检测，同时加入最小关键帧间隔，避免运动画面下无限制发送：
+
+```cpp
+const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
+const int jpeg_quality = 70;
+const int target_video_fps = 10;
+const uint32_t keyframe_interval_frames = 60;
+```
+
+含义：
+
+- 静止画面下约每 2 秒有周期关键帧刷新。
+- 运动画面下最多按约 10fps 方向输出关键帧。
+- JPEG 质量先降到 70，优先换取稳定性和手机端可用性。
+
+### webrtc-gateway
+
+网关读取共享内存后通过 WebRTC DataChannel 发送。当前加入发送端缓冲保护：
+
+```cpp
+const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
+const size_t VIDEO_BUFFER_HIGH_WATERMARK = 512 * 1024;
+```
+
+含义：
+
+- 视频分片保持与 `video-processor` 一致。
+- 如果 `video` DataChannel 已积压超过 512KB，当前帧会被丢弃。
+- 该策略牺牲完整帧率，换取实时性，避免浏览器越看越延迟。
+
+### browser viewer
+
+浏览器端显示三类运行指标：
+
+```text
+frames: 已成功渲染帧数
+fps: 最近约 1 秒成功渲染帧率
+Mbps: 最近约 1 秒浏览器收到并渲染的 JPEG 数据码率
+KB: 累计渲染数据量
+```
+
+如果页面能显示 `streaming <frame_id>` 且 `frames` 持续增加，说明 WebRTC 链路和 JPEG 重组是通的。
 
 ## 已解决问题
 
@@ -284,9 +350,8 @@ docker compose restart webrtc-gateway video-processor
 
 ## 下一步计划
 
-- 将 PC viewer 迁移为手机 viewer。
+- 在 PC 端确认 `fps`、`Mbps` 和延迟稳定后，再切到手机浏览器。
 - 手机端继续使用 `role=viewer`，不改变树莓派侧协议。
-- 增加页面端连接质量统计和丢包统计。
-- 根据实际延迟调整 `keyframe_interval_frames`、JPEG quality 和分片大小。
+- 根据手机端实际表现继续调整 `jpeg_quality`、`target_video_fps`、`FRAGMENT_MAX_SIZE` 和 `VIDEO_BUFFER_HIGH_WATERMARK`。
+- 增加丢帧/丢分片统计，区分“网关主动丢帧”和“浏览器缺分片未渲染”。
 - 评估是否增加 WebSocket/JPEG fallback，用于非 WebRTC 环境下的诊断。
-
