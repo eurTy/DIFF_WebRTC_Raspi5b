@@ -122,12 +122,18 @@ Mobile App
 │   ├── package-lock.json
 │   ├── server.js
 │   └── public/index.html
+├── early_yuyv_dct_lz4/
+│   ├── README.md
+│   ├── core_project_0205/
+│   └── related_experiments/
 ├── systemd/
 │   └── pi-signaling.service
 └── README.md
 ```
 
 `libdatachannel` 以源码副本放入仓库，原因是树莓派端网络不稳定时 Docker 构建不能依赖实时从 GitHub 拉取源码。
+
+`early_yuyv_dct_lz4` 是早期“YUYV/DCT/LZ4 变化域”路线归档，用来保留频域低频系数压缩和 UDP 发送的原型代码，不属于当前主线运行链路。
 
 ## 当前实测环境
 
