@@ -19,6 +19,8 @@ Pi address in current test LAN: 192.168.3.19
 Final target: native mobile App
 ```
 
+2026-10-08 保存点：保留 `1280x720` 原生 MJPEG 画质，部署参数为 `30fps`，增加实时延迟、画面年龄和有界重组；无线抖动造成的秒级卡顿尚未解决。完整数据、尝试记录、测量边界及回退方法见 [本日优化记录](docs/latency/2026-10-08/README.md)。此版本是实验检查点，不是稳定超低延迟发布版。
+
 ## 技术路线
 
 本项目没有使用传统 WebRTC 摄像头媒体轨道，而是采用自定义 JPEG 分片传输：
@@ -160,7 +162,7 @@ MJPG 1280x720 30fps
 MJPG 640x480 30fps
 ```
 
-当前代码按 `1280x720`、`10fps`、`MJPG` 方向采集，优先使用摄像头自身 MJPEG 压缩能力。实际发送仍受网关 `bufferedAmount()` 流控保护。
+当前 Compose 按 `1280x720`、`30fps`、`MJPG` 采集，保留摄像头自身 MJPEG 压缩数据，不做二次编码。实际浏览器帧率受网络、网关流控及不完整帧丢弃影响，不保证达到 30fps；采集程序未配置环境变量时仍回退到 10fps。
 
 ## 部署步骤
 
@@ -231,7 +233,7 @@ docker compose logs --tail=80 webrtc-gateway
 已改为成功渲染后显示 streaming <frame_id>。
 ```
 
-第二阶段优化已经完成第一轮：
+第二阶段第一轮历史改动如下，10fps / 512KB 为当时参数；当前保存点参数见下文：
 
 - `video-processor` 从 OpenCV `VideoCapture + imencode` 改为 V4L2 `mmap` 原生 MJPEG 读取。
 - 移除树莓派端二次 JPEG 压缩，减少 CPU、延迟和重压缩画质损失。
@@ -263,13 +265,13 @@ ws://<pi-ip>:8080/?role=viewer&v=20260607b
 ### DataChannel
 
 ```text
-control: 可靠通道，发送 frame_start、frame_end、skip_frame。
+control: 可靠通道，发送 frame_start、frame_end、skip_frame 和时钟校准消息。
 video: 不可靠通道，发送 JPEG 二进制分片。
 ```
 
 ### 视频分片包头
 
-每个 `video` DataChannel 消息前 16 字节为分片头：
+当前 VPF2 的每个 `video` DataChannel 消息前 24 字节为分片头，所有整数采用网络字节序。浏览器仍能接收旧版 VPF1 的 16 字节包头：
 
 ```cpp
 struct VideoFragmentHeader {
@@ -278,10 +280,12 @@ struct VideoFragmentHeader {
     uint16_t frag_idx;
     uint16_t frag_total;
     uint32_t payload_len;
+    uint32_t published_hi;
+    uint32_t published_lo;
 };
 ```
 
-浏览器端按 `frame_id` 聚合所有分片，收齐后生成 JPEG Blob 并显示到 `<img>`。
+VPF2 magic 为 `0x56504632`。`published_hi * 2^32 + published_lo` 是共享内存发布时间（毫秒）。时间戳与图像分片同行，不必等待可靠通道元数据才能计算延迟。浏览器按 `frame_id` 重组，最多保留两个未完成帧，超过 120ms 丢弃；收齐后生成 JPEG Blob 并显示到 `<img>`，拒绝旧帧覆盖新帧。仍保留原来的逐帧控制消息。
 
 ## 关键参数
 
@@ -293,14 +297,16 @@ struct VideoFragmentHeader {
 const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
 CAMERA_WIDTH=1280
 CAMERA_HEIGHT=720
-CAMERA_FPS=10
+CAMERA_FPS=30
+CAMERA_BUFFERS=2
 CAMERA_SHARPNESS=4
 ```
 
 含义：
 
 - 摄像头自己输出 MJPEG，不再由树莓派二次 JPEG 编码。
-- 默认 10fps 是为了先保证手机端稳定性；PC 端稳定后可以尝试 15fps。
+- 当前部署为 30fps，驱动确认接受；MMAP 申请两个缓冲区，出队积压时仅发布最新帧。
+- 未调低分辨率、锐度或 JPEG 量化质量。10fps 与 30fps 实测 JPEG 量化表哈希一致。
 - `CAMERA_SHARPNESS=4` 比摄像头默认值 5 略低，用于减少边缘过锐和锯齿感。
 - 如需锁定曝光，可通过环境变量增加 `CAMERA_EXPOSURE`、`CAMERA_GAIN`、`CAMERA_BACKLIGHT`。
 
@@ -310,14 +316,15 @@ CAMERA_SHARPNESS=4
 
 ```cpp
 const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
-const size_t VIDEO_BUFFER_HIGH_WATERMARK = 512 * 1024;
+const size_t VIDEO_BUFFER_HIGH_WATERMARK = 128 * 1024;
 ```
 
 含义：
 
-- 视频分片保持与 `video-processor` 一致。
-- 如果 `video` DataChannel 已积压超过 512KB，当前帧会被丢弃。
-- 该策略牺牲完整帧率，换取实时性，避免浏览器越看越延迟。
+- 默认视频分片为 24KiB，可通过 `VIDEO_FRAGMENT_BYTES` 指定 512 至 32768 bytes。共享内存中的分片字段不再决定网络分片数。
+- 网关轮询周期从 10ms 缩短至 1ms，复制整帧后复核写入序号，避免读到半写入图像。
+- 应用层待发送量超过 128KiB 时暂不发送，恢复时重新读取最新共享内存帧；发布时间已超过 100ms 的帧不再发送。
+- 该阈值只限制应用层可见排队，不能清空 SCTP 内部队列，也不是端到端延迟上限。当前无线环境仍有秒级停顿。
 
 ### browser viewer
 
@@ -420,6 +427,28 @@ v4l2-ctl -d /dev/video0 --list-formats-ext
 sudo systemctl restart pi-signaling.service
 cd /home/eur/project_0321plus
 docker compose restart webrtc-gateway video-processor
+```
+
+## 网页实时延迟
+
+网页底部显示当前帧延迟、画面年龄、近 10 秒平均值、P95 和时钟误差估计。
+
+- 测量起点是采集程序将 JPEG 写入共享内存时的 `steady_clock` 毫秒时间，字段名沿用 `last_feedback_time`；它不是摄像头曝光时间。
+- 网关通过 VPF2 包头和 `frame_start.published_steady_ms` 发送该时间。浏览器在当前 JPEG 的 `img.decode()` 完成后记录终点，按帧 ID 匹配，兼容旧版元数据晚于视频到达的情况。
+- `control` DataChannel 上的四时间戳请求/回复估算两个单调时钟的偏移。使用最近 30 秒内 RTT 最小的有效样本，启动时加密探测，随后每秒一次。
+- 时钟误差显示为最小有效 RTT 的一半加 1 ms 时间戳量化误差的估计；链路不对称和时钟漂移仍可能影响结果，不是硬件精度保证。
+- 画面年龄在没有新帧时继续增长；平均和 P95 只计算最近 10 秒解码成功且有时间戳的帧。解码失败的帧不计入延迟样本。
+- 尚未取得三次校准回复、校准超过 10 秒未更新或连接断开时，不显示虚假的延迟数值。
+- 不包含摄像头曝光/读出、内部 MJPEG 编码、V4L2 出队前等待及显示器刷新，因此不能称为完整的光学端到端延迟。
+
+实时延迟本身不改变共享内存 ABI。要完整部署本次采集及网关优化，需同步网页的 `index.html`、`latency.js`、`video-frames.js`、测试文件及 Compose 配置，并重建两个容器：
+
+```bash
+cd /home/eur/project_0321plus
+docker compose build video-processor webrtc-gateway
+docker compose up -d
+cd /home/eur/signaling-server
+npm test
 ```
 
 ## 下一步计划

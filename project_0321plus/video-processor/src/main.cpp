@@ -188,7 +188,7 @@ int openCamera(const std::string& device, uint32_t width, uint32_t height, uint3
 
 std::vector<Buffer> initMmapBuffers(int fd) {
     v4l2_requestbuffers req{};
-    req.count = 4;
+    req.count = std::clamp(envUInt("CAMERA_BUFFERS", 2), 2U, 8U);
     req.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     req.memory = V4L2_MEMORY_MMAP;
     if (xioctl(fd, VIDIOC_REQBUFS, &req) < 0) {
@@ -350,6 +350,7 @@ int main() {
     uint32_t frameId = 0;
     uint32_t writeSeq = 0;
     uint32_t invalidJpegCount = 0;
+    uint32_t drainedFrames = 0;
     const size_t maxFrameSize = SHM_SIZE - HEADER_SIZE;
 
     while (true) {
@@ -369,9 +370,26 @@ int main() {
             break;
         }
 
+        // If capture fell behind, return queued old buffers and publish only the newest one.
+        for (size_t queued = 1; queued < buffers.size(); ++queued) {
+            v4l2_buffer newer{};
+            newer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
+            newer.memory = V4L2_MEMORY_MMAP;
+            if (xioctl(cameraFd, VIDIOC_DQBUF, &newer) < 0) break;
+            if (xioctl(cameraFd, VIDIOC_QBUF, &buf) < 0) {
+                std::cerr << "[Camera] Could not return old buffer" << std::endl;
+            }
+            buf = newer;
+            ++drainedFrames;
+        }
+        if (buf.index >= buffers.size()) {
+            std::cerr << "[Camera] Invalid buffer index" << std::endl;
+            break;
+        }
         const uint8_t* frameData = static_cast<const uint8_t*>(buffers[buf.index].start);
         const size_t frameSize = buf.bytesused;
-        if (frameSize > 0 && frameSize <= maxFrameSize) {
+        if (!(buf.flags & V4L2_BUF_FLAG_ERROR) && frameSize > 0 &&
+            frameSize <= maxFrameSize && frameSize <= buffers[buf.index].length) {
             if (!looksLikeJpeg(frameData, frameSize)) {
                 ++invalidJpegCount;
                 if (invalidJpegCount % LOG_INTERVAL_FRAMES == 1) {
@@ -385,7 +403,8 @@ int main() {
                         static_cast<uint32_t>((frameSize + FRAGMENT_MAX_SIZE - 1) / FRAGMENT_MAX_SIZE);
                     std::cout << "[VideoProcessor] Send native MJPEG frame " << frameId
                               << ", bytes=" << frameSize
-                              << ", fragments=" << fragTotal << std::endl;
+                              << ", fragments=" << fragTotal
+                              << ", drained=" << drainedFrames << std::endl;
                 }
                 ++frameId;
             }

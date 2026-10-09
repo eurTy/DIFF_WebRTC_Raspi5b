@@ -19,6 +19,7 @@
 #include <cstddef>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 using json = nlohmann::json;
 
@@ -47,12 +48,27 @@ struct __attribute__((packed)) VideoFragmentHeader {
     uint16_t frag_idx;
     uint16_t frag_total;
     uint32_t payload_len;
+    uint32_t published_hi;
+    uint32_t published_lo;
 };
 
-const uint32_t VIDEO_FRAGMENT_MAGIC = 0x56504631; // "VPF1"
-const size_t VIDEO_BUFFER_HIGH_WATERMARK = 512 * 1024;
+const uint32_t VIDEO_FRAGMENT_MAGIC = 0x56504632; // "VPF2"
+const size_t VIDEO_BUFFER_HIGH_WATERMARK = 128 * 1024;
 const uint32_t VIDEO_DROP_LOG_INTERVAL = 30;
 const uint32_t VIDEO_SEND_LOG_INTERVAL = 30;
+
+uint32_t envUInt(const char* name, uint32_t fallback, uint32_t minimum, uint32_t maximum) {
+    const char* value = std::getenv(name);
+    if (!value) return fallback;
+    try { return static_cast<uint32_t>(std::clamp(std::stoul(value),
+        static_cast<unsigned long>(minimum), static_cast<unsigned long>(maximum))); }
+    catch (...) { return fallback; }
+}
+
+double steadyMilliseconds() {
+    return std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now().time_since_epoch()).count();
+}
 
 bool readStableHeader(const ShmHeader* header, ShmHeader& out) {
     for (int attempt = 0; attempt < 3; ++attempt) {
@@ -234,8 +250,6 @@ std::shared_ptr<rtc::DataChannel> reliableChannel;
 std::shared_ptr<rtc::DataChannel> unreliableChannel;
 
 void setupWebRTC() {
-    rtc::InitLogger(rtc::LogLevel::Debug);
-
     rtc::Configuration config;
     config.iceServers.emplace_back("stun:stun.l.google.com:19302");
 
@@ -283,6 +297,23 @@ void setupWebRTC() {
     std::cout << "[WebRTC] DataChannels created" << std::endl;
 
     reliableChannel->onOpen([]() { std::cout << "[WebRTC] Reliable channel opened" << std::endl; });
+    reliableChannel->onMessage([](rtc::message_variant data) {
+        const double received = steadyMilliseconds();
+        const auto* text = std::get_if<std::string>(&data);
+        if (!text || text->size() > 1024) return;
+        try {
+            const json request = json::parse(*text);
+            if (request.value("type", std::string()) != "latency_clock_request") return;
+            json response;
+            response["type"] = "latency_clock_response";
+            response["request_id"] = request.at("request_id");
+            response["server_receive_ms"] = received;
+            response["server_send_ms"] = steadyMilliseconds();
+            reliableChannel->send(response.dump());
+        } catch (const std::exception& error) {
+            std::cerr << "[Latency] Clock request rejected: " << error.what() << std::endl;
+        }
+    });
     unreliableChannel->onOpen([]() { std::cout << "[WebRTC] Unreliable channel opened" << std::endl; });
 }
 
@@ -311,7 +342,7 @@ void handleSignalingMessage(const std::string& msg) {
 
 // ==================== 主函数 ====================
 int main() {
-    rtc::InitLogger(rtc::LogLevel::Debug);
+    rtc::InitLogger(rtc::LogLevel::Warning);
     std::cout << "WebRTC Gateway Starting..." << std::endl;
 
     const std::string signalingIp = "127.0.0.1";
@@ -366,9 +397,14 @@ int main() {
     std::cout << "[Main] Shared memory mapped successfully" << std::endl;
 
     uint32_t last_frame_id = static_cast<uint32_t>(-1);
+    uint32_t last_announced_frame = static_cast<uint32_t>(-1);
+    uint32_t last_backpressure_log = static_cast<uint32_t>(-1);
     auto last_skip_control_time = std::chrono::steady_clock::now() - std::chrono::seconds(2);
     const auto skip_control_interval = std::chrono::milliseconds(1000);
     const uint32_t skip_log_interval_frames = 60;
+    const size_t fragmentSize = envUInt("VIDEO_FRAGMENT_BYTES", FRAGMENT_MAX_SIZE, 512, 32768);
+    std::vector<uint8_t> frameCopy;
+    std::vector<std::byte> packet(sizeof(VideoFragmentHeader) + fragmentSize);
 
     while (running) {
         ShmHeader h{};
@@ -377,13 +413,15 @@ int main() {
             continue;
         }
         if (h.frame_size == 0 && h.frag_total == 0 && h.flags == 0) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
             continue;
         }
         if (h.frame_id != last_frame_id) {
             const bool is_skip_frame = (h.flags & 1) != 0;
-            if ((!is_skip_frame && h.frame_id % VIDEO_SEND_LOG_INTERVAL == 0) ||
-                (is_skip_frame && h.frame_id % skip_log_interval_frames == 0)) {
+            if (h.frame_id != last_announced_frame &&
+                ((!is_skip_frame && h.frame_id % VIDEO_SEND_LOG_INTERVAL == 0) ||
+                 (is_skip_frame && h.frame_id % skip_log_interval_frames == 0))) {
+                last_announced_frame = h.frame_id;
                 std::cout << "[Gateway] New frame detected: id=" << h.frame_id
                           << ", flags=" << h.flags
                           << ", fragments=" << h.frag_total
@@ -406,58 +444,67 @@ int main() {
                     continue;
                 }
 
-                uint32_t expected_fragments = (h.frame_size + FRAGMENT_MAX_SIZE - 1) / FRAGMENT_MAX_SIZE;
-                if (h.frag_total != expected_fragments) {
-                    std::cerr << "[Gateway] Fragment count mismatch, header=" << h.frag_total
-                              << ", expected=" << expected_fragments << std::endl;
-                    last_frame_id = h.frame_id;
+                const double now = steadyMilliseconds();
+                if (now - h.last_feedback_time > 100) {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1));
                     continue;
                 }
+                const uint32_t transportFragments = static_cast<uint32_t>(
+                    (h.frame_size + fragmentSize - 1) / fragmentSize);
+                if (transportFragments > 65535) { last_frame_id = h.frame_id; continue; }
 
                 const size_t bufferedAmount = unreliableChannel->bufferedAmount();
                 if (bufferedAmount > VIDEO_BUFFER_HIGH_WATERMARK) {
-                    if (h.frame_id % VIDEO_DROP_LOG_INTERVAL == 0) {
+                    if (h.frame_id != last_backpressure_log && h.frame_id % VIDEO_DROP_LOG_INTERVAL == 0) {
+                        last_backpressure_log = h.frame_id;
                         std::cerr << "[Gateway] Video channel buffered=" << bufferedAmount
                                   << " bytes, dropping frame " << h.frame_id << std::endl;
                     }
-                    last_frame_id = h.frame_id;
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1));
                     continue;
                 }
 
-                // 关键帧：发送元数据
+                // Validate the payload as well as the header before releasing it to SCTP.
+                frameCopy.resize(h.frame_size);
+                memcpy(frameCopy.data(), data_start, h.frame_size);
+                std::atomic_thread_fence(std::memory_order_acquire);
+                if (header->write_idx != h.write_idx) continue;
+
                 json start;
                 start["type"] = "frame_start";
                 start["frame_id"] = h.frame_id;
-                start["total_fragments"] = h.frag_total;
+                start["total_fragments"] = transportFragments;
                 start["total_bytes"] = h.frame_size;
+                start["published_steady_ms"] = h.last_feedback_time;
+                start["gateway_steady_ms"] = steadyMilliseconds();
                 reliableChannel->send(start.dump());
 
                 if (h.frame_id % VIDEO_SEND_LOG_INTERVAL == 0) {
                     std::cout << "[Gateway] Sending frame " << h.frame_id
-                              << ", fragments=" << h.frag_total
+                              << ", fragments=" << transportFragments
                               << ", bytes=" << h.frame_size
                               << ", buffered=" << bufferedAmount << std::endl;
                 }
 
                 // 发送每个分片
-                for (uint32_t i = 0; i < h.frag_total; ++i) {
-                    size_t offset = i * FRAGMENT_MAX_SIZE;
+                for (uint32_t i = 0; i < transportFragments; ++i) {
+                    size_t offset = i * fragmentSize;
                     size_t remaining = h.frame_size - offset;
-                    size_t len = std::min(FRAGMENT_MAX_SIZE, remaining);
+                    size_t len = std::min(fragmentSize, remaining);
                     VideoFragmentHeader fragmentHeader;
                     fragmentHeader.magic = htonl(VIDEO_FRAGMENT_MAGIC);
                     fragmentHeader.frame_id = htonl(h.frame_id);
                     fragmentHeader.frag_idx = htons(static_cast<uint16_t>(i));
-                    fragmentHeader.frag_total = htons(static_cast<uint16_t>(h.frag_total));
+                    fragmentHeader.frag_total = htons(static_cast<uint16_t>(transportFragments));
                     fragmentHeader.payload_len = htonl(static_cast<uint32_t>(len));
+                    fragmentHeader.published_hi = htonl(static_cast<uint32_t>(h.last_feedback_time >> 32));
+                    fragmentHeader.published_lo = htonl(static_cast<uint32_t>(h.last_feedback_time));
 
-                    std::vector<std::byte> packet(sizeof(VideoFragmentHeader) + len);
                     memcpy(packet.data(), &fragmentHeader, sizeof(VideoFragmentHeader));
-                    memcpy(packet.data() + sizeof(VideoFragmentHeader), data_start + offset, len);
+                    memcpy(packet.data() + sizeof(VideoFragmentHeader), frameCopy.data() + offset, len);
 
-                    unreliableChannel->send(packet.data(), packet.size());
+                    unreliableChannel->send(packet.data(), sizeof(VideoFragmentHeader) + len);
                 }
-
                 json end;
                 end["type"] = "frame_end";
                 end["frame_id"] = h.frame_id;
@@ -465,7 +512,7 @@ int main() {
             }
             last_frame_id = h.frame_id;
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
     munmap(shm_ptr, SHM_SIZE);

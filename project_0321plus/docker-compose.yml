@@ -10,7 +10,8 @@ services:
       CAMERA_DEVICE: /dev/video0
       CAMERA_WIDTH: "1280"
       CAMERA_HEIGHT: "720"
-      CAMERA_FPS: "10"
+      CAMERA_FPS: "30"
+      CAMERA_BUFFERS: "2"
       CAMERA_SHARPNESS: "4"
     volumes:
       - v_shm:/dev/shm            # 共享内存卷

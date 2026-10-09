@@ -20,7 +20,7 @@
       margin: 0;
       min-height: 100vh;
       display: grid;
-      grid-template-rows: auto 1fr auto;
+      grid-template-rows: auto minmax(180px, 1fr) auto auto;
       background: #101418;
     }
 
@@ -48,7 +48,7 @@
     .status {
       font-size: 13px;
       color: #9ed7ff;
-      white-space: nowrap;
+      overflow-wrap: anywhere;
     }
 
     main {
@@ -62,7 +62,8 @@
       display: block;
       width: 100%;
       max-width: 1280px;
-      max-height: calc(100vh - 116px);
+      max-height: max(180px, calc(100vh - 240px));
+      aspect-ratio: 16 / 9;
       object-fit: contain;
       background: #06080a;
       border: 1px solid #26333d;
@@ -70,12 +71,36 @@
 
     footer {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       gap: 12px;
       border-top: 1px solid #2c3943;
       font-size: 12px;
       color: #b9c7d0;
     }
+
+    .latency-bar {
+      padding: 12px 14px;
+      border-top: 1px solid #2c3943;
+      background: #151b20;
+    }
+
+    .latency-heading {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: #b9c7d0;
+      font-size: 12px;
+    }
+
+    .latency-heading h2 { margin: 0; font-size: 12px; font-weight: 500; }
+    #latency-state { color: #81dbc1; }
+    .latency-metrics { margin: 12px 0 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+    .latency-metrics dt { color: #b9c7d0; font-size: 12px; margin-bottom: 4px; }
+    .latency-metrics dd { margin: 0; font-size: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    #latency-age[data-stalled="true"] { color: #ffbe7d; }
+    @media (max-width: 700px) { .latency-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
@@ -88,12 +113,29 @@
     <img id="video" alt="video stream">
   </main>
 
+  <section class="latency-bar" aria-label="JPEG 链路延迟">
+    <div class="latency-heading">
+      <h2 title="JPEG 写入共享内存到浏览器解码完成；不包含摄像头内部采集、编码和显示器刷新">JPEG 输出 → 解码</h2>
+      <span id="latency-state">校准中</span>
+    </div>
+    <dl class="latency-metrics">
+      <div><dt>当前帧延迟</dt><dd id="latency-current">-- ms</dd></div>
+      <div><dt>画面年龄</dt><dd id="latency-age">-- ms</dd></div>
+      <div><dt>近 10 秒平均</dt><dd id="latency-mean">-- ms</dd></div>
+      <div><dt>P95 / 10 秒</dt><dd id="latency-p95">-- ms</dd></div>
+      <div><dt>时钟误差估计</dt><dd id="latency-error">-- ms</dd></div>
+    </dl>
+  </section>
+
   <footer>
     <span id="frames">0 frames</span>
     <span id="stats">0.0 fps | 0.00 Mbps</span>
     <span id="bytes">0 KB</span>
+    <span id="drops">丢弃 0 帧</span>
   </footer>
 
+  <script src="/latency.js?v=20261008"></script>
+  <script src="/video-frames.js?v=20261008"></script>
   <script>
     const MAGIC = 0x56504631;
     const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260607b`;
@@ -102,6 +144,34 @@
     const bytesEl = document.getElementById('bytes');
     const statsEl = document.getElementById('stats');
     const videoEl = document.getElementById('video');
+    const dropsEl = document.getElementById('drops');
+    const latency = new VideoLatency.LatencyTracker();
+    const latencyEls = Object.fromEntries(['current', 'age', 'mean', 'p95', 'error', 'state'].map(name => [name, document.getElementById(`latency-${name}`)]));
+    let latencyGeneration = 0;
+    let nextClockProbe = 0;
+    let lastVideoReceived = 0;
+
+    function updateLatency() {
+      const sample = latency.snapshot();
+      const format = value => Number.isFinite(value) ? `${Math.round(value)} ms` : '-- ms';
+      latencyEls.current.textContent = format(sample.delayMs);
+      latencyEls.age.textContent = format(sample.ageMs);
+      latencyEls.mean.textContent = format(sample.meanMs);
+      latencyEls.p95.textContent = format(sample.p95Ms);
+      latencyEls.error.textContent = Number.isFinite(sample.uncertaintyMs) ? `±${Math.ceil(sample.uncertaintyMs)} ms` : '-- ms';
+      const labels = { calibrating: '校准中', stale: '校准失效', waiting: '等待帧时间', invalid: '时钟精度不足', ready: `10 秒内 ${sample.count} 帧` };
+      latencyEls.state.textContent = document.hidden ? '后台标签页' : labels[sample.state];
+      latencyEls.age.dataset.stalled = String(lastVideoReceived > 0 && performance.now() - lastVideoReceived > 1000);
+      dropsEl.textContent = `丢弃 ${assembler.dropped} 帧`;
+    }
+
+    function resetLatency() {
+      latencyGeneration++;
+      latency.reset();
+      nextClockProbe = 0;
+      lastVideoReceived = 0;
+      updateLatency();
+    }
 
     let pc;
     let ws;
@@ -115,33 +185,19 @@
     let statsBytes = 0;
     let signalQueue = Promise.resolve();
     const pendingCandidates = [];
-    const frames = new Map();
+    const assembler = new VideoFrames.Assembler();
+    const frames = assembler.frames;
 
     function setStatus(text) {
       statusEl.textContent = text;
     }
 
     function ensureFrame(frameId, totalFragments, totalBytes) {
-      if (!frames.has(frameId)) {
-        frames.set(frameId, {
-          totalFragments,
-          totalBytes,
-          chunks: new Array(totalFragments),
-          received: 0,
-          receivedBytes: 0,
-          createdAt: Date.now(),
-        });
-      }
-      return frames.get(frameId);
+      return assembler.ensureFrame(frameId, totalFragments, totalBytes);
     }
 
     function pruneFrames() {
-      const now = Date.now();
-      for (const [frameId, frame] of frames) {
-        if (now - frame.createdAt > 2000 || frames.size > 8) {
-          frames.delete(frameId);
-        }
-      }
+      assembler.prune();
     }
 
     function renderFrame(frameId) {
@@ -149,6 +205,7 @@
       if (!frame || frame.received !== frame.totalFragments) {
         return;
       }
+      if (!assembler.finish(frameId)) return;
 
       const blob = new Blob(frame.chunks, { type: 'image/jpeg' });
       const url = URL.createObjectURL(blob);
@@ -157,7 +214,17 @@
         URL.revokeObjectURL(lastObjectUrl);
       }
       lastObjectUrl = url;
+      const generation = latencyGeneration;
+      videoEl.decode().then(() => {
+        if (generation !== latencyGeneration || videoEl.src !== url) return;
+        lastVideoReceived = performance.now();
+        latency.noteDecoded(frameId, lastVideoReceived);
+        recordRenderedFrame(frameId, frame);
+        updateLatency();
+      }).catch(() => {});
+    }
 
+    function recordRenderedFrame(frameId, frame) {
       frameCount += 1;
       byteCount += frame.receivedBytes;
       statsFrames += 1;
@@ -174,12 +241,16 @@
         statsBytes = 0;
       }
       setStatus(`streaming ${frameId}`);
-      frames.delete(frameId);
     }
 
     function handleControlMessage(text) {
       const msg = JSON.parse(text);
-      if (msg.type === 'frame_start') {
+      if (msg.type === 'latency_clock_response') {
+        latency.acceptClock(msg);
+        updateLatency();
+        return;
+      } else if (msg.type === 'frame_start') {
+        latency.noteMetadata(msg.frame_id, msg.published_steady_ms);
         ensureFrame(msg.frame_id, msg.total_fragments, msg.total_bytes || 0);
       } else if (msg.type === 'frame_end') {
         renderFrame(msg.frame_id);
@@ -193,30 +264,13 @@
 
     async function handleVideoMessage(data) {
       const buffer = data instanceof ArrayBuffer ? data : await data.arrayBuffer();
-      if (buffer.byteLength < 16) {
-        return;
-      }
-
-      const view = new DataView(buffer);
-      if (view.getUint32(0) !== MAGIC) {
-        return;
-      }
-
-      const frameId = view.getUint32(4);
-      const fragIdx = view.getUint16(8);
-      const fragTotal = view.getUint16(10);
-      const payloadLen = view.getUint32(12);
-      const payload = buffer.slice(16, 16 + payloadLen);
-      const frame = ensureFrame(frameId, fragTotal, 0);
-
-      if (!frame.chunks[fragIdx]) {
-        frame.chunks[fragIdx] = payload;
-        frame.received += 1;
-        frame.receivedBytes += payloadLen;
-      }
+      const packet = VideoFrames.parseFragment(buffer);
+      const frame = assembler.accept(packet);
+      if (!frame) return;
+      if (frame.received === 1 && frame.published) latency.noteMetadata(packet.id, frame.published);
 
       if (frame.received === frame.totalFragments) {
-        renderFrame(frameId);
+        renderFrame(packet.id);
       }
       pruneFrames();
     }
@@ -232,6 +286,8 @@
       controlChannel = null;
       videoChannel = null;
       pendingCandidates.length = 0;
+      assembler.reset();
+      resetLatency();
     }
 
     function setupPeerConnection() {
@@ -251,6 +307,7 @@
 
       pc.onconnectionstatechange = () => {
         setStatus(pc.connectionState);
+        if (['disconnected', 'failed', 'closed'].includes(pc.connectionState)) resetLatency();
       };
 
       pc.ondatachannel = ({ channel }) => {
@@ -263,7 +320,10 @@
           videoChannel.onmessage = (event) => handleVideoMessage(event.data);
         }
         channel.onopen = () => setStatus(`${channel.label} open`);
-        channel.onclose = () => setStatus(`${channel.label} closed`);
+        channel.onclose = () => {
+          setStatus(`${channel.label} closed`);
+          resetLatency();
+        };
       };
     }
 
@@ -332,9 +392,19 @@
       };
       ws.onclose = () => {
         setStatus('signaling closed');
+        closePeerConnection();
       };
       ws.onerror = () => setStatus('ws error');
     }
+
+    setInterval(() => {
+      updateLatency();
+      if (!controlChannel || controlChannel.readyState !== 'open' || performance.now() < nextClockProbe) return;
+      const request = latency.request();
+      nextClockProbe = performance.now() + (latency.clocks.length < 8 ? 250 : 1000);
+      try { controlChannel.send(JSON.stringify(request)); }
+      catch (error) { latency.cancelRequest(request.request_id); }
+    }, 100);
 
     connect();
   </script>
