@@ -100,6 +100,15 @@ static std::function<void(const std::string&)> onMessageCallback;
 static std::mutex msgMutex;
 static std::atomic<bool> signalingConnected{false};
 static std::atomic<bool> running{true};
+static std::atomic<bool> restartRequested{false};
+
+void checkSessionRestart() {
+    if (!restartRequested.load()) return;
+    // This stateless worker is supervised by Compose (restart: always).
+    // Recycle the closed ICE/SCTP session without racing detached library callbacks.
+    std::cerr << "[Main] Recycling gateway session; supervisor will restart" << std::endl;
+    std::_Exit(EXIT_FAILURE);
+}
 
 // 发送队列
 std::queue<std::string> sendQueue;
@@ -175,12 +184,14 @@ static int callback_ws(struct lws* wsi, enum lws_callback_reasons reason,
         case LWS_CALLBACK_CLIENT_CLOSED:
             std::cout << "[Signaling] Disconnected from server" << std::endl;
             signalingConnected = false;
+            restartRequested = true;
             wsi = nullptr;
             break;
 
         case LWS_CALLBACK_CLIENT_CONNECTION_ERROR:
             std::cerr << "[Signaling] Connection failed" << std::endl;
             signalingConnected = false;
+            restartRequested = true;
             wsi = nullptr;
             break;
 
@@ -283,6 +294,8 @@ void setupWebRTC() {
 
     peerConnection->onStateChange([](rtc::PeerConnection::State state) {
         std::cout << "[WebRTC] Connection state: " << state << std::endl;
+        if (state == rtc::PeerConnection::State::Failed || state == rtc::PeerConnection::State::Closed)
+            restartRequested = true;
     });
 
     // 创建 DataChannel（这会触发内部协商，从而调用 onLocalDescription）
@@ -320,6 +333,10 @@ void setupWebRTC() {
 void handleSignalingMessage(const std::string& msg) {
     try {
         json j = json::parse(msg);
+        if (j.value("type", std::string()) == "viewer_reset") {
+            restartRequested = true;
+            return;
+        }
         if (j.contains("type") && j.contains("sdp")) {
             std::string sdpStr = j["sdp"].get<std::string>();
             std::string typeStr = j["type"].get<std::string>();
@@ -352,6 +369,7 @@ int main() {
 
     int waitCount = 0;
     while (!signalingConnected && waitCount < 100) {
+        checkSessionRestart();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         ++waitCount;
     }
@@ -369,6 +387,7 @@ int main() {
     // PC/手机端可能晚于网关打开，保持等待而不是退出重启。
     int waitChannel = 0;
     while (running && (!reliableChannel || !unreliableChannel || !unreliableChannel->isOpen())) {
+        checkSessionRestart();
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         ++waitChannel;
         if (waitChannel % 50 == 0) {
@@ -408,6 +427,7 @@ int main() {
 
     while (running) {
         ShmHeader h{};
+        checkSessionRestart();
         if (!readStableHeader(header, h)) {
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
             continue;

@@ -10,7 +10,7 @@
     if (!headerSize || buffer.byteLength < headerSize) return null;
     const id = view.getUint32(4), index = view.getUint16(8), total = view.getUint16(10);
     const length = view.getUint32(12);
-    if (!total || total > 8192 || index >= total || !length || length > 65536 || buffer.byteLength !== headerSize + length) return null;
+    if (!total || total > 8192 || index >= total || !length || length > 8 * 1024 * 1024 || buffer.byteLength !== headerSize + length) return null;
     return {
       id, index, total, payload: new Uint8Array(buffer, headerSize, length),
       published: headerSize === 24 ? view.getUint32(16) * 4294967296 + view.getUint32(20) : null,
@@ -23,6 +23,7 @@
       this.frames = this.frames || new Map(); this.frames.clear();
       this.retired = new Map(); this.lastRendered = null;
       this.latestPublished = 0; this.latestId = null; this.dropped = 0;
+      this.publicationFloor = 0;
     }
     discard(id) {
       if (this.frames.delete(id)) this.dropped++;
@@ -48,7 +49,12 @@
       if (!packet) return null;
       // Capture restarts can reset frame IDs while the monotonic clock keeps advancing.
       if (packet.published > this.latestPublished && this.latestId !== null &&
-          packet.id !== this.latestId && !newer(packet.id, this.latestId)) this.reset();
+          packet.id !== this.latestId && !newer(packet.id, this.latestId)) {
+        this.reset();
+        this.publicationFloor = packet.published;
+      }
+      // A queued frame from the previous capture process must not advance the new sequence.
+      if (packet.published !== null && packet.published < this.publicationFloor) return null;
       if (packet.published > this.latestPublished) { this.latestPublished = packet.published; this.latestId = packet.id; }
       this.prune();
       const frame = this.ensureFrame(packet.id, packet.total);

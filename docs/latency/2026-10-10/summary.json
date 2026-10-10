@@ -1,0 +1,401 @@
+[
+  {
+    "file": "baseline30.json",
+    "report": {
+      "label": "20261009-baseline30",
+      "measuredAt": "2026-10-09T14:24:44.054Z",
+      "duration": 60.023900000000374,
+      "latency": {
+        "count": 1721,
+        "mean": 63.559185224861494,
+        "min": 11.838731999974698,
+        "p50": 33.3387319999747,
+        "p95": 343.03873199922964,
+        "p99": 534.2387320003472,
+        "max": 1055.3387319999747
+      },
+      "decode": {
+        "count": 1721,
+        "mean": 3.5936664730312606,
+        "min": 2.900000000372529,
+        "p50": 3.5,
+        "p95": 4.199999999254942,
+        "p99": 4.899999998509884,
+        "max": 8.400000000372529
+      },
+      "frameInterval": {
+        "count": 1720,
+        "mean": 34.28203488372071,
+        "min": 6.900000000372529,
+        "p50": 31.299999998882413,
+        "p95": 51.40000000037253,
+        "p99": 147.19999999925494,
+        "max": 282
+      },
+      "age": {
+        "count": 1200,
+        "mean": 101.77302128039965,
+        "min": 23.53873199922964,
+        "p50": 56.138732000719756,
+        "p95": 463.6784170002211,
+        "p99": 764.5784170005936,
+        "max": 1112.878416999476
+      },
+      "fps": 28.671912354911782,
+      "clockUncertaintyMs": 4.8955470003711525,
+      "negativeSamples": 0,
+      "width": 1280,
+      "height": 720,
+      "browserErrors": [],
+      "imageErrors": 0,
+      "rtc": [
+        {
+          "id": "CPrOpLc1kH_cbR+VII8",
+          "timestamp": 1791555884040.607,
+          "type": "candidate-pair",
+          "bytesDiscardedOnSend": 0,
+          "bytesReceived": 245154984,
+          "bytesSent": 6933837,
+          "consentRequestsSent": 30,
+          "currentRoundTripTime": 0.009,
+          "lastPacketReceivedTimestamp": 1791555884039,
+          "lastPacketSentTimestamp": 1791555884039,
+          "localCandidateId": "IrOpLc1kH",
+          "nominated": true,
+          "packetsDiscardedOnSend": 0,
+          "packetsReceived": 209881,
+          "packetsSent": 106389,
+          "priority": 7926369428768293000,
+          "remoteCandidateId": "IcbR+VII8",
+          "requestsReceived": 9,
+          "requestsSent": 31,
+          "responsesReceived": 31,
+          "responsesSent": 9,
+          "state": "succeeded",
+          "totalRoundTripTime": 2.543,
+          "transportId": "T01",
+          "writable": true
+        }
+      ]
+    }
+  },
+  {
+    "file": "lifetime80.json",
+    "report": {
+      "label": "20261009-lifetime80",
+      "measuredAt": "2026-10-09T14:32:08.22Z",
+      "duration": 120.01719999999925,
+      "latency": {
+        "count": 2639,
+        "mean": 218.82923379479848,
+        "min": 16.951855999417603,
+        "p50": 37.35185599979013,
+        "p95": 1121.0518560009077,
+        "p99": 4079.2518560001627,
+        "max": 7992.35185599979
+      },
+      "decode": {
+        "count": 2639,
+        "mean": 3.446987495276627,
+        "min": 2.700000001117587,
+        "p50": 3.400000000372529,
+        "p95": 4.099999999627471,
+        "p99": 4.5,
+        "max": 5.700000001117587
+      },
+      "frameInterval": {
+        "count": 2638,
+        "mean": 44.26849886277511,
+        "min": 6.300000000745058,
+        "p50": 30.59999999962747,
+        "p95": 49.5,
+        "p99": 63,
+        "max": 6139.799999998882
+      },
+      "age": {
+        "count": 2400,
+        "mean": 775.9019947419891,
+        "min": 17.75185600016266,
+        "p50": 66.14449050033,
+        "p95": 4134.844490499585,
+        "p99": 7203.344490499585,
+        "max": 8022.944490499212
+      },
+      "fps": 21.98851497951974,
+      "clockUncertaintyMs": 2.9448060002177954,
+      "negativeSamples": 0,
+      "width": 1280,
+      "height": 720,
+      "browserErrors": [],
+      "imageErrors": 0,
+      "rtc": [
+        {
+          "id": "CPK5NHPXgJ_kq7s8JW0",
+          "timestamp": 1791556328195.875,
+          "type": "candidate-pair",
+          "bytesDiscardedOnSend": 0,
+          "bytesReceived": 313792053,
+          "bytesSent": 8733268,
+          "consentRequestsSent": 79,
+          "currentRoundTripTime": 0.489,
+          "lastPacketReceivedTimestamp": 1791556328195,
+          "lastPacketSentTimestamp": 1791556328195,
+          "localCandidateId": "IK5NHPXgJ",
+          "nominated": true,
+          "packetsDiscardedOnSend": 0,
+          "packetsReceived": 267604,
+          "packetsSent": 134121,
+          "priority": 7926369428768293000,
+          "remoteCandidateId": "Ikq7s8JW0",
+          "requestsReceived": 10,
+          "requestsSent": 80,
+          "responsesReceived": 80,
+          "responsesSent": 10,
+          "state": "succeeded",
+          "totalRoundTripTime": 33.163,
+          "transportId": "T01",
+          "writable": true
+        }
+      ]
+    }
+  },
+  {
+    "file": "pacing2000.json",
+    "report": {
+      "label": "20261009-paced",
+      "measuredAt": "2026-10-09T14:39:03.081Z",
+      "duration": 120.01230000000075,
+      "latency": {
+        "count": 2340,
+        "mean": 288.1763962441916,
+        "min": 3.8728065013419837,
+        "p50": 38.972806500969455,
+        "p95": 2033.9728065009695,
+        "p99": 3762.1728065002244,
+        "max": 11046.372806501342
+      },
+      "decode": {
+        "count": 2340,
+        "mean": 3.60269230768387,
+        "min": 2.899999998509884,
+        "p50": 3.5,
+        "p95": 4.199999999254942,
+        "p99": 4.700000001117587,
+        "max": 6.299999998882413
+      },
+      "frameInterval": {
+        "count": 2339,
+        "mean": 50.52445489525407,
+        "min": 6.300000000745058,
+        "p50": 29.90000000037253,
+        "p95": 53.59999999962747,
+        "p99": 162.90000000037253,
+        "max": 6137.699999999255
+      },
+      "age": {
+        "count": 2350,
+        "mean": 781.8611029535126,
+        "min": 18.64228649996221,
+        "p50": 136.56921850028448,
+        "p95": 3123.372806501342,
+        "p99": 6017.572806500597,
+        "max": 10001.529703501146
+      },
+      "fps": 19.498001454850755,
+      "clockUncertaintyMs": 2.7951184997800738,
+      "negativeSamples": 0,
+      "width": 1280,
+      "height": 720,
+      "browserErrors": [],
+      "imageErrors": 0,
+      "rtc": [
+        {
+          "id": "CPSZ9fqstA_9E2Wtbx4",
+          "timestamp": 1791556743056.836,
+          "type": "candidate-pair",
+          "bytesDiscardedOnSend": 0,
+          "bytesReceived": 281170223,
+          "bytesSent": 7866695,
+          "consentRequestsSent": 63,
+          "currentRoundTripTime": 0.015,
+          "lastPacketReceivedTimestamp": 1791556743056,
+          "lastPacketSentTimestamp": 1791556743056,
+          "localCandidateId": "ISZ9fqstA",
+          "nominated": true,
+          "packetsDiscardedOnSend": 0,
+          "packetsReceived": 239869,
+          "packetsSent": 120781,
+          "priority": 7926369428768293000,
+          "remoteCandidateId": "I9E2Wtbx4",
+          "requestsReceived": 7,
+          "requestsSent": 64,
+          "responsesReceived": 64,
+          "responsesSent": 7,
+          "state": "succeeded",
+          "totalRoundTripTime": 63.301,
+          "transportId": "T01",
+          "writable": true
+        }
+      ]
+    }
+  },
+  {
+    "file": "rtc-followup.json",
+    "report": {
+      "label": "20261010-rtc-ab",
+      "transport": "webrtc",
+      "measuredAt": "2026-10-10T02:04:52.598Z",
+      "duration": 120.0208,
+      "latency": {
+        "count": 3215,
+        "mean": 244.55949941210798,
+        "min": 15.143853999965359,
+        "p50": 157.04385399993043,
+        "p95": 592.843853999977,
+        "p99": 694.843853999977,
+        "max": 1104.6438539999654
+      },
+      "decode": {
+        "count": 3215,
+        "mean": 3.404199066873358,
+        "min": 2.7000000000116415,
+        "p50": 3.300000000046566,
+        "p95": 4.099999999976717,
+        "p99": 4.599999999976717,
+        "max": 8.599999999976717
+      },
+      "frameInterval": {
+        "count": 3214,
+        "mean": 37.31425015556938,
+        "min": 3.7999999999883585,
+        "p50": 34.40000000002328,
+        "p95": 55.600000000034925,
+        "p99": 83,
+        "max": 435.20000000001164
+      },
+      "age": {
+        "count": 2332,
+        "mean": 285.38755947513516,
+        "min": 21.41782249993412,
+        "p50": 224.95378300000448,
+        "p95": 653.6438539999654,
+        "p99": 846.5994045000407,
+        "max": 1197.999404500064
+      },
+      "fps": 26.78702358257902,
+      "clockUncertaintyMs": 3.69562999997288,
+      "negativeSamples": 0,
+      "width": 1280,
+      "height": 720,
+      "browserErrors": [],
+      "imageErrors": 0,
+      "rtc": []
+    }
+  },
+  {
+    "file": "ws-first.json",
+    "report": {
+      "label": "20261009-ws-pull",
+      "transport": "ws",
+      "measuredAt": "2026-10-09T15:03:01.886Z",
+      "duration": 120.029,
+      "latency": {
+        "count": 3460,
+        "mean": 40.489556899175824,
+        "min": 18.852909500710666,
+        "p50": 37.252909501083195,
+        "p95": 63.252909501083195,
+        "p99": 79.2529095010832,
+        "max": 336.95290950033814
+      },
+      "decode": {
+        "count": 3460,
+        "mean": 3.527341040444555,
+        "min": 2.699999999254942,
+        "p50": 3.5,
+        "p95": 4.199999999254942,
+        "p99": 4.799999998882413,
+        "max": 6.599999999627471
+      },
+      "frameInterval": {
+        "count": 3459,
+        "mean": 34.69817866435386,
+        "min": 19.300000000745058,
+        "p50": 31.299999998882413,
+        "p95": 50,
+        "p99": 68.30000000074506,
+        "max": 320.09999999962747
+      },
+      "age": {
+        "count": 2401,
+        "mean": 55.83410425233934,
+        "min": 19.859890999272466,
+        "p50": 53.41968449950218,
+        "p95": 87.74239449948072,
+        "p99": 112.29901050031185,
+        "max": 361.85496200062335
+      },
+      "fps": 28.82636696131768,
+      "clockUncertaintyMs": 2.9278325003106147,
+      "negativeSamples": 0,
+      "width": 1280,
+      "height": 720,
+      "browserErrors": [],
+      "imageErrors": 0,
+      "rtc": []
+    }
+  },
+  {
+    "file": "ws-followup.json",
+    "report": {
+      "label": "20261010-ws-ab",
+      "transport": "ws",
+      "measuredAt": "2026-10-10T02:10:52.065Z",
+      "duration": 180.0151,
+      "latency": {
+        "count": 4228,
+        "mean": 42.814929951855945,
+        "min": 10.102087000152096,
+        "p50": 26.102087000152096,
+        "p95": 87.30208700010553,
+        "p99": 104.1020870001521,
+        "max": 151.90208700008225
+      },
+      "decode": {
+        "count": 4228,
+        "mean": 3.5489120151373843,
+        "min": 2.700000000069849,
+        "p50": 3.5,
+        "p95": 4.300000000046566,
+        "p99": 5,
+        "max": 8.5
+      },
+      "frameInterval": {
+        "count": 4227,
+        "mean": 42.57662644901822,
+        "min": 13.400000000023283,
+        "p50": 40.70000000006985,
+        "p95": 70,
+        "p99": 88.5,
+        "max": 138.5
+      },
+      "age": {
+        "count": 3601,
+        "mean": 70.350116480183,
+        "min": 12.660963000031188,
+        "p50": 69.07427250011824,
+        "p95": 129.47223000007216,
+        "p99": 157.62739199993666,
+        "max": 254.97223000007216
+      },
+      "fps": 23.48691859738433,
+      "clockUncertaintyMs": 2.44011100003263,
+      "negativeSamples": 0,
+      "width": 1280,
+      "height": 720,
+      "browserErrors": [],
+      "imageErrors": 0,
+      "rtc": []
+    }
+  }
+]

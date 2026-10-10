@@ -1,0 +1,15 @@
+services:
+  video-processor:
+    volumes:
+      - type: bind
+        source: /dev/shm/pi-video
+        target: /dev/shm
+        bind:
+          create_host_path: false
+  webrtc-gateway:
+    volumes:
+      - type: bind
+        source: /dev/shm/pi-video
+        target: /dev/shm
+        bind:
+          create_host_path: false

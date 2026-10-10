@@ -50,6 +50,8 @@
       color: #9ed7ff;
       overflow-wrap: anywhere;
     }
+    .connection-tools { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
+    #transport { font: inherit; font-size: 13px; color: #eef4f8; background: #151b20; border: 1px solid #526270; padding: 6px; max-width: 100%; }
 
     main {
       display: grid;
@@ -106,7 +108,13 @@
 <body>
   <header>
     <h1>Pi WebRTC Video</h1>
-    <div class="status" id="status">connecting</div>
+    <div class="connection-tools">
+      <select id="transport" aria-label="视频传输通道">
+        <option value="webrtc">WebRTC</option>
+        <option value="ws">WebSocket</option>
+      </select>
+      <div class="status" id="status">connecting</div>
+    </div>
   </header>
 
   <main>
@@ -135,10 +143,16 @@
   </footer>
 
   <script src="/latency.js?v=20261008"></script>
-  <script src="/video-frames.js?v=20261008"></script>
+  <script src="/video-frames.js?v=20261009"></script>
   <script>
     const MAGIC = 0x56504631;
     const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260607b`;
+    const latestMode = new URLSearchParams(location.search).get('transport') === 'ws';
+    const transportEl = document.getElementById('transport');
+    transportEl.value = latestMode ? 'ws' : 'webrtc';
+    transportEl.onchange = () => {
+      const url = new URL(location.href); url.searchParams.set('transport', transportEl.value); location.href = url.href;
+    };
     const statusEl = document.getElementById('status');
     const frameEl = document.getElementById('frames');
     const bytesEl = document.getElementById('bytes');
@@ -161,7 +175,9 @@
       latencyEls.error.textContent = Number.isFinite(sample.uncertaintyMs) ? `±${Math.ceil(sample.uncertaintyMs)} ms` : '-- ms';
       const labels = { calibrating: '校准中', stale: '校准失效', waiting: '等待帧时间', invalid: '时钟精度不足', ready: `10 秒内 ${sample.count} 帧` };
       latencyEls.state.textContent = document.hidden ? '后台标签页' : labels[sample.state];
-      latencyEls.age.dataset.stalled = String(lastVideoReceived > 0 && performance.now() - lastVideoReceived > 1000);
+      latencyEls.age.dataset.stalled = String(
+        (Number.isFinite(sample.ageMs) && sample.ageMs > 1000) ||
+        (lastVideoReceived > 0 && performance.now() - lastVideoReceived > 1000));
       dropsEl.textContent = `丢弃 ${assembler.dropped} 帧`;
     }
 
@@ -177,6 +193,9 @@
     let ws;
     let controlChannel;
     let videoChannel;
+    let latestPublication = 0;
+    let latestRetry;
+    let reconnectTimer;
     let lastObjectUrl;
     let frameCount = 0;
     let byteCount = 0;
@@ -215,7 +234,7 @@
       }
       lastObjectUrl = url;
       const generation = latencyGeneration;
-      videoEl.decode().then(() => {
+      return videoEl.decode().then(() => {
         if (generation !== latencyGeneration || videoEl.src !== url) return;
         lastVideoReceived = performance.now();
         latency.noteDecoded(frameId, lastVideoReceived);
@@ -270,9 +289,10 @@
       if (frame.received === 1 && frame.published) latency.noteMetadata(packet.id, frame.published);
 
       if (frame.received === frame.totalFragments) {
-        renderFrame(packet.id);
+        await renderFrame(packet.id);
       }
       pruneFrames();
+      return packet.published;
     }
 
     function closePeerConnection() {
@@ -381,6 +401,7 @@
     function connect() {
       closePeerConnection();
       signalQueue = Promise.resolve();
+      if (latestMode) { connectLatest(); return; }
       setupPeerConnection();
       ws = new WebSocket(wsUrl);
       ws.onopen = () => setStatus('signaling open');
@@ -397,12 +418,53 @@
       ws.onerror = () => setStatus('ws error');
     }
 
+    function requestLatestFrame() {
+      clearTimeout(latestRetry);
+      if (ws?.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'frame_request', after: latestPublication }));
+    }
+
+    function connectLatest() {
+      clearTimeout(latestRetry); clearTimeout(reconnectTimer);
+      latestPublication = 0;
+      const socket = ws = new WebSocket(wsUrl.replace('role=viewer', 'role=latest'));
+      socket.binaryType = 'arraybuffer';
+      socket.onopen = () => { setStatus('connected'); requestLatestFrame(); };
+      socket.onmessage = async event => {
+        if (socket !== ws) return;
+        try {
+          if (typeof event.data === 'string') {
+            const message = JSON.parse(event.data);
+            if (message.type === 'frame_wait' || message.type === 'frame_error') {
+              setStatus(message.message || 'waiting camera');
+              latestRetry = setTimeout(requestLatestFrame, message.type === 'frame_error' ? 1000 : 100);
+            } else if (message.type === 'server_warning') setStatus(message.message);
+            else handleControlMessage(event.data);
+            return;
+          }
+          const published = await handleVideoMessage(event.data);
+          if (socket !== ws || socket.readyState !== WebSocket.OPEN) return;
+          if (!Number.isSafeInteger(published) || published <= 0) { socket.close(1002, 'invalid video packet'); return; }
+          latestPublication = published;
+          requestLatestFrame();
+        } catch (error) {
+          console.error(error); socket.close(1002, 'video protocol error');
+        }
+      };
+      socket.onclose = event => {
+        if (socket !== ws) return;
+        clearTimeout(latestRetry); closePeerConnection(); setStatus('disconnected');
+        if (event.code !== 4001 && event.code !== 4002) reconnectTimer = setTimeout(connect, 1000);
+      };
+      socket.onerror = () => setStatus('ws error');
+    }
+
     setInterval(() => {
       updateLatency();
-      if (!controlChannel || controlChannel.readyState !== 'open' || performance.now() < nextClockProbe) return;
+      const ready = latestMode ? ws?.readyState === WebSocket.OPEN : controlChannel?.readyState === 'open';
+      if (!ready || performance.now() < nextClockProbe) return;
       const request = latency.request();
       nextClockProbe = performance.now() + (latency.clocks.length < 8 ? 250 : 1000);
-      try { controlChannel.send(JSON.stringify(request)); }
+      try { (latestMode ? ws : controlChannel).send(JSON.stringify(request)); }
       catch (error) { latency.cancelRequest(request.request_id); }
     }, 100);
 

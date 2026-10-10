@@ -3,6 +3,8 @@ const http = require('http');
 const path = require('path');
 const { URL } = require('url');
 const WebSocket = require('ws');
+const { LatestFrameSource } = require('./latest-source');
+const { attachLatestSession } = require('./latest-session');
 
 const PORT = Number(process.env.PORT || 8080);
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -41,11 +43,13 @@ const server = http.createServer((req, res) => {
     });
 });
 
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server, maxPayload: 65536, perMessageDeflate: false });
+const latestSource = new LatestFrameSource(process.env.VIDEO_SHM_PATH || '/dev/shm/pi-video/video_shm');
 let gatewaySocket = null;
 let lastOffer = null;
 let lastGatewayCandidates = [];
 let viewerSocket = null;
+let gatewaySessionUsed = false;
 
 function getRole(req) {
     try {
@@ -66,7 +70,7 @@ function safeSend(ws, message) {
 }
 
 function broadcastToViewers(message) {
-    safeSend(viewerSocket, message);
+    if (viewerSocket?.role === 'viewer') safeSend(viewerSocket, message);
 }
 
 function normalizePeerIp(address) {
@@ -128,6 +132,7 @@ function removeSocket(ws) {
         gatewaySocket = null;
         lastOffer = null;
         lastGatewayCandidates = [];
+        gatewaySessionUsed = false;
     }
     if (ws === viewerSocket) {
         viewerSocket = null;
@@ -142,6 +147,7 @@ wss.on('connection', (ws, req) => {
     const clientIp = req.socket.remoteAddress;
     ws.role = role;
     ws.peerAddress = clientIp;
+    req.socket.setNoDelay(true);
 
     console.log(`[Signaling] ${role} connected: ${clientIp}`);
 
@@ -165,17 +171,31 @@ wss.on('connection', (ws, req) => {
             gatewaySocket.close(4000, 'Gateway replaced');
         }
         gatewaySocket = ws;
+        gatewaySessionUsed = false;
+        lastOffer = null;
+        lastGatewayCandidates = [];
     } else {
         if (viewerSocket && viewerSocket !== ws) {
             viewerSocket.close(4002, 'viewer replaced');
         }
         viewerSocket = ws;
-        if (lastOffer) {
+        if (role === 'viewer' && gatewaySessionUsed) {
+            lastOffer = null;
+            lastGatewayCandidates = [];
+            safeSend(gatewaySocket, JSON.stringify({ type: 'viewer_reset' }));
+        } else if (role === 'viewer' && lastOffer) {
             safeSend(ws, lastOffer);
             for (const candidate of lastGatewayCandidates) {
                 safeSend(ws, candidate);
             }
         }
+    }
+
+    if (role === 'latest') {
+        attachLatestSession(ws, latestSource);
+        ws.on('close', () => removeSocket(ws));
+        ws.on('error', () => removeSocket(ws));
+        return;
     }
 
     ws.on('message', (raw) => {
@@ -193,6 +213,9 @@ wss.on('connection', (ws, req) => {
             return;
         }
         const forwardMessage = normalizeViewerCandidate(message, ws);
+        try {
+            if (JSON.parse(forwardMessage).type === 'answer') gatewaySessionUsed = true;
+        } catch (error) { /* The gateway validates signaling payloads. */ }
         if (!safeSend(gatewaySocket, forwardMessage)) {
             safeSend(ws, JSON.stringify({ type: 'server_warning', message: 'gateway offline' }));
         }

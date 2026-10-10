@@ -49,6 +49,16 @@ test('handles frame ID wraparound and a capture process restart', () => {
   a.accept(packet(200, 0, 1, 2000)); a.finish(200);
   a.accept(packet(0, 0, 1, 3000)); assert.equal(a.finish(0), true);
 });
+
+test('rejects delayed frames from before a capture restart', () => {
+  const a = new Assembler();
+  a.accept(packet(500, 0, 1, 1000)); a.finish(500);
+  a.accept(packet(0, 0, 1, 2000)); a.finish(0);
+  assert.equal(a.accept(packet(501, 0, 1, 1001)), null);
+  assert.equal(a.finish(501), false);
+  a.accept(packet(1, 0, 1, 2033));
+  assert.equal(a.finish(1), true);
+});
 test('rejects malformed lengths, indices and timestamp changes', () => {
   assert.equal(parseFragment(new ArrayBuffer(23)), null);
   assert.equal(packet(1, 2, 2), null);

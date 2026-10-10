@@ -1,0 +1,92 @@
+{
+  "test": "live-latency",
+  "first": {
+    "state": "ready",
+    "delayMs": 56.73969650012441,
+    "ageMs": 66.33969649998471,
+    "meanMs": 59.409909266037275,
+    "p95Ms": 83.53969650017098,
+    "uncertaintyMs": 7.490565499989316,
+    "count": 47,
+    "text": "57 ms",
+    "frames": 47
+  },
+  "second": {
+    "state": "ready",
+    "delayMs": 18.926367999985814,
+    "ageMs": 44.62636799993925,
+    "meanMs": 36.78532322391402,
+    "p95Ms": 83.72636800003238,
+    "uncertaintyMs": 5.4888519999803975,
+    "count": 134,
+    "text": "19 ms",
+    "frames": 134
+  },
+  "layouts": [
+    {
+      "name": "desktop",
+      "overflow": false,
+      "clipped": false,
+      "metrics": [
+        "52 ms",
+        "52 ms",
+        "34 ms",
+        "82 ms",
+        "±6 ms"
+      ]
+    },
+    {
+      "name": "mobile",
+      "overflow": false,
+      "clipped": false,
+      "metrics": [
+        "34 ms",
+        "34 ms",
+        "37 ms",
+        "82 ms",
+        "±6 ms"
+      ]
+    },
+    {
+      "name": "small",
+      "overflow": false,
+      "clipped": false,
+      "metrics": [
+        "74 ms",
+        "109 ms",
+        "39 ms",
+        "83 ms",
+        "±6 ms"
+      ]
+    }
+  ],
+  "pixels": {
+    "width": 1280,
+    "height": 720,
+    "min": 8,
+    "max": 254
+  },
+  "backlogged": {
+    "age": 2119.396778500057,
+    "highlighted": "true"
+  },
+  "stall": {
+    "age": 1806.3119660000084,
+    "highlighted": "true"
+  },
+  "stale": {
+    "state": "校准失效",
+    "current": "-- ms"
+  },
+  "browserErrors": [],
+  "title": "Pi WebRTC Video",
+  "status": "streaming 29889",
+  "frames": "171 frames",
+  "stats": "18.7 fps | 14.56 Mbps",
+  "bytes": "17032 KB",
+  "imageWidth": 1280,
+  "imageHeight": 720,
+  "imageComplete": true,
+  "imageLoads": 171,
+  "imageErrors": 0
+}

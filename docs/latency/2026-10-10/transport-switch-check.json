@@ -1,0 +1,93 @@
+{
+  "test": "transport-switch-and-reconnect",
+  "results": [
+    {
+      "mode": "ws",
+      "frames": 21,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 83.98540650005452,
+      "ageMs": 117.08540650003124,
+      "meanMs": 70.99493030956504,
+      "p95Ms": 93.48540650005452,
+      "uncertaintyMs": 6.616334500024095,
+      "count": 21
+    },
+    {
+      "mode": "webrtc",
+      "frames": 23,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 61.85241600009613,
+      "ageMs": 83.1524160001427,
+      "meanMs": 112.81763339139339,
+      "p95Ms": 181.35241600009613,
+      "uncertaintyMs": 7.393852000066545,
+      "count": 23
+    },
+    {
+      "mode": "ws",
+      "frames": 22,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 14.786544000031427,
+      "ageMs": 40.68654400005471,
+      "meanMs": 20.018362181827385,
+      "p95Ms": 28.98654399998486,
+      "uncertaintyMs": 3.5134369999868795,
+      "count": 22
+    },
+    {
+      "mode": "webrtc",
+      "frames": 27,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 26.545164500013925,
+      "ageMs": 46.14516449999064,
+      "meanMs": 29.09701635181921,
+      "p95Ms": 41.74516449996736,
+      "uncertaintyMs": 4.694546499988064,
+      "count": 27
+    },
+    {
+      "mode": "webrtc",
+      "frames": 98,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 32.16822400002275,
+      "ageMs": 42.268223999999464,
+      "meanMs": 311.60904032655407,
+      "p95Ms": 514.4682240000693,
+      "uncertaintyMs": 6.645213000010699,
+      "count": 98
+    },
+    {
+      "mode": "ws",
+      "frames": 22,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 15.146318499930203,
+      "ageMs": 27.94631849997677,
+      "meanMs": 16.35086395451799,
+      "p95Ms": 21.746318500023335,
+      "uncertaintyMs": 6.091944500047248,
+      "count": 22
+    }
+  ],
+  "before": {
+    "frames": 22,
+    "generation": 1
+  },
+  "recovered": {
+    "frames": 46,
+    "generation": 3,
+    "state": "ready",
+    "delayMs": 70.04778250004165,
+    "ageMs": 105.84778250008821,
+    "meanMs": 49.631115833399235,
+    "p95Ms": 155.84778250008821,
+    "uncertaintyMs": 2.6425375000108033,
+    "count": 24
+  },
+  "browserErrors": []
+}
