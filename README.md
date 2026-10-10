@@ -1,6 +1,6 @@
 # DIFF WebRTC Raspi5B
 
-树莓派 5 低延迟视频传输项目。当前版本已经完成从 USB 摄像头原生 MJPEG 采集、共享内存传递、WebRTC / WebSocket 传输到浏览器 JPEG 显示的联调。后续主线调整为面向测控专业的工业执行机构远程测试系统；工业状态采集与控制目前仍是方案，尚未接入电机或 PLC。
+树莓派 5 低延迟视频传输项目。当前版本已经完成从 USB 摄像头原生 MJPEG 采集、共享内存传递、WebRTC / WebSocket 传输到浏览器 JPEG 显示的联调。主线扩展为面向测控专业的工业执行机构远程测试系统；已实现独立的软件模拟工位与 Modbus 网关原型，尚未接入真实电机或 PLC。
 
 当前版本定位：
 
@@ -16,7 +16,8 @@
 Web client version: 20260607b
 Target viewer: PC browser now, mobile browser next
 Pi address in current test LAN: 192.168.3.19
-Next target: industrial actuator test HMI + simulated Modbus station
+Industrial prototype: simulated Modbus station + independent gateway API
+Next target: industrial actuator test HMI + video/event correlation
 ```
 
 2026-10-08 保存点：保留 `1280x720` 原生 MJPEG 画质，部署参数为 `30fps`，增加实时延迟、画面年龄和有界重组；无线抖动造成的秒级卡顿尚未解决。完整数据、尝试记录、测量边界及回退方法见 [本日优化记录](docs/latency/2026-10-08/README.md)。此版本是实验检查点，不是稳定超低延迟发布版。
@@ -26,6 +27,8 @@ Next target: industrial actuator test HMI + simulated Modbus station
 2026-10-10 后续：增加三种发送节奏与 VPF3 分段计时，详见 [发送节奏实验](docs/latency/2026-10-10/flow-control.md)。面向设备维护、自动化调试和测试验证的具体场景、设备预算、接口、验收与毕业设计摘要见 [工业执行机构方案](docs/industrial-roadmap/README.md)。
 
 ## 技术路线
+
+2026-10-10 工业原型：新增 [industrial_station](industrial_station/README.md)，包括模拟往复机构、Modbus TCP、动作互锁、断线撤权、命令去重、故障注入、SQLite 审计与 JSON 报告。全部设备数据明确标注 SIMULATED，原视频模块不修改；新增 HTTP 8091 是 API 而非完整 HMI。[实施与验收记录](docs/industrial-roadmap/2026-10-10-implementation.md)：23 项新测试、37 项原视频回归通过，部署后 100 次模拟往复完成，原始数据可复算。
 
 本项目没有使用传统 WebRTC 摄像头媒体轨道，而是采用自定义 JPEG 分片传输：
 

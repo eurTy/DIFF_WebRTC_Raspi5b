@@ -1,0 +1,539 @@
+{
+  "source": "SIMULATED",
+  "prefix": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-",
+  "checks": [
+    {
+      "name": "simulation_only",
+      "passed": true
+    },
+    {
+      "name": "initial_home",
+      "passed": true
+    },
+    {
+      "name": "anonymous_denied",
+      "passed": true,
+      "http_status": 401
+    },
+    {
+      "name": "observer_cannot_write",
+      "passed": true,
+      "http_status": 403
+    },
+    {
+      "name": "arm",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "clear",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "reset",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "manual",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "extend",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "ten_identical_requests_one_motion",
+      "passed": true,
+      "motion_delta": 1
+    },
+    {
+      "name": "return",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "missing_limit",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "timeout",
+      "passed": true,
+      "status": "FAILED",
+      "reason": "ACTION_TIMEOUT"
+    },
+    {
+      "name": "timeout_reason",
+      "passed": true,
+      "duration_ms": 1203
+    },
+    {
+      "name": "clear_timeout",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "reset_timeout",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "return_after_timeout",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "both_limits",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "both_limits_alarm",
+      "passed": true,
+      "alarm": "LIMIT_CONFLICT"
+    },
+    {
+      "name": "clear_limits",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "reset_limits",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "freeze_heartbeat",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "frozen_heartbeat_detected",
+      "passed": true,
+      "qualities": [
+        "GOOD",
+        "OFFLINE",
+        "STALE"
+      ]
+    },
+    {
+      "name": "recovery_requires_rearm",
+      "passed": true
+    },
+    {
+      "name": "rearm",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "final_reset",
+      "passed": true,
+      "status": "COMPLETED",
+      "reason": "NONE"
+    },
+    {
+      "name": "final_idle_no_alarm",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "commands": [
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-arm",
+      "request": {
+        "action": "ARM",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "ARM",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 1,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:48.201349+00:00",
+      "created_mono_ms": 7141735.328635,
+      "updated_utc": "2026-10-10T03:55:48.222894+00:00",
+      "confirmation_ms": 21.54338400065899
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-clear",
+      "request": {
+        "action": "INJECT",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "INJECT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 2,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:48.241024+00:00",
+      "created_mono_ms": 7141775.000955,
+      "updated_utc": "2026-10-10T03:55:48.255652+00:00",
+      "confirmation_ms": 14.630061000585556
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-reset",
+      "request": {
+        "action": "RESET",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "RESET",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 3,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:48.270758+00:00",
+      "created_mono_ms": 7141804.734662,
+      "updated_utc": "2026-10-10T03:55:48.282091+00:00",
+      "confirmation_ms": 11.334442999213934
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-manual",
+      "request": {
+        "action": "MODE",
+        "parameter": 1,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "MODE",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 4,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:48.301374+00:00",
+      "created_mono_ms": 7141835.350375,
+      "updated_utc": "2026-10-10T03:55:48.311523+00:00",
+      "confirmation_ms": 10.149201999418437
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-extend",
+      "request": {
+        "action": "EXTEND",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "EXTEND",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 5,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:48.331479+00:00",
+      "created_mono_ms": 7141865.456559001,
+      "updated_utc": "2026-10-10T03:55:48.783218+00:00",
+      "confirmation_ms": 20.829357999376953,
+      "device_duration_ms": 405
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-return",
+      "request": {
+        "action": "RETRACT",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "RETRACT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 6,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:48.952483+00:00",
+      "created_mono_ms": 7142486.465376,
+      "updated_utc": "2026-10-10T03:55:49.423726+00:00",
+      "confirmation_ms": 19.994926000013947,
+      "device_duration_ms": 405
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-missing_limit",
+      "request": {
+        "action": "INJECT",
+        "parameter": 1,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "INJECT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 7,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:49.483377+00:00",
+      "created_mono_ms": 7143017.357619,
+      "updated_utc": "2026-10-10T03:55:49.506275+00:00",
+      "confirmation_ms": 22.895588000304997
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-timeout",
+      "request": {
+        "action": "EXTEND",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "EXTEND",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 8,
+      "status": "FAILED",
+      "reason": "ACTION_TIMEOUT",
+      "created_utc": "2026-10-10T03:55:49.520891+00:00",
+      "created_mono_ms": 7143054.867528,
+      "updated_utc": "2026-10-10T03:55:50.784092+00:00",
+      "confirmation_ms": 13.49035600014031,
+      "device_duration_ms": 1203
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-clear_timeout",
+      "request": {
+        "action": "INJECT",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "INJECT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 9,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:50.810989+00:00",
+      "created_mono_ms": 7144344.9683179995,
+      "updated_utc": "2026-10-10T03:55:50.832136+00:00",
+      "confirmation_ms": 21.14624400064349
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-reset_timeout",
+      "request": {
+        "action": "RESET",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "RESET",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 10,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:50.850930+00:00",
+      "created_mono_ms": 7144384.908099,
+      "updated_utc": "2026-10-10T03:55:50.866964+00:00",
+      "confirmation_ms": 16.03374500013888
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-return_after_timeout",
+      "request": {
+        "action": "RETRACT",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "RETRACT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 11,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:50.880725+00:00",
+      "created_mono_ms": 7144414.7018639995,
+      "updated_utc": "2026-10-10T03:55:51.323392+00:00",
+      "confirmation_ms": 16.577440000139177,
+      "device_duration_ms": 403
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-both_limits",
+      "request": {
+        "action": "INJECT",
+        "parameter": 2,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "INJECT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 12,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:51.380937+00:00",
+      "created_mono_ms": 7144914.918203,
+      "updated_utc": "2026-10-10T03:55:51.404730+00:00",
+      "confirmation_ms": 23.79059400036931
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-clear_limits",
+      "request": {
+        "action": "INJECT",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "INJECT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 13,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:51.430625+00:00",
+      "created_mono_ms": 7144964.6025640005,
+      "updated_utc": "2026-10-10T03:55:51.450355+00:00",
+      "confirmation_ms": 19.728857999667525
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-reset_limits",
+      "request": {
+        "action": "RESET",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "RESET",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 14,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:51.500803+00:00",
+      "created_mono_ms": 7145034.780772,
+      "updated_utc": "2026-10-10T03:55:51.515632+00:00",
+      "confirmation_ms": 14.828244999982417
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-freeze_heartbeat",
+      "request": {
+        "action": "INJECT",
+        "parameter": 5,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "INJECT",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4153068752,
+      "sequence": 15,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:51.530730+00:00",
+      "created_mono_ms": 7145064.705184,
+      "updated_utc": "2026-10-10T03:55:51.548780+00:00",
+      "confirmation_ms": 18.051808000542223
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-rearm",
+      "request": {
+        "action": "ARM",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "ARM",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4234890549,
+      "sequence": 1,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:53.890597+00:00",
+      "created_mono_ms": 7147424.575666,
+      "updated_utc": "2026-10-10T03:55:53.911059+00:00",
+      "confirmation_ms": 20.46084799990058
+    },
+    {
+      "command_id": "smoke-58058d07-f33e-4b37-af46-96ccadde5d9e-final_reset",
+      "request": {
+        "action": "RESET",
+        "parameter": 0,
+        "validity_ms": 1000,
+        "actor": "operator"
+      },
+      "action": "RESET",
+      "actor": "operator",
+      "source": "SIMULATED",
+      "run_id": "f9b64e5b-07e1-4595-a3f2-1814f73a2864",
+      "boot_id": 4286985290,
+      "session": 4234890549,
+      "sequence": 2,
+      "status": "COMPLETED",
+      "reason": "NONE",
+      "created_utc": "2026-10-10T03:55:53.922719+00:00",
+      "created_mono_ms": 7147456.695677,
+      "updated_utc": "2026-10-10T03:55:53.940016+00:00",
+      "confirmation_ms": 17.29830199945718
+    }
+  ]
+}

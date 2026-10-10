@@ -1,0 +1,22 @@
+[Unit]
+Description=SIMULATED Modbus actuator (no hardware I/O)
+After=network.target
+
+[Service]
+Type=simple
+User=eur
+WorkingDirectory=/home/eur/industrial-lab
+ExecStart=/home/eur/industrial-lab/.venv/bin/python -m industrial_station.simulator --host 127.0.0.1 --port 5020
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=8
+UMask=0077
+Environment=PYTHONDONTWRITEBYTECODE=1
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target
