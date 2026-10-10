@@ -2,6 +2,7 @@ const fs = require('node:fs/promises');
 
 const HEADER_BYTES = 48;
 const MAX_FRAME_BYTES = 8 * 1024 * 1024;
+const TIMING_OFFSET = 128 * 1024 * 1024 - 64;
 
 class LatestFrameSource {
     constructor(filename) {
@@ -29,13 +30,25 @@ class LatestFrameSource {
         if ((sequence & 1) || (header.readUInt32LE(24) & 1) || size < 4 || size > MAX_FRAME_BYTES ||
             !Number.isSafeInteger(published) || published <= after) return null;
 
-        // Reuse VPF2 framing, but carry one complete native JPEG per WebSocket message.
-        const packet = Buffer.allocUnsafe(24 + size);
-        if ((await file.read(packet, 24, size, HEADER_BYTES)).bytesRead !== size) return null;
+        const hasTiming = (header.readUInt32LE(24) & 2) !== 0;
+        const packetHeader = hasTiming ? 64 : 24;
+        const packet = Buffer.alloc(packetHeader + size);
+        if ((await file.read(packet, packetHeader, size, HEADER_BYTES)).bytesRead !== size) return null;
+        if (hasTiming) {
+            const timing = Buffer.alloc(64);
+            if ((await file.read(timing, 0, 64, TIMING_OFFSET)).bytesRead !== 64 ||
+                timing.readUInt32LE(0) !== 0x314d4954 || timing.readUInt32LE(4) !== header.readUInt32LE(0) ||
+                timing.readBigUInt64LE(32) / 1000n !== BigInt(published)) return null;
+            packet.writeBigUInt64BE(timing.readBigUInt64LE(16), 24);
+            packet.writeBigUInt64BE(timing.readBigUInt64LE(24), 32);
+            packet.writeBigUInt64BE(timing.readBigUInt64LE(32), 40);
+            packet.writeUInt32BE(timing.readUInt32LE(12), 56);
+            packet.writeUInt32BE(timing.readUInt32LE(8), 60);
+        }
         const verified = Buffer.alloc(HEADER_BYTES);
         if ((await file.read(verified, 0, verified.length, 0)).bytesRead !== HEADER_BYTES ||
-            !header.equals(verified) || packet[24] !== 0xff || packet[25] !== 0xd8) return null;
-        packet.writeUInt32BE(0x56504632, 0);
+            !header.equals(verified) || packet[packetHeader] !== 0xff || packet[packetHeader + 1] !== 0xd8) return null;
+        packet.writeUInt32BE(hasTiming ? 0x56504633 : 0x56504632, 0);
         packet.writeUInt32BE(header.readUInt32LE(0), 4);
         packet.writeUInt16BE(0, 8);
         packet.writeUInt16BE(1, 10);
@@ -51,4 +64,4 @@ class LatestFrameSource {
     }
 }
 
-module.exports = { LatestFrameSource, HEADER_BYTES, MAX_FRAME_BYTES };
+module.exports = { LatestFrameSource, HEADER_BYTES, MAX_FRAME_BYTES, TIMING_OFFSET };

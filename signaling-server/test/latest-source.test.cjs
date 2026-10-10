@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
-const { LatestFrameSource, MAX_FRAME_BYTES } = require('../latest-source');
+const { LatestFrameSource, MAX_FRAME_BYTES, TIMING_OFFSET } = require('../latest-source');
 const { parseFragment } = require('../public/video-frames');
 
 async function fixture(t) {
@@ -64,4 +64,25 @@ test('retries opening a source created after the service starts', async t => {
     await fs.unlink(filename);
     await assert.rejects(source.readLatest(), { code: 'ENOENT' });
     await write(); assert.ok(await source.readLatest());
+});
+
+test('VPF3 preserves JPEG and validates timing sidecar identity', async t => {
+    const { source, header, jpeg, filename, write } = await fixture(t);
+    header.writeUInt32LE(2, 24); await write();
+    const timing = Buffer.alloc(64);
+    timing.writeUInt32LE(0x314d4954, 0); timing.writeUInt32LE(42, 4);
+    timing.writeUInt32LE(60, 8); timing.writeUInt32LE(0x2000, 12);
+    timing.writeBigUInt64LE(4999999970000n, 16); timing.writeBigUInt64LE(4999999999000n, 24);
+    timing.writeBigUInt64LE(5000000000000n, 32);
+    const file = await fs.open(filename, 'r+');
+    try {
+        await file.write(timing, 0, 64, TIMING_OFFSET);
+        const { packet } = await source.readLatest();
+        const parsed = parseFragment(packet.buffer.slice(packet.byteOffset, packet.byteOffset + packet.byteLength));
+        assert.equal(parsed.timing.driver, 4999999970);
+        assert.equal(parsed.timing.sequence, 60);
+        assert.deepEqual(Buffer.from(parsed.payload), jpeg);
+        timing.writeUInt32LE(43, 4); await file.write(timing, 0, 64, TIMING_OFFSET);
+        assert.equal(await source.readLatest(), null);
+    } finally { await file.close(); }
 });

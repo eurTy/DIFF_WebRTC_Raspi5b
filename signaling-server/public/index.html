@@ -51,7 +51,11 @@
       overflow-wrap: anywhere;
     }
     .connection-tools { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
-    #transport { font: inherit; font-size: 13px; color: #eef4f8; background: #151b20; border: 1px solid #526270; padding: 6px; max-width: 100%; }
+    #transport, #flow { font: inherit; font-size: 13px; color: #eef4f8; background: #151b20; border: 1px solid #526270; padding: 6px; max-width: 100%; }
+    #flow:disabled { opacity: .5; }
+    details { margin-top: 14px; font-size: 12px; color: #b9c7d0; }
+    summary { cursor: pointer; }
+    #timing-source { margin-left: 12px; }
 
     main {
       display: grid;
@@ -114,6 +118,11 @@
         <option value="ws">WebSocket</option>
       </select>
       <div class="status" id="status">connecting</div>
+      <select id="flow" aria-label="发送节奏">
+        <option value="decode">解码后请求</option>
+        <option value="receive">收帧后请求</option>
+        <option value="window2">双帧窗口</option>
+      </select>
     </div>
   </header>
 
@@ -133,6 +142,16 @@
       <div><dt>P95 / 10 秒</dt><dd id="latency-p95">-- ms</dd></div>
       <div><dt>时钟误差估计</dt><dd id="latency-error">-- ms</dd></div>
     </dl>
+    <details id="stage-details">
+      <summary>分段计时<span id="timing-source">--</span></summary>
+      <dl class="latency-metrics">
+        <div><dt>驱动 → 输出</dt><dd id="stage-capture">-- ms</dd></div>
+        <div><dt>输出 → 发送</dt><dd id="stage-dispatch">-- ms</dd></div>
+        <div><dt>发送 → 收到（估计）</dt><dd id="stage-network">-- ms</dd></div>
+        <div><dt>收到 → 解码</dt><dd id="stage-decode">-- ms</dd></div>
+        <div><dt>驱动 → 解码（估计）</dt><dd id="stage-total">-- ms</dd></div>
+      </dl>
+    </details>
   </section>
 
   <footer>
@@ -142,12 +161,20 @@
     <span id="drops">丢弃 0 帧</span>
   </footer>
 
-  <script src="/latency.js?v=20261008"></script>
-  <script src="/video-frames.js?v=20261009"></script>
+  <script src="/latency.js?v=20261010b"></script>
+  <script src="/video-frames.js?v=20261010b"></script>
+  <script src="/latest-renderer.js?v=20261010b"></script>
   <script>
     const MAGIC = 0x56504631;
     const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260607b`;
     const latestMode = new URLSearchParams(location.search).get('transport') === 'ws';
+    const requestedFlow = new URLSearchParams(location.search).get('flow');
+    const flowMode = ['decode', 'receive', 'window2'].includes(requestedFlow) ? requestedFlow : 'decode';
+    const flowEl = document.getElementById('flow');
+    flowEl.value = flowMode; flowEl.disabled = !latestMode;
+    flowEl.onchange = () => {
+      const url = new URL(location.href); url.searchParams.set('flow', flowEl.value); location.href = url.href;
+    };
     const transportEl = document.getElementById('transport');
     transportEl.value = latestMode ? 'ws' : 'webrtc';
     transportEl.onchange = () => {
@@ -167,6 +194,12 @@
 
     function updateLatency() {
       const sample = latency.snapshot();
+      const stages = latency.stages();
+      document.getElementById('timing-source').textContent = stages?.source || '--';
+      for (const name of ['capture', 'dispatch', 'network', 'decode', 'total']) {
+        const value = stages?.[name];
+        document.getElementById(`stage-${name}`).textContent = Number.isFinite(value) ? `${value.toFixed(1)} ms` : '-- ms';
+      }
       const format = value => Number.isFinite(value) ? `${Math.round(value)} ms` : '-- ms';
       latencyEls.current.textContent = format(sample.delayMs);
       latencyEls.age.textContent = format(sample.ageMs);
@@ -418,15 +451,23 @@
       ws.onerror = () => setStatus('ws error');
     }
 
-    function requestLatestFrame() {
+    function requestLatestFrame(published = latestPublication) {
       clearTimeout(latestRetry);
-      if (ws?.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'frame_request', after: latestPublication }));
+      if (ws?.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'frame_request', after: published, window: flowMode === 'window2' ? 2 : 1 }));
     }
 
     function connectLatest() {
       clearTimeout(latestRetry); clearTimeout(reconnectTimer);
       latestPublication = 0;
       const socket = ws = new WebSocket(wsUrl.replace('role=viewer', 'role=latest'));
+      const active = () => socket === ws && socket.readyState === WebSocket.OPEN;
+      const renderer = new LatestRenderer({
+        active,
+        render: item => handleVideoMessage(item.data),
+        release: item => { if (flowMode !== 'receive') requestLatestFrame(item.packet.published); },
+        discard: () => { assembler.dropped++; },
+        error: error => { console.error(error); socket.close(1002, 'video protocol error'); },
+      });
       socket.binaryType = 'arraybuffer';
       socket.onopen = () => { setStatus('connected'); requestLatestFrame(); };
       socket.onmessage = async event => {
@@ -441,11 +482,14 @@
             else handleControlMessage(event.data);
             return;
           }
-          const published = await handleVideoMessage(event.data);
-          if (socket !== ws || socket.readyState !== WebSocket.OPEN) return;
-          if (!Number.isSafeInteger(published) || published <= 0) { socket.close(1002, 'invalid video packet'); return; }
-          latestPublication = published;
-          requestLatestFrame();
+          const packet = VideoFrames.parseFragment(event.data);
+          if (!packet || packet.total !== 1 || !Number.isSafeInteger(packet.published) || packet.published <= 0) {
+            socket.close(1002, 'invalid video packet'); return;
+          }
+          latency.noteTiming(packet.id, packet.timing, performance.now());
+          latestPublication = packet.published;
+          if (flowMode === 'receive') requestLatestFrame(packet.published);
+          renderer.enqueue({ data: event.data, packet });
         } catch (error) {
           console.error(error); socket.close(1002, 'video protocol error');
         }

@@ -1,0 +1,14 @@
+{
+  "scope": "Passive Wi-Fi events plus router ping, covering the six flow runs and adjacent checks",
+  "privateRawLogDirectory": "/home/eur/flow_timing_20261010/network",
+  "scanDurationsSeconds": [3.669736, 3.677566, 3.675590, 3.681481],
+  "scanStartEpochSeconds": [1791600459.150278, 1791600762.830081, 1791601066.511558, 1791601370.194253],
+  "ping": {
+    "transmitted": 1080,
+    "received": 1079,
+    "lossPercent": 0.0925926,
+    "elapsedMs": 1080467,
+    "rttMs": {"min": 1.013, "mean": 18.720, "max": 158.148, "mdev": 21.604}
+  },
+  "caveat": "Scan duration is not outage duration; these observations do not prove that scans caused all video latency."
+}

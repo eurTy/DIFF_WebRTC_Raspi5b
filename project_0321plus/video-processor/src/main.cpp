@@ -37,6 +37,17 @@ struct Buffer {
 const char* SHM_NAME = "/video_shm";
 const size_t SHM_SIZE = 128 * 1024 * 1024;
 const size_t HEADER_SIZE = sizeof(ShmHeader);
+struct FrameTiming {
+    uint32_t magic, frameId, driverSequence, driverFlags;
+    uint64_t driverUs, dequeuedUs, publishedUs;
+    uint64_t reserved[3];
+};
+static_assert(sizeof(FrameTiming) == 64);
+const size_t TIMING_OFFSET = SHM_SIZE - sizeof(FrameTiming);
+uint64_t steadyUs() {
+    return std::chrono::duration_cast<std::chrono::microseconds>(
+        std::chrono::steady_clock::now().time_since_epoch()).count();
+}
 const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
 const uint32_t LOG_INTERVAL_FRAMES = 30;
 
@@ -269,7 +280,10 @@ void publishFrame(ShmHeader* header,
                   const uint8_t* frameData,
                   size_t frameSize,
                   uint32_t frameId,
-                  uint32_t& writeSeq) {
+                  uint32_t& writeSeq,
+                  FrameTiming* timing,
+                  const v4l2_buffer& cameraBuffer,
+                  uint64_t dequeuedUs) {
     const uint32_t fragTotal =
         static_cast<uint32_t>((frameSize + FRAGMENT_MAX_SIZE - 1) / FRAGMENT_MAX_SIZE);
 
@@ -281,13 +295,15 @@ void publishFrame(ShmHeader* header,
     header->frag_total = fragTotal;
     header->frag_size = static_cast<uint32_t>(FRAGMENT_MAX_SIZE);
     header->frame_size = static_cast<uint32_t>(frameSize);
-    header->flags = 0;
+    header->flags = 2; // Timing sidecar present; preserve the original 48-byte SHM ABI.
     header->motion_threshold = 0;
     header->keyframe_interval = 0;
-    header->last_feedback_time =
-        static_cast<uint64_t>(std::chrono::duration_cast<std::chrono::milliseconds>(
-                                  std::chrono::steady_clock::now().time_since_epoch())
-                                  .count());
+    const uint64_t publishedUs = steadyUs();
+    const uint64_t driverUs = cameraBuffer.timestamp.tv_sec > 0 && cameraBuffer.timestamp.tv_usec >= 0
+        ? uint64_t(cameraBuffer.timestamp.tv_sec) * 1000000 + cameraBuffer.timestamp.tv_usec : 0;
+    *timing = {0x314d4954, frameId, cameraBuffer.sequence, cameraBuffer.flags,
+               driverUs, dequeuedUs, publishedUs, {0, 0, 0}};
+    header->last_feedback_time = publishedUs / 1000;
     header->frame_id = frameId;
 
     std::atomic_thread_fence(std::memory_order_release);
@@ -346,12 +362,13 @@ int main() {
     ShmHeader* header = static_cast<ShmHeader*>(shmPtr);
     std::memset(header, 0, HEADER_SIZE);
     uint8_t* dataStart = static_cast<uint8_t*>(shmPtr) + HEADER_SIZE;
+    auto* timing = reinterpret_cast<FrameTiming*>(static_cast<uint8_t*>(shmPtr) + TIMING_OFFSET);
 
     uint32_t frameId = 0;
     uint32_t writeSeq = 0;
     uint32_t invalidJpegCount = 0;
     uint32_t drainedFrames = 0;
-    const size_t maxFrameSize = SHM_SIZE - HEADER_SIZE;
+    const size_t maxFrameSize = TIMING_OFFSET - HEADER_SIZE;
 
     while (true) {
         if (!waitForFrame(cameraFd)) {
@@ -387,6 +404,7 @@ int main() {
             break;
         }
         const uint8_t* frameData = static_cast<const uint8_t*>(buffers[buf.index].start);
+        const uint64_t dequeuedUs = steadyUs();
         const size_t frameSize = buf.bytesused;
         if (!(buf.flags & V4L2_BUF_FLAG_ERROR) && frameSize > 0 &&
             frameSize <= maxFrameSize && frameSize <= buffers[buf.index].length) {
@@ -397,14 +415,18 @@ int main() {
                               << frameSize << std::endl;
                 }
             } else {
-                publishFrame(header, dataStart, frameData, frameSize, frameId, writeSeq);
+                publishFrame(header, dataStart, frameData, frameSize, frameId, writeSeq,
+                             timing, buf, dequeuedUs);
                 if (frameId % LOG_INTERVAL_FRAMES == 0) {
                     const uint32_t fragTotal =
                         static_cast<uint32_t>((frameSize + FRAGMENT_MAX_SIZE - 1) / FRAGMENT_MAX_SIZE);
                     std::cout << "[VideoProcessor] Send native MJPEG frame " << frameId
                               << ", bytes=" << frameSize
                               << ", fragments=" << fragTotal
-                              << ", drained=" << drainedFrames << std::endl;
+                              << ", drained=" << drainedFrames
+                              << ", timestamp_flags=" << (buf.flags & (V4L2_BUF_FLAG_TIMESTAMP_MASK | V4L2_BUF_FLAG_TSTAMP_SRC_MASK))
+                              << ", driver_age_us=" << (timing->driverUs <= dequeuedUs ? dequeuedUs - timing->driverUs : 0)
+                              << std::endl;
                 }
                 ++frameId;
             }

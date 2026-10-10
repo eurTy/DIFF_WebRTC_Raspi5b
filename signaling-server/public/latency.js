@@ -73,6 +73,26 @@
       if (!this.latest || decoded >= this.latest.decoded) this.latest = frame;
     }
 
+    noteTiming(id, timing, received = this.now()) {
+      if (timing) Object.assign(this.frame(id), { timing, received });
+    }
+
+    stages() {
+      const frame = this.latest, timing = frame?.timing;
+      if (!timing || this.clocks.length < 3 || this.lastReply === null || this.now() - this.lastReply > 10000) return null;
+      const best = this.clocks.reduce((a, b) => a.rtt < b.rtt ? a : b);
+      const driverValid = (timing.flags & 0xe000) === 0x2000 && timing.driver > 0 && timing.driver <= timing.dequeued;
+      const positive = value => Number.isFinite(value) && value >= 0 ? value : null;
+      return {
+        source: driverValid ? ((timing.flags & 0x70000) === 0x10000 ? 'V4L2 SOE' : 'V4L2 EOF') : 'V4L2 unknown',
+        capture: driverValid ? positive(timing.published - timing.driver) : null,
+        dispatch: positive(timing.sent - timing.published),
+        network: positive(frame.received + best.offset - timing.sent),
+        decode: positive(frame.decoded - frame.received),
+        total: driverValid ? positive(frame.decoded + best.offset - timing.driver) : null,
+      };
+    }
+
     snapshot() {
       const at = this.now();
       this.prune(at);

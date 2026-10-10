@@ -1,0 +1,93 @@
+{
+  "test": "transport-switch-and-reconnect",
+  "results": [
+    {
+      "mode": "ws",
+      "frames": 22,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 16.239395500160754,
+      "ageMs": 51.63939550006762,
+      "meanMs": 16.9212136820001,
+      "p95Ms": 25.43939550034702,
+      "uncertaintyMs": 2.1946665002033114,
+      "count": 22
+    },
+    {
+      "mode": "webrtc",
+      "frames": 20,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 30.66420799959451,
+      "ageMs": 40.16420799959451,
+      "meanMs": 39.23920799966436,
+      "p95Ms": 48.56420799950138,
+      "uncertaintyMs": 11.294065000023693,
+      "count": 20
+    },
+    {
+      "mode": "ws",
+      "frames": 25,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 38.95534999994561,
+      "ageMs": 85.25534999975935,
+      "meanMs": 54.00334999985993,
+      "p95Ms": 87.95534999994561,
+      "uncertaintyMs": 4.944286999758333,
+      "count": 25
+    },
+    {
+      "mode": "webrtc",
+      "frames": 26,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 32.416346500162035,
+      "ageMs": 52.8163465000689,
+      "meanMs": 39.87019265394729,
+      "p95Ms": 52.3163465000689,
+      "uncertaintyMs": 11.645518500125036,
+      "count": 26
+    },
+    {
+      "mode": "webrtc",
+      "frames": 23,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 25.799560999963433,
+      "ageMs": 31.399560999590904,
+      "meanMs": 23.773474043275677,
+      "p95Ms": 30.799560999963433,
+      "uncertaintyMs": 4.295204000081867,
+      "count": 23
+    },
+    {
+      "mode": "ws",
+      "frames": 23,
+      "width": 1280,
+      "state": "ready",
+      "delayMs": 11.985137000214309,
+      "ageMs": 18.885137000121176,
+      "meanMs": 16.146006565439798,
+      "p95Ms": 34.18513700040057,
+      "uncertaintyMs": 6.64403700013645,
+      "count": 23
+    }
+  ],
+  "before": {
+    "frames": 23,
+    "generation": 1
+  },
+  "recovered": {
+    "frames": 47,
+    "generation": 3,
+    "state": "ready",
+    "delayMs": 13.374386500101537,
+    "ageMs": 37.87438650010154,
+    "meanMs": 14.103553166748801,
+    "p95Ms": 24.5743865002878,
+    "uncertaintyMs": 4.794018500018865,
+    "count": 24
+  },
+  "browserErrors": []
+}

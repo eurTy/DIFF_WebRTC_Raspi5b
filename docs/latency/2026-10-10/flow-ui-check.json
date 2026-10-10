@@ -1,0 +1,107 @@
+{
+  "test": "live-latency",
+  "first": {
+    "state": "ready",
+    "delayMs": 61.86581150023267,
+    "ageMs": 83.4658115003258,
+    "meanMs": 47.48119611571042,
+    "p95Ms": 72.26581150013953,
+    "uncertaintyMs": 7.09393550013192,
+    "count": 65,
+    "text": "62 ms",
+    "frames": 65
+  },
+  "second": {
+    "state": "ready",
+    "delayMs": 15.5868049999699,
+    "ageMs": 33.886804999783635,
+    "meanMs": 34.75283064081286,
+    "p95Ms": 71.98680499987677,
+    "uncertaintyMs": 2.9939439999870956,
+    "count": 156,
+    "text": "16 ms",
+    "frames": 156
+  },
+  "layouts": [
+    {
+      "name": "desktop",
+      "overflow": false,
+      "clipped": false,
+      "metrics": [
+        "9 ms",
+        "9 ms",
+        "33 ms",
+        "66 ms",
+        "±3 ms",
+        "32.0 ms",
+        "1.8 ms",
+        "4.4 ms",
+        "2.8 ms",
+        "41.0 ms"
+      ]
+    },
+    {
+      "name": "mobile",
+      "overflow": false,
+      "clipped": false,
+      "metrics": [
+        "11 ms",
+        "11 ms",
+        "32 ms",
+        "66 ms",
+        "±3 ms",
+        "36.0 ms",
+        "2.3 ms",
+        "5.6 ms",
+        "2.8 ms",
+        "46.8 ms"
+      ]
+    },
+    {
+      "name": "small",
+      "overflow": false,
+      "clipped": false,
+      "metrics": [
+        "10 ms",
+        "10 ms",
+        "31 ms",
+        "66 ms",
+        "±3 ms",
+        "36.0 ms",
+        "1.9 ms",
+        "4.7 ms",
+        "2.9 ms",
+        "45.5 ms"
+      ]
+    }
+  ],
+  "pixels": {
+    "width": 1280,
+    "height": 720,
+    "min": 0,
+    "max": 185
+  },
+  "backlogged": {
+    "age": 2039.9868049998768,
+    "highlighted": "true"
+  },
+  "stall": {
+    "age": 1727.7868049996905,
+    "highlighted": "true"
+  },
+  "stale": {
+    "state": "校准失效",
+    "current": "-- ms"
+  },
+  "browserErrors": [],
+  "title": "Pi WebRTC Video",
+  "status": "streaming 35239",
+  "frames": "210 frames",
+  "stats": "30.6 fps | 13.83 Mbps",
+  "bytes": "12166 KB",
+  "imageWidth": 1280,
+  "imageHeight": 720,
+  "imageComplete": true,
+  "imageLoads": 210,
+  "imageErrors": 0
+}

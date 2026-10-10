@@ -6,14 +6,19 @@
     if (!(buffer instanceof ArrayBuffer) || buffer.byteLength < 16) return null;
     const view = new DataView(buffer);
     const magic = view.getUint32(0);
-    const headerSize = magic === 0x56504632 ? 24 : magic === 0x56504631 ? 16 : 0;
+    const headerSize = magic === 0x56504633 ? 64 : magic === 0x56504632 ? 24 : magic === 0x56504631 ? 16 : 0;
     if (!headerSize || buffer.byteLength < headerSize) return null;
     const id = view.getUint32(4), index = view.getUint16(8), total = view.getUint16(10);
     const length = view.getUint32(12);
     if (!total || total > 8192 || index >= total || !length || length > 8 * 1024 * 1024 || buffer.byteLength !== headerSize + length) return null;
     return {
       id, index, total, payload: new Uint8Array(buffer, headerSize, length),
-      published: headerSize === 24 ? view.getUint32(16) * 4294967296 + view.getUint32(20) : null,
+      published: headerSize >= 24 ? view.getUint32(16) * 4294967296 + view.getUint32(20) : null,
+      timing: headerSize === 64 ? {
+        driver: Number(view.getBigUint64(24)) / 1000, dequeued: Number(view.getBigUint64(32)) / 1000,
+        published: Number(view.getBigUint64(40)) / 1000, sent: Number(view.getBigUint64(48)) / 1000,
+        flags: view.getUint32(56), sequence: view.getUint32(60),
+      } : null,
     };
   }
 

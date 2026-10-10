@@ -15,6 +15,22 @@ test('parses VPF2 publication timestamps above 32 bits', () => {
   assert.equal(packet(1).published, 5000000001);
   assert.equal(packet(1).payload.byteLength, 4);
 });
+
+test('parses VPF3 microsecond timing and rejects truncated headers', () => {
+  const buffer = new ArrayBuffer(68), view = new DataView(buffer);
+  view.setUint32(0, 0x56504633); view.setUint32(4, 42);
+  view.setUint16(10, 1); view.setUint32(12, 4);
+  view.setBigUint64(16, 5000000000n);
+  [4999999967000n, 4999999999000n, 5000000000123n, 5000000001456n]
+    .forEach((value, index) => view.setBigUint64(24 + index * 8, value));
+  view.setUint32(56, 0x12000); view.setUint32(60, 456);
+  const parsed = parseFragment(buffer);
+  assert.equal(parsed.payload.byteLength, 4);
+  assert.equal(parsed.published, 5000000000);
+  assert.deepEqual(parsed.timing, { driver: 4999999967, dequeued: 4999999999,
+    published: 5000000000.123, sent: 5000000001.456, flags: 0x12000, sequence: 456 });
+  for (const length of [16, 24, 63, 64, 67]) assert.equal(parseFragment(buffer.slice(0, length)), null);
+});
 test('reassembles out-of-order fragments and ignores duplicates', () => {
   const a = new Assembler();
   a.accept(packet(1, 1)); a.accept(packet(1, 1));
