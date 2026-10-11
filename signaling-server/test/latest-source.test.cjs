@@ -86,3 +86,16 @@ test('VPF3 preserves JPEG and validates timing sidecar identity', async t => {
         assert.equal(await source.readLatest(), null);
     } finally { await file.close(); }
 });
+
+test('reopens a shared-memory path replaced with a new inode', async t => {
+    const { source, filename, header, jpeg } = await fixture(t);
+    assert.ok(await source.readLatest());
+    const temporary = filename + '.replacement';
+    header.writeUInt32LE(99, 0); header.writeBigUInt64LE(5000000100n, 40);
+    await fs.writeFile(temporary, Buffer.concat([header, jpeg]));
+    // Windows cannot rename over an open file; Pi/Linux exercises actual inode replacement.
+    if (process.platform === 'win32') source.filename = temporary;
+    else await fs.rename(temporary, filename);
+    source.lastIdentityCheck = 0;
+    assert.equal((await source.readLatest()).packet.readUInt32BE(4), 99);
+});

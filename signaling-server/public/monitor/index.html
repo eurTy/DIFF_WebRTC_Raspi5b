@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>设备观测与诊断</title>
+  <link rel="stylesheet" href="/monitor/monitor.css">
+  <script defer src="/vendor/lucide.min.js"></script>
+  <script defer src="/monitor/model.js"></script>
+  <script defer src="/monitor/monitor.js"></script>
+</head>
+<body>
+  <header class="topbar"><div class="brand"><i data-lucide="activity"></i><h1>设备观测与诊断</h1><span class="node-name">Pi 5 · 测试节点 01</span></div>
+    <div class="top-actions"><span id="connection" class="badge pending">连接中</span><span class="read-only">只读</span><button id="export" title="导出当前观测数据" aria-label="导出当前观测数据"><i data-lucide="download"></i></button></div>
+  </header>
+  <nav class="tabs" aria-label="视图"><button class="selected" data-view="live" aria-selected="true">实时监测</button><button data-view="events" aria-selected="false">事件记录 <span id="event-count">0</span></button><a href="/?transport=ws&amp;clock=separate">独立视频 <i data-lucide="external-link"></i></a></nav>
+  <main>
+    <section class="overview" aria-label="关键测量值">
+      <dl><dt>画面年龄 <span>ms</span></dt><dd id="video-age">--</dd><small id="video-quality">等待视频</small></dl>
+      <dl><dt>驱动至解码估计 <span>ms</span></dt><dd id="video-total">--</dd><small id="video-clock" title="基于最小往返时间的估计余量，不是经外部仪器校准的不确定度">校准中</small></dl>
+      <dl><dt>采样时帧年龄 <span>ms</span></dt><dd id="capture-age">--</dd><small id="capture-quality">等待采集</small></dl>
+      <dl><dt>主机温度 <span>°C</span></dt><dd id="temperature">--</dd><small>SoC 内置测温</small></dl>
+      <dl><dt>CPU 使用率 <span>%</span></dt><dd id="cpu">--</dd><small id="frequency">-- MHz</small></dl>
+      <dl><dt>活动告警</dt><dd id="alarm-count">--</dd><small id="sample-age">状态未更新</small></dl>
+    </section>
+    <div id="offline" class="notice" role="status" hidden>状态通道中断，当前数据已过期。</div>
+    <section id="view-live">
+      <div class="live-grid">
+        <section class="video-section"><div class="section-heading"><h2>现场视频</h2><span id="video-spec">1280 × 720 · MJPEG</span><select id="flow" aria-label="视频请求策略"><option value="decode">解码后请求</option><option value="receive">收帧后请求</option></select><button id="reconnect" title="重连视频" aria-label="重连视频"><i data-lucide="refresh-cw"></i></button></div>
+          <div class="video-surface"><iframe id="video" src="/?transport=ws&amp;flow=decode&amp;embed=1&amp;clock=separate" title="实时摄像头画面" allow="autoplay"></iframe><span id="video-warning" hidden>画面已过期</span></div>
+          <div class="video-caption"><span id="stream-status">连接中</span><span id="stream-rate">-- fps</span><span id="frame-id">帧 --</span></div>
+          <div class="stage-line" aria-label="分段计时"><div><span>驱动 → 发布</span><strong id="stage-capture">-- ms</strong></div><div><span>发布 → 发送</span><strong id="stage-dispatch">-- ms</strong></div><div><span>发送 → 接收估计</span><strong id="stage-network">-- ms</strong></div><div><span>接收 → 解码</span><strong id="stage-decode">-- ms</strong></div></div>
+        </section>
+        <aside class="node-section"><div class="section-heading"><h2>边缘节点</h2><span class="source-label">实测</span></div><dl class="node-data">
+          <div><dt>状态质量</dt><dd id="node-quality">--</dd></div><div><dt>数据源</dt><dd>Linux / V4L2</dd></div><div><dt>Wi‑Fi 信号</dt><dd id="wifi">-- dBm</dd></div><div><dt>接口发送</dt><dd id="tx">-- Mbps</dd></div><div><dt>接口接收</dt><dd id="rx">-- Mbps</dd></div><div><dt>可用内存</dt><dd id="memory">-- GB</dd></div><div><dt>内存隔离</dt><dd id="memory-control">--</dd></div><div><dt>采样周期</dt><dd>1 s</dd></div><div><dt>当前采样调度迟到</dt><dd id="sample-late">-- ms</dd></div></dl>
+          <h3>当前诊断</h3><ul id="active-alarms" class="alarm-list"><li>等待状态数据</li></ul><p class="boundary">只读监测 · 非安全联锁</p>
+        </aside>
+      </div>
+      <section class="trends"><div class="section-heading"><h2>状态趋势</h2><span>最近 5 分钟</span><span class="legend"><b class="teal"></b>CPU % <b class="red"></b>温度 °C</span></div><canvas id="trend" aria-label="CPU与温度时间趋势" role="img"></canvas><div id="trend-readout" class="trend-readout">--</div></section>
+      <section class="recent-events"><div class="section-heading"><h2>最近事件</h2><button id="all-events" class="text-button">全部事件 <i data-lucide="arrow-right"></i></button></div><div id="recent-list"></div></section>
+    </section>
+    <section id="view-events" hidden>
+      <div class="section-heading"><h2>事件记录</h2><select id="event-filter" aria-label="事件筛选"><option value="all">全部状态</option><option value="ACTIVE">触发</option><option value="RECOVERED">恢复</option></select><button id="refresh-events" title="刷新事件" aria-label="刷新事件"><i data-lucide="refresh-cw"></i></button></div>
+      <div class="event-workspace"><div id="event-list"></div><section id="event-detail" class="event-detail"><h3>事件证据</h3><p class="empty">暂无选中事件</p></section></div>
+    </section>
+  </main>
+  <footer><span>测控实验平台 · 不含实物执行机构</span><span id="last-updated">--</span></footer>
+</body></html>

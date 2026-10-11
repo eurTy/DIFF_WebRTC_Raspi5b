@@ -12,7 +12,7 @@
       this.clocks = [];
       this.frames = new Map();
       this.latest = null;
-      this.nextRequest = 0;
+      this.nextRequest = this.nextRequest || 0;
       this.lastReply = null;
     }
 

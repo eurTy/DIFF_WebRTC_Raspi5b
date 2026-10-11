@@ -8,11 +8,28 @@ class LatestFrameSource {
     constructor(filename) {
         this.filename = filename;
         this.opening = null;
+        this.identity = null;
+        this.lastIdentityCheck = 0;
     }
 
     async handle() {
+        if (this.opening && Date.now() - this.lastIdentityCheck >= 1000) {
+            this.lastIdentityCheck = Date.now();
+            try {
+                const current = await fs.stat(this.filename);
+                if (this.identity && (current.ino !== this.identity.ino || current.dev !== this.identity.dev)) await this.close();
+            } catch (error) {
+                await this.close();
+                throw error;
+            }
+        }
         if (!this.opening) {
-            this.opening = fs.open(this.filename, 'r').catch(error => {
+            this.opening = fs.open(this.filename, 'r').then(async file => {
+                try { this.identity = await file.stat(); }
+                catch (error) { await file.close(); throw error; }
+                this.lastIdentityCheck = Date.now();
+                return file;
+            }).catch(error => {
                 this.opening = null;
                 throw error;
             });
@@ -60,6 +77,7 @@ class LatestFrameSource {
     async close() {
         const opening = this.opening;
         this.opening = null;
+        this.identity = null;
         if (opening) await (await opening).close();
     }
 }

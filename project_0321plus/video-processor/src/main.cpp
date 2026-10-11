@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <cstdint>
 #include <cstring>
+#include <csignal>
 #include <fcntl.h>
 #include <iostream>
 #include <linux/videodev2.h>
@@ -49,7 +50,9 @@ uint64_t steadyUs() {
         std::chrono::steady_clock::now().time_since_epoch()).count();
 }
 const size_t FRAGMENT_MAX_SIZE = 24 * 1024;
-const uint32_t LOG_INTERVAL_FRAMES = 30;
+const uint32_t LOG_INTERVAL_FRAMES = 300;
+volatile std::sig_atomic_t stopping = 0;
+void handleStop(int) { stopping = 1; }
 
 int xioctl(int fd, unsigned long request, void* arg) {
     int ret;
@@ -312,6 +315,8 @@ void publishFrame(ShmHeader* header,
 }
 
 int main() {
+    std::signal(SIGINT, handleStop);
+    std::signal(SIGTERM, handleStop);
     const std::string device = std::getenv("CAMERA_DEVICE") ?
         std::getenv("CAMERA_DEVICE") : "/dev/video0";
     const uint32_t width = envUInt("CAMERA_WIDTH", 1280);
@@ -368,13 +373,22 @@ int main() {
     uint32_t writeSeq = 0;
     uint32_t invalidJpegCount = 0;
     uint32_t drainedFrames = 0;
+    uint32_t consecutiveTimeouts = 0;
+    bool failed = false;
     const size_t maxFrameSize = TIMING_OFFSET - HEADER_SIZE;
 
-    while (true) {
+    while (!stopping) {
         if (!waitForFrame(cameraFd)) {
+            if (stopping) break;
             std::cerr << "[Camera] Timeout waiting for frame" << std::endl;
+            if (++consecutiveTimeouts >= 5) {
+                std::cerr << "[Camera] Capture stalled; exiting for supervised recovery" << std::endl;
+                failed = true;
+                break;
+            }
             continue;
         }
+        consecutiveTimeouts = 0;
 
         v4l2_buffer buf{};
         buf.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -384,6 +398,7 @@ int main() {
                 continue;
             }
             std::cerr << "[Camera] VIDIOC_DQBUF failed: " << strerror(errno) << std::endl;
+            failed = true;
             break;
         }
 
@@ -401,6 +416,7 @@ int main() {
         }
         if (buf.index >= buffers.size()) {
             std::cerr << "[Camera] Invalid buffer index" << std::endl;
+            failed = true;
             break;
         }
         const uint8_t* frameData = static_cast<const uint8_t*>(buffers[buf.index].start);
@@ -436,6 +452,7 @@ int main() {
 
         if (xioctl(cameraFd, VIDIOC_QBUF, &buf) < 0) {
             std::cerr << "[Camera] VIDIOC_QBUF failed: " << strerror(errno) << std::endl;
+            failed = true;
             break;
         }
     }
@@ -449,5 +466,5 @@ int main() {
         }
     }
     close(cameraFd);
-    return 0;
+    return failed ? 1 : 0;
 }

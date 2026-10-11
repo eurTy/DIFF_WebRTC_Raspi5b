@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-11",
+  "node_tests": {"passed": 45, "platforms": ["Windows", "Raspberry Pi OS"]},
+  "observer_tests": {"passed": 9, "platforms": ["Windows", "Raspberry Pi OS"]},
+  "capture_build": {"cmake": "passed", "flags": ["-O2", "-Wall", "-Wextra"], "warnings": 0},
+  "browser": {
+    "measured_at": "2026-10-11T14:08:55.655Z",
+    "engine": "Microsoft Edge via Playwright 1.58.2",
+    "video": {"width": 1280, "height": 720, "pixel_min": 9, "pixel_max": 108},
+    "viewport_widths": [1440, 1024, 390, 320],
+    "horizontal_overflow": false,
+    "major_value_clipping": false,
+    "status_offline_display": "passed",
+    "independent_video_stale_display": "passed",
+    "event_detail_and_json_export": "passed",
+    "page_errors": 0,
+    "images_published": false
+  },
+  "numeric_recomputation": {"matrix_runs_verified": 5, "pacing_runs_verified": 3},
+  "capture_fault_injection": {"runs": 3, "active_events": 3, "recovered_events": 3},
+  "final_deployment": {
+    "enabled": ["pi-observer", "pi-signaling"],
+    "disabled_but_preserved": ["pi-industrial-gateway", "pi-industrial-simulator"],
+    "qdisc": "fq_codel (restored)",
+    "permanent_network_changes": false,
+    "reboot_performed": false
+  },
+  "limitations": [
+    "Wi-Fi long-tail stalls remain; successful-frame latency does not describe current image freshness.",
+    "No optical latency calibration, production machine validation or 24-hour reliability test.",
+    "Read-only trusted-LAN prototype, not an authenticated public service or safety controller."
+  ]
+}

@@ -40,6 +40,10 @@ test('real server routes both transports and resets consumed RTC sessions', { ti
         await delay(20);
     }
     assert.ok(httpReady, 'server must listen: ' + output);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/%E0%A4%A`)).status, 400);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/%2e%2e%2fpublic-not-public/secrets`)).status, 403);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/`, { method: 'POST' })).status, 405);
+    assert.equal((await fetch(`http://127.0.0.1:${port}/monitor/`)).status, 200);
     async function connect(role) {
         const socket = new WebSocket(`ws://127.0.0.1:${port}/?role=${role}&v=20260607b`);
         socket.messages = [];
@@ -73,4 +77,8 @@ test('real server routes both transports and resets consumed RTC sessions', { ti
     assert.deepEqual([...jpeg.subarray(24)], [255, 216, 255, 217]);
     latest.send(JSON.stringify({ type: 'latency_clock_request', request_id: 7 }));
     assert.equal((await message(latest)).request_id, 7);
+    const clock = await connect('clock');
+    clock.send(JSON.stringify({ type: 'latency_clock_request', request_id: 8 }));
+    assert.equal((await message(clock)).request_id, 8);
+    assert.equal(latest.readyState, WebSocket.OPEN, 'clock connection must not replace video viewer');
 });

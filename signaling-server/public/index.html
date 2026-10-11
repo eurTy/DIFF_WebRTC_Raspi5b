@@ -107,6 +107,10 @@
     .latency-metrics dd { margin: 0; font-size: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
     #latency-age[data-stalled="true"] { color: #ffbe7d; }
     @media (max-width: 700px) { .latency-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    body.embedded { height: 100vh; min-height: 0; display: block; }
+    body.embedded > header, body.embedded > footer, body.embedded > .latency-bar { display: none; }
+    body.embedded main { padding: 0; height: 100%; }
+    body.embedded img { width: 100%; height: 100%; max-height: none; max-width: none; border: 0; }
   </style>
 </head>
 <body>
@@ -168,6 +172,9 @@
     const MAGIC = 0x56504631;
     const wsUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=viewer&v=20260607b`;
     const latestMode = new URLSearchParams(location.search).get('transport') === 'ws';
+    const embedded = new URLSearchParams(location.search).get('embed') === '1';
+    const separateClock = latestMode && new URLSearchParams(location.search).get('clock') === 'separate';
+    if (embedded) document.body.classList.add('embedded');
     const requestedFlow = new URLSearchParams(location.search).get('flow');
     const flowMode = ['decode', 'receive', 'window2'].includes(requestedFlow) ? requestedFlow : 'decode';
     const flowEl = document.getElementById('flow');
@@ -212,6 +219,12 @@
         (Number.isFinite(sample.ageMs) && sample.ageMs > 1000) ||
         (lastVideoReceived > 0 && performance.now() - lastVideoReceived > 1000));
       dropsEl.textContent = `丢弃 ${assembler.dropped} 帧`;
+      if (embedded && window.parent !== window) {
+        window.parent.postMessage({ type: 'pi-video-status', sample, stages, status: statusEl.textContent,
+          frameId: latency.latest?.id ?? null, publishedMs: latency.latest?.published ?? null,
+          receivedAgoMs: lastVideoReceived ? performance.now() - lastVideoReceived : null,
+          stats: statsEl.textContent, resolution: [videoEl.naturalWidth, videoEl.naturalHeight] }, location.origin);
+      }
     }
 
     function resetLatency() {
@@ -224,6 +237,7 @@
 
     let pc;
     let ws;
+    let clockWs, clockRetry, leaving = false;
     let controlChannel;
     let videoChannel;
     let latestPublication = 0;
@@ -502,13 +516,30 @@
       socket.onerror = () => setStatus('ws error');
     }
 
+    function connectClock() {
+      if (!separateClock || leaving) return;
+      const socket = new WebSocket(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/?role=clock&v=20260607b`);
+      clockWs = socket;
+      socket.onmessage = event => {
+        if (socket !== clockWs) return;
+        try { latency.acceptClock(JSON.parse(event.data)); } catch { socket.close(1002, 'invalid clock reply'); }
+      };
+      socket.onclose = () => {
+        if (socket === clockWs && !leaving) clockRetry = setTimeout(connectClock, 1000);
+      };
+      socket.onerror = () => {};
+    }
+    window.addEventListener('pagehide', () => { leaving = true; clearTimeout(clockRetry); clockWs?.close(); });
+    connectClock();
+
     setInterval(() => {
       updateLatency();
-      const ready = latestMode ? ws?.readyState === WebSocket.OPEN : controlChannel?.readyState === 'open';
+      const transport = separateClock ? clockWs : latestMode ? ws : controlChannel;
+      const ready = latestMode ? transport?.readyState === WebSocket.OPEN : transport?.readyState === 'open';
       if (!ready || performance.now() < nextClockProbe) return;
       const request = latency.request();
       nextClockProbe = performance.now() + (latency.clocks.length < 8 ? 250 : 1000);
-      try { (latestMode ? ws : controlChannel).send(JSON.stringify(request)); }
+      try { transport.send(JSON.stringify(request)); }
       catch (error) { latency.cancelRequest(request.request_id); }
     }, 100);
 

@@ -1,0 +1,26 @@
+[Unit]
+Description=Read-only video and host measurement observer
+After=network.target
+
+[Service]
+User=eur
+WorkingDirectory=/home/eur/industrial-lab
+ExecStart=/home/eur/industrial-lab/.venv/bin/python -m monitoring.server
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=8
+UMask=0077
+Environment=PYTHONDONTWRITEBYTECODE=1
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/eur/industrial-lab/monitoring/runtime
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+Nice=5
+CPUWeight=20
+MemoryMax=192M
+TasksMax=16
+
+[Install]
+WantedBy=multi-user.target

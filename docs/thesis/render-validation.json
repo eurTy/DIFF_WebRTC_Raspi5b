@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-11",
+  "artifact": "draft/thesis-draft.docx",
+  "pages": 34,
+  "native_equations": 7,
+  "tables": 11,
+  "figures": 4,
+  "render_engine": "Microsoft Word COM (hidden), then pypdfium2 page rasterization",
+  "packaged_renderer": "Unavailable because soffice.exe is not installed; native Word fallback used.",
+  "toc_fields_updated": true,
+  "all_pages_visually_inspected": true,
+  "text_outside_page_bounds": 0,
+  "empty_pages": 0,
+  "page_images_and_qa_pdf_published": false,
+  "school_template_applied": false,
+  "draft_requires_author_and_supervisor_review": true
+}

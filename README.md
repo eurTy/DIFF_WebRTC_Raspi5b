@@ -1,12 +1,21 @@
 # DIFF WebRTC Raspi5B
 
-树莓派 5 低延迟视频传输项目。当前版本已经完成从 USB 摄像头原生 MJPEG 采集、共享内存传递、WebRTC / WebSocket 传输到浏览器 JPEG 显示的联调。主线扩展为面向测控专业的工业执行机构远程测试系统；已实现独立的软件模拟工位与 Modbus 网关原型，尚未接入真实电机或 PLC。
+树莓派 5 视频与状态协同监测项目。当前版本已完成 USB 摄像头原生 MJPEG、共享内存、WebRTC / WebSocket 和浏览器显示，并加入真实 Linux 状态、数据新鲜度、故障事件及前后证据。当前毕业设计主线是**设备远程运维观测与诊断**，不是小车或模拟往复控制；没有接入真实电机或 PLC。
+
+## 当前入口与交付
+
+- [监测界面](http://192.168.3.19:8080/monitor/)：真实视频、CPU/温度/Wi-Fi、独立状态质量、事件与 JSON 导出。
+- [部署与操作](monitoring/README.md)：只读 API、规则、隐私、安全边界和回退。
+- [本轮审计与实测](docs/monitoring/2026-10-11/README.md)：保留无线长尾和失败结果，不宣称延迟彻底解决。
+- [本科论文完整初稿](docs/thesis/draft/thesis.md)及 [Word 文件](docs/thesis/draft/thesis-draft.docx)：基于真实数据，不编造电机、产线或 AI 实验。
+
+原 `/` 视频入口仍保留，`industrial_station` 模拟模型仍可独立研究，但当前 Pi 已停止其开机自启。新观测服务不提供设备写入命令，不能替代 PLC、安全联锁或急停。
 
 当前版本定位：
 
 - 树莓派端负责摄像头原生 MJPEG 采集、WebRTC 网关和信令服务。
 - PC 浏览器当前作为中间测试端和协议验证平台。
-- 后续优先开发设备测试 HMI、模拟工位、Modbus 状态采集、报警记录与测试报告，原生手机 App 暂列远期选项。
+- 当前优先真实采集节点状态、视频新鲜度和报警证据；真实物理传感量接入为下一阶段，原生手机 App 为远期选项。
 - 视频与设备命令/状态分离；可靠传输不等于确定性实时控制，动作互锁必须在被控端执行。
 - 当前优化保持 720p 原始 JPEG 质量，重点是有界队列、分段计时、发送节奏及 Wi-Fi 长尾评估。
 
@@ -16,8 +25,9 @@
 Web client version: 20260607b
 Target viewer: PC browser now, mobile browser next
 Pi address in current test LAN: 192.168.3.19
-Industrial prototype: simulated Modbus station + independent gateway API
-Next target: industrial actuator test HMI + video/event correlation
+Current application: read-only measured observer + video/event correlation
+Archived option: simulated Modbus station (disabled on current Pi)
+Boundary: laboratory prototype, not an industrial safety/control system
 ```
 
 2026-10-08 保存点：保留 `1280x720` 原生 MJPEG 画质，部署参数为 `30fps`，增加实时延迟、画面年龄和有界重组；无线抖动造成的秒级卡顿尚未解决。完整数据、尝试记录、测量边界及回退方法见 [本日优化记录](docs/latency/2026-10-08/README.md)。此版本是实验检查点，不是稳定超低延迟发布版。
@@ -28,7 +38,7 @@ Next target: industrial actuator test HMI + video/event correlation
 
 ## 技术路线
 
-2026-10-10 工业原型：新增 [industrial_station](industrial_station/README.md)，包括模拟往复机构、Modbus TCP、动作互锁、断线撤权、命令去重、故障注入、SQLite 审计与 JSON 报告。全部设备数据明确标注 SIMULATED，原视频模块不修改；新增 HTTP 8091 是 API 而非完整 HMI。[实施与验收记录](docs/industrial-roadmap/2026-10-10-implementation.md)：23 项新测试、37 项原视频回归通过，部署后 100 次模拟往复完成，原始数据可复算。
+2026-10-10 历史工业原型：保留 [industrial_station](industrial_station/README.md)，包括模拟往复机构、Modbus TCP、动作互锁、断线撤权、命令去重、故障注入、SQLite 审计与 JSON 报告。全部设备数据标注 SIMULATED；这不是当前论文的真实设备实验。[历史实施记录](docs/industrial-roadmap/2026-10-10-implementation.md)保留供复核。
 
 本项目没有使用传统 WebRTC 摄像头媒体轨道，而是采用自定义 JPEG 分片传输：
 
@@ -99,7 +109,7 @@ Mobile App
 
 ### 与 H264/H265 的差异化
 
-传统 H264/H265 侧重压缩率，通常依赖 GOP、参考帧、编码缓冲和解码缓冲；在弱网或拥塞时，旧帧可能继续排队，导致显示延迟累积。
+H264/H265 的时延取决于编码参数、硬件和缓冲策略，低延迟配置同样可以用于交互。当前原生 MJPEG 路线便于独立丢帧，代价是带宽较大；本仓库尚未做同条件 H264/H265 对照，不能声称编码标准本身必然更慢。任何协议的排队失控都可能造成旧帧积压。
 
 本项目的差异化目标：
 
@@ -460,9 +470,8 @@ npm test
 
 ## 下一步计划
 
-- 完成同画质发送节奏对照，不用降低分辨率或二次压缩掩盖排队问题。
-- 建立明确标注模拟数据的往复执行机构工位，冻结状态机、I/O 与 Modbus 寄存器定义。
-- 增加独立设备网关，实现命令生命周期、互锁、通信过期、事件日志及报告。
-- 在测试 HMI 关联状态事件与视频时间戳；补齐鉴权、操作权限和断线恢复验收。
-- 获取真实设备后补做接线、测量标定和现场验证；模拟结果不能替代实物验证。
-- 原生 UDP 接收端、差分图块与离线 AI 分析保留为后续选项，不阻塞上述主线。
+- 取得有线或独立接入点基准，继续分离 Pi 无线长尾与软件处理开销。
+- 完成光学端到端延迟参考测量和更长时间的稳定性观测。
+- 借用真实设备后接入一个有单位、可标定的物理量，再验证运维场景价值。
+- 生产接入前补齐认证、权限、网络隔离、磁盘容量与断电恢复验证。
+- 原生 UDP、差分图块和离线 AI 是可选研究项，不以它们替代当前测量验证。

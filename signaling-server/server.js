@@ -5,6 +5,8 @@ const { URL } = require('url');
 const WebSocket = require('ws');
 const { LatestFrameSource } = require('./latest-source');
 const { attachLatestSession } = require('./latest-session');
+const { observerProxy } = require('./observer-proxy');
+const { attachClockSession } = require('./clock-session');
 
 const PORT = Number(process.env.PORT || 8080);
 const PUBLIC_DIR = path.join(__dirname, 'public');
@@ -18,11 +20,24 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-    const urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
-    const requestPath = urlPath === '/' ? '/index.html' : urlPath;
-    const filePath = path.normalize(path.join(PUBLIC_DIR, requestPath));
+    let urlPath, search;
+    try {
+        const url = new URL(req.url || '/', 'http://127.0.0.1');
+        urlPath = decodeURIComponent(url.pathname);
+        search = url.search;
+        if (urlPath.includes('\0') || urlPath.includes('\\')) throw new Error('invalid path');
+    } catch {
+        res.writeHead(400); res.end('Invalid URL'); return;
+    }
+    if (observerProxy(req, res, urlPath, search, Number(process.env.OBSERVER_PORT || 8092))) return;
+    if (!['GET', 'HEAD'].includes(req.method)) {
+        res.writeHead(405, { Allow: 'GET, HEAD' }); res.end(); return;
+    }
+    const requestPath = urlPath === '/' ? '/index.html' : ['/monitor', '/monitor/'].includes(urlPath) ? '/monitor/index.html' : urlPath;
+    const filePath = path.resolve(PUBLIC_DIR, '.' + requestPath);
+    const relative = path.relative(PUBLIC_DIR, filePath);
 
-    if (!filePath.startsWith(PUBLIC_DIR)) {
+    if (relative.startsWith('..') || path.isAbsolute(relative)) {
         res.writeHead(403);
         res.end('Forbidden');
         return;
@@ -38,8 +53,9 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, {
             'Content-Type': MIME_TYPES[path.extname(filePath)] || 'application/octet-stream',
             'Cache-Control': 'no-store',
+            'X-Content-Type-Options': 'nosniff',
         });
-        res.end(data);
+        res.end(req.method === 'HEAD' ? undefined : data);
     });
 });
 
@@ -149,6 +165,12 @@ wss.on('connection', (ws, req) => {
     ws.peerAddress = clientIp;
     req.socket.setNoDelay(true);
 
+    if (!['gateway', 'viewer', 'latest', 'clock'].includes(role) ||
+        (role === 'gateway' && !['127.0.0.1', '::1'].includes(normalizePeerIp(clientIp)))) {
+        ws.close(1008, 'role not permitted');
+        return;
+    }
+
     console.log(`[Signaling] ${role} connected: ${clientIp}`);
 
     if (role !== 'gateway') {
@@ -164,6 +186,11 @@ wss.on('connection', (ws, req) => {
             ws.close(4001, 'invalid viewer url');
             return;
         }
+    }
+
+    if (role === 'clock') {
+        attachClockSession(ws);
+        return;
     }
 
     if (role === 'gateway') {
