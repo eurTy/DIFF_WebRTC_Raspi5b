@@ -1,0 +1,18 @@
+{
+  "source_baseline": "d31ff5420a3038e4f518ae7599b4690af371683f",
+  "core_application_sources_changed": false,
+  "canonical_files": 39,
+  "integration_tests_passed": 3,
+  "node_tests_passed": 45,
+  "observer_tests_passed": 9,
+  "test_platform": "Windows local; loopback networking enabled for HTTP tests",
+  "original_main_worktree_clean": true,
+  "private_workspace_archive_entries": 6207,
+  "private_workspace_archive_sha256": "8c475cca8593d3ecfc6d86a7b9cf3858848e43319578fdcee48926ec7956686e",
+  "git_bundle_sha256": "c2d5792e5e919697d7d5730b64e2aad3a468ae6322953a139a926a207c04077d",
+  "git_bundle_complete_history_verified": true,
+  "pi_database_online_backup_quick_check": "ok before disconnect",
+  "pi_final_archive_verification": "PENDING_DEVICE_OFFLINE",
+  "pi_integrated_deployment": "NOT_SWITCHED",
+  "runtime_services_modified": false
+}

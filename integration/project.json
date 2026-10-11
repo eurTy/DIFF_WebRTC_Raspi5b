@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "project": "observer-unified-v1",
+  "baseline_commit": "d31ff5420a3038e4f518ae7599b4690af371683f",
+  "frozen_tag": "observer-v1-frozen-20261011",
+  "runtime_policy": "READ_ONLY_EXISTING_DEPLOYMENT",
+  "modules": [
+    {"name": "capture", "source": "project_0321plus/video-processor", "runtime": "project_0321plus/video-processor", "patterns": ["CMakeLists.txt", "Dockerfile", "src/*.cpp"], "service": "docker:video-processor"},
+    {"name": "rtc-gateway", "source": "project_0321plus/webrtc-gateway", "runtime": "project_0321plus/webrtc-gateway", "patterns": ["CMakeLists.txt", "Dockerfile", "src/*.cpp"], "service": "docker:webrtc-gateway"},
+    {"name": "signaling", "source": "signaling-server", "runtime": "signaling-server", "patterns": ["*.js", "package*.json", "public/*.html", "public/*.js", "public/monitor/*", "public/vendor/*", "test/*.cjs"], "service": "systemd:pi-signaling"},
+    {"name": "observer", "source": "monitoring", "runtime": "industrial-lab/monitoring", "patterns": ["*.py", "requirements.txt", "pi-observer.service", "tests/*.py"], "service": "systemd:pi-observer"}
+  ],
+  "interfaces": {"web_port": 8080, "observer_loopback_port": 8092, "shared_memory": "/dev/shm/pi-video/video_shm", "camera": "/dev/video0"},
+  "compose_files": ["project_0321plus/docker-compose.yml", "project_0321plus/docker-compose.latest.yml"],
+  "host_units": ["systemd/pi-signaling.service", "systemd/pi-signaling-hardening.conf", "systemd/pi-video-shm.conf", "monitoring/pi-observer.service"],
+  "runtime_images": {
+    "capture": "sha256:5a78eec29227702e2d6d6f4ebf270adf2d7dd5344944472444481861bcd145f3c",
+    "gateway": "sha256:ff80cb24d95b1c2150625a986c2acdae3b44ed8fc9c69487fab5a35a02951b9d"
+  },
+  "private_exclusions": ["runtime databases", "camera snapshots", "credentials", "private workspace archive", "raw host inventory"],
+  "historical_only": ["early_yuyv_dct_lz4", "industrial_station"]
+}

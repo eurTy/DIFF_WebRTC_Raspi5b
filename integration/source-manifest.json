@@ -1,0 +1,242 @@
+{
+  "project": "observer-unified-v1",
+  "baseline_commit": "d31ff5420a3038e4f518ae7599b4690af371683f",
+  "scope": "Canonical application and test sources; vendored libraries remain in Git release",
+  "normalization": "CRLF to LF",
+  "files": [
+    {
+      "module": "capture",
+      "source": "project_0321plus/video-processor/CMakeLists.txt",
+      "runtime": "project_0321plus/video-processor/CMakeLists.txt",
+      "sha256_lf": "2e7e909cda030cc19b59aad7c649fc1adf89879bc90bf46aed1de461111bde93"
+    },
+    {
+      "module": "capture",
+      "source": "project_0321plus/video-processor/Dockerfile",
+      "runtime": "project_0321plus/video-processor/Dockerfile",
+      "sha256_lf": "09d7084b047650a095ca88024ce2d6e5e935c1ca34fdf5dfff72b0946a030c18"
+    },
+    {
+      "module": "capture",
+      "source": "project_0321plus/video-processor/src/main.cpp",
+      "runtime": "project_0321plus/video-processor/src/main.cpp",
+      "sha256_lf": "f433b1545153c459b5d01aa086b06f7c54544d1c04c81fde2802102e3b3fdbb2"
+    },
+    {
+      "module": "rtc-gateway",
+      "source": "project_0321plus/webrtc-gateway/CMakeLists.txt",
+      "runtime": "project_0321plus/webrtc-gateway/CMakeLists.txt",
+      "sha256_lf": "109051c138f9e9bdba3fe6b2685073d1ed794d5aaffcb5262f2e9efa89a23a86"
+    },
+    {
+      "module": "rtc-gateway",
+      "source": "project_0321plus/webrtc-gateway/Dockerfile",
+      "runtime": "project_0321plus/webrtc-gateway/Dockerfile",
+      "sha256_lf": "1dec0d44116bd843f5c18e62f708e7605c2958d0406bd7edd0a50b8c4998e6e0"
+    },
+    {
+      "module": "rtc-gateway",
+      "source": "project_0321plus/webrtc-gateway/src/main.cpp",
+      "runtime": "project_0321plus/webrtc-gateway/src/main.cpp",
+      "sha256_lf": "9f83097411059ecb0b3d1055c7fff0af1c1b6bb98b69f6dda4f295ebe3a6c3ee"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/clock-session.js",
+      "runtime": "signaling-server/clock-session.js",
+      "sha256_lf": "ed8bbdc04e688d86aed6cd6064bfc80025cc416d74e8b7602c2a23eff0cc5024"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/latest-session.js",
+      "runtime": "signaling-server/latest-session.js",
+      "sha256_lf": "51ad6d0a019a04c160b5554138f227ec900b06b5bc4470c5b4728a4a34fa8885"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/latest-source.js",
+      "runtime": "signaling-server/latest-source.js",
+      "sha256_lf": "eb2f6d044b9a59d908a290290ee5de8e37ec650ca5ce05bed728715317fb5d8c"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/observer-proxy.js",
+      "runtime": "signaling-server/observer-proxy.js",
+      "sha256_lf": "0e50ece7b384f153219cf6dbff0413445245d8e2f7e691a4e8eba7a89c360244"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/package-lock.json",
+      "runtime": "signaling-server/package-lock.json",
+      "sha256_lf": "f030ef832d314b9d7a091d1ca6096c5618782580120f3f81cc00b3bcbb762c6e"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/package.json",
+      "runtime": "signaling-server/package.json",
+      "sha256_lf": "fb6252583cad4b398c5dd4735d468a75404b3413a5fbede442ee43d850d1a082"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/index.html",
+      "runtime": "signaling-server/public/index.html",
+      "sha256_lf": "a926ae1ab0b1c54e82283d51dce2654db6ef00de5bfe33c0f16cdaf0945bc40e"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/latency.js",
+      "runtime": "signaling-server/public/latency.js",
+      "sha256_lf": "b510deb53ba0aac7b00002c97b1a177b3d0a792eb82777bfd21d72dc6b2ae5d0"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/latest-renderer.js",
+      "runtime": "signaling-server/public/latest-renderer.js",
+      "sha256_lf": "0c7e36187e5802178c5064078e7eff0300a77e6ddf2cfc35d796a081415065c8"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/monitor/index.html",
+      "runtime": "signaling-server/public/monitor/index.html",
+      "sha256_lf": "7bd5a4da35d07887d0ac4cc2574ee0969a04eb6ae0ef76da37bf8794d204bf1c"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/monitor/model.js",
+      "runtime": "signaling-server/public/monitor/model.js",
+      "sha256_lf": "899f922f71ebb757dd3ca20c242bb2e33a4692b8683bb38a83dc77b1f8dd3010"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/monitor/monitor.css",
+      "runtime": "signaling-server/public/monitor/monitor.css",
+      "sha256_lf": "c1625b1ca1a69b1eb101391270a65c94b63cebb5eb2b4924a9ec968043626b1b"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/monitor/monitor.js",
+      "runtime": "signaling-server/public/monitor/monitor.js",
+      "sha256_lf": "80f55613bccda9a9453dbd0064e4fcc1e0fdc31afd35a437108300b6fcadce8d"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/vendor/lucide-LICENSE",
+      "runtime": "signaling-server/public/vendor/lucide-LICENSE",
+      "sha256_lf": "1e7290b35280a048667bbf0ebabac1c7fd52a75300e8b2946ac165715997f2bc"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/vendor/lucide.min.js",
+      "runtime": "signaling-server/public/vendor/lucide.min.js",
+      "sha256_lf": "3411692820cb8d47543f69496aa25fd603a358f4498046f41c508a5a3342210e"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/public/video-frames.js",
+      "runtime": "signaling-server/public/video-frames.js",
+      "sha256_lf": "b6ed0980024a2077f4a241be94e15e1122ff5a8720a4d83bff07afc8b7d947ba"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/server.js",
+      "runtime": "signaling-server/server.js",
+      "sha256_lf": "3b337e6fd7bd28255853fb3e3f128301908a34cdc5f21aa8dd47305928381572"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/clock-session.test.cjs",
+      "runtime": "signaling-server/test/clock-session.test.cjs",
+      "sha256_lf": "2ffb3673ec2ca053ce235fe0a54c0eaf298ba218dc005a9ea035734b75eb099c"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/latency.test.cjs",
+      "runtime": "signaling-server/test/latency.test.cjs",
+      "sha256_lf": "805738ffe6e684b1ba296225190e5b6a26de0a3c05f58e067040de9a65c6cec9"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/latest-renderer.test.cjs",
+      "runtime": "signaling-server/test/latest-renderer.test.cjs",
+      "sha256_lf": "af3e470e4dc343caa5c1058f9c9422a9a7dc86bb8d629a64b490ab6651bffe80"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/latest-session.test.cjs",
+      "runtime": "signaling-server/test/latest-session.test.cjs",
+      "sha256_lf": "1cc5a7b10f8bf7126d2d7ec3966af75614a4c38f77f429cc81c3c4184c18804b"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/latest-source.test.cjs",
+      "runtime": "signaling-server/test/latest-source.test.cjs",
+      "sha256_lf": "1937414d99411b28ad32037d22f7a0dc0a712af9348422de38eefa635b518dc3"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/monitor.test.cjs",
+      "runtime": "signaling-server/test/monitor.test.cjs",
+      "sha256_lf": "adbdf9745f36079b0085dfa8690768deea3408dafd8c30ba34974893fb035b35"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/server.test.cjs",
+      "runtime": "signaling-server/test/server.test.cjs",
+      "sha256_lf": "b3121d8fa51c1e181bc232cda391e55f94a038f7e93264f4a5fd799d799027ac"
+    },
+    {
+      "module": "signaling",
+      "source": "signaling-server/test/video-frames.test.cjs",
+      "runtime": "signaling-server/test/video-frames.test.cjs",
+      "sha256_lf": "89c54ef4a28fccb3c652107628fff12a3260b0d94cfad6027c2a8ad6c23372b7"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/__init__.py",
+      "runtime": "industrial-lab/monitoring/__init__.py",
+      "sha256_lf": "b4cc455f88787ef0f469306a1e2efb84b426ca346790b77a8485874ab1bd87b8"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/alarms.py",
+      "runtime": "industrial-lab/monitoring/alarms.py",
+      "sha256_lf": "2c972c4088833eeffd418a71092dea42eeaf947d3015c67b70fd20f2d7dbc4bc"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/pi-observer.service",
+      "runtime": "industrial-lab/monitoring/pi-observer.service",
+      "sha256_lf": "66c9159518dd953f32cd954abc99361cda793820f9b12ab2b026c77e826b0917"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/requirements.txt",
+      "runtime": "industrial-lab/monitoring/requirements.txt",
+      "sha256_lf": "7cbe709d58a624b2df8c66b269dbee92801e510ca5800b7eda1aa7a8b04047c0"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/sensors.py",
+      "runtime": "industrial-lab/monitoring/sensors.py",
+      "sha256_lf": "98c43412c70ed95d4c74ef3555d65e9fd346129b9cb92b96621591269cf58f3e"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/server.py",
+      "runtime": "industrial-lab/monitoring/server.py",
+      "sha256_lf": "68af4b878c33ed6022ea0c34a1747d2153198b85285683b84dd008a942631ca0"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/store.py",
+      "runtime": "industrial-lab/monitoring/store.py",
+      "sha256_lf": "6072172e215732dd3c8e64c572a7911b3ee82fb24fbff42ba09da911359c530d"
+    },
+    {
+      "module": "observer",
+      "source": "monitoring/tests/test_monitoring.py",
+      "runtime": "industrial-lab/monitoring/tests/test_monitoring.py",
+      "sha256_lf": "549e29ded02a8e708cb23e27406910b8f3990a93e994fabdc42f0d25032cf68a"
+    }
+  ]
+}
