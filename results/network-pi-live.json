@@ -1,0 +1,6825 @@
+{
+  "experiment": "REAL_TCP_APPLICATION_PACED_RELAY",
+  "server_url": "http://192.168.3.19:8088",
+  "receiver_platform": "Windows-11-10.0.26200-SP0",
+  "receiver_source_sha256": {
+    "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+    "semantic_video/encoder.py": "2360042cdaee8c709f836cd2bec4f08f4ffcefc0b14d258e48106ffd2cd9a58a",
+    "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+    "semantic_video/model.py": "b6c89f7ed5aaeff981055e7b8aba13b73ab9bf81afb2f364e1a23e82f45356ab",
+    "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+    "semantic_video/server.py": "8c8f498c46a7f79a0740398aef68220d0214878f84645dca8daa9ceaee0d3bd4",
+    "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+    "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+    "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+    "experiments/network.py": "9b54ead46fac20d6a6b7ba282928958aa113e1caea86c3063e1350516ac62649",
+    "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+    "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+    "experiments/summarize.py": "6899e2ce706c7cb66df8e5d24c50d0801950c6a02c909cc8d6d61e9f8ac02d5a"
+  },
+  "source_hash_snapshot": "run_start",
+  "scope": "Synthetic fixture unless explicitly marked live; TCP byte pacing is not RF loss emulation. Clock uses separate unshaped connection.",
+  "latency_endpoint": "Python JPEG decode completion, not browser scanout",
+  "schedule_seed": 20261012,
+  "age_sampling_ms": 100,
+  "intended_cells": 8,
+  "complete": false,
+  "cells": [
+    {
+      "policy": "uniform",
+      "kbps": 512,
+      "seed": 7,
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "duration_s": 12.0,
+      "warmup_s": 3.0,
+      "clock": {
+        "rtt_ms": 8.549735999666154,
+        "offset_ms": -144598.7104079998
+      },
+      "clock_after": {
+        "rtt_ms": 7.405801999382675,
+        "offset_ms": -144596.61520899972
+      },
+      "clock_offset_shift_ms": 2.0951990000903606,
+      "clock_diagnostic_envelope_ms": 6.370066999923438,
+      "clock_quality_warning": false,
+      "frames": 94,
+      "fps": 7.833333333333333,
+      "payload_mbps": 0.23790866666666666,
+      "latency_p50_ms": 110.86099200043827,
+      "latency_p95_ms": 235.41223199991506,
+      "fresh_time_fraction_250ms": 0.75,
+      "conservative_fresh_time_fraction_250ms": 0.75,
+      "fresh_weighted_task_fraction": null,
+      "mean_encode_ms": 4.2920212765957455,
+      "all_wire_bytes_including_upgrade": 387666,
+      "failures": [],
+      "records": [
+        {
+          "elapsed_ms": 145.46280000079423,
+          "latency_ms": 183.6955920010805,
+          "id": 147715,
+          "bytes": 3738,
+          "encode_ms": 56.141,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 249.91460000071675,
+          "latency_ms": 124.14739200100303,
+          "id": 147720,
+          "bytes": 3747,
+          "encode_ms": 3.636,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 344.8302000006661,
+          "latency_ms": 119.06299200095236,
+          "id": 147723,
+          "bytes": 3730,
+          "encode_ms": 3.567,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 451.3574999999255,
+          "latency_ms": 125.59029199928045,
+          "id": 147726,
+          "bytes": 3722,
+          "encode_ms": 3.588,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 546.7651000004262,
+          "latency_ms": 120.99789199978113,
+          "id": 147729,
+          "bytes": 3737,
+          "encode_ms": 3.513,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 887.5571000007913,
+          "latency_ms": 361.78989200107753,
+          "id": 147732,
+          "bytes": 3725,
+          "encode_ms": 3.422,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 1559.4554000003263,
+          "latency_ms": 697.6881920006126,
+          "id": 147742,
+          "bytes": 3741,
+          "encode_ms": 3.4,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2491.2423000000417,
+          "latency_ms": 932.4750919993967,
+          "id": 147763,
+          "bytes": 3754,
+          "encode_ms": 3.376,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3331.2781000006944,
+          "latency_ms": 836.5108920000494,
+          "id": 147791,
+          "bytes": 3647,
+          "encode_ms": 9.309,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3564.643200000748,
+          "latency_ms": 237.875992000103,
+          "id": 147816,
+          "bytes": 3683,
+          "encode_ms": 3.375,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3659.0676000006497,
+          "latency_ms": 100.30039200000465,
+          "id": 147823,
+          "bytes": 3757,
+          "encode_ms": 3.371,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3767.221800000407,
+          "latency_ms": 108.45459200069308,
+          "id": 147826,
+          "bytes": 3760,
+          "encode_ms": 3.397,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3860.4354000007734,
+          "latency_ms": 101.66819200105965,
+          "id": 147829,
+          "bytes": 3773,
+          "encode_ms": 3.385,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3969.537500000559,
+          "latency_ms": 110.77029200084507,
+          "id": 147832,
+          "bytes": 3767,
+          "encode_ms": 3.388,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4061.6213000006974,
+          "latency_ms": 102.85409200005233,
+          "id": 147835,
+          "bytes": 3774,
+          "encode_ms": 3.379,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4170.885100000538,
+          "latency_ms": 112.11789200082421,
+          "id": 147838,
+          "bytes": 3783,
+          "encode_ms": 3.363,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4277.900200000033,
+          "latency_ms": 119.13299199938774,
+          "id": 147841,
+          "bytes": 3792,
+          "encode_ms": 9.261,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4373.529500000179,
+          "latency_ms": 114.76229199953377,
+          "id": 147844,
+          "bytes": 3786,
+          "encode_ms": 3.446,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4481.397900000215,
+          "latency_ms": 122.63069199956954,
+          "id": 147847,
+          "bytes": 3804,
+          "encode_ms": 3.437,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4572.427700000815,
+          "latency_ms": 113.66049200110137,
+          "id": 147850,
+          "bytes": 3813,
+          "encode_ms": 3.427,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4680.761700000614,
+          "latency_ms": 121.99449199996889,
+          "id": 147853,
+          "bytes": 3791,
+          "encode_ms": 3.546,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4775.052800000645,
+          "latency_ms": 116.2855920009315,
+          "id": 147856,
+          "bytes": 3805,
+          "encode_ms": 3.526,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4883.346900000237,
+          "latency_ms": 124.57969200052321,
+          "id": 147859,
+          "bytes": 3792,
+          "encode_ms": 3.554,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4977.389500000514,
+          "latency_ms": 118.62229200080037,
+          "id": 147862,
+          "bytes": 3791,
+          "encode_ms": 3.527,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5084.39400000032,
+          "latency_ms": 125.62679200060666,
+          "id": 147865,
+          "bytes": 3791,
+          "encode_ms": 9.685,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5178.3444000007585,
+          "latency_ms": 119.57719200104475,
+          "id": 147868,
+          "bytes": 3786,
+          "encode_ms": 3.514,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5289.109200000763,
+          "latency_ms": 130.3419920001179,
+          "id": 147871,
+          "bytes": 3777,
+          "encode_ms": 3.573,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5381.7066000001505,
+          "latency_ms": 90.93939200043678,
+          "id": 147875,
+          "bytes": 3777,
+          "encode_ms": 3.625,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5492.297000000253,
+          "latency_ms": 101.52979199960828,
+          "id": 147878,
+          "bytes": 3771,
+          "encode_ms": 3.642,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5586.674899999984,
+          "latency_ms": 95.90769200026989,
+          "id": 147881,
+          "bytes": 3778,
+          "encode_ms": 3.477,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5680.431300000288,
+          "latency_ms": 89.66409200057387,
+          "id": 147884,
+          "bytes": 3778,
+          "encode_ms": 3.574,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5791.889600000344,
+          "latency_ms": 101.1223920006305,
+          "id": 147887,
+          "bytes": 3782,
+          "encode_ms": 3.515,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5901.014900000766,
+          "latency_ms": 110.24769200012088,
+          "id": 147890,
+          "bytes": 3778,
+          "encode_ms": 9.656,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5993.849400000647,
+          "latency_ms": 103.08219200000167,
+          "id": 147893,
+          "bytes": 3777,
+          "encode_ms": 3.516,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6102.390700000338,
+          "latency_ms": 111.62349200062454,
+          "id": 147896,
+          "bytes": 3777,
+          "encode_ms": 3.567,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6194.283800000325,
+          "latency_ms": 103.5165919996798,
+          "id": 147899,
+          "bytes": 3771,
+          "encode_ms": 3.579,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6304.363700000569,
+          "latency_ms": 113.59649199992418,
+          "id": 147902,
+          "bytes": 3777,
+          "encode_ms": 3.53,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6398.678500000387,
+          "latency_ms": 107.91129199974239,
+          "id": 147905,
+          "bytes": 3790,
+          "encode_ms": 3.569,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6506.5955000007525,
+          "latency_ms": 115.82829200103879,
+          "id": 147908,
+          "bytes": 3783,
+          "encode_ms": 3.563,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6724.852800000459,
+          "latency_ms": 234.08559199981391,
+          "id": 147911,
+          "bytes": 3775,
+          "encode_ms": 3.53,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7572.541100000031,
+          "latency_ms": 849.7738920003176,
+          "id": 147918,
+          "bytes": 3779,
+          "encode_ms": 9.56,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7666.345000000671,
+          "latency_ms": 111.57779200002551,
+          "id": 147943,
+          "bytes": 3748,
+          "encode_ms": 3.59,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7759.991500000469,
+          "latency_ms": 105.22429200075567,
+          "id": 147946,
+          "bytes": 3747,
+          "encode_ms": 3.611,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7869.139000000432,
+          "latency_ms": 114.37179199978709,
+          "id": 147949,
+          "bytes": 3763,
+          "encode_ms": 3.516,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7963.122800000012,
+          "latency_ms": 108.35559199936688,
+          "id": 147952,
+          "bytes": 3755,
+          "encode_ms": 3.561,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8072.908100000583,
+          "latency_ms": 118.14089200086892,
+          "id": 147955,
+          "bytes": 3764,
+          "encode_ms": 3.556,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8180.081699999981,
+          "latency_ms": 125.31449200026691,
+          "id": 147958,
+          "bytes": 3766,
+          "encode_ms": 4.272,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8272.751200000755,
+          "latency_ms": 117.98399200104177,
+          "id": 147961,
+          "bytes": 3764,
+          "encode_ms": 3.563,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8381.735400000587,
+          "latency_ms": 94.96819199994206,
+          "id": 147965,
+          "bytes": 3756,
+          "encode_ms": 9.645,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8490.079499999993,
+          "latency_ms": 103.31229200027883,
+          "id": 147968,
+          "bytes": 3767,
+          "encode_ms": 3.522,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8599.996700000018,
+          "latency_ms": 113.22949199937284,
+          "id": 147971,
+          "bytes": 3754,
+          "encode_ms": 3.539,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8693.661000000313,
+          "latency_ms": 106.89379199966788,
+          "id": 147974,
+          "bytes": 3761,
+          "encode_ms": 3.52,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8802.61630000081,
+          "latency_ms": 115.84909200109541,
+          "id": 147977,
+          "bytes": 3773,
+          "encode_ms": 3.552,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8896.107600000687,
+          "latency_ms": 108.34039200097322,
+          "id": 147980,
+          "bytes": 3790,
+          "encode_ms": 3.546,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9004.740400000475,
+          "latency_ms": 116.97319200076163,
+          "id": 147983,
+          "bytes": 3794,
+          "encode_ms": 3.552,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9112.466700000688,
+          "latency_ms": 124.69949200004339,
+          "id": 147986,
+          "bytes": 3804,
+          "encode_ms": 3.53,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9223.4617000008,
+          "latency_ms": 135.69449200108647,
+          "id": 147989,
+          "bytes": 3815,
+          "encode_ms": 9.627,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9317.185300000012,
+          "latency_ms": 97.41809199936688,
+          "id": 147993,
+          "bytes": 3807,
+          "encode_ms": 3.559,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9411.117400000803,
+          "latency_ms": 91.35019200108945,
+          "id": 147996,
+          "bytes": 3816,
+          "encode_ms": 3.455,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9519.362100000493,
+          "latency_ms": 99.59489200077951,
+          "id": 147999,
+          "bytes": 3838,
+          "encode_ms": 3.579,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9628.443100000732,
+          "latency_ms": 108.67589200101793,
+          "id": 148002,
+          "bytes": 3833,
+          "encode_ms": 3.575,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9721.77190000005,
+          "latency_ms": 102.00469199940562,
+          "id": 148005,
+          "bytes": 3832,
+          "encode_ms": 3.591,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9831.51070000045,
+          "latency_ms": 111.74349199980497,
+          "id": 148008,
+          "bytes": 3844,
+          "encode_ms": 3.561,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9926.253800000064,
+          "latency_ms": 106.48659200035036,
+          "id": 148011,
+          "bytes": 3835,
+          "encode_ms": 3.427,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10033.312900000252,
+          "latency_ms": 113.54569200053811,
+          "id": 148014,
+          "bytes": 3841,
+          "encode_ms": 9.626,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10127.204100000672,
+          "latency_ms": 107.43689200095832,
+          "id": 148017,
+          "bytes": 3843,
+          "encode_ms": 3.555,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10234.550400000066,
+          "latency_ms": 114.78319199942052,
+          "id": 148020,
+          "bytes": 3839,
+          "encode_ms": 3.596,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10327.393600000069,
+          "latency_ms": 107.6263919994235,
+          "id": 148023,
+          "bytes": 3830,
+          "encode_ms": 3.558,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10435.08120000083,
+          "latency_ms": 115.31399200111628,
+          "id": 148026,
+          "bytes": 3837,
+          "encode_ms": 3.544,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10527.898100000806,
+          "latency_ms": 108.13089200109243,
+          "id": 148029,
+          "bytes": 3837,
+          "encode_ms": 3.554,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10637.515700000338,
+          "latency_ms": 117.74849200062454,
+          "id": 148032,
+          "bytes": 3829,
+          "encode_ms": 3.576,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10730.718900000677,
+          "latency_ms": 110.95169200003147,
+          "id": 148035,
+          "bytes": 3804,
+          "encode_ms": 3.586,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10839.539700000547,
+          "latency_ms": 119.77249200083315,
+          "id": 148038,
+          "bytes": 3801,
+          "encode_ms": 9.7,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10935.352900000289,
+          "latency_ms": 115.58569199964404,
+          "id": 148041,
+          "bytes": 3803,
+          "encode_ms": 3.562,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11028.204800000414,
+          "latency_ms": 108.43759199976921,
+          "id": 148044,
+          "bytes": 3791,
+          "encode_ms": 3.603,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11137.886500000022,
+          "latency_ms": 118.11929200030863,
+          "id": 148047,
+          "bytes": 3802,
+          "encode_ms": 3.523,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11231.757600000128,
+          "latency_ms": 111.99039199948311,
+          "id": 148050,
+          "bytes": 3790,
+          "encode_ms": 3.571,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11339.643000000156,
+          "latency_ms": 119.87579200044274,
+          "id": 148053,
+          "bytes": 3798,
+          "encode_ms": 3.576,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11433.908999999985,
+          "latency_ms": 114.14179199934006,
+          "id": 148056,
+          "bytes": 3803,
+          "encode_ms": 3.425,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11543.139500000514,
+          "latency_ms": 123.37229200080037,
+          "id": 148059,
+          "bytes": 3792,
+          "encode_ms": 3.405,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11651.44000000041,
+          "latency_ms": 131.67279200069606,
+          "id": 148062,
+          "bytes": 3806,
+          "encode_ms": 9.327,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11745.161500000395,
+          "latency_ms": 93.39429200068116,
+          "id": 148066,
+          "bytes": 3795,
+          "encode_ms": 3.445,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11853.480000000447,
+          "latency_ms": 101.712791999802,
+          "id": 148069,
+          "bytes": 3800,
+          "encode_ms": 3.427,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11946.226400000043,
+          "latency_ms": 94.4591920003295,
+          "id": 148072,
+          "bytes": 3790,
+          "encode_ms": 3.425,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12038.96180000063,
+          "latency_ms": 87.1945920009166,
+          "id": 148075,
+          "bytes": 3799,
+          "encode_ms": 3.408,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12148.848900000565,
+          "latency_ms": 97.08169200085104,
+          "id": 148078,
+          "bytes": 3801,
+          "encode_ms": 3.385,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12256.928199999966,
+          "latency_ms": 105.16099200025201,
+          "id": 148081,
+          "bytes": 3816,
+          "encode_ms": 3.407,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12349.659900000319,
+          "latency_ms": 97.89269199967384,
+          "id": 148084,
+          "bytes": 3811,
+          "encode_ms": 3.428,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12457.84260000009,
+          "latency_ms": 106.07539200037718,
+          "id": 148087,
+          "bytes": 3803,
+          "encode_ms": 9.326,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12550.202000000514,
+          "latency_ms": 98.43479200080037,
+          "id": 148090,
+          "bytes": 3804,
+          "encode_ms": 3.417,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12659.746100000106,
+          "latency_ms": 107.97889200039208,
+          "id": 148093,
+          "bytes": 3814,
+          "encode_ms": 3.398,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12754.616200000048,
+          "latency_ms": 102.84899199940264,
+          "id": 148096,
+          "bytes": 3821,
+          "encode_ms": 3.452,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12879.03790000081,
+          "latency_ms": 127.27069200016558,
+          "id": 148099,
+          "bytes": 3829,
+          "encode_ms": 3.423,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12971.704300000332,
+          "latency_ms": 87.93709200061858,
+          "id": 148103,
+          "bytes": 3858,
+          "encode_ms": 3.436,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13081.974900000729,
+          "latency_ms": 98.20769200101495,
+          "id": 148106,
+          "bytes": 3862,
+          "encode_ms": 3.407,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13173.890399999917,
+          "latency_ms": 90.12319199927151,
+          "id": 148109,
+          "bytes": 3869,
+          "encode_ms": 4.41,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13284.058000000194,
+          "latency_ms": 100.29079199954867,
+          "id": 148112,
+          "bytes": 3850,
+          "encode_ms": 9.807,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13393.25800000038,
+          "latency_ms": 109.49079200066626,
+          "id": 148115,
+          "bytes": 3845,
+          "encode_ms": 3.541,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13487.299300000072,
+          "latency_ms": 103.53209199942648,
+          "id": 148118,
+          "bytes": 3840,
+          "encode_ms": 3.533,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14046.048000000417,
+          "latency_ms": 562.2807919997722,
+          "id": 148121,
+          "bytes": 3843,
+          "encode_ms": 3.468,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14760.968799999915,
+          "latency_ms": 709.2015920002013,
+          "id": 148138,
+          "bytes": 3852,
+          "encode_ms": 3.406,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14901.002199999988,
+          "latency_ms": 149.23499199934304,
+          "id": 148159,
+          "bytes": 3824,
+          "encode_ms": 3.399,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        }
+      ],
+      "age_samples_ms": [
+        1441.232791999355,
+        1541.232791999355,
+        1641.232791999355,
+        1741.232791999355,
+        905.232791999355,
+        1005.232791999355,
+        273.23279199935496,
+        141.23279199935496,
+        141.23279200028628,
+        141.23279200028628,
+        141.23279200028628,
+        141.23279199935496,
+        141.23279200028628,
+        141.23279199935496,
+        141.23279199935496,
+        141.23279199935496,
+        141.23279200028628,
+        141.23279199935496,
+        141.23279200028628,
+        141.23279200028628,
+        141.23279200028628,
+        141.23279200028628,
+        141.23279200028628,
+        141.23279199935496,
+        109.23279200028628,
+        109.23279199935496,
+        109.23279200028628,
+        109.23279200028628,
+        109.23279200028628,
+        209.23279200028628,
+        109.23279199935496,
+        209.23279199935496,
+        109.23279199935496,
+        209.23279199935496,
+        109.23279199935496,
+        209.23279199935496,
+        209.23279200028628,
+        309.2327920002863,
+        309.23279199935496,
+        409.23279199935496,
+        509.23279199935496,
+        609.232791999355,
+        709.232791999355,
+        809.232791999355,
+        909.232791999355,
+        1009.232791999355,
+        877.2327920002863,
+        145.23279199935496,
+        145.23279200028628,
+        145.23279199935496,
+        145.23279199935496,
+        145.23279200028628,
+        145.23279200028628,
+        145.23279200028628,
+        113.23279199935496,
+        113.23279200028628,
+        113.23279199935496,
+        113.23279199935496,
+        213.23279199935496,
+        112.23279200028628,
+        212.23279200028628,
+        212.23279200028628,
+        212.23279199935496,
+        212.23279200028628,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279200028628,
+        180.23279200028628,
+        180.23279199935496,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279200028628,
+        180.23279200028628,
+        180.23279199935496,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279200028628,
+        180.23279200028628,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279199935496,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279199935496,
+        180.23279200028628,
+        180.23279200028628,
+        148.23279200028628,
+        148.23279199935496,
+        148.23279200028628,
+        148.23279200028628,
+        148.23279200028628,
+        148.23279200028628,
+        148.23279199935496,
+        148.23279200028628,
+        148.23279200028628,
+        148.23279200028628,
+        148.23279199935496,
+        148.23279199935496,
+        116.23279200028628,
+        116.23279200028628,
+        116.23279199935496,
+        116.23279199935496,
+        116.23279200028628,
+        116.23279199935496,
+        216.23279199935496,
+        316.23279199935496,
+        416.23279199935496,
+        516.232791999355,
+        616.232791999355,
+        616.232791999355,
+        716.232791999355,
+        816.232791999355,
+        916.232791999355,
+        1016.232791999355,
+        1116.232791999355,
+        1216.232791999355,
+        748.2327920002863,
+        848.2327920002863
+      ],
+      "fresh_time_samples": 120,
+      "receiver_source_sha256": {
+        "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+        "semantic_video/encoder.py": "2360042cdaee8c709f836cd2bec4f08f4ffcefc0b14d258e48106ffd2cd9a58a",
+        "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+        "semantic_video/model.py": "b6c89f7ed5aaeff981055e7b8aba13b73ab9bf81afb2f364e1a23e82f45356ab",
+        "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+        "semantic_video/server.py": "8c8f498c46a7f79a0740398aef68220d0214878f84645dca8daa9ceaee0d3bd4",
+        "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+        "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+        "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+        "experiments/network.py": "9b54ead46fac20d6a6b7ba282928958aa113e1caea86c3063e1350516ac62649",
+        "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+        "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+        "experiments/summarize.py": "6899e2ce706c7cb66df8e5d24c50d0801950c6a02c909cc8d6d61e9f8ac02d5a"
+      },
+      "repeat": 0
+    },
+    {
+      "policy": "semantic",
+      "kbps": 512,
+      "seed": 7,
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "duration_s": 12.0,
+      "warmup_s": 3.0,
+      "clock": {
+        "rtt_ms": 8.11863199993968,
+        "offset_ms": -144596.31782899983
+      },
+      "clock_after": {
+        "rtt_ms": 13.16903500072658,
+        "offset_ms": -144597.4770665001
+      },
+      "clock_offset_shift_ms": -1.1592375002801418,
+      "clock_diagnostic_envelope_ms": 5.218553500249982,
+      "clock_quality_warning": false,
+      "frames": 89,
+      "fps": 7.416666666666667,
+      "payload_mbps": 0.16496133333333335,
+      "latency_p50_ms": 102.57097100000829,
+      "latency_p95_ms": 355.3700710004191,
+      "fresh_time_fraction_250ms": 0.6916666666666667,
+      "conservative_fresh_time_fraction_250ms": 0.6916666666666667,
+      "fresh_weighted_task_fraction": null,
+      "mean_encode_ms": 3.786449438202246,
+      "all_wire_bytes_including_upgrade": 339731,
+      "failures": [],
+      "records": [
+        {
+          "elapsed_ms": 128.3892999999225,
+          "latency_ms": 184.56637100037187,
+          "id": 148213,
+          "bytes": 5710,
+          "encode_ms": 18.661,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 190.66479999944568,
+          "latency_ms": 78.84187099989504,
+          "id": 148218,
+          "bytes": 2101,
+          "encode_ms": 2.97,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 300.18630000017583,
+          "latency_ms": 88.3633710006252,
+          "id": 148221,
+          "bytes": 2104,
+          "encode_ms": 3.032,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 408.1162999998778,
+          "latency_ms": 96.29337100032717,
+          "id": 148224,
+          "bytes": 2107,
+          "encode_ms": 2.963,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 533.5351999998093,
+          "latency_ms": 121.71227100025862,
+          "id": 148227,
+          "bytes": 3298,
+          "encode_ms": 3.02,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 629.0324999997392,
+          "latency_ms": 117.20957100018859,
+          "id": 148230,
+          "bytes": 3300,
+          "encode_ms": 3.013,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 736.1672000000253,
+          "latency_ms": 124.34427100047469,
+          "id": 148233,
+          "bytes": 3295,
+          "encode_ms": 2.995,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 831.2972999997437,
+          "latency_ms": 119.47437100019306,
+          "id": 148236,
+          "bytes": 3306,
+          "encode_ms": 2.958,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 939.7450999999419,
+          "latency_ms": 127.92217100039124,
+          "id": 148239,
+          "bytes": 3298,
+          "encode_ms": 9.634,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1032.2708000000566,
+          "latency_ms": 120.44787100050598,
+          "id": 148242,
+          "bytes": 3296,
+          "encode_ms": 2.979,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1126.3236999996006,
+          "latency_ms": 82.50077100005001,
+          "id": 148246,
+          "bytes": 3281,
+          "encode_ms": 2.954,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1234.3872999995947,
+          "latency_ms": 90.56437100004405,
+          "id": 148249,
+          "bytes": 3290,
+          "encode_ms": 2.989,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1326.645099999383,
+          "latency_ms": 82.82217099983245,
+          "id": 148252,
+          "bytes": 3296,
+          "encode_ms": 2.959,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1434.4064999995753,
+          "latency_ms": 90.58357100002468,
+          "id": 148255,
+          "bytes": 3285,
+          "encode_ms": 2.956,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1545.3171999994665,
+          "latency_ms": 101.4942709999159,
+          "id": 148258,
+          "bytes": 3303,
+          "encode_ms": 2.996,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1637.0246000001207,
+          "latency_ms": 93.20167100057006,
+          "id": 148261,
+          "bytes": 3306,
+          "encode_ms": 2.921,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1746.8830999992788,
+          "latency_ms": 103.06017099972814,
+          "id": 148264,
+          "bytes": 3315,
+          "encode_ms": 9.594,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1839.8855999996886,
+          "latency_ms": 96.06267100013793,
+          "id": 148267,
+          "bytes": 3301,
+          "encode_ms": 2.989,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 1947.2814999995753,
+          "latency_ms": 103.45857100002468,
+          "id": 148270,
+          "bytes": 3307,
+          "encode_ms": 2.974,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2041.8009000001475,
+          "latency_ms": 97.97797100059688,
+          "id": 148273,
+          "bytes": 3315,
+          "encode_ms": 2.988,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2148.50009999983,
+          "latency_ms": 104.67717100027949,
+          "id": 148276,
+          "bytes": 3318,
+          "encode_ms": 2.994,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2241.7819999996573,
+          "latency_ms": 97.95907100010663,
+          "id": 148279,
+          "bytes": 3308,
+          "encode_ms": 2.992,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2335.4140999997035,
+          "latency_ms": 91.59117100015283,
+          "id": 148282,
+          "bytes": 3313,
+          "encode_ms": 2.969,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2457.9668999994174,
+          "latency_ms": 114.14397099986672,
+          "id": 148285,
+          "bytes": 3316,
+          "encode_ms": 2.989,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2566.152400000021,
+          "latency_ms": 122.32947100047022,
+          "id": 148288,
+          "bytes": 3309,
+          "encode_ms": 9.636,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2658.212799999863,
+          "latency_ms": 114.38987100031227,
+          "id": 148291,
+          "bytes": 3319,
+          "encode_ms": 2.998,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2766.797999999486,
+          "latency_ms": 122.97507099993527,
+          "id": 148294,
+          "bytes": 3309,
+          "encode_ms": 2.979,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 2860.6571999993175,
+          "latency_ms": 116.83427099976689,
+          "id": 148297,
+          "bytes": 3313,
+          "encode_ms": 2.995,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 3154.2653000000864,
+          "latency_ms": 310.4423710005358,
+          "id": 148300,
+          "bytes": 3317,
+          "encode_ms": 2.952,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 3542.376199999824,
+          "latency_ms": 402.5532710002735,
+          "id": 148309,
+          "bytes": 2107,
+          "encode_ms": 2.92,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4707.632199999876,
+          "latency_ms": 1167.8092710003257,
+          "id": 148321,
+          "bytes": 2103,
+          "encode_ms": 2.956,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4925.2901999996975,
+          "latency_ms": 217.46727100014687,
+          "id": 148356,
+          "bytes": 2095,
+          "encode_ms": 2.913,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4987.220999999903,
+          "latency_ms": 79.3980710003525,
+          "id": 148362,
+          "bytes": 2090,
+          "encode_ms": 9.628,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5096.395399999805,
+          "latency_ms": 88.57247100025415,
+          "id": 148365,
+          "bytes": 2093,
+          "encode_ms": 2.933,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5189.688299999572,
+          "latency_ms": 81.8653710000217,
+          "id": 148368,
+          "bytes": 2094,
+          "encode_ms": 2.892,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5295.787800000049,
+          "latency_ms": 87.96487100049853,
+          "id": 148371,
+          "bytes": 2096,
+          "encode_ms": 2.917,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5388.718100000173,
+          "latency_ms": 80.89517100062221,
+          "id": 148374,
+          "bytes": 2103,
+          "encode_ms": 3.001,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5497.071599999443,
+          "latency_ms": 89.24867099989206,
+          "id": 148377,
+          "bytes": 2100,
+          "encode_ms": 3.008,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5589.265800000168,
+          "latency_ms": 81.44287100061774,
+          "id": 148380,
+          "bytes": 2099,
+          "encode_ms": 3.016,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5699.204899999313,
+          "latency_ms": 91.38197099976242,
+          "id": 148383,
+          "bytes": 2103,
+          "encode_ms": 2.967,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5808.3219999996945,
+          "latency_ms": 100.49907100014389,
+          "id": 148386,
+          "bytes": 2099,
+          "encode_ms": 9.602,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5903.05429999996,
+          "latency_ms": 95.23137100040913,
+          "id": 148389,
+          "bytes": 2090,
+          "encode_ms": 2.905,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6010.969899999909,
+          "latency_ms": 103.14697100035846,
+          "id": 148392,
+          "bytes": 2096,
+          "encode_ms": 2.972,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6103.7039000000805,
+          "latency_ms": 99.88097100052983,
+          "id": 148395,
+          "bytes": 2089,
+          "encode_ms": 2.94,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6194.92389999982,
+          "latency_ms": 91.10097100026906,
+          "id": 148398,
+          "bytes": 2100,
+          "encode_ms": 2.975,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6302.69299999997,
+          "latency_ms": 98.87007100041956,
+          "id": 148401,
+          "bytes": 2095,
+          "encode_ms": 2.924,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6395.988599999808,
+          "latency_ms": 92.16567100025713,
+          "id": 148404,
+          "bytes": 2098,
+          "encode_ms": 2.939,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6503.212599999271,
+          "latency_ms": 99.38967099972069,
+          "id": 148407,
+          "bytes": 2095,
+          "encode_ms": 2.912,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6610.061900000088,
+          "latency_ms": 70.23897100053728,
+          "id": 148411,
+          "bytes": 2093,
+          "encode_ms": 9.588,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6704.999199999496,
+          "latency_ms": 65.1762709999457,
+          "id": 148414,
+          "bytes": 2092,
+          "encode_ms": 2.946,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6798.778299999423,
+          "latency_ms": 57.955370999872684,
+          "id": 148417,
+          "bytes": 2095,
+          "encode_ms": 2.955,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6906.826299999841,
+          "latency_ms": 66.00337100028992,
+          "id": 148420,
+          "bytes": 2095,
+          "encode_ms": 2.912,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7016.112900000066,
+          "latency_ms": 75.28997100051492,
+          "id": 148423,
+          "bytes": 2092,
+          "encode_ms": 2.925,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7140.809499999508,
+          "latency_ms": 99.98657099995762,
+          "id": 148426,
+          "bytes": 3296,
+          "encode_ms": 2.979,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7233.514700000174,
+          "latency_ms": 92.6917710006237,
+          "id": 148429,
+          "bytes": 3304,
+          "encode_ms": 2.942,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7327.431599999778,
+          "latency_ms": 86.60867100022733,
+          "id": 148432,
+          "bytes": 3300,
+          "encode_ms": 2.948,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7451.913300000131,
+          "latency_ms": 111.09037100058049,
+          "id": 148435,
+          "bytes": 3298,
+          "encode_ms": 9.568,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7546.5385999996215,
+          "latency_ms": 109.71567100007087,
+          "id": 148438,
+          "bytes": 3305,
+          "encode_ms": 2.996,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7655.508499999531,
+          "latency_ms": 118.68557099997997,
+          "id": 148441,
+          "bytes": 3313,
+          "encode_ms": 2.984,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7748.6683999998495,
+          "latency_ms": 111.84547100029886,
+          "id": 148444,
+          "bytes": 3304,
+          "encode_ms": 2.936,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7858.890300000086,
+          "latency_ms": 122.06737100053579,
+          "id": 148447,
+          "bytes": 3309,
+          "encode_ms": 2.993,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 7953.12229999993,
+          "latency_ms": 116.29937100037932,
+          "id": 148450,
+          "bytes": 3312,
+          "encode_ms": 2.938,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8060.633999999613,
+          "latency_ms": 123.81107100006193,
+          "id": 148453,
+          "bytes": 3321,
+          "encode_ms": 2.959,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8153.789299999364,
+          "latency_ms": 116.96637099981308,
+          "id": 148456,
+          "bytes": 3313,
+          "encode_ms": 2.982,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8263.012399999425,
+          "latency_ms": 126.18947099987417,
+          "id": 148459,
+          "bytes": 3312,
+          "encode_ms": 9.632,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8356.15219999943,
+          "latency_ms": 119.32927099987864,
+          "id": 148462,
+          "bytes": 3312,
+          "encode_ms": 2.943,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8465.37509999983,
+          "latency_ms": 128.5521710002795,
+          "id": 148465,
+          "bytes": 3316,
+          "encode_ms": 2.921,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8557.184299999848,
+          "latency_ms": 120.36137100029737,
+          "id": 148468,
+          "bytes": 3315,
+          "encode_ms": 2.966,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8667.440099999309,
+          "latency_ms": 130.61717099975795,
+          "id": 148471,
+          "bytes": 3316,
+          "encode_ms": 2.926,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8760.871100000106,
+          "latency_ms": 124.04817100055516,
+          "id": 148474,
+          "bytes": 3316,
+          "encode_ms": 2.946,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8855.211699999869,
+          "latency_ms": 118.38877100031823,
+          "id": 148477,
+          "bytes": 3316,
+          "encode_ms": 2.969,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 8964.428799999878,
+          "latency_ms": 91.60587100032717,
+          "id": 148481,
+          "bytes": 3309,
+          "encode_ms": 2.96,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9072.8805999998,
+          "latency_ms": 104.05767100024968,
+          "id": 148484,
+          "bytes": 3313,
+          "encode_ms": 9.595,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9166.713899999857,
+          "latency_ms": 97.89097100030631,
+          "id": 148487,
+          "bytes": 3317,
+          "encode_ms": 2.969,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9276.639899999835,
+          "latency_ms": 107.81697100028396,
+          "id": 148490,
+          "bytes": 3315,
+          "encode_ms": 2.984,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9368.977799999528,
+          "latency_ms": 100.15487099997699,
+          "id": 148493,
+          "bytes": 3311,
+          "encode_ms": 2.973,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9477.424699999392,
+          "latency_ms": 108.60177099984139,
+          "id": 148496,
+          "bytes": 3313,
+          "encode_ms": 2.967,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9571.298299999908,
+          "latency_ms": 102.47537100035697,
+          "id": 148499,
+          "bytes": 3308,
+          "encode_ms": 3.227,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9678.38069999963,
+          "latency_ms": 109.55777100007981,
+          "id": 148502,
+          "bytes": 3315,
+          "encode_ms": 2.965,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9771.466799999587,
+          "latency_ms": 102.6438710000366,
+          "id": 148505,
+          "bytes": 3305,
+          "encode_ms": 2.93,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9880.380099999718,
+          "latency_ms": 111.55717100016773,
+          "id": 148508,
+          "bytes": 3316,
+          "encode_ms": 9.614,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 9974.13599999994,
+          "latency_ms": 105.31307100038975,
+          "id": 148511,
+          "bytes": 3311,
+          "encode_ms": 2.948,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10068.465199999511,
+          "latency_ms": 99.6422709999606,
+          "id": 148514,
+          "bytes": 3315,
+          "encode_ms": 3.004,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10178.498900000006,
+          "latency_ms": 109.67597100045532,
+          "id": 148517,
+          "bytes": 3313,
+          "encode_ms": 2.97,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10272.189100000076,
+          "latency_ms": 103.36617100052536,
+          "id": 148520,
+          "bytes": 3315,
+          "encode_ms": 2.978,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10380.465699999593,
+          "latency_ms": 111.64277100004256,
+          "id": 148523,
+          "bytes": 3312,
+          "encode_ms": 2.924,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10474.80719999969,
+          "latency_ms": 105.98427100013942,
+          "id": 148526,
+          "bytes": 3312,
+          "encode_ms": 2.973,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10581.982400000095,
+          "latency_ms": 113.15947100054473,
+          "id": 148529,
+          "bytes": 3306,
+          "encode_ms": 2.985,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10691.743499999866,
+          "latency_ms": 122.92057100031525,
+          "id": 148532,
+          "bytes": 3310,
+          "encode_ms": 9.615,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10786.135699999519,
+          "latency_ms": 117.31277099996805,
+          "id": 148535,
+          "bytes": 3318,
+          "encode_ms": 2.994,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10895.700499999337,
+          "latency_ms": 126.87757099978626,
+          "id": 148538,
+          "bytes": 3310,
+          "encode_ms": 2.958,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 10989.734399999492,
+          "latency_ms": 120.91147099994123,
+          "id": 148541,
+          "bytes": 3312,
+          "encode_ms": 2.951,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11098.178599999286,
+          "latency_ms": 97.3556709997356,
+          "id": 148545,
+          "bytes": 3309,
+          "encode_ms": 2.945,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11191.827300000004,
+          "latency_ms": 91.00437100045383,
+          "id": 148548,
+          "bytes": 3312,
+          "encode_ms": 2.985,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11297.757699999958,
+          "latency_ms": 96.93477100040764,
+          "id": 148551,
+          "bytes": 3311,
+          "encode_ms": 2.944,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11391.843599999323,
+          "latency_ms": 91.02067099977285,
+          "id": 148554,
+          "bytes": 3309,
+          "encode_ms": 2.951,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11503.393899999559,
+          "latency_ms": 102.57097100000829,
+          "id": 148557,
+          "bytes": 3320,
+          "encode_ms": 9.61,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11594.615600000136,
+          "latency_ms": 93.79267100058496,
+          "id": 148560,
+          "bytes": 3316,
+          "encode_ms": 2.934,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11688.643999999389,
+          "latency_ms": 87.82107099983841,
+          "id": 148563,
+          "bytes": 3311,
+          "encode_ms": 2.974,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11798.079499999993,
+          "latency_ms": 97.25657100044191,
+          "id": 148566,
+          "bytes": 3312,
+          "encode_ms": 2.936,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 11907.39960000012,
+          "latency_ms": 106.57667100057006,
+          "id": 148569,
+          "bytes": 3322,
+          "encode_ms": 2.986,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 12045.795199999586,
+          "latency_ms": 144.9722710000351,
+          "id": 148572,
+          "bytes": 3305,
+          "encode_ms": 2.949,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-B"
+          ]
+        },
+        {
+          "elapsed_ms": 12418.144799999893,
+          "latency_ms": 385.32187100034207,
+          "id": 148576,
+          "bytes": 2103,
+          "encode_ms": 2.964,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12824.132299999706,
+          "latency_ms": 423.3093710001558,
+          "id": 148587,
+          "bytes": 2102,
+          "encode_ms": 2.943,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13586.559499999508,
+          "latency_ms": 785.7365709999576,
+          "id": 148599,
+          "bytes": 2100,
+          "encode_ms": 9.601,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13789.400999999605,
+          "latency_ms": 224.57807100005448,
+          "id": 148622,
+          "bytes": 2108,
+          "encode_ms": 2.953,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13930.203099999577,
+          "latency_ms": 165.38017100002617,
+          "id": 148628,
+          "bytes": 2109,
+          "encode_ms": 3.01,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14006.984699999914,
+          "latency_ms": 106.16177100036293,
+          "id": 148632,
+          "bytes": 2109,
+          "encode_ms": 3.092,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14100.982599999756,
+          "latency_ms": 100.15967100020498,
+          "id": 148635,
+          "bytes": 2111,
+          "encode_ms": 3.13,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14210.526300000027,
+          "latency_ms": 76.70337100047618,
+          "id": 148639,
+          "bytes": 2103,
+          "encode_ms": 3.164,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14288.872099999338,
+          "latency_ms": 56.04917099978775,
+          "id": 148642,
+          "bytes": 2105,
+          "encode_ms": 2.958,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14396.718599999323,
+          "latency_ms": 63.89567099977285,
+          "id": 148645,
+          "bytes": 2098,
+          "encode_ms": 2.945,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14502.477099999785,
+          "latency_ms": 68.65417100023478,
+          "id": 148648,
+          "bytes": 2096,
+          "encode_ms": 9.594,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14596.131299999543,
+          "latency_ms": 62.308370999991894,
+          "id": 148651,
+          "bytes": 2098,
+          "encode_ms": 2.997,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14705.86950000003,
+          "latency_ms": 72.04657100047916,
+          "id": 148654,
+          "bytes": 2100,
+          "encode_ms": 2.957,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14797.69579999987,
+          "latency_ms": 63.87287100031972,
+          "id": 148657,
+          "bytes": 2104,
+          "encode_ms": 2.938,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14906.866499999538,
+          "latency_ms": 73.04357099998742,
+          "id": 148660,
+          "bytes": 2106,
+          "encode_ms": 2.924,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        }
+      ],
+      "age_samples_ms": [
+        256.17707100044936,
+        356.17707100044936,
+        356.17707100044936,
+        456.17707100044936,
+        556.1770710004494,
+        656.1770710004494,
+        460.17707100044936,
+        560.1770710004494,
+        660.1770710004494,
+        760.1770710004494,
+        860.1770710004494,
+        960.1770710004494,
+        1060.1770710004494,
+        1160.1770710004494,
+        1260.1770710004494,
+        1360.1770710004494,
+        1460.1770710004494,
+        1560.1770710004494,
+        1260.1770710004494,
+        1360.1770710004494,
+        92.17707100044936,
+        92.17707100044936,
+        92.17707100044936,
+        92.17707100044936,
+        92.17707100044936,
+        92.17707100044936,
+        92.17707100044936,
+        92.17707100044936,
+        192.17707100044936,
+        192.17707100044936,
+        192.17707100044936,
+        192.17707100044936,
+        96.17707100044936,
+        196.17707100044936,
+        96.17707100044936,
+        196.17707100044936,
+        196.17707100044936,
+        160.17707100044936,
+        59.17707100044936,
+        159.17707100044936,
+        159.17707100044936,
+        159.17707100044936,
+        159.17707100044936,
+        159.17707100044936,
+        159.17707100044936,
+        159.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        163.17707100044936,
+        127.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        131.17707100044936,
+        99.17707100044936,
+        99.17707100044936,
+        99.17707100044936,
+        99.17707100044936,
+        199.17707100044936,
+        99.17707100044936,
+        99.17707100044936,
+        99.17707100044936,
+        199.17707100044936,
+        199.17707100044936,
+        199.17707100044936,
+        299.17707100044936,
+        399.17707100044936,
+        499.17707100044936,
+        467.17707100044936,
+        567.1770710004494,
+        667.1770710004494,
+        767.1770710004494,
+        499.17707100044936,
+        599.1770710004494,
+        699.1770710004494,
+        799.1770710004494,
+        899.1770710004494,
+        999.1770710004494,
+        1099.1770710004494,
+        799.1770710004494,
+        899.1770710004494,
+        235.17707100044936,
+        335.17707100044936,
+        235.17707100044936,
+        199.17707100044936,
+        199.17707100044936,
+        67.17707100044936,
+        67.17707100044936,
+        167.17707100044936,
+        66.17707100044936,
+        166.17707100044936,
+        66.17707100044936,
+        166.17707100044936
+      ],
+      "fresh_time_samples": 120,
+      "receiver_source_sha256": {
+        "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+        "semantic_video/encoder.py": "2360042cdaee8c709f836cd2bec4f08f4ffcefc0b14d258e48106ffd2cd9a58a",
+        "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+        "semantic_video/model.py": "b6c89f7ed5aaeff981055e7b8aba13b73ab9bf81afb2f364e1a23e82f45356ab",
+        "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+        "semantic_video/server.py": "8c8f498c46a7f79a0740398aef68220d0214878f84645dca8daa9ceaee0d3bd4",
+        "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+        "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+        "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+        "experiments/network.py": "9b54ead46fac20d6a6b7ba282928958aa113e1caea86c3063e1350516ac62649",
+        "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+        "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+        "experiments/summarize.py": "6899e2ce706c7cb66df8e5d24c50d0801950c6a02c909cc8d6d61e9f8ac02d5a"
+      },
+      "repeat": 0
+    },
+    {
+      "policy": "static-roi",
+      "kbps": 512,
+      "seed": 7,
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "duration_s": 12.0,
+      "warmup_s": 3.0,
+      "clock": {
+        "rtt_ms": 15.518520999699831,
+        "offset_ms": -144598.61942650005
+      },
+      "clock_after": {
+        "rtt_ms": 8.726740000769496,
+        "offset_ms": -144594.64989500027
+      },
+      "clock_offset_shift_ms": 3.9695314997807145,
+      "clock_diagnostic_envelope_ms": 11.72879199963063,
+      "clock_quality_warning": false,
+      "frames": 97,
+      "fps": 8.083333333333334,
+      "payload_mbps": 0.292794,
+      "latency_p50_ms": 121.84857350029051,
+      "latency_p95_ms": 146.48853349965046,
+      "fresh_time_fraction_250ms": 0.875,
+      "conservative_fresh_time_fraction_250ms": 0.875,
+      "fresh_weighted_task_fraction": null,
+      "mean_encode_ms": 3.9404845360824745,
+      "all_wire_bytes_including_upgrade": 563363,
+      "failures": [],
+      "records": [
+        {
+          "elapsed_ms": 95.41730000078678,
+          "latency_ms": 149.57277350034565,
+          "id": 148877,
+          "bytes": 4695,
+          "encode_ms": 18.671,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 204.38610000070184,
+          "latency_ms": 126.54157350026071,
+          "id": 148881,
+          "bytes": 4686,
+          "encode_ms": 2.973,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 298.1363000003621,
+          "latency_ms": 88.29177349992096,
+          "id": 148885,
+          "bytes": 4728,
+          "encode_ms": 2.923,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 423.04550000000745,
+          "latency_ms": 113.20097349956632,
+          "id": 148888,
+          "bytes": 4722,
+          "encode_ms": 3.127,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 546.322100000456,
+          "latency_ms": 136.47757350001484,
+          "id": 148891,
+          "bytes": 4725,
+          "encode_ms": 2.995,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 656.0049000000581,
+          "latency_ms": 114.16037349961698,
+          "id": 148895,
+          "bytes": 4749,
+          "encode_ms": 3.137,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 765.9613000005484,
+          "latency_ms": 124.11677350010723,
+          "id": 148898,
+          "bytes": 4747,
+          "encode_ms": 2.99,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 873.3215000005439,
+          "latency_ms": 131.47697350010276,
+          "id": 148901,
+          "bytes": 4753,
+          "encode_ms": 3.032,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 997.7386000007391,
+          "latency_ms": 119.89407350029796,
+          "id": 148905,
+          "bytes": 4751,
+          "encode_ms": 9.739,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1107.2509000003338,
+          "latency_ms": 129.40637349989265,
+          "id": 148908,
+          "bytes": 4739,
+          "encode_ms": 3.084,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1218.4371000006795,
+          "latency_ms": 108.59257350023836,
+          "id": 148912,
+          "bytes": 4733,
+          "encode_ms": 2.994,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1325.131400000304,
+          "latency_ms": 115.28687349986285,
+          "id": 148915,
+          "bytes": 4730,
+          "encode_ms": 3.124,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1433.6131000006571,
+          "latency_ms": 123.76857350021601,
+          "id": 148918,
+          "bytes": 4739,
+          "encode_ms": 3.035,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1557.0411000000313,
+          "latency_ms": 115.19657349959016,
+          "id": 148922,
+          "bytes": 4734,
+          "encode_ms": 3.08,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1665.1485999999568,
+          "latency_ms": 123.30407349951565,
+          "id": 148925,
+          "bytes": 4730,
+          "encode_ms": 3.065,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1790.9917000001296,
+          "latency_ms": 149.1471734996885,
+          "id": 148928,
+          "bytes": 4751,
+          "encode_ms": 3.179,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 1911.4144999999553,
+          "latency_ms": 133.56997349951416,
+          "id": 148932,
+          "bytes": 4752,
+          "encode_ms": 9.888,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2021.3012000005692,
+          "latency_ms": 111.45667350012809,
+          "id": 148936,
+          "bytes": 4753,
+          "encode_ms": 3.088,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2130.9367000004277,
+          "latency_ms": 121.09217349998653,
+          "id": 148939,
+          "bytes": 4758,
+          "encode_ms": 3.108,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2239.3628000002354,
+          "latency_ms": 129.5182734997943,
+          "id": 148942,
+          "bytes": 4733,
+          "encode_ms": 2.944,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2345.966000000015,
+          "latency_ms": 104.12147349957377,
+          "id": 148946,
+          "bytes": 4741,
+          "encode_ms": 2.966,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2454.2244000006467,
+          "latency_ms": 112.37987350020558,
+          "id": 148949,
+          "bytes": 4734,
+          "encode_ms": 3.132,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2578.0627000005916,
+          "latency_ms": 136.21817350015044,
+          "id": 148952,
+          "bytes": 4753,
+          "encode_ms": 3.003,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2687.752100000158,
+          "latency_ms": 113.90757349971682,
+          "id": 148956,
+          "bytes": 4764,
+          "encode_ms": 3.089,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2812.1969000007957,
+          "latency_ms": 138.3523735003546,
+          "id": 148959,
+          "bytes": 4738,
+          "encode_ms": 9.953,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 2920.8362000007182,
+          "latency_ms": 110.9916735002771,
+          "id": 148963,
+          "bytes": 4738,
+          "encode_ms": 3.092,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3029.0045000007376,
+          "latency_ms": 119.15997350029647,
+          "id": 148966,
+          "bytes": 4738,
+          "encode_ms": 3.087,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3135.617899999954,
+          "latency_ms": 125.77337349951267,
+          "id": 148969,
+          "bytes": 4747,
+          "encode_ms": 3.102,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3245.3256000000983,
+          "latency_ms": 103.48107349965721,
+          "id": 148973,
+          "bytes": 4749,
+          "encode_ms": 3.096,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3368.9710000008345,
+          "latency_ms": 127.12647350039333,
+          "id": 148976,
+          "bytes": 4743,
+          "encode_ms": 3.016,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3479.9237000001594,
+          "latency_ms": 106.07917349971831,
+          "id": 148980,
+          "bytes": 4697,
+          "encode_ms": 3.1,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3587.1041999999434,
+          "latency_ms": 113.25967349950224,
+          "id": 148983,
+          "bytes": 4711,
+          "encode_ms": 3.093,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3712.3996000001207,
+          "latency_ms": 138.55507349967957,
+          "id": 148986,
+          "bytes": 4725,
+          "encode_ms": 9.905,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3818.7998000001535,
+          "latency_ms": 112.95527349971235,
+          "id": 148990,
+          "bytes": 4741,
+          "encode_ms": 3.131,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 3927.8828000007197,
+          "latency_ms": 122.03827350027859,
+          "id": 148993,
+          "bytes": 4732,
+          "encode_ms": 3.083,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4038.015500000678,
+          "latency_ms": 132.17097350023687,
+          "id": 148996,
+          "bytes": 4746,
+          "encode_ms": 3.132,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4145.506599999964,
+          "latency_ms": 103.6620734995231,
+          "id": 149000,
+          "bytes": 4732,
+          "encode_ms": 3.189,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4254.725200000219,
+          "latency_ms": 112.88067349977791,
+          "id": 149003,
+          "bytes": 4734,
+          "encode_ms": 3.063,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4378.8725000005215,
+          "latency_ms": 137.0279735000804,
+          "id": 149006,
+          "bytes": 4718,
+          "encode_ms": 2.988,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4487.265300000086,
+          "latency_ms": 113.42077349964529,
+          "id": 149010,
+          "bytes": 4713,
+          "encode_ms": 2.976,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4596.884500000626,
+          "latency_ms": 123.03997350018471,
+          "id": 149013,
+          "bytes": 4700,
+          "encode_ms": 10.005,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4705.788300000131,
+          "latency_ms": 131.94377349969,
+          "id": 149016,
+          "bytes": 4693,
+          "encode_ms": 3.099,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4814.709600000642,
+          "latency_ms": 108.8650735002011,
+          "id": 149020,
+          "bytes": 4683,
+          "encode_ms": 3.128,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 4922.14100000076,
+          "latency_ms": 116.29647350031883,
+          "id": 149023,
+          "bytes": 4681,
+          "encode_ms": 3.089,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5029.556400000118,
+          "latency_ms": 123.71187349967659,
+          "id": 149026,
+          "bytes": 4679,
+          "encode_ms": 3.049,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5124.519700000063,
+          "latency_ms": 118.67517349962145,
+          "id": 149029,
+          "bytes": 4673,
+          "encode_ms": 3.108,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5233.110600000247,
+          "latency_ms": 95.26607349980623,
+          "id": 149033,
+          "bytes": 4658,
+          "encode_ms": 3.093,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5354.797800000757,
+          "latency_ms": 116.95327350031585,
+          "id": 149036,
+          "bytes": 4640,
+          "encode_ms": 3.121,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5476.868400000036,
+          "latency_ms": 139.02387349959463,
+          "id": 149039,
+          "bytes": 4646,
+          "encode_ms": 10.423,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5586.57620000001,
+          "latency_ms": 112.7316734995693,
+          "id": 149043,
+          "bytes": 4661,
+          "encode_ms": 3.138,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5695.021300000139,
+          "latency_ms": 121.17677349969745,
+          "id": 149046,
+          "bytes": 4653,
+          "encode_ms": 3.094,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5802.564400000498,
+          "latency_ms": 128.71987350005656,
+          "id": 149049,
+          "bytes": 4653,
+          "encode_ms": 3.126,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 5912.609700000845,
+          "latency_ms": 106.76517350040376,
+          "id": 149053,
+          "bytes": 4644,
+          "encode_ms": 3.118,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6019.785099999979,
+          "latency_ms": 113.940573499538,
+          "id": 149056,
+          "bytes": 4638,
+          "encode_ms": 3.023,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6128.83690000046,
+          "latency_ms": 122.99237350001931,
+          "id": 149059,
+          "bytes": 4641,
+          "encode_ms": 2.981,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6238.459400000051,
+          "latency_ms": 132.61487349960953,
+          "id": 149062,
+          "bytes": 4646,
+          "encode_ms": 3.068,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6364.705700000748,
+          "latency_ms": 126.8611735003069,
+          "id": 149066,
+          "bytes": 4635,
+          "encode_ms": 9.723,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6488.0482000000775,
+          "latency_ms": 118.20367349963635,
+          "id": 149070,
+          "bytes": 4645,
+          "encode_ms": 3.16,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6597.093300000764,
+          "latency_ms": 127.2487735003233,
+          "id": 149073,
+          "bytes": 4635,
+          "encode_ms": 3.157,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6705.8105000006035,
+          "latency_ms": 135.96597350016236,
+          "id": 149076,
+          "bytes": 4643,
+          "encode_ms": 2.969,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6827.818400000222,
+          "latency_ms": 121.9738734997809,
+          "id": 149080,
+          "bytes": 4642,
+          "encode_ms": 3.111,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 6937.214300000109,
+          "latency_ms": 131.36977349966764,
+          "id": 149083,
+          "bytes": 4628,
+          "encode_ms": 3.128,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7045.535099999979,
+          "latency_ms": 107.690573499538,
+          "id": 149087,
+          "bytes": 4657,
+          "encode_ms": 2.979,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7169.932900000364,
+          "latency_ms": 132.08837349992245,
+          "id": 149090,
+          "bytes": 4632,
+          "encode_ms": 3.09,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7294.264200000092,
+          "latency_ms": 124.41967349965125,
+          "id": 149094,
+          "bytes": 4668,
+          "encode_ms": 10.016,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7403.333000000566,
+          "latency_ms": 133.4884735001251,
+          "id": 149097,
+          "bytes": 4664,
+          "encode_ms": 3.113,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7509.959600000642,
+          "latency_ms": 104.1150735002011,
+          "id": 149101,
+          "bytes": 4675,
+          "encode_ms": 3.073,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7617.655900000595,
+          "latency_ms": 111.81137350015342,
+          "id": 149104,
+          "bytes": 4704,
+          "encode_ms": 3.15,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7726.077100000344,
+          "latency_ms": 120.23257349990308,
+          "id": 149107,
+          "bytes": 4684,
+          "encode_ms": 3.106,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7833.103700000793,
+          "latency_ms": 127.25917350035161,
+          "id": 149110,
+          "bytes": 4689,
+          "encode_ms": 3.056,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 7943.188100000843,
+          "latency_ms": 104.34357350040227,
+          "id": 149114,
+          "bytes": 4666,
+          "encode_ms": 3.07,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8051.368600000627,
+          "latency_ms": 112.5240735001862,
+          "id": 149117,
+          "bytes": 4703,
+          "encode_ms": 3.114,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8160.693100000732,
+          "latency_ms": 121.84857350029051,
+          "id": 149120,
+          "bytes": 4711,
+          "encode_ms": 9.867,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8267.495600000024,
+          "latency_ms": 128.6510734995827,
+          "id": 149123,
+          "bytes": 4702,
+          "encode_ms": 3.068,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8376.1194000002,
+          "latency_ms": 105.27487349975854,
+          "id": 149127,
+          "bytes": 4714,
+          "encode_ms": 3.128,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8484.50790000055,
+          "latency_ms": 113.66337350010872,
+          "id": 149130,
+          "bytes": 4734,
+          "encode_ms": 3.103,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8593.407100000419,
+          "latency_ms": 122.56257349997759,
+          "id": 149133,
+          "bytes": 4722,
+          "encode_ms": 3.107,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8701.936900000088,
+          "latency_ms": 131.09237349964678,
+          "id": 149136,
+          "bytes": 4723,
+          "encode_ms": 3.074,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8811.664200000465,
+          "latency_ms": 108.81967350002378,
+          "id": 149140,
+          "bytes": 4712,
+          "encode_ms": 3.043,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 8921.351200000383,
+          "latency_ms": 118.50667349994183,
+          "id": 149143,
+          "bytes": 4743,
+          "encode_ms": 3.123,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9045.658400000073,
+          "latency_ms": 142.81387349963188,
+          "id": 149146,
+          "bytes": 4760,
+          "encode_ms": 9.931,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9154.08160000015,
+          "latency_ms": 115.23707349970937,
+          "id": 149150,
+          "bytes": 4757,
+          "encode_ms": 3.047,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9278.163200000301,
+          "latency_ms": 139.31867349985987,
+          "id": 149153,
+          "bytes": 4739,
+          "encode_ms": 3.165,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9385.61910000071,
+          "latency_ms": 114.77457350026816,
+          "id": 149157,
+          "bytes": 4750,
+          "encode_ms": 3.063,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9495.36670000013,
+          "latency_ms": 124.5221734996885,
+          "id": 149160,
+          "bytes": 4754,
+          "encode_ms": 3.137,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9604.266900000162,
+          "latency_ms": 101.42237349972129,
+          "id": 149164,
+          "bytes": 4753,
+          "encode_ms": 2.98,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9710.397400000133,
+          "latency_ms": 107.55287349969149,
+          "id": 149167,
+          "bytes": 4756,
+          "encode_ms": 2.986,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9818.693200000562,
+          "latency_ms": 115.84867350012064,
+          "id": 149170,
+          "bytes": 4749,
+          "encode_ms": 3.124,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 9942.703200000338,
+          "latency_ms": 139.85867349989712,
+          "id": 149173,
+          "bytes": 4755,
+          "encode_ms": 10.046,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10050.910000000149,
+          "latency_ms": 116.06547349970788,
+          "id": 149177,
+          "bytes": 4739,
+          "encode_ms": 3.125,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10146.83430000022,
+          "latency_ms": 111.9897734997794,
+          "id": 149180,
+          "bytes": 4730,
+          "encode_ms": 3.114,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10267.472100000829,
+          "latency_ms": 132.62757350038737,
+          "id": 149183,
+          "bytes": 4759,
+          "encode_ms": 2.96,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10375.91310000047,
+          "latency_ms": 105.06857350002974,
+          "id": 149187,
+          "bytes": 4759,
+          "encode_ms": 3.138,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10483.908999999985,
+          "latency_ms": 113.06447349954396,
+          "id": 149190,
+          "bytes": 4762,
+          "encode_ms": 3.095,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10592.609100000001,
+          "latency_ms": 121.76457349956036,
+          "id": 149193,
+          "bytes": 4743,
+          "encode_ms": 3.032,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10701.360600000247,
+          "latency_ms": 130.51607349980623,
+          "id": 149196,
+          "bytes": 4754,
+          "encode_ms": 3.028,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10825.673400000669,
+          "latency_ms": 122.82887350022793,
+          "id": 149200,
+          "bytes": 4755,
+          "encode_ms": 10.02,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 10933.827500000596,
+          "latency_ms": 130.9829735001549,
+          "id": 149203,
+          "bytes": 4763,
+          "encode_ms": 3.109,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11043.36110000033,
+          "latency_ms": 108.51657349988818,
+          "id": 149207,
+          "bytes": 4753,
+          "encode_ms": 3.068,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11152.18200000003,
+          "latency_ms": 117.33747349958867,
+          "id": 149210,
+          "bytes": 4777,
+          "encode_ms": 3.114,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11276.246500000358,
+          "latency_ms": 141.4019734999165,
+          "id": 149213,
+          "bytes": 4770,
+          "encode_ms": 3.102,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11383.806200000457,
+          "latency_ms": 116.96167350001633,
+          "id": 149217,
+          "bytes": 4762,
+          "encode_ms": 2.991,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11496.433900000528,
+          "latency_ms": 129.58937350008637,
+          "id": 149220,
+          "bytes": 4751,
+          "encode_ms": 3.143,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11617.932599999942,
+          "latency_ms": 115.08807349950075,
+          "id": 149224,
+          "bytes": 4763,
+          "encode_ms": 3.078,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11742.05940000061,
+          "latency_ms": 139.21487350016832,
+          "id": 149227,
+          "bytes": 4760,
+          "encode_ms": 9.953,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11849.895299999975,
+          "latency_ms": 115.05077349953353,
+          "id": 149231,
+          "bytes": 4753,
+          "encode_ms": 3.122,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 11957.84240000043,
+          "latency_ms": 122.99787349998951,
+          "id": 149234,
+          "bytes": 4758,
+          "encode_ms": 3.13,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12066.794900000095,
+          "latency_ms": 131.95037349965423,
+          "id": 149237,
+          "bytes": 4755,
+          "encode_ms": 3.112,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12174.627000000328,
+          "latency_ms": 107.78247349988669,
+          "id": 149241,
+          "bytes": 4740,
+          "encode_ms": 3.01,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12283.69020000007,
+          "latency_ms": 116.8456734996289,
+          "id": 149244,
+          "bytes": 4761,
+          "encode_ms": 3.108,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12391.305900000036,
+          "latency_ms": 124.46137349959463,
+          "id": 149247,
+          "bytes": 4750,
+          "encode_ms": 3.158,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12499.145000000484,
+          "latency_ms": 132.30047350004315,
+          "id": 149250,
+          "bytes": 4760,
+          "encode_ms": 2.979,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12622.069500000216,
+          "latency_ms": 123.22497349977493,
+          "id": 149254,
+          "bytes": 4748,
+          "encode_ms": 9.904,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12731.292100000195,
+          "latency_ms": 132.44757349975407,
+          "id": 149257,
+          "bytes": 4750,
+          "encode_ms": 3.052,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 12840.770400000736,
+          "latency_ms": 105.92587350029498,
+          "id": 149261,
+          "bytes": 4722,
+          "encode_ms": 3.086,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 13288.950600000098,
+          "latency_ms": 454.1060734996572,
+          "id": 149264,
+          "bytes": 4726,
+          "encode_ms": 3.083,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base",
+            "process-A"
+          ]
+        },
+        {
+          "elapsed_ms": 13473.715200000443,
+          "latency_ms": 206.87067350000143,
+          "id": 149277,
+          "bytes": 2131,
+          "encode_ms": 3.104,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13628.031700000167,
+          "latency_ms": 161.18717349972576,
+          "id": 149283,
+          "bytes": 2133,
+          "encode_ms": 3.087,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13875.442000000738,
+          "latency_ms": 276.5974735002965,
+          "id": 149287,
+          "bytes": 2131,
+          "encode_ms": 3.074,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14651.436700000428,
+          "latency_ms": 184.59217349998653,
+          "id": 149313,
+          "bytes": 2135,
+          "encode_ms": 3.125,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14758.065799999982,
+          "latency_ms": 127.22127349954098,
+          "id": 149318,
+          "bytes": 2138,
+          "encode_ms": 10.172,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14820.70120000001,
+          "latency_ms": 89.8566734995693,
+          "id": 149321,
+          "bytes": 2142,
+          "encode_ms": 3.083,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14928.757200000808,
+          "latency_ms": 97.91267350036651,
+          "id": 149324,
+          "bytes": 2139,
+          "encode_ms": 3.137,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        }
+      ],
+      "age_samples_ms": [
+        190.15547349955887,
+        190.15547349955887,
+        190.15547349955887,
+        158.15547349955887,
+        158.15547349955887,
+        126.15547349955887,
+        126.15547349955887,
+        226.15547349955887,
+        226.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        158.15547349955887,
+        158.15547349955887,
+        158.15547349955887,
+        126.15547349955887,
+        126.15547349955887,
+        226.15547349955887,
+        226.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        162.15547349955887,
+        162.15547349955887,
+        162.15547349955887,
+        126.15547349955887,
+        126.15547349955887,
+        226.15547349955887,
+        226.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        162.15547349955887,
+        130.15547349955887,
+        130.15547349955887,
+        230.15547349955887,
+        230.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        162.15547349955887,
+        162.15547349955887,
+        130.15547349955887,
+        230.15547349955887,
+        230.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        194.15547349955887,
+        161.15547349955887,
+        161.15547349955887,
+        161.15547349955887,
+        161.15547349955887,
+        129.15547349955887,
+        129.15547349955887,
+        129.15547349955887,
+        229.15547349955887,
+        229.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        161.15547349955887,
+        161.15547349955887,
+        129.15547349955887,
+        129.15547349955887,
+        229.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        165.15547349955887,
+        165.15547349955887,
+        165.15547349955887,
+        129.15547349955887,
+        129.15547349955887,
+        129.15547349955887,
+        229.15547349955887,
+        229.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        165.15547349955887,
+        165.15547349955887,
+        165.15547349955887,
+        133.15547349955887,
+        133.15547349955887,
+        233.15547349955887,
+        197.15547349955887,
+        197.15547349955887,
+        165.15547349955887,
+        165.15547349955887,
+        165.15547349955887,
+        133.15547349955887,
+        133.15547349955887,
+        133.15547349955887,
+        133.15547349955887,
+        233.15547349955887,
+        201.15547349955887,
+        201.15547349955887,
+        165.15547349955887,
+        265.15547349955887,
+        365.15547349955887,
+        465.15547349955887,
+        465.15547349955887,
+        565.1554734995589,
+        233.15547349955887,
+        333.15547349955887,
+        233.15547349955887,
+        333.15547349955887,
+        301.15547349955887,
+        401.15547349955887,
+        501.15547349955887,
+        601.1554734995589,
+        701.1554734995589,
+        801.1554734995589,
+        901.1554734995589,
+        1001.1554734995589,
+        233.15547349955887,
+        169.15547349955887,
+        169.15547349955887
+      ],
+      "fresh_time_samples": 120,
+      "receiver_source_sha256": {
+        "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+        "semantic_video/encoder.py": "2360042cdaee8c709f836cd2bec4f08f4ffcefc0b14d258e48106ffd2cd9a58a",
+        "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+        "semantic_video/model.py": "b6c89f7ed5aaeff981055e7b8aba13b73ab9bf81afb2f364e1a23e82f45356ab",
+        "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+        "semantic_video/server.py": "8c8f498c46a7f79a0740398aef68220d0214878f84645dca8daa9ceaee0d3bd4",
+        "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+        "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+        "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+        "experiments/network.py": "9b54ead46fac20d6a6b7ba282928958aa113e1caea86c3063e1350516ac62649",
+        "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+        "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+        "experiments/summarize.py": "6899e2ce706c7cb66df8e5d24c50d0801950c6a02c909cc8d6d61e9f8ac02d5a"
+      },
+      "repeat": 0
+    },
+    {
+      "policy": "full",
+      "kbps": 2048,
+      "seed": 7,
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "duration_s": 12.0,
+      "warmup_s": 3.0,
+      "clock": {
+        "rtt_ms": 7.092636000365019,
+        "offset_ms": -144594.2251530001
+      },
+      "clock_after": {
+        "rtt_ms": 7.508966000750661,
+        "offset_ms": -144592.951382
+      },
+      "clock_offset_shift_ms": 1.2737710000947118,
+      "clock_diagnostic_envelope_ms": 4.820089000277221,
+      "clock_quality_warning": false,
+      "frames": 15,
+      "fps": 1.25,
+      "payload_mbps": 1.0794493333333333,
+      "latency_p50_ms": 785.7120469994843,
+      "latency_p95_ms": 1179.4453370001165,
+      "fresh_time_fraction_250ms": 0.0,
+      "conservative_fresh_time_fraction_250ms": 0.0,
+      "fresh_weighted_task_fraction": null,
+      "mean_encode_ms": 6.998066666666669,
+      "all_wire_bytes_including_upgrade": 1967188,
+      "failures": [],
+      "records": [
+        {
+          "elapsed_ms": 720.8219999996945,
+          "latency_ms": 753.5659469999373,
+          "id": 149357,
+          "bytes": 105450,
+          "encode_ms": 6.676,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 1509.8122999994084,
+          "latency_ms": 810.5562469996512,
+          "id": 149379,
+          "bytes": 106691,
+          "encode_ms": 6.714,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2311.8245000001043,
+          "latency_ms": 812.5684470003471,
+          "id": 149403,
+          "bytes": 108571,
+          "encode_ms": 6.807,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3072.967799999751,
+          "latency_ms": 773.7117469999939,
+          "id": 149427,
+          "bytes": 108640,
+          "encode_ms": 6.703,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3907.379399999976,
+          "latency_ms": 844.1233470002189,
+          "id": 149450,
+          "bytes": 108540,
+          "encode_ms": 6.662,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4661.453299999237,
+          "latency_ms": 766.1972469994798,
+          "id": 149475,
+          "bytes": 108260,
+          "encode_ms": 6.794,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5453.523000000045,
+          "latency_ms": 790.2669470002875,
+          "id": 149498,
+          "bytes": 108223,
+          "encode_ms": 6.777,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6184.769599999301,
+          "latency_ms": 757.5135469995439,
+          "id": 149521,
+          "bytes": 107128,
+          "encode_ms": 6.776,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6973.811499999836,
+          "latency_ms": 810.5554470000789,
+          "id": 149543,
+          "bytes": 107456,
+          "encode_ms": 10.845,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7697.868400000036,
+          "latency_ms": 738.6123470002785,
+          "id": 149567,
+          "bytes": 107595,
+          "encode_ms": 6.53,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8469.213399999775,
+          "latency_ms": 772.9573470000178,
+          "id": 149589,
+          "bytes": 107675,
+          "encode_ms": 6.774,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9247.384099999443,
+          "latency_ms": 787.1280469996855,
+          "id": 149612,
+          "bytes": 107185,
+          "encode_ms": 6.772,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10499.420500000007,
+          "latency_ms": 1271.1644470002502,
+          "id": 149635,
+          "bytes": 107168,
+          "encode_ms": 6.909,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11632.393199999817,
+          "latency_ms": 1140.1371470000595,
+          "id": 149673,
+          "bytes": 108624,
+          "encode_ms": 6.547,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12401.973899999633,
+          "latency_ms": 777.7178469998762,
+          "id": 149707,
+          "bytes": 107545,
+          "encode_ms": 6.653,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13136.403599999845,
+          "latency_ms": 744.1475470000878,
+          "id": 149730,
+          "bytes": 108282,
+          "encode_ms": 6.796,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14050.811999999918,
+          "latency_ms": 926.5559470001608,
+          "id": 149752,
+          "bytes": 108231,
+          "encode_ms": 6.631,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14809.968099999242,
+          "latency_ms": 785.7120469994843,
+          "id": 149779,
+          "bytes": 108622,
+          "encode_ms": 6.802,
+          "level": 0,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        }
+      ],
+      "age_samples_ms": [
+        1500.7439470002428,
+        800.7439470002428,
+        900.7439470002428,
+        1000.7439470002428,
+        1100.7439470002428,
+        1200.7439470002428,
+        1300.7439470002428,
+        1400.7439470002428,
+        1500.7439470002428,
+        1600.7439470002428,
+        936.7439470002428,
+        1036.7439470002428,
+        1136.7439470002428,
+        1236.7439470002428,
+        1336.7439470002428,
+        1436.7439470002428,
+        1536.7439470002428,
+        804.7439470002428,
+        904.7439470002428,
+        1004.7439470002428,
+        1104.7439470002428,
+        1204.7439470002428,
+        1304.7439470002428,
+        1404.7439470002428,
+        1504.7439470002428,
+        836.7439470002428,
+        936.7439470002428,
+        1036.7439470002428,
+        1136.7439470002428,
+        1236.7439470002428,
+        1336.7439470002428,
+        1436.7439470002428,
+        772.7439470002428,
+        872.7439470002428,
+        972.7439470002428,
+        1072.7439470002428,
+        1172.7439470002428,
+        1272.7439470002428,
+        1372.7439470002428,
+        1472.7439470002428,
+        836.7439470002428,
+        936.7439470002428,
+        1036.7439470002428,
+        1136.7439470002428,
+        1236.7439470002428,
+        1336.7439470002428,
+        1436.7439470002428,
+        740.7439470002428,
+        840.7439470002428,
+        940.7439470002428,
+        1040.7439470002428,
+        1140.7439470002428,
+        1240.7439470002428,
+        1340.7439470002428,
+        1440.7439470002428,
+        803.7439470002428,
+        903.7439470002428,
+        1003.7439470002428,
+        1103.7439470002428,
+        1203.7439470002428,
+        1303.7439470002428,
+        1403.7439470002428,
+        1503.7439470002428,
+        839.7439470002428,
+        939.7439470002428,
+        1039.7439470002428,
+        1139.7439470002428,
+        1239.7439470002428,
+        1339.7439470002428,
+        1439.7439470002428,
+        1539.7439470002428,
+        1639.7439470002428,
+        1739.7439470002428,
+        1839.7439470002428,
+        1939.7439470002428,
+        1271.7439470002428,
+        1371.7439470002428,
+        1471.7439470002428,
+        1571.7439470002428,
+        1671.7439470002428,
+        1771.7439470002428,
+        1871.7439470002428,
+        1971.7439470002428,
+        2071.7439470002428,
+        2171.7439470002428,
+        2271.7439470002428,
+        2371.7439470002428,
+        1207.7439470002428,
+        1307.7439470002428,
+        1407.7439470002428,
+        1507.7439470002428,
+        1607.7439470002428,
+        1707.7439470002428,
+        1807.7439470002428,
+        1907.7439470002428,
+        875.7439470002428,
+        975.7439470002428,
+        1075.7439470002428,
+        1175.7439470002428,
+        1275.7439470002428,
+        1375.7439470002428,
+        1475.7439470002428,
+        807.7439470002428,
+        907.7439470002428,
+        1007.7439470002428,
+        1107.7439470002428,
+        1207.7439470002428,
+        1307.7439470002428,
+        1407.7439470002428,
+        1507.7439470002428,
+        1607.7439470002428,
+        975.7439470002428,
+        1075.7439470002428,
+        1175.7439470002428,
+        1275.7439470002428,
+        1375.7439470002428,
+        1475.7439470002428,
+        1575.7439470002428,
+        1675.7439470002428,
+        875.7439470002428
+      ],
+      "fresh_time_samples": 120,
+      "receiver_source_sha256": {
+        "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+        "semantic_video/encoder.py": "2360042cdaee8c709f836cd2bec4f08f4ffcefc0b14d258e48106ffd2cd9a58a",
+        "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+        "semantic_video/model.py": "b6c89f7ed5aaeff981055e7b8aba13b73ab9bf81afb2f364e1a23e82f45356ab",
+        "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+        "semantic_video/server.py": "8c8f498c46a7f79a0740398aef68220d0214878f84645dca8daa9ceaee0d3bd4",
+        "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+        "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+        "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+        "experiments/network.py": "9b54ead46fac20d6a6b7ba282928958aa113e1caea86c3063e1350516ac62649",
+        "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+        "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+        "experiments/summarize.py": "6899e2ce706c7cb66df8e5d24c50d0801950c6a02c909cc8d6d61e9f8ac02d5a"
+      },
+      "repeat": 0
+    },
+    {
+      "policy": "uniform",
+      "kbps": 2048,
+      "seed": 7,
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "duration_s": 12.0,
+      "warmup_s": 3.0,
+      "clock": {
+        "rtt_ms": 7.121155000291765,
+        "offset_ms": -144595.64239450032
+      },
+      "clock_after": {
+        "rtt_ms": 7.5237329993397,
+        "offset_ms": -144591.7812405005
+      },
+      "clock_offset_shift_ms": 3.8611539998091757,
+      "clock_diagnostic_envelope_ms": 7.421731499955058,
+      "clock_quality_warning": false,
+      "frames": 96,
+      "fps": 8.0,
+      "payload_mbps": 0.3178046666666667,
+      "latency_p50_ms": 64.18225549906492,
+      "latency_p95_ms": 248.78938049916178,
+      "fresh_time_fraction_250ms": 0.7916666666666666,
+      "conservative_fresh_time_fraction_250ms": 0.7916666666666666,
+      "fresh_weighted_task_fraction": null,
+      "mean_encode_ms": 4.968416666666666,
+      "all_wire_bytes_including_upgrade": 615621,
+      "failures": [],
+      "records": [
+        {
+          "elapsed_ms": 98.01549999974668,
+          "latency_ms": 162.92500549927354,
+          "id": 149862,
+          "bytes": 17665,
+          "encode_ms": 14.619,
+          "level": 2,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 172.66849999967963,
+          "latency_ms": 73.5780055001378,
+          "id": 149867,
+          "bytes": 7447,
+          "encode_ms": 8.592,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 280.8516999995336,
+          "latency_ms": 81.76120549999177,
+          "id": 149870,
+          "bytes": 7419,
+          "encode_ms": 6.544,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 358.68739999923855,
+          "latency_ms": 59.59690549969673,
+          "id": 149873,
+          "bytes": 7376,
+          "encode_ms": 6.481,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 483.6875,
+          "latency_ms": 84.59700549952686,
+          "id": 149876,
+          "bytes": 7403,
+          "encode_ms": 6.534,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 560.5181999998167,
+          "latency_ms": 61.4277055002749,
+          "id": 149879,
+          "bytes": 7391,
+          "encode_ms": 6.542,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 668.8267000000924,
+          "latency_ms": 69.73620549961925,
+          "id": 149882,
+          "bytes": 7406,
+          "encode_ms": 6.478,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 763.0987999998033,
+          "latency_ms": 64.00830549933016,
+          "id": 149885,
+          "bytes": 7407,
+          "encode_ms": 6.423,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 872.6288000000641,
+          "latency_ms": 73.53830550052226,
+          "id": 149888,
+          "bytes": 7416,
+          "encode_ms": 8.636,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 980.8207999998704,
+          "latency_ms": 81.73030550032854,
+          "id": 149891,
+          "bytes": 7398,
+          "encode_ms": 6.542,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 1509.0394000001252,
+          "latency_ms": 509.948905499652,
+          "id": 149894,
+          "bytes": 7411,
+          "encode_ms": 6.582,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 1822.2863999996334,
+          "latency_ms": 323.1959054991603,
+          "id": 149909,
+          "bytes": 3846,
+          "encode_ms": 9.569,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 1994.7562999995425,
+          "latency_ms": 195.66580550000072,
+          "id": 149918,
+          "bytes": 3852,
+          "encode_ms": 3.564,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2026.7565999999642,
+          "latency_ms": 63.666105499491096,
+          "id": 149923,
+          "bytes": 3851,
+          "encode_ms": 3.522,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2135.8876000000164,
+          "latency_ms": 72.79710550047457,
+          "id": 149926,
+          "bytes": 3844,
+          "encode_ms": 3.517,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2229.846599999815,
+          "latency_ms": 30.756105499342084,
+          "id": 149930,
+          "bytes": 3855,
+          "encode_ms": 3.428,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2338.4696999993175,
+          "latency_ms": 39.379205498844385,
+          "id": 149933,
+          "bytes": 3852,
+          "encode_ms": 9.592,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2447.1403999999166,
+          "latency_ms": 48.04990549944341,
+          "id": 149936,
+          "bytes": 3847,
+          "encode_ms": 3.502,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2540.5305999992415,
+          "latency_ms": 41.44010549969971,
+          "id": 149939,
+          "bytes": 3848,
+          "encode_ms": 3.422,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2648.842600000091,
+          "latency_ms": 49.75210550054908,
+          "id": 149942,
+          "bytes": 3856,
+          "encode_ms": 3.562,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2758.5774999996647,
+          "latency_ms": 59.487005500122905,
+          "id": 149945,
+          "bytes": 3844,
+          "encode_ms": 3.536,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2836.406399999745,
+          "latency_ms": 37.31590550020337,
+          "id": 149948,
+          "bytes": 3851,
+          "encode_ms": 3.473,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 2946.4959999993443,
+          "latency_ms": 47.40550549887121,
+          "id": 149951,
+          "bytes": 3852,
+          "encode_ms": 3.456,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3041.780799999833,
+          "latency_ms": 42.690305499359965,
+          "id": 149954,
+          "bytes": 3845,
+          "encode_ms": 3.551,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3148.859899999574,
+          "latency_ms": 49.769405499100685,
+          "id": 149957,
+          "bytes": 3857,
+          "encode_ms": 9.57,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3237.7200999995694,
+          "latency_ms": 38.62960550002754,
+          "id": 149960,
+          "bytes": 3841,
+          "encode_ms": 3.555,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3352.1032999996096,
+          "latency_ms": 53.01280549913645,
+          "id": 149963,
+          "bytes": 3846,
+          "encode_ms": 3.531,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3445.6944999992847,
+          "latency_ms": 46.6040054988116,
+          "id": 149966,
+          "bytes": 3847,
+          "encode_ms": 3.476,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3537.637499999255,
+          "latency_ms": 42.5470054987818,
+          "id": 149969,
+          "bytes": 3842,
+          "encode_ms": 3.542,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3659.0551999993622,
+          "latency_ms": 63.96470549888909,
+          "id": 149972,
+          "bytes": 3839,
+          "encode_ms": 3.562,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3754.920899999328,
+          "latency_ms": 59.83040549978614,
+          "id": 149975,
+          "bytes": 3846,
+          "encode_ms": 3.457,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3862.2966999998316,
+          "latency_ms": 67.2062055002898,
+          "id": 149978,
+          "bytes": 3851,
+          "encode_ms": 3.423,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 3957.718899999745,
+          "latency_ms": 62.62840550020337,
+          "id": 149981,
+          "bytes": 3843,
+          "encode_ms": 9.542,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4050.8285999996588,
+          "latency_ms": 55.738105500116944,
+          "id": 149984,
+          "bytes": 3850,
+          "encode_ms": 3.506,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4158.395299999975,
+          "latency_ms": 63.30480550043285,
+          "id": 149987,
+          "bytes": 3838,
+          "encode_ms": 3.534,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4251.960699999705,
+          "latency_ms": 56.870205499231815,
+          "id": 149990,
+          "bytes": 3853,
+          "encode_ms": 3.533,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4346.026199999265,
+          "latency_ms": 50.935705499723554,
+          "id": 149993,
+          "bytes": 3852,
+          "encode_ms": 3.559,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4454.699899999425,
+          "latency_ms": 59.60940549895167,
+          "id": 149996,
+          "bytes": 3856,
+          "encode_ms": 3.543,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4547.170899999328,
+          "latency_ms": 52.08040549978614,
+          "id": 149999,
+          "bytes": 3848,
+          "encode_ms": 3.535,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4653.887199999765,
+          "latency_ms": 58.79670549929142,
+          "id": 150002,
+          "bytes": 3844,
+          "encode_ms": 3.585,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4761.958999999799,
+          "latency_ms": 66.86850550025702,
+          "id": 150005,
+          "bytes": 3854,
+          "encode_ms": 9.682,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4856.673499999568,
+          "latency_ms": 61.583005499094725,
+          "id": 150008,
+          "bytes": 3851,
+          "encode_ms": 3.556,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 4949.9087999993935,
+          "latency_ms": 54.818305499851704,
+          "id": 150011,
+          "bytes": 3854,
+          "encode_ms": 3.569,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5057.655899999663,
+          "latency_ms": 62.56540549919009,
+          "id": 150014,
+          "bytes": 3855,
+          "encode_ms": 3.551,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5165.436099999584,
+          "latency_ms": 70.34560550004244,
+          "id": 150017,
+          "bytes": 3861,
+          "encode_ms": 3.524,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5273.916999999434,
+          "latency_ms": 78.82650549896061,
+          "id": 150020,
+          "bytes": 3853,
+          "encode_ms": 3.557,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5368.610999999568,
+          "latency_ms": 73.52050549909472,
+          "id": 150023,
+          "bytes": 3847,
+          "encode_ms": 3.478,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5459.4851999999955,
+          "latency_ms": 64.39470550045371,
+          "id": 150026,
+          "bytes": 3842,
+          "encode_ms": 3.56,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5566.423499999568,
+          "latency_ms": 71.33300549909472,
+          "id": 150029,
+          "bytes": 3853,
+          "encode_ms": 9.561,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5659.178899999708,
+          "latency_ms": 64.0884054992348,
+          "id": 150032,
+          "bytes": 3852,
+          "encode_ms": 3.57,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5768.8805999998,
+          "latency_ms": 41.79010549932718,
+          "id": 150036,
+          "bytes": 3852,
+          "encode_ms": 3.564,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5862.632399999537,
+          "latency_ms": 35.541905499994755,
+          "id": 150039,
+          "bytes": 3851,
+          "encode_ms": 3.531,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 5972.6953999996185,
+          "latency_ms": 45.60490549914539,
+          "id": 150042,
+          "bytes": 3853,
+          "encode_ms": 3.559,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6079.795099999756,
+          "latency_ms": 52.70460549928248,
+          "id": 150045,
+          "bytes": 3851,
+          "encode_ms": 3.54,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6158.651800000109,
+          "latency_ms": 31.56130550056696,
+          "id": 150048,
+          "bytes": 3864,
+          "encode_ms": 3.462,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6266.367399999872,
+          "latency_ms": 39.27690549939871,
+          "id": 150051,
+          "bytes": 3864,
+          "encode_ms": 3.552,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6405.451599999331,
+          "latency_ms": 78.36110549978912,
+          "id": 150054,
+          "bytes": 7441,
+          "encode_ms": 6.424,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6500.158499999903,
+          "latency_ms": 73.06800550036132,
+          "id": 150057,
+          "bytes": 7428,
+          "encode_ms": 6.435,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6606.327999999747,
+          "latency_ms": 79.23750549927354,
+          "id": 150060,
+          "bytes": 7428,
+          "encode_ms": 6.532,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6699.934099999256,
+          "latency_ms": 72.84360549971461,
+          "id": 150063,
+          "bytes": 7440,
+          "encode_ms": 6.512,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6808.3892999999225,
+          "latency_ms": 81.29880549944937,
+          "id": 150066,
+          "bytes": 7432,
+          "encode_ms": 6.492,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6899.047199999914,
+          "latency_ms": 71.95670549944043,
+          "id": 150069,
+          "bytes": 7413,
+          "encode_ms": 6.496,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 6991.757199999876,
+          "latency_ms": 64.6667055003345,
+          "id": 150072,
+          "bytes": 7429,
+          "encode_ms": 6.617,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7116.032499999739,
+          "latency_ms": 88.94200550019741,
+          "id": 150075,
+          "bytes": 7429,
+          "encode_ms": 6.419,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7225.745999999344,
+          "latency_ms": 97.65550549887121,
+          "id": 150078,
+          "bytes": 7430,
+          "encode_ms": 8.707,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7301.917700000107,
+          "latency_ms": 73.82720549963415,
+          "id": 150081,
+          "bytes": 7432,
+          "encode_ms": 6.47,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7413.3542999997735,
+          "latency_ms": 85.26380549930036,
+          "id": 150084,
+          "bytes": 7445,
+          "encode_ms": 6.664,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7518.707599999383,
+          "latency_ms": 90.61710549890995,
+          "id": 150087,
+          "bytes": 7435,
+          "encode_ms": 6.567,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7612.397099999711,
+          "latency_ms": 84.30660549923778,
+          "id": 150090,
+          "bytes": 7435,
+          "encode_ms": 6.556,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7722.385099999607,
+          "latency_ms": 94.29460549913347,
+          "id": 150093,
+          "bytes": 7425,
+          "encode_ms": 6.544,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7801.906999999657,
+          "latency_ms": 73.81650549918413,
+          "id": 150096,
+          "bytes": 7432,
+          "encode_ms": 6.469,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 7911.572999999858,
+          "latency_ms": 83.48250550031662,
+          "id": 150099,
+          "bytes": 7434,
+          "encode_ms": 6.564,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8082.740799999796,
+          "latency_ms": 154.65030550025403,
+          "id": 150102,
+          "bytes": 17761,
+          "encode_ms": 2.629,
+          "level": 2,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8143.474200000055,
+          "latency_ms": 83.38370550051332,
+          "id": 150106,
+          "bytes": 7445,
+          "encode_ms": 8.7,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8253.471599999815,
+          "latency_ms": 93.38110549934208,
+          "id": 150109,
+          "bytes": 7431,
+          "encode_ms": 6.521,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8361.13599999994,
+          "latency_ms": 101.04550549946725,
+          "id": 150112,
+          "bytes": 7429,
+          "encode_ms": 6.539,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8470.640099999495,
+          "latency_ms": 78.54960549995303,
+          "id": 150116,
+          "bytes": 7423,
+          "encode_ms": 6.585,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8561.609299999662,
+          "latency_ms": 69.51880550011992,
+          "id": 150119,
+          "bytes": 7412,
+          "encode_ms": 6.527,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8669.291100000031,
+          "latency_ms": 77.20060550048947,
+          "id": 150122,
+          "bytes": 7429,
+          "encode_ms": 6.486,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8748.896099999547,
+          "latency_ms": 56.80560549907386,
+          "id": 150125,
+          "bytes": 7436,
+          "encode_ms": 6.452,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8873.60850000009,
+          "latency_ms": 81.51800549961627,
+          "id": 150128,
+          "bytes": 7414,
+          "encode_ms": 8.655,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 8967.004300000146,
+          "latency_ms": 74.91380549967289,
+          "id": 150131,
+          "bytes": 7434,
+          "encode_ms": 6.592,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9138.941099999472,
+          "latency_ms": 146.85060549899936,
+          "id": 150134,
+          "bytes": 7431,
+          "encode_ms": 6.525,
+          "level": 3,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 9757.000999999233,
+          "latency_ms": 628.9105054996908,
+          "id": 150138,
+          "bytes": 3846,
+          "encode_ms": 9.534,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10133.80429999996,
+          "latency_ms": 373.71380550041795,
+          "id": 150157,
+          "bytes": 3856,
+          "encode_ms": 3.469,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10773.283799999394,
+          "latency_ms": 649.1933054998517,
+          "id": 150168,
+          "bytes": 3849,
+          "encode_ms": 3.537,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 10990.80179999955,
+          "latency_ms": 230.71130549907684,
+          "id": 150187,
+          "bytes": 3850,
+          "encode_ms": 3.658,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11022.091999999247,
+          "latency_ms": 30.001505499705672,
+          "id": 150194,
+          "bytes": 3849,
+          "encode_ms": 3.516,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11129.777699999511,
+          "latency_ms": 37.6872054990381,
+          "id": 150197,
+          "bytes": 3848,
+          "encode_ms": 9.645,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11238.575299999677,
+          "latency_ms": 46.484805500134826,
+          "id": 150200,
+          "bytes": 3853,
+          "encode_ms": 3.572,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11331.738299999386,
+          "latency_ms": 39.64780549891293,
+          "id": 150203,
+          "bytes": 3842,
+          "encode_ms": 3.458,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11440.085899999365,
+          "latency_ms": 47.99540549889207,
+          "id": 150206,
+          "bytes": 3856,
+          "encode_ms": 3.404,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11533.359100000001,
+          "latency_ms": 41.26860550045967,
+          "id": 150209,
+          "bytes": 3854,
+          "encode_ms": 3.535,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11643.359100000001,
+          "latency_ms": 51.26860550045967,
+          "id": 150212,
+          "bytes": 3858,
+          "encode_ms": 3.556,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11735.251899999566,
+          "latency_ms": 43.16140550002456,
+          "id": 150215,
+          "bytes": 3852,
+          "encode_ms": 3.557,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11844.00859999936,
+          "latency_ms": 51.91810549981892,
+          "id": 150218,
+          "bytes": 3857,
+          "encode_ms": 3.538,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 11937.391999999993,
+          "latency_ms": 45.30150550045073,
+          "id": 150221,
+          "bytes": 3848,
+          "encode_ms": 9.644,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12045.964099999517,
+          "latency_ms": 53.87360549904406,
+          "id": 150224,
+          "bytes": 3845,
+          "encode_ms": 3.502,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12140.743799999356,
+          "latency_ms": 48.65330549888313,
+          "id": 150227,
+          "bytes": 3848,
+          "encode_ms": 3.532,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12247.509300000034,
+          "latency_ms": 55.418805500492454,
+          "id": 150230,
+          "bytes": 3855,
+          "encode_ms": 3.431,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12341.236199999228,
+          "latency_ms": 49.14570549875498,
+          "id": 150233,
+          "bytes": 3854,
+          "encode_ms": 3.565,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12449.289199999534,
+          "latency_ms": 57.198705499991775,
+          "id": 150236,
+          "bytes": 3847,
+          "encode_ms": 3.551,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12542.297599999234,
+          "latency_ms": 54.20710549876094,
+          "id": 150239,
+          "bytes": 3862,
+          "encode_ms": 3.51,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12651.270200000145,
+          "latency_ms": 63.17970550060272,
+          "id": 150242,
+          "bytes": 3853,
+          "encode_ms": 3.535,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12759.524999999441,
+          "latency_ms": 71.43450549989939,
+          "id": 150245,
+          "bytes": 3859,
+          "encode_ms": 9.691,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12852.366599999368,
+          "latency_ms": 64.27610549889505,
+          "id": 150248,
+          "bytes": 3857,
+          "encode_ms": 3.44,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 12943.333999999799,
+          "latency_ms": 55.243505500257015,
+          "id": 150251,
+          "bytes": 3857,
+          "encode_ms": 3.547,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13036.115699999966,
+          "latency_ms": 48.02520550042391,
+          "id": 150254,
+          "bytes": 3855,
+          "encode_ms": 3.565,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13159.615799999796,
+          "latency_ms": 71.52530550025403,
+          "id": 150257,
+          "bytes": 3855,
+          "encode_ms": 3.514,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13255.262299999595,
+          "latency_ms": 67.17180549912155,
+          "id": 150260,
+          "bytes": 3866,
+          "encode_ms": 3.446,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13348.876999999397,
+          "latency_ms": 60.786505499854684,
+          "id": 150263,
+          "bytes": 3851,
+          "encode_ms": 3.568,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13457.704499999993,
+          "latency_ms": 69.61400550045073,
+          "id": 150266,
+          "bytes": 3862,
+          "encode_ms": 3.567,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13551.390499999747,
+          "latency_ms": 63.30000549927354,
+          "id": 150269,
+          "bytes": 3865,
+          "encode_ms": 9.568,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13659.478799999692,
+          "latency_ms": 71.38830550014973,
+          "id": 150272,
+          "bytes": 3868,
+          "encode_ms": 3.595,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13753.214099999517,
+          "latency_ms": 65.12360549904406,
+          "id": 150275,
+          "bytes": 3859,
+          "encode_ms": 3.541,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13861.482799999416,
+          "latency_ms": 73.39230549894273,
+          "id": 150278,
+          "bytes": 3848,
+          "encode_ms": 3.537,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 13955.01649999991,
+          "latency_ms": 66.92600549943745,
+          "id": 150281,
+          "bytes": 3844,
+          "encode_ms": 3.551,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14713.566899999976,
+          "latency_ms": 725.476405499503,
+          "id": 150284,
+          "bytes": 3847,
+          "encode_ms": 3.543,
+          "level": 4,
+          "budget_exceeded": false,
+          "parts": [
+            "base"
+          ]
+        },
+        {
+          "elapsed_ms": 14991.11409999989,
+          "latency_ms": 303.0236054994166,
+          "id": 150305,
+          "bytes": 3824,
+          "encode_ms": 3.547,
+          "level": 4,
+          "budget_exceeded": true,
+          "parts": [
+            "base"
+          ]
+        }
+      ],
+      "age_samples_ms": [
+        100.90950549952686,
+        100.90950549952686,
+        100.90950549952686,
+        100.90950550045818,
+        100.90950549952686,
+        100.90950549952686,
+        104.90950549952686,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950550045818,
+        104.90950550045818,
+        104.90950550045818,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950549952686,
+        104.90950550045818,
+        104.90950549952686,
+        104.90950549952686,
+        72.90950549952686,
+        72.90950550045818,
+        72.90950549952686,
+        72.90950549952686,
+        72.90950550045818,
+        72.90950549952686,
+        172.90950549952686,
+        172.90950550045818,
+        172.90950550045818,
+        72.90950550045818,
+        172.90950550045818,
+        72.90950549952686,
+        72.90950550045818,
+        172.90950550045818,
+        172.90950550045818,
+        171.90950549952686,
+        171.90950549952686,
+        171.90950549952686,
+        171.90950549952686,
+        171.90950549952686,
+        171.90950549952686,
+        171.90950549952686,
+        171.90950550045818,
+        171.90950550045818,
+        139.90950550045818,
+        139.90950549952686,
+        139.90950549952686,
+        107.90950550045818,
+        107.90950550045818,
+        107.90950550045818,
+        107.90950549952686,
+        107.90950549952686,
+        107.90950549952686,
+        207.90950549952686,
+        207.90950549952686,
+        307.90950549952686,
+        407.90950549952686,
+        507.90950549952686,
+        607.9095054995269,
+        707.9095054995269,
+        671.9095055004582,
+        771.9095055004582,
+        871.9095055004582,
+        971.9095055004582,
+        439.9095055004582,
+        539.9095055004582,
+        639.9095055004582,
+        739.9095055004582,
+        839.9095055004582,
+        939.9095055004582,
+        675.9095055004582,
+        775.9095055004582,
+        239.90950549952686,
+        107.90950550045818,
+        107.90950549952686,
+        107.90950550045818,
+        107.90950549952686,
+        107.90950549952686,
+        107.90950550045818,
+        107.90950550045818,
+        107.90950550045818,
+        107.90950550045818,
+        107.90950550045818,
+        107.90950549952686,
+        107.90950549952686,
+        107.90950550045818,
+        107.90950549952686,
+        107.90950550045818,
+        111.90950549952686,
+        111.90950550045818,
+        111.90950550045818,
+        111.90950549952686,
+        111.90950550045818,
+        111.90950550045818,
+        111.90950550045818,
+        111.90950549952686,
+        111.90950550045818,
+        111.90950550045818,
+        111.90950549952686,
+        111.90950550045818,
+        111.90950549952686,
+        111.90950549952686,
+        111.90950549952686,
+        211.90950549952686,
+        311.90950549952686,
+        411.90950549952686,
+        511.90950549952686,
+        611.9095054995269,
+        711.9095054995269,
+        811.9095054995269,
+        811.9095054995269,
+        911.9095054995269
+      ],
+      "fresh_time_samples": 120,
+      "receiver_source_sha256": {
+        "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+        "semantic_video/encoder.py": "2360042cdaee8c709f836cd2bec4f08f4ffcefc0b14d258e48106ffd2cd9a58a",
+        "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+        "semantic_video/model.py": "b6c89f7ed5aaeff981055e7b8aba13b73ab9bf81afb2f364e1a23e82f45356ab",
+        "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+        "semantic_video/server.py": "8c8f498c46a7f79a0740398aef68220d0214878f84645dca8daa9ceaee0d3bd4",
+        "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+        "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+        "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+        "experiments/network.py": "9b54ead46fac20d6a6b7ba282928958aa113e1caea86c3063e1350516ac62649",
+        "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+        "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+        "experiments/summarize.py": "6899e2ce706c7cb66df8e5d24c50d0801950c6a02c909cc8d6d61e9f8ac02d5a"
+      },
+      "repeat": 0
+    }
+  ],
+  "setup_failures": []
+}

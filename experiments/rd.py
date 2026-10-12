@@ -10,6 +10,7 @@ from semantic_video.encoder import Encoder, MODES
 from semantic_video.metrics import evaluate
 from semantic_video.protocol import reconstruct, unpack
 from semantic_video.source import FixtureSource
+from experiments.provenance import source_hashes
 
 
 def run(frames):
@@ -23,13 +24,13 @@ def run(frames):
                 # Seeded simulated time makes aging independent of CPU benchmark duration.
                 encoder.started_ms=0
                 for index in range(frames):
-                    frame=source.at(index*7,0)
+                    frame=source.at(index*3,0)
                     from unittest.mock import patch
                     with patch('semantic_video.encoder.mono_ms',return_value=index*100):
                         packet,meta=encoder.encode(frame)
                     decoded=reconstruct(*unpack(packet))
                     quality=evaluate(frame.image,decoded)
-                    rows.append({'seed':seed,'kbps':kbps,'policy':mode,'sample':index,'bytes':len(packet),
+                    rows.append({'seed':seed,'kbps':kbps,'policy':mode,'sample':index,'frame_id':frame.identity,'bytes':len(packet),
                                  'encode_ms':meta['encode_ms'],'level':meta['level'],'budget_exceeded':meta['budget_exceeded'],
                                  'parts':[p['name'] for p in meta['parts']],**quality})
                     encoder.acknowledge(meta,50,len(packet),now=index*100+50)
@@ -42,7 +43,7 @@ def run(frames):
                                 **{key:float(np.mean([r[key] for r in group])) for key in ['bytes','encode_ms','weighted_roi_psnr_db','background_psnr_db','whole_psnr_db']},
                                 'marker_success':float(np.mean([sum(v['weight']*v['marker_correct'] for v in r['regions'].values())/10 for r in group])),
                                 'over_budget_fraction':float(np.mean([r['budget_exceeded'] for r in group]))})
-    return {'experiment':'PAIRED_SYNTHETIC_RD_NOT_NETWORK','platform':platform.platform(),'opencv':cv2.__version__,
+    return {'experiment':'PAIRED_SYNTHETIC_RD_NOT_NETWORK','platform':platform.platform(),'opencv':cv2.__version__,'source_sha256':source_hashes(),'fixture_frame_step':3,
             'frames_per_cell':frames,'psnr_exact_match_cap_db':99,'aging_clock':'100 ms synthetic interval; ACK at +50 ms',
             'summary':summary,'rows':rows}
 

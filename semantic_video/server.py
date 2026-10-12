@@ -109,7 +109,16 @@ class Service:
                     raise ValueError("Exactly one matching acknowledgement required")
                 encoder.acknowledge(metadata, mono_ms()-send_started, len(packet))
                 period = max(encoder.control.period_ms, len(packet)*8/encoder.control.kbps)
-                await asyncio.sleep(max(0, period-(mono_ms()-cycle))/1000)
+                delay = max(0, period-(mono_ms()-cycle))/1000
+                if delay:
+                    # Keep reading control frames while pacing so close releases its slot promptly.
+                    try:
+                        incoming = await asyncio.wait_for(ws.receive(), delay)
+                        if incoming.type not in (WSMsgType.CLOSE, WSMsgType.CLOSED, WSMsgType.CLOSING, WSMsgType.ERROR):
+                            raise ValueError("Unexpected message while pacing")
+                        break
+                    except asyncio.TimeoutError:
+                        pass
         except (ValueError, TypeError, KeyError, asyncio.TimeoutError, ConnectionError, OSError):
             await ws.close(code=1008, message=b"Invalid session or delivery deadline")
         finally:

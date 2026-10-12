@@ -31,7 +31,7 @@
 <h2>任务区域</h2>
 <label>当前区域<select id="region-choice"><option value="0">工序 A</option><option value="1">工序 B</option></select></label>
 <label>优先权重<input id="weight" type="number" min="1" max="10" step="1" value="6"></label>
-<div class="coordinates"><label>X<input id="roi-x" type="number" min="0" max="0.98" step="0.001"></label><label>Y<input id="roi-y" type="number" min="0" max="0.98" step="0.001"></label><label>W<input id="roi-w" type="number" min="0.02" max="1" step="0.001"></label><label>H<input id="roi-h" type="number" min="0.02" max="1" step="0.001"></label></div>
+<div class="coordinates"><label>X<input id="roi-x" type="number" min="0" max="0.98" step="0.0001"></label><label>Y<input id="roi-y" type="number" min="0" max="0.98" step="0.0001"></label><label>W<input id="roi-w" type="number" min="0.02" max="1" step="0.0001"></label><label>H<input id="roi-h" type="number" min="0.02" max="1" step="0.0001"></label></div>
 <button id="reset" title="重置区域" aria-label="重置区域"><i data-lucide="rotate-ccw"></i></button>
 <h2>传输状态</h2>
 <dl><dt>已显示帧</dt><dd id="frames">0</dd><dt>分层等级</dt><dd id="level">--</dd><dt>本帧重点块</dt><dd id="patches">--</dd><dt>超预算帧</dt><dd id="overruns">0</dd><dt>输入基准</dt><dd id="timing-kind">--</dd></dl>

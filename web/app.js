@@ -17,7 +17,10 @@ function clockConnect(token){
 }
 async function connect(){
   for(const input of document.querySelectorAll('input[type=number]'))if(!input.reportValidity())return;
-  stop();const token=epoch;frames=overruns=0;latest=null;samples=[];history=[];$('frames').textContent='0';$('overruns').textContent='0';for(const id of ['latency','age','encoding','budget','level','patches'])$(id).textContent='--';$('notice').textContent='';$('empty').hidden=false;$('empty').textContent='等待帧';$('status').textContent='连接中';
+  if(regions.some(r=>![r.x,r.y,r.w,r.h,r.weight].every(Number.isFinite)||r.x<0||r.y<0||r.w<.02||r.h<.02||r.x+r.w>1||r.y+r.h>1||r.weight<1||r.weight>10)||regions.reduce((n,r)=>n+r.w*r.h,0)>.5){$('notice').textContent='区域须位于画面内，合计面积不超过 50%，权重为 1 至 10。';return;}
+  const previous=ws;stop();const token=epoch;frames=overruns=0;latest=null;samples=[];history=[];$('frames').textContent='0';$('overruns').textContent='0';for(const id of ['latency','age','encoding','budget','level','patches'])$(id).textContent='--';$('notice').textContent='';$('empty').hidden=false;$('empty').textContent='等待帧';$('status').textContent='连接中';
+  if(previous&&previous.readyState!==WebSocket.CLOSED)await new Promise(resolve=>{const timer=setTimeout(resolve,1000);previous.addEventListener('close',()=>{clearTimeout(timer);resolve();},{once:true});});
+  if(token!==epoch)return;
   clockConnect(token);const connection=new WebSocket(url('/stream'));ws=connection;connection.binaryType='arraybuffer';
   connection.onopen=()=>connection.send(JSON.stringify({type:'start',mode:$('mode').value,kbps:+$('kbps').value,fps:+$('fps').value,seed:+$('seed').value,regions}));
   let decoding=false;
@@ -39,7 +42,7 @@ async function connect(){
     }catch(error){if(token===epoch){$('notice').textContent=error.message;connection.close(1008,'Invalid frame');}}
     finally{bitmaps.forEach(b=>b.close());decoding=false;}
   };
-  connection.onclose=()=>{if(token===epoch){$('status').textContent='连接已关闭';clockWs?.close();}};
+  connection.onclose=event=>{if(token===epoch){$('status').textContent='连接已关闭';if(event.code===1008)$('notice').textContent='参数或确认消息无效，或传输超过服务期限。';clockWs?.close();}};
   connection.onerror=()=>{if(token===epoch)$('notice').textContent='网络连接失败';};
 }
 function chart(now){const canvas=$('trend'),c=canvas.getContext('2d');c.clearRect(0,0,1000,150);const points=samples.filter(p=>p.latency_ms!==null),max=Math.max(100,...points.map(p=>p.latency_ms));c.font='12px sans-serif';c.fillStyle='#60767c';c.fillText(`${Math.ceil(max)} ms`,8,15);c.strokeStyle='#dce4e5';c.beginPath();c.moveTo(0,145);c.lineTo(1000,145);c.stroke();c.strokeStyle='#00867a';c.lineWidth=2;c.beginPath();points.forEach((p,i)=>{const x=1000*(1-(now-p.time)/60000),y=142-120*p.latency_ms/max;i?c.lineTo(x,y):c.moveTo(x,y);});c.stroke();}

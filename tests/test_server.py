@@ -61,5 +61,17 @@ class Server(unittest.IsolatedAsyncioTestCase):
                 await stream.send_json({'type':'start',**settings})
                 self.assertEqual((await stream.receive()).type,WSMsgType.CLOSE)
 
+    async def test_disconnect_while_low_rate_pacing_releases_slot(self):
+        stream=await self.client.ws_connect(self.url+'/stream')
+        await stream.send_json({'type':'start','mode':'full','kbps':128,'fps':2})
+        await stream.receive_json()
+        meta,_=unpack((await stream.receive()).data)
+        await stream.send_json({'type':'ack','id':meta['id']})
+        await asyncio.sleep(.03)
+        await asyncio.wait_for(stream.close(),.5)
+        await asyncio.sleep(.03)
+        async with self.client.get(self.url+'/api/status') as response:
+            self.assertEqual((await response.json())['sessions'],0)
+
 
 if __name__=='__main__': unittest.main()

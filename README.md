@@ -44,10 +44,10 @@ docker compose -f compose.yml down
 在旧采集已经正常工作且共享文件可读时，可选择只读输入：
 
 ```bash
-docker compose -f compose.yml -f compose.live.yml up -d --no-build
+SHM_READER_GID=$(stat -c %g /dev/shm/pi-video) docker compose -f compose.yml -f compose.live.yml up -d --no-build
 ```
 
-只有新版容器会重建。输入共享路径不存在时明确失败，不自动创建替代输入。默认实验服务不需要共享挂载。远程页面仅用于可信局域网；当前没有用户身份认证、HTTPS 或互联网接入设计，禁止直接暴露公网。
+只有新版容器会重建。输入共享路径不存在时明确失败，不自动创建替代输入。输入目录现场权限为 0750，因此只为新容器追加目录现有 GID，不对旧目录 chmod、不改所有者、不用 root 绕过权限；挂载仍是只读。默认实验服务不需要共享挂载或该组。远程页面仅用于可信局域网；当前没有用户身份认证、HTTPS 或互联网接入设计，禁止直接暴露公网。
 
 Pi 若不能稳定下载依赖，可使用 `Dockerfile.offline`：先将 `requirements.lock.txt` 对应 ARM64 wheel 放入 `wheelhouse/`，通过 `docker load` 导入官方 Python 基础镜像，再执行 `docker build --network=none -f Dockerfile.offline -t semantic-adaptive-v2:local .`。基础镜像和工具来源见 `deployment-provenance.json`。不把 wheel、镜像 tar 或现场媒体提交到 Git。
 
