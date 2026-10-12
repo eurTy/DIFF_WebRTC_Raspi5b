@@ -1,0 +1,15 @@
+**
+!Dockerfile
+!requirements.txt
+!requirements.lock.txt
+!Dockerfile.offline
+!wheelhouse/
+!wheelhouse/*.whl
+!semantic_video/
+!semantic_video/*.py
+!web/
+!web/*
+!tests/
+!tests/*.py
+!experiments/
+!experiments/*.py

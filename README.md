@@ -1,0 +1,84 @@
+# 受限环境下的语义自适应视频传输系统设计与实现
+
+面向测控技术与仪器专业的独立研究项目。目标是在受限带宽与边缘算力下，衡量并改善远程观察中“重点细节是否可辨”和“所见状态是否足够新鲜”的矛盾。本系统没有执行器控制接口，不承担安全联锁或机器闭环控制。
+
+## 与旧项目的关系
+
+本分支 `research/semantic-adaptive-v2` 从空目录和独立 Git 历史建立，不继承旧应用代码，也不使用旧容器镜像作为基础。第三方 Lucide 图标库及许可证独立保留。旧 `main` 固定在 `d31ff54`，冻结标签为 `observer-v1-frozen-20261011`，整合版在 `release/observer-integrated-v1`。不要把本分支合并覆盖旧 main。
+
+默认输入是明确标记的合成实验场景。唯一可选的旧系统边界是 **只读** 48 字节共享内存头适配器；新版默认不依赖它。切换到该输入不占用 `/dev/video0`，不发送反馈，不修改旧文件。原生 USB 输入另有实现，但未证明可与旧采集器共用同一摄像头，禁止自动停掉旧采集器来抢设备。
+
+## 系统边界
+
+- “语义”指使用者给定的任务区域及其重要性，加上局部变化和高质量刷新等待时间；**不是大模型理解、目标检测或新型神经语义编解码**。
+- 每个二进制帧包含同一时刻的低分辨率全景和重点 JPEG 块。浏览器完整解码后一次合成，不与历史补丁混用。
+- 四种策略：`full` 全帧 Q85、`uniform` 全局画质分辨率自适应、`static-roi` 固定优先权重、`semantic` 变化与等待时间参与优先级。
+- ACK 限制每会话最多一帧在途，源端读取最新帧；ACK 服务时间用于缩减预算。实际发帧周期同时受目标帧率和有效载荷上限约束。编码最低档仍超预算时明确计数并降低发送频率，不伪称一定能满足任务细节需求。
+- WebSocket 基于 TCP，仍存在队头阻塞。没有证明优于硬件 H.264/WebRTC 或专用工业协议。
+- 独立四时间戳校时通道支持软件段延迟与当前帧龄显示。数值不是摄像头曝光到屏幕发光的光学端到端延迟。
+
+## 本地启动
+
+Python 3.12，独立虚拟环境：
+
+```bash
+python -m venv .venv
+# Linux: source .venv/bin/activate
+# Windows PowerShell: .\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.lock.txt
+python -m semantic_video.server --host 127.0.0.1 --port 8088
+```
+
+打开 `http://127.0.0.1:8088`。输入为合成场景，权重和区域修改在重新连接后生效。默认 1200 kbps 是有效载荷节奏上限，不含 TCP/IP 和时钟控制消息。
+
+## 独立容器
+
+```bash
+docker compose -f compose.yml up -d --build
+docker compose -f compose.yml logs --tail=30
+docker compose -f compose.yml down
+```
+
+该 Compose 使用独立项目名，仅映射 8088；非 root、只读根文件系统、移除全部 capabilities、禁止提权、限制 1 CPU 和 64 进程，不修改全局 sysctl、Wi-Fi、CPU governor 或旧服务。没有启用自动开机启动。树莓派旧服务仍使用 8080 / 8092。
+
+在旧采集已经正常工作且共享文件可读时，可选择只读输入：
+
+```bash
+docker compose -f compose.yml -f compose.live.yml up -d --no-build
+```
+
+只有新版容器会重建。输入共享路径不存在时明确失败，不自动创建替代输入。默认实验服务不需要共享挂载。远程页面仅用于可信局域网；当前没有用户身份认证、HTTPS 或互联网接入设计，禁止直接暴露公网。
+
+Pi 若不能稳定下载依赖，可使用 `Dockerfile.offline`：先将 `requirements.lock.txt` 对应 ARM64 wheel 放入 `wheelhouse/`，通过 `docker load` 导入官方 Python 基础镜像，再执行 `docker build --network=none -f Dockerfile.offline -t semantic-adaptive-v2:local .`。基础镜像和工具来源见 `deployment-provenance.json`。不把 wheel、镜像 tar 或现场媒体提交到 Git。
+
+## 验证与实验
+
+```bash
+python -m unittest discover -s tests -v
+node --test tests/protocol.cjs
+python -m experiments.rd --frames 30 --output results/rd.json
+python -m experiments.network --url http://127.0.0.1:8088 --output results/network.json
+```
+
+浏览器验收脚本为 `tests/browser.cjs`，需测试环境提供 Playwright 和 Edge，执行 `node tests/browser.cjs http://127.0.0.1:8088 runtime/browser`。运行目录不提交；真实摄像头截图也不得公开上传。
+
+`rd.py` 对三种纹理场景、三档预算和四种策略逐帧配对，输出任务区域 PSNR、背景 PSNR、合成标记保真度和编码耗时。帧相同不代表真实工业数据；细线与小色标是人为设定的任务，实验存在场景偏向。`network.py` 使用真实 TCP 字节中继限速，不触碰任何系统 qdisc。它不模拟射频丢包，不能据此推断复杂工厂无线信道表现。
+
+网络实验同时报告收到帧的延迟和按 100 ms 网格采样的帧龄。超过 250 ms 或没有帧的时段算新鲜度失败。合成任务指标要求位置误差不超过 3 像素且颜色状态正确；它用于比较传输失真，不是 AI 检测准确率。软件接收端为 Python 解码，不等于浏览器最终显示。校时前后偏移、连接失败和所有低性能基线均保留。
+
+`results/rd-pc.json` 和 `results/network-pc.json` 为电脑首轮预实验，**不是树莓派最终性能**。论文与最终部署验收将使用分别标注的平台结果，不能把预实验数字换一个标题当作实机数据。
+
+## 可复现性与限制
+
+输入参数、预算档位、合成随机种子、策略、校时数据和原始数值记录都保留。测量不确定性包括时钟路径不对称、软件计时端点、图像生成/解码、操作系统调度和 100 ms 帧龄采样离散化。PSNR 完全一致时以 99 dB 作为有限存储上限。低预算下丢失背景细节是主动代价，不应以重点区域单一指标掩盖。
+
+现阶段不宣称动态策略在所有条件下优于固定 ROI；其价值还必须通过区域刷新公平性、场景变化和预算突变对照检验。未实现真实生产线故障诊断、PLC 接口、自动识别任务区域或工业安全认证。
+
+## 参考来源
+
+- [AccMPEG](https://arxiv.org/abs/2204.12534)：任务相关编码质量分配的研究背景，不作为本项目性能来源。
+- [AWStream](https://awstream.github.io/paper/awstream.pdf)：带宽与任务精度自适应的背景。
+- [Age of Information](https://arxiv.org/abs/2007.08564)：信息新鲜度指标的背景。
+- [DDS](https://people.cs.uchicago.edu/~junchenj/docs/DDS-Sigcomm20.pdf)：服务器驱动区域细化的背景；本项目采用同帧自包含方案。
+
+这些既有思路不能包装成本文首次提出的理论。本科工作的贡献定位是边界清晰的工程实现、受限条件下的对照与失效分析。

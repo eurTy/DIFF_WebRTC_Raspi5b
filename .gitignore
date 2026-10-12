@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+runtime/
+private/
+node_modules/
+.env
+.env.*
+*.sqlite*
+*.log
+*.tgz
+*.tar
+.DS_Store
+thesis/render/
+wheelhouse/

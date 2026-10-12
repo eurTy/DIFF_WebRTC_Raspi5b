@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-12",
+  "base_image": "docker.io/library/python:3.12-slim-bookworm",
+  "base_index_sha256": "34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+  "base_arm64_manifest_sha256": "739ba32ae445e8d58f3d90feb85f83bebc8346f8dd280fa1eb5848f4ff1ed163",
+  "transfer_tool": "google/go-containerregistry crane v0.22.1",
+  "transfer_tool_release_sha256": "0e073ea8192c3b8442ec8aaf44d53c1050a09084669fae3a6ceb0f2026cf8b21",
+  "offline_build": "Official base downloaded on PC and docker-loaded on Pi; pinned ARM64 wheel cache copied separately",
+  "legacy_application_code_imported": false,
+  "legacy_image_used_as_base": false,
+  "host_python_packages_modified": false,
+  "new_web_port": 8088,
+  "old_web_port": 8080
+}
