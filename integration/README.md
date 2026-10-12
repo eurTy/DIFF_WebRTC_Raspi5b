@@ -40,7 +40,9 @@ python3 project.py status --url http://127.0.0.1:8080
 
 旧版本固定在 `observer-v1-frozen-20261011`，基线提交 `d31ff5420a3038e4f518ae7599b4690af371683f`，原 main 不随整合分支变动。本机 `_version_archives/observer-v1-d31ff54/` 保存完整 Git bundle 和私有工作区归档。后者含现场媒体，绝不能推送公开仓库。
 
-Pi 私有备份目标为 `/home/eur/version-archives/observer-v1-d31ff54/`：实际运行镜像导出、部署目录压缩包、SQLite 在线备份以及配置记录。运行数据库不能仅复制主 `.sqlite` 文件来替代在线备份。断线前数据库 `quick_check` 返回 `ok`；镜像导出命令已结束。部署压缩包及远端最终校验仍须在连接恢复后确认，不宣称已经全部验证。
+Pi 私有备份位于 `/home/eur/version-archives/observer-v1-d31ff54/`：实际运行镜像导出、部署目录压缩包、SQLite 在线备份以及配置记录。运行数据库不能仅复制主 `.sqlite` 文件来替代在线备份。2026-10-12 恢复连接后，重新校验了归档：源码包 9990 项，镜像包 42 项，数据库 `quick_check=ok`，三个归档的 SHA256 记录于 `validation.json`。另保留 systemd、tmpfiles 和启动配置私有归档。
+
+整合版已经解压至 Pi 的 `/home/eur/observer-unified-v1`。只读比对 39 个核心文件全部相同，旧版状态接口返回 `quality=GOOD`、`capture=GOOD`、活动告警 0。原服务和容器继续使用原路径，没有切换或覆盖。
 
 恢复应先在隔离目录校验归档与数据库，再安排维护窗口切换服务。此项目不提供自动停止旧摄像头或覆盖 `/etc/systemd` 的捷径。单个 USB 摄像头不能假定允许两套采集器并发占用。
 
