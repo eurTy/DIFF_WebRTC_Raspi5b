@@ -75,6 +75,7 @@ class Encoder:
         attempts = 0
         first = 0 if self.mode == "full" else max(0, self.last_level - (self.count % 8 == 0))
         chosen = None
+        fitting = None
         for level in range(first, 5):
             parts, images = self.candidate(frame, level, ranked, budget)
             attempts += 1
@@ -85,11 +86,22 @@ class Encoder:
                     "encode_ms": (time.perf_counter()-started)*1000, "attempts": attempts,
                     "budget_exceeded": False}
             message = pack(base, images)
+            if self.control.feedback == "realtime":
+                base["send_window"] = self.control.window
+                message = pack(base, images)
             chosen = (level, base, images, message)
+            if len(message) <= budget and fitting is None:
+                fitting = chosen
             priority_present = self.mode in ("full", "uniform") or any(p["name"] == ranked[0][1].name for p in parts[1:])
             if self.mode == "full" or len(message) <= budget and priority_present:
                 break
+        else:
+            # Preserve the best fitting context when no priority patch fits.
+            # Historical modes remain unchanged for reproducible comparisons.
+            if self.control.feedback == "realtime" and fitting is not None:
+                chosen = fitting
         level, base, images, message = chosen
+        base["attempts"] = attempts
         base["encode_ms"] = round((time.perf_counter()-started)*1000, 3)
         base["sent_ms"] = round(mono_ms(), 3)
         message = pack(base, images)
@@ -100,8 +112,10 @@ class Encoder:
         self.count += 1
         return message, base
 
-    def acknowledge(self, metadata, service_ms, packet_bytes, now=None):
+    def acknowledge(self, metadata, service_ms, packet_bytes, now=None, dropped=False):
         now = mono_ms() if now is None else now
         self.control.observe(service_ms, packet_bytes)
+        if dropped:
+            return
         for part in metadata["parts"][1:]:
             self.refresh[part["name"]] = now

@@ -1,0 +1,6011 @@
+{
+  "url": "http://192.168.3.19:8088",
+  "feedback": "single",
+  "duration_s": 40,
+  "outage_s": 6,
+  "measurement": "software publication to browser draw; not optical; live scene not controlled",
+  "errors": [],
+  "events": [
+    {
+      "type": "stream_blackhole",
+      "elapsed_s": 15.008
+    },
+    {
+      "type": "stream_restored",
+      "elapsed_s": 21.107
+    }
+  ],
+  "summary": {
+    "received": 152,
+    "displayed": 152,
+    "p50_ms": 44.598173999926075,
+    "p95_ms": 57.39817399997264,
+    "max_ms": 64.69817400001921,
+    "age_p95_ms": 13386.9,
+    "fresh_250_fraction": 0.34146341463414637,
+    "unknown_age_fraction": 0.29810298102981025,
+    "min_budget_kb": 15,
+    "final_status": "连接已关闭"
+  },
+  "samples": [
+    {
+      "elapsed_s": 0,
+      "frames": 3,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 0.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.114,
+      "frames": 4,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 1.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.222,
+      "frames": 5,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 1.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.333,
+      "frames": 6,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 1.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.442,
+      "frames": 7,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 3,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.551,
+      "frames": 8,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 3,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.658,
+      "frames": 9,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 4,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.766,
+      "frames": 10,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 4,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.874,
+      "frames": 11,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 5.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 0.983,
+      "frames": 12,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 5.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.091,
+      "frames": 13,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 5.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.2,
+      "frames": 14,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 6.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.305,
+      "frames": 15,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 6.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.419,
+      "frames": 16,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 8,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.527,
+      "frames": 18,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 8,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.636,
+      "frames": 19,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 9,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.745,
+      "frames": 20,
+      "age_ms": null,
+      "latency_ms": null,
+      "budget_kb": 15,
+      "fps": 9,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 1.854,
+      "frames": 21,
+      "age_ms": 79.2,
+      "latency_ms": 33.2,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 1.964,
+      "frames": 22,
+      "age_ms": 79.2,
+      "latency_ms": 51.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.072,
+      "frames": 23,
+      "age_ms": 79.2,
+      "latency_ms": 51.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.181,
+      "frames": 24,
+      "age_ms": 129.3,
+      "latency_ms": 50.7,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.291,
+      "frames": 25,
+      "age_ms": 129.3,
+      "latency_ms": 52.8,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.4,
+      "frames": 26,
+      "age_ms": 70.9,
+      "latency_ms": 51.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.508,
+      "frames": 27,
+      "age_ms": 70.9,
+      "latency_ms": 51.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.616,
+      "frames": 28,
+      "age_ms": 126.4,
+      "latency_ms": 51.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.724,
+      "frames": 29,
+      "age_ms": 126.4,
+      "latency_ms": 50.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.827,
+      "frames": 31,
+      "age_ms": 126.4,
+      "latency_ms": 51.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 2.941,
+      "frames": 32,
+      "age_ms": 72.8,
+      "latency_ms": 51.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.051,
+      "frames": 33,
+      "age_ms": 72.8,
+      "latency_ms": 51.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.161,
+      "frames": 34,
+      "age_ms": 124.1,
+      "latency_ms": 50.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.271,
+      "frames": 35,
+      "age_ms": 124.1,
+      "latency_ms": 63.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.379,
+      "frames": 36,
+      "age_ms": 69.8,
+      "latency_ms": 50.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.489,
+      "frames": 37,
+      "age_ms": 69.8,
+      "latency_ms": 51,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.597,
+      "frames": 38,
+      "age_ms": 122.7,
+      "latency_ms": 51.4,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.707,
+      "frames": 39,
+      "age_ms": 122.7,
+      "latency_ms": 50.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.816,
+      "frames": 40,
+      "age_ms": 122.7,
+      "latency_ms": 51.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 3.922,
+      "frames": 41,
+      "age_ms": 71.4,
+      "latency_ms": 61.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.033,
+      "frames": 42,
+      "age_ms": 71.4,
+      "latency_ms": 51.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.135,
+      "frames": 43,
+      "age_ms": 120.6,
+      "latency_ms": 63.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.237,
+      "frames": 45,
+      "age_ms": 120.6,
+      "latency_ms": 51.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.347,
+      "frames": 46,
+      "age_ms": 69.4,
+      "latency_ms": 50.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.457,
+      "frames": 47,
+      "age_ms": 69.4,
+      "latency_ms": 51.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.565,
+      "frames": 48,
+      "age_ms": 69.4,
+      "latency_ms": 21,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.674,
+      "frames": 49,
+      "age_ms": 89,
+      "latency_ms": 29.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.781,
+      "frames": 50,
+      "age_ms": 89,
+      "latency_ms": 19.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.887,
+      "frames": 51,
+      "age_ms": 52,
+      "latency_ms": 21.4,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 4.994,
+      "frames": 52,
+      "age_ms": 52,
+      "latency_ms": 21,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.103,
+      "frames": 53,
+      "age_ms": 97.2,
+      "latency_ms": 21.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.213,
+      "frames": 54,
+      "age_ms": 97.2,
+      "latency_ms": 20.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.323,
+      "frames": 55,
+      "age_ms": 97.2,
+      "latency_ms": 40.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.433,
+      "frames": 56,
+      "age_ms": 44.7,
+      "latency_ms": 30.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.534,
+      "frames": 57,
+      "age_ms": 44.7,
+      "latency_ms": 49.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.636,
+      "frames": 59,
+      "age_ms": 99.2,
+      "latency_ms": 30.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.743,
+      "frames": 60,
+      "age_ms": 99.2,
+      "latency_ms": 30.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.851,
+      "frames": 61,
+      "age_ms": 41.8,
+      "latency_ms": 31.2,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 5.959,
+      "frames": 62,
+      "age_ms": 41.8,
+      "latency_ms": 30.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.068,
+      "frames": 63,
+      "age_ms": 41.8,
+      "latency_ms": 32.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.178,
+      "frames": 64,
+      "age_ms": 94.2,
+      "latency_ms": 30.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.289,
+      "frames": 65,
+      "age_ms": 94.2,
+      "latency_ms": 40.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.4,
+      "frames": 66,
+      "age_ms": 39.1,
+      "latency_ms": 32.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.51,
+      "frames": 67,
+      "age_ms": 39.1,
+      "latency_ms": 35.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.618,
+      "frames": 68,
+      "age_ms": 100.7,
+      "latency_ms": 34.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.726,
+      "frames": 69,
+      "age_ms": 100.7,
+      "latency_ms": 44.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.834,
+      "frames": 70,
+      "age_ms": 100.7,
+      "latency_ms": 47.2,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 6.942,
+      "frames": 71,
+      "age_ms": 144,
+      "latency_ms": 48.3,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.054,
+      "frames": 72,
+      "age_ms": 144,
+      "latency_ms": 46,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.163,
+      "frames": 74,
+      "age_ms": 100.6,
+      "latency_ms": 47.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.271,
+      "frames": 75,
+      "age_ms": 100.6,
+      "latency_ms": 46.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.381,
+      "frames": 76,
+      "age_ms": 144,
+      "latency_ms": 48.1,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.489,
+      "frames": 77,
+      "age_ms": 144,
+      "latency_ms": 56.1,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.599,
+      "frames": 78,
+      "age_ms": 99.1,
+      "latency_ms": 55.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.708,
+      "frames": 79,
+      "age_ms": 99.1,
+      "latency_ms": 56.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.816,
+      "frames": 80,
+      "age_ms": 99.1,
+      "latency_ms": 57.4,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 7.925,
+      "frames": 81,
+      "age_ms": 147.2,
+      "latency_ms": 56.2,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.035,
+      "frames": 82,
+      "age_ms": 147.2,
+      "latency_ms": 56.2,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.144,
+      "frames": 83,
+      "age_ms": 97.1,
+      "latency_ms": 57.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.253,
+      "frames": 84,
+      "age_ms": 97.1,
+      "latency_ms": 56.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.356,
+      "frames": 85,
+      "age_ms": 117.3,
+      "latency_ms": 24.5,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.458,
+      "frames": 87,
+      "age_ms": 117.3,
+      "latency_ms": 25.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.568,
+      "frames": 88,
+      "age_ms": 117.3,
+      "latency_ms": 23.7,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.677,
+      "frames": 89,
+      "age_ms": 67.5,
+      "latency_ms": 33.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.784,
+      "frames": 90,
+      "age_ms": 67.5,
+      "latency_ms": 23.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 8.896,
+      "frames": 91,
+      "age_ms": 117.2,
+      "latency_ms": 34.2,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.005,
+      "frames": 92,
+      "age_ms": 117.2,
+      "latency_ms": 33.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.113,
+      "frames": 93,
+      "age_ms": 65.4,
+      "latency_ms": 33.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.221,
+      "frames": 94,
+      "age_ms": 65.4,
+      "latency_ms": 33.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.329,
+      "frames": 95,
+      "age_ms": 65.4,
+      "latency_ms": 34,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.438,
+      "frames": 96,
+      "age_ms": 112.1,
+      "latency_ms": 34.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.548,
+      "frames": 97,
+      "age_ms": 112.1,
+      "latency_ms": 46.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.658,
+      "frames": 98,
+      "age_ms": 62.4,
+      "latency_ms": 33.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.764,
+      "frames": 99,
+      "age_ms": 62.4,
+      "latency_ms": 33.4,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.872,
+      "frames": 100,
+      "age_ms": 125.1,
+      "latency_ms": 35.3,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 9.973,
+      "frames": 101,
+      "age_ms": 125.1,
+      "latency_ms": 50.4,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.076,
+      "frames": 103,
+      "age_ms": 125.1,
+      "latency_ms": 43.7,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.177,
+      "frames": 104,
+      "age_ms": 62.9,
+      "latency_ms": 44.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.282,
+      "frames": 104,
+      "age_ms": 62.9,
+      "latency_ms": 44.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.398,
+      "frames": 106,
+      "age_ms": 120.3,
+      "latency_ms": 45.2,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.508,
+      "frames": 107,
+      "age_ms": 120.3,
+      "latency_ms": 43.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.62,
+      "frames": 108,
+      "age_ms": 65.7,
+      "latency_ms": 47,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.728,
+      "frames": 109,
+      "age_ms": 65.7,
+      "latency_ms": 43.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.835,
+      "frames": 110,
+      "age_ms": 65.7,
+      "latency_ms": 44.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 10.945,
+      "frames": 111,
+      "age_ms": 119.4,
+      "latency_ms": 43.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.055,
+      "frames": 112,
+      "age_ms": 119.4,
+      "latency_ms": 44.2,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.165,
+      "frames": 113,
+      "age_ms": 61.9,
+      "latency_ms": 54.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.276,
+      "frames": 114,
+      "age_ms": 61.9,
+      "latency_ms": 54.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.383,
+      "frames": 115,
+      "age_ms": 123.1,
+      "latency_ms": 54.2,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.485,
+      "frames": 116,
+      "age_ms": 123.1,
+      "latency_ms": 54.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.587,
+      "frames": 118,
+      "age_ms": 123.1,
+      "latency_ms": 54.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.698,
+      "frames": 119,
+      "age_ms": 65.5,
+      "latency_ms": 53.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.806,
+      "frames": 120,
+      "age_ms": 65.5,
+      "latency_ms": 54,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 11.915,
+      "frames": 121,
+      "age_ms": 120.5,
+      "latency_ms": 64.7,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.024,
+      "frames": 122,
+      "age_ms": 120.5,
+      "latency_ms": 20.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.131,
+      "frames": 123,
+      "age_ms": 31.7,
+      "latency_ms": 22.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.241,
+      "frames": 124,
+      "age_ms": 31.7,
+      "latency_ms": 21.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.35,
+      "frames": 125,
+      "age_ms": 84.8,
+      "latency_ms": 20.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.46,
+      "frames": 126,
+      "age_ms": 84.8,
+      "latency_ms": 20.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.567,
+      "frames": 127,
+      "age_ms": 84.8,
+      "latency_ms": 22.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.675,
+      "frames": 128,
+      "age_ms": 128.7,
+      "latency_ms": 34.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.783,
+      "frames": 129,
+      "age_ms": 128.7,
+      "latency_ms": 30.9,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.892,
+      "frames": 130,
+      "age_ms": 80,
+      "latency_ms": 31.1,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 12.995,
+      "frames": 131,
+      "age_ms": 80,
+      "latency_ms": 30.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.095,
+      "frames": 132,
+      "age_ms": 128.3,
+      "latency_ms": 30.8,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.196,
+      "frames": 133,
+      "age_ms": 128.3,
+      "latency_ms": 31.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.299,
+      "frames": 134,
+      "age_ms": 128.3,
+      "latency_ms": 32.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.408,
+      "frames": 136,
+      "age_ms": 81.3,
+      "latency_ms": 32.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.509,
+      "frames": 137,
+      "age_ms": 81.3,
+      "latency_ms": 43.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.622,
+      "frames": 138,
+      "age_ms": 129.4,
+      "latency_ms": 40.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.729,
+      "frames": 139,
+      "age_ms": 129.4,
+      "latency_ms": 43.7,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.836,
+      "frames": 140,
+      "age_ms": 129.4,
+      "latency_ms": 40.6,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 13.943,
+      "frames": 141,
+      "age_ms": 86.7,
+      "latency_ms": 44.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.052,
+      "frames": 142,
+      "age_ms": 86.7,
+      "latency_ms": 44.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.161,
+      "frames": 143,
+      "age_ms": 134.9,
+      "latency_ms": 45.7,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.269,
+      "frames": 144,
+      "age_ms": 134.9,
+      "latency_ms": 45.4,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.379,
+      "frames": 145,
+      "age_ms": 86.9,
+      "latency_ms": 54.9,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.488,
+      "frames": 146,
+      "age_ms": 86.9,
+      "latency_ms": 44.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.597,
+      "frames": 147,
+      "age_ms": 135.9,
+      "latency_ms": 44.8,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.703,
+      "frames": 148,
+      "age_ms": 135.9,
+      "latency_ms": 44.5,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.806,
+      "frames": 150,
+      "age_ms": 135.9,
+      "latency_ms": 44.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 14.907,
+      "frames": 151,
+      "age_ms": 82.5,
+      "latency_ms": 44.6,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.008,
+      "frames": 152,
+      "age_ms": 82.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 10,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.115,
+      "frames": 152,
+      "age_ms": 146.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.23,
+      "frames": 152,
+      "age_ms": 146.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.342,
+      "frames": 152,
+      "age_ms": 146.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 9.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.449,
+      "frames": 152,
+      "age_ms": 395.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 8.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.556,
+      "frames": 152,
+      "age_ms": 395.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 8.5,
+      "status": "传输中",
+      "stale": "false"
+    },
+    {
+      "elapsed_s": 15.665,
+      "frames": 152,
+      "age_ms": 641.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 7.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 15.775,
+      "frames": 152,
+      "age_ms": 641.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 7.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 15.881,
+      "frames": 152,
+      "age_ms": 890.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 6,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 15.991,
+      "frames": 152,
+      "age_ms": 890.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 6,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.101,
+      "frames": 152,
+      "age_ms": 1139.9,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.207,
+      "frames": 152,
+      "age_ms": 1139.9,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.318,
+      "frames": 152,
+      "age_ms": 1139.9,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.429,
+      "frames": 152,
+      "age_ms": 1388.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 3.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.539,
+      "frames": 152,
+      "age_ms": 1388.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 3.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.651,
+      "frames": 152,
+      "age_ms": 1641.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 2.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.752,
+      "frames": 152,
+      "age_ms": 1641.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 2.5,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.868,
+      "frames": 152,
+      "age_ms": 1891,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 1,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 16.976,
+      "frames": 152,
+      "age_ms": 1891,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 1,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.086,
+      "frames": 152,
+      "age_ms": 1891,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 1,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.194,
+      "frames": 152,
+      "age_ms": 2140.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.306,
+      "frames": 152,
+      "age_ms": 2140.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.415,
+      "frames": 152,
+      "age_ms": 2391.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.526,
+      "frames": 152,
+      "age_ms": 2391.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.635,
+      "frames": 152,
+      "age_ms": 2642.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.745,
+      "frames": 152,
+      "age_ms": 2642.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.853,
+      "frames": 152,
+      "age_ms": 2891.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 17.964,
+      "frames": 152,
+      "age_ms": 2891.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.073,
+      "frames": 152,
+      "age_ms": 2891.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.179,
+      "frames": 152,
+      "age_ms": 3142,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.287,
+      "frames": 152,
+      "age_ms": 3142,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.394,
+      "frames": 152,
+      "age_ms": 3387.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.502,
+      "frames": 152,
+      "age_ms": 3387.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.609,
+      "frames": 152,
+      "age_ms": 3632.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.717,
+      "frames": 152,
+      "age_ms": 3632.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.826,
+      "frames": 152,
+      "age_ms": 3632.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 18.935,
+      "frames": 152,
+      "age_ms": 3895.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.046,
+      "frames": 152,
+      "age_ms": 3895.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.155,
+      "frames": 152,
+      "age_ms": 4147.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.265,
+      "frames": 152,
+      "age_ms": 4147.3,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.373,
+      "frames": 152,
+      "age_ms": 4396.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.483,
+      "frames": 152,
+      "age_ms": 4396.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.593,
+      "frames": 152,
+      "age_ms": 4396.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.703,
+      "frames": 152,
+      "age_ms": 4632.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.811,
+      "frames": 152,
+      "age_ms": 4632.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 19.921,
+      "frames": 152,
+      "age_ms": 4896.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.026,
+      "frames": 152,
+      "age_ms": 4896.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "传输中",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.132,
+      "frames": 152,
+      "age_ms": 5143.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.244,
+      "frames": 152,
+      "age_ms": 5143.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.354,
+      "frames": 152,
+      "age_ms": 5392.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.46,
+      "frames": 152,
+      "age_ms": 5392.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.567,
+      "frames": 152,
+      "age_ms": 5392.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.674,
+      "frames": 152,
+      "age_ms": 5637.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.784,
+      "frames": 152,
+      "age_ms": 5637.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.891,
+      "frames": 152,
+      "age_ms": 5883,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 20.998,
+      "frames": 152,
+      "age_ms": 5883,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.107,
+      "frames": 152,
+      "age_ms": 6145.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.215,
+      "frames": 152,
+      "age_ms": 6145.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.323,
+      "frames": 152,
+      "age_ms": 6145.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.434,
+      "frames": 152,
+      "age_ms": 6394.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.545,
+      "frames": 152,
+      "age_ms": 6394.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.655,
+      "frames": 152,
+      "age_ms": 6647.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.763,
+      "frames": 152,
+      "age_ms": 6647.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.873,
+      "frames": 152,
+      "age_ms": 6895.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 21.983,
+      "frames": 152,
+      "age_ms": 6895.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.09,
+      "frames": 152,
+      "age_ms": 6895.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.199,
+      "frames": 152,
+      "age_ms": 7144,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.306,
+      "frames": 152,
+      "age_ms": 7144,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.414,
+      "frames": 152,
+      "age_ms": 7390.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.521,
+      "frames": 152,
+      "age_ms": 7390.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.629,
+      "frames": 152,
+      "age_ms": 7636.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.736,
+      "frames": 152,
+      "age_ms": 7636.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.845,
+      "frames": 152,
+      "age_ms": 7884,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 22.955,
+      "frames": 152,
+      "age_ms": 7884,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.067,
+      "frames": 152,
+      "age_ms": 7884,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.175,
+      "frames": 152,
+      "age_ms": 8135.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.284,
+      "frames": 152,
+      "age_ms": 8135.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.393,
+      "frames": 152,
+      "age_ms": 8386.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.502,
+      "frames": 152,
+      "age_ms": 8386.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.612,
+      "frames": 152,
+      "age_ms": 8634.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.722,
+      "frames": 152,
+      "age_ms": 8634.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.83,
+      "frames": 152,
+      "age_ms": 8634.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 23.939,
+      "frames": 152,
+      "age_ms": 8884.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.048,
+      "frames": 152,
+      "age_ms": 8884.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.156,
+      "frames": 152,
+      "age_ms": 9134.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.266,
+      "frames": 152,
+      "age_ms": 9134.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.376,
+      "frames": 152,
+      "age_ms": 9383.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.485,
+      "frames": 152,
+      "age_ms": 9383.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.595,
+      "frames": 152,
+      "age_ms": 9634,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.704,
+      "frames": 152,
+      "age_ms": 9634,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.813,
+      "frames": 152,
+      "age_ms": 9634,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 24.923,
+      "frames": 152,
+      "age_ms": 9882.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.03,
+      "frames": 152,
+      "age_ms": 9882.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.137,
+      "frames": 152,
+      "age_ms": 10144.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.247,
+      "frames": 152,
+      "age_ms": 10144.7,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.359,
+      "frames": 152,
+      "age_ms": 10397.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.468,
+      "frames": 152,
+      "age_ms": 10397.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.577,
+      "frames": 152,
+      "age_ms": 10397.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.686,
+      "frames": 152,
+      "age_ms": 10647.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.796,
+      "frames": 152,
+      "age_ms": 10647.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 25.904,
+      "frames": 152,
+      "age_ms": 10897.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.014,
+      "frames": 152,
+      "age_ms": 10897.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.123,
+      "frames": 152,
+      "age_ms": 11145.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.231,
+      "frames": 152,
+      "age_ms": 11145.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.341,
+      "frames": 152,
+      "age_ms": 11145.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.451,
+      "frames": 152,
+      "age_ms": 11395.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.561,
+      "frames": 152,
+      "age_ms": 11395.5,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.67,
+      "frames": 152,
+      "age_ms": 11647.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.78,
+      "frames": 152,
+      "age_ms": 11647.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.888,
+      "frames": 152,
+      "age_ms": 11895,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 26.997,
+      "frames": 152,
+      "age_ms": 11895,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.107,
+      "frames": 152,
+      "age_ms": 12146.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.217,
+      "frames": 152,
+      "age_ms": 12146.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.328,
+      "frames": 152,
+      "age_ms": 12146.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.437,
+      "frames": 152,
+      "age_ms": 12382.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.545,
+      "frames": 152,
+      "age_ms": 12382.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.653,
+      "frames": 152,
+      "age_ms": 12644.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.761,
+      "frames": 152,
+      "age_ms": 12644.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.87,
+      "frames": 152,
+      "age_ms": 12893.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 27.979,
+      "frames": 152,
+      "age_ms": 12893.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.085,
+      "frames": 152,
+      "age_ms": 12893.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.193,
+      "frames": 152,
+      "age_ms": 13139.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.302,
+      "frames": 152,
+      "age_ms": 13139.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.41,
+      "frames": 152,
+      "age_ms": 13386.9,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.519,
+      "frames": 152,
+      "age_ms": 13386.9,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.627,
+      "frames": 152,
+      "age_ms": 13636.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.736,
+      "frames": 152,
+      "age_ms": 13636.6,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.847,
+      "frames": 152,
+      "age_ms": 13885.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 28.958,
+      "frames": 152,
+      "age_ms": 13885.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.065,
+      "frames": 152,
+      "age_ms": 13885.8,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.173,
+      "frames": 152,
+      "age_ms": 14135.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.284,
+      "frames": 152,
+      "age_ms": 14135.2,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.392,
+      "frames": 152,
+      "age_ms": 14386.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.502,
+      "frames": 152,
+      "age_ms": 14386.1,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.61,
+      "frames": 152,
+      "age_ms": 14633.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.719,
+      "frames": 152,
+      "age_ms": 14633.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.827,
+      "frames": 152,
+      "age_ms": 14633.4,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 29.938,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.049,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.157,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.264,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.375,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.482,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.592,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.7,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.809,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 30.917,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.026,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.137,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.248,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.358,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.468,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.578,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.689,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.797,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 31.905,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.012,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.118,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.228,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.335,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.445,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.555,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.664,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.774,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.881,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 32.99,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.099,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.209,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.317,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.425,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.534,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.644,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.754,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.863,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 33.971,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.082,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.191,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.301,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.409,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.518,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.624,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.731,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.84,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 34.95,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.06,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.171,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.278,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.386,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.494,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.603,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.713,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.822,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 35.932,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.041,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.148,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.257,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.366,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.475,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.583,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.693,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.802,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 36.911,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.021,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.13,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.24,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.349,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.457,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.567,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.674,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.784,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 37.892,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.003,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.114,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.222,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.331,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.443,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.553,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.66,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.769,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.878,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 38.988,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.097,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.208,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.317,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.427,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.536,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.644,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.755,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.864,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    },
+    {
+      "elapsed_s": 39.976,
+      "frames": 152,
+      "age_ms": null,
+      "latency_ms": 45.3,
+      "budget_kb": 15,
+      "fps": 0,
+      "status": "连接已关闭",
+      "stale": "true"
+    }
+  ],
+  "export": {
+    "schema": 1,
+    "exported_at": "2026-10-12T23:05:20.859Z",
+    "source": "LIVE_READ_ONLY_ADAPTER",
+    "measurement": "software timestamp estimate, not glass-to-glass",
+    "clock_assumption": "symmetric minimum-RTT path",
+    "frames": [
+      {
+        "time": 565.0999999999767,
+        "frame": 27123,
+        "latency_ms": null,
+        "bytes": 13457,
+        "encode_ms": 9.474,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 665.3000000000466,
+        "frame": 27126,
+        "latency_ms": null,
+        "bytes": 13440,
+        "encode_ms": 2.164,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 765.3000000000466,
+        "frame": 27129,
+        "latency_ms": null,
+        "bytes": 13441,
+        "encode_ms": 2.235,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 866,
+        "frame": 27132,
+        "latency_ms": null,
+        "bytes": 13484,
+        "encode_ms": 2.261,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 965,
+        "frame": 27135,
+        "latency_ms": null,
+        "bytes": 13450,
+        "encode_ms": 2.178,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1075.7000000000698,
+        "frame": 27138,
+        "latency_ms": null,
+        "bytes": 13510,
+        "encode_ms": 2.218,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1175.7000000000698,
+        "frame": 27142,
+        "latency_ms": null,
+        "bytes": 13436,
+        "encode_ms": 2.238,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1274.9000000000233,
+        "frame": 27145,
+        "latency_ms": null,
+        "bytes": 13499,
+        "encode_ms": 2.219,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1376.2000000000698,
+        "frame": 27148,
+        "latency_ms": null,
+        "bytes": 13438,
+        "encode_ms": 9.506,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1476.3000000000466,
+        "frame": 27151,
+        "latency_ms": null,
+        "bytes": 13505,
+        "encode_ms": 2.251,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1595.3000000000466,
+        "frame": 27154,
+        "latency_ms": null,
+        "bytes": 13478,
+        "encode_ms": 2.229,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1674.9000000000233,
+        "frame": 27157,
+        "latency_ms": null,
+        "bytes": 13429,
+        "encode_ms": 2.181,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1777.9000000000233,
+        "frame": 27160,
+        "latency_ms": null,
+        "bytes": 13510,
+        "encode_ms": 2.25,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1876.5,
+        "frame": 27163,
+        "latency_ms": null,
+        "bytes": 13484,
+        "encode_ms": 2.213,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 1996.9000000000233,
+        "frame": 27166,
+        "latency_ms": null,
+        "bytes": 13482,
+        "encode_ms": 2.148,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2076.5,
+        "frame": 27169,
+        "latency_ms": null,
+        "bytes": 13522,
+        "encode_ms": 2.224,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2194.8000000000466,
+        "frame": 27172,
+        "latency_ms": null,
+        "bytes": 13453,
+        "encode_ms": 9.474,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2276,
+        "frame": 27175,
+        "latency_ms": null,
+        "bytes": 13486,
+        "encode_ms": 2.147,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2374.5,
+        "frame": 27178,
+        "latency_ms": null,
+        "bytes": 13502,
+        "encode_ms": 2.213,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2476.0999999999767,
+        "frame": 27181,
+        "latency_ms": null,
+        "bytes": 13446,
+        "encode_ms": 2.211,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2576.8000000000466,
+        "frame": 27184,
+        "latency_ms": 33.23435399995651,
+        "bytes": 13523,
+        "encode_ms": 2.146,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2694.70000000007,
+        "frame": 27187,
+        "latency_ms": 51.134353999979794,
+        "bytes": 13486,
+        "encode_ms": 2.204,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2795.3000000000466,
+        "frame": 27190,
+        "latency_ms": 51.73435399995651,
+        "bytes": 13477,
+        "encode_ms": 2.248,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2894.3000000000466,
+        "frame": 27193,
+        "latency_ms": 50.73435399995651,
+        "bytes": 13489,
+        "encode_ms": 2.18,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 2996.4000000000233,
+        "frame": 27196,
+        "latency_ms": 52.83435399993323,
+        "bytes": 13502,
+        "encode_ms": 9.539,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3094.9000000000233,
+        "frame": 27199,
+        "latency_ms": 51.33435399993323,
+        "bytes": 13506,
+        "encode_ms": 2.216,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3195.3000000000466,
+        "frame": 27202,
+        "latency_ms": 51.73435399995651,
+        "bytes": 13480,
+        "encode_ms": 2.151,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3294.9000000000233,
+        "frame": 27205,
+        "latency_ms": 51.33435399993323,
+        "bytes": 13502,
+        "encode_ms": 2.19,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3394.4000000000233,
+        "frame": 27208,
+        "latency_ms": 50.83435399993323,
+        "bytes": 13461,
+        "encode_ms": 2.244,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3495.5999999999767,
+        "frame": 27211,
+        "latency_ms": 52.03435399988666,
+        "bytes": 13462,
+        "encode_ms": 2.172,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3595.3000000000466,
+        "frame": 27214,
+        "latency_ms": 51.73435399995651,
+        "bytes": 13502,
+        "encode_ms": 2.19,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3694.70000000007,
+        "frame": 27217,
+        "latency_ms": 51.134353999979794,
+        "bytes": 13526,
+        "encode_ms": 2.218,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3795.20000000007,
+        "frame": 27220,
+        "latency_ms": 51.634353999979794,
+        "bytes": 13446,
+        "encode_ms": 9.441,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 3894.5,
+        "frame": 27223,
+        "latency_ms": 50.934353999909945,
+        "bytes": 13468,
+        "encode_ms": 2.26,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4006.70000000007,
+        "frame": 27226,
+        "latency_ms": 63.134353999979794,
+        "bytes": 13547,
+        "encode_ms": 2.179,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4094.4000000000233,
+        "frame": 27229,
+        "latency_ms": 50.83435399993323,
+        "bytes": 13542,
+        "encode_ms": 2.267,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4194.599999999977,
+        "frame": 27232,
+        "latency_ms": 51.03435399988666,
+        "bytes": 13541,
+        "encode_ms": 2.256,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4295,
+        "frame": 27235,
+        "latency_ms": 51.434353999909945,
+        "bytes": 13526,
+        "encode_ms": 2.196,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4394.5,
+        "frame": 27238,
+        "latency_ms": 50.934353999909945,
+        "bytes": 13548,
+        "encode_ms": 2.244,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4495.099999999977,
+        "frame": 27241,
+        "latency_ms": 51.53435399988666,
+        "bytes": 13535,
+        "encode_ms": 2.191,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4605.5,
+        "frame": 27244,
+        "latency_ms": 61.934353999909945,
+        "bytes": 13500,
+        "encode_ms": 9.479,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4695.300000000047,
+        "frame": 27247,
+        "latency_ms": 51.73435399995651,
+        "bytes": 13489,
+        "encode_ms": 2.212,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4806.900000000023,
+        "frame": 27250,
+        "latency_ms": 63.33435399993323,
+        "bytes": 13477,
+        "encode_ms": 2.204,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4905.20000000007,
+        "frame": 27253,
+        "latency_ms": 61.634353999979794,
+        "bytes": 13548,
+        "encode_ms": 2.163,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 4995.300000000047,
+        "frame": 27256,
+        "latency_ms": 51.73435399995651,
+        "bytes": 13513,
+        "encode_ms": 2.192,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5094.300000000047,
+        "frame": 27259,
+        "latency_ms": 50.73435399995651,
+        "bytes": 13499,
+        "encode_ms": 2.21,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5195.5,
+        "frame": 27262,
+        "latency_ms": 51.934353999909945,
+        "bytes": 13467,
+        "encode_ms": 2.146,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5296.599999999977,
+        "frame": 27266,
+        "latency_ms": 21.03435399988666,
+        "bytes": 13566,
+        "encode_ms": 2.231,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5405.400000000023,
+        "frame": 27269,
+        "latency_ms": 29.834353999933228,
+        "bytes": 13467,
+        "encode_ms": 9.479,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5495.20000000007,
+        "frame": 27272,
+        "latency_ms": 19.634353999979794,
+        "bytes": 13492,
+        "encode_ms": 2.207,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5595.70000000007,
+        "frame": 27275,
+        "latency_ms": 21.407204500050284,
+        "bytes": 13508,
+        "encode_ms": 2.256,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5695.300000000047,
+        "frame": 27278,
+        "latency_ms": 21.007204500027,
+        "bytes": 13525,
+        "encode_ms": 2.22,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5795.900000000023,
+        "frame": 27281,
+        "latency_ms": 21.607204500003718,
+        "bytes": 13507,
+        "encode_ms": 2.154,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 5894.800000000047,
+        "frame": 27284,
+        "latency_ms": 20.507204500027,
+        "bytes": 13478,
+        "encode_ms": 2.191,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6014.900000000023,
+        "frame": 27287,
+        "latency_ms": 40.60720450000372,
+        "bytes": 13480,
+        "encode_ms": 2.212,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6105,
+        "frame": 27290,
+        "latency_ms": 30.707204499980435,
+        "bytes": 13485,
+        "encode_ms": 2.149,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6224.20000000007,
+        "frame": 27293,
+        "latency_ms": 49.907204500050284,
+        "bytes": 13501,
+        "encode_ms": 9.547,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6305.599999999977,
+        "frame": 27296,
+        "latency_ms": 31.30720449995715,
+        "bytes": 13521,
+        "encode_ms": 2.388,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6404.900000000023,
+        "frame": 27299,
+        "latency_ms": 30.607204500003718,
+        "bytes": 13472,
+        "encode_ms": 2.313,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6505,
+        "frame": 27302,
+        "latency_ms": 30.707204499980435,
+        "bytes": 13548,
+        "encode_ms": 2.275,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6605.5,
+        "frame": 27305,
+        "latency_ms": 31.207204499980435,
+        "bytes": 13444,
+        "encode_ms": 2.252,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6705.099999999977,
+        "frame": 27308,
+        "latency_ms": 30.80720449995715,
+        "bytes": 13492,
+        "encode_ms": 2.21,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6806.400000000023,
+        "frame": 27311,
+        "latency_ms": 32.10720450000372,
+        "bytes": 13481,
+        "encode_ms": 2.305,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 6905.099999999977,
+        "frame": 27314,
+        "latency_ms": 30.80720449995715,
+        "bytes": 13504,
+        "encode_ms": 2.306,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7014.800000000047,
+        "frame": 27317,
+        "latency_ms": 40.507204500027,
+        "bytes": 13505,
+        "encode_ms": 9.942,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7106.400000000023,
+        "frame": 27320,
+        "latency_ms": 32.10720450000372,
+        "bytes": 13461,
+        "encode_ms": 2.304,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7205.400000000023,
+        "frame": 27323,
+        "latency_ms": 35.10720450000372,
+        "bytes": 13448,
+        "encode_ms": 2.201,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7305.099999999977,
+        "frame": 27326,
+        "latency_ms": 34.80720449995715,
+        "bytes": 13532,
+        "encode_ms": 2.285,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7414.400000000023,
+        "frame": 27329,
+        "latency_ms": 44.10720450000372,
+        "bytes": 13489,
+        "encode_ms": 2.228,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7516.20000000007,
+        "frame": 27332,
+        "latency_ms": 47.19817400001921,
+        "bytes": 13473,
+        "encode_ms": 2.317,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7617.300000000047,
+        "frame": 27335,
+        "latency_ms": 48.298173999995925,
+        "bytes": 13483,
+        "encode_ms": 2.215,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7715,
+        "frame": 27338,
+        "latency_ms": 45.99817399994936,
+        "bytes": 13503,
+        "encode_ms": 2.35,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7827.20000000007,
+        "frame": 27341,
+        "latency_ms": 58.19817400001921,
+        "bytes": 13511,
+        "encode_ms": 9.969,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 7916.300000000047,
+        "frame": 27344,
+        "latency_ms": 47.298173999995925,
+        "bytes": 13462,
+        "encode_ms": 2.303,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8015.099999999977,
+        "frame": 27347,
+        "latency_ms": 46.098173999926075,
+        "bytes": 13457,
+        "encode_ms": 2.2,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8117.099999999977,
+        "frame": 27350,
+        "latency_ms": 48.098173999926075,
+        "bytes": 13510,
+        "encode_ms": 2.148,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8225.099999999977,
+        "frame": 27353,
+        "latency_ms": 56.098173999926075,
+        "bytes": 13468,
+        "encode_ms": 2.355,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8324.800000000047,
+        "frame": 27356,
+        "latency_ms": 55.798173999995925,
+        "bytes": 13534,
+        "encode_ms": 2.407,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8425.300000000047,
+        "frame": 27359,
+        "latency_ms": 56.298173999995925,
+        "bytes": 13485,
+        "encode_ms": 2.358,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8526.400000000023,
+        "frame": 27362,
+        "latency_ms": 57.39817399997264,
+        "bytes": 13502,
+        "encode_ms": 2.361,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8625.20000000007,
+        "frame": 27365,
+        "latency_ms": 56.19817400001921,
+        "bytes": 13509,
+        "encode_ms": 10.012,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8725.20000000007,
+        "frame": 27368,
+        "latency_ms": 56.19817400001921,
+        "bytes": 13508,
+        "encode_ms": 2.228,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8826.800000000047,
+        "frame": 27371,
+        "latency_ms": 57.798173999995925,
+        "bytes": 13508,
+        "encode_ms": 2.196,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 8925.70000000007,
+        "frame": 27374,
+        "latency_ms": 56.69817400001921,
+        "bytes": 13463,
+        "encode_ms": 2.215,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9025.5,
+        "frame": 27378,
+        "latency_ms": 24.49817399994936,
+        "bytes": 13489,
+        "encode_ms": 2.353,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9126.5,
+        "frame": 27381,
+        "latency_ms": 25.49817399994936,
+        "bytes": 13555,
+        "encode_ms": 2.172,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9226.599999999977,
+        "frame": 27384,
+        "latency_ms": 25.598173999926075,
+        "bytes": 13511,
+        "encode_ms": 2.31,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9324.70000000007,
+        "frame": 27387,
+        "latency_ms": 23.698174000019208,
+        "bytes": 13471,
+        "encode_ms": 2.324,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9434.900000000023,
+        "frame": 27390,
+        "latency_ms": 33.89817399997264,
+        "bytes": 13511,
+        "encode_ms": 9.959,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9524.300000000047,
+        "frame": 27393,
+        "latency_ms": 23.298173999995925,
+        "bytes": 13535,
+        "encode_ms": 2.173,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9635.20000000007,
+        "frame": 27396,
+        "latency_ms": 34.19817400001921,
+        "bytes": 13490,
+        "encode_ms": 2.214,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9734.599999999977,
+        "frame": 27399,
+        "latency_ms": 33.598173999926075,
+        "bytes": 13486,
+        "encode_ms": 2.297,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9834.70000000007,
+        "frame": 27402,
+        "latency_ms": 33.69817400001921,
+        "bytes": 13524,
+        "encode_ms": 2.347,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 9934.5,
+        "frame": 27405,
+        "latency_ms": 33.49817399994936,
+        "bytes": 13544,
+        "encode_ms": 2.207,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10035,
+        "frame": 27408,
+        "latency_ms": 33.99817399994936,
+        "bytes": 13455,
+        "encode_ms": 2.325,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10135.70000000007,
+        "frame": 27411,
+        "latency_ms": 34.69817400001921,
+        "bytes": 13515,
+        "encode_ms": 2.309,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10247.900000000023,
+        "frame": 27414,
+        "latency_ms": 46.89817399997264,
+        "bytes": 13594,
+        "encode_ms": 10.588,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10334.70000000007,
+        "frame": 27417,
+        "latency_ms": 33.69817400001921,
+        "bytes": 13567,
+        "encode_ms": 2.189,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10434.400000000023,
+        "frame": 27420,
+        "latency_ms": 33.39817399997264,
+        "bytes": 13530,
+        "encode_ms": 2.216,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10536.300000000047,
+        "frame": 27423,
+        "latency_ms": 35.298173999995925,
+        "bytes": 13501,
+        "encode_ms": 2.3,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10651.400000000023,
+        "frame": 27426,
+        "latency_ms": 50.39817399997264,
+        "bytes": 13537,
+        "encode_ms": 2.273,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10745,
+        "frame": 27429,
+        "latency_ms": 43.99817399994936,
+        "bytes": 13520,
+        "encode_ms": 2.308,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10844.70000000007,
+        "frame": 27432,
+        "latency_ms": 43.69817400001921,
+        "bytes": 13507,
+        "encode_ms": 2.285,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 10945.900000000023,
+        "frame": 27435,
+        "latency_ms": 44.89817399997264,
+        "bytes": 13455,
+        "encode_ms": 2.218,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11054.900000000023,
+        "frame": 27438,
+        "latency_ms": 53.89817399997264,
+        "bytes": 13515,
+        "encode_ms": 9.995,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11146.20000000007,
+        "frame": 27441,
+        "latency_ms": 45.19817400001921,
+        "bytes": 13474,
+        "encode_ms": 2.296,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11244.5,
+        "frame": 27444,
+        "latency_ms": 43.49817399994936,
+        "bytes": 13485,
+        "encode_ms": 2.394,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11348,
+        "frame": 27447,
+        "latency_ms": 46.99817399994936,
+        "bytes": 13461,
+        "encode_ms": 2.224,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11444.5,
+        "frame": 27450,
+        "latency_ms": 43.49817399994936,
+        "bytes": 13538,
+        "encode_ms": 2.333,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11545.5,
+        "frame": 27453,
+        "latency_ms": 44.49817399994936,
+        "bytes": 13509,
+        "encode_ms": 2.328,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11644.800000000047,
+        "frame": 27456,
+        "latency_ms": 43.798173999995925,
+        "bytes": 13560,
+        "encode_ms": 2.354,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11745.20000000007,
+        "frame": 27459,
+        "latency_ms": 44.19817400001921,
+        "bytes": 13507,
+        "encode_ms": 2.358,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11855.900000000023,
+        "frame": 27462,
+        "latency_ms": 54.89817399997264,
+        "bytes": 13529,
+        "encode_ms": 9.892,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 11955.300000000047,
+        "frame": 27465,
+        "latency_ms": 54.298173999995925,
+        "bytes": 13473,
+        "encode_ms": 2.203,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12055.20000000007,
+        "frame": 27468,
+        "latency_ms": 54.19817400001921,
+        "bytes": 13524,
+        "encode_ms": 2.191,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12155.099999999977,
+        "frame": 27471,
+        "latency_ms": 54.098173999926075,
+        "bytes": 13540,
+        "encode_ms": 2.357,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12255.800000000047,
+        "frame": 27474,
+        "latency_ms": 54.798173999995925,
+        "bytes": 13513,
+        "encode_ms": 2.348,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12355.099999999977,
+        "frame": 27477,
+        "latency_ms": 54.098173999926075,
+        "bytes": 13536,
+        "encode_ms": 2.184,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12454.900000000023,
+        "frame": 27480,
+        "latency_ms": 53.89817399997264,
+        "bytes": 13537,
+        "encode_ms": 2.187,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12555,
+        "frame": 27483,
+        "latency_ms": 53.99817399994936,
+        "bytes": 13514,
+        "encode_ms": 2.278,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12665.70000000007,
+        "frame": 27486,
+        "latency_ms": 64.69817400001921,
+        "bytes": 13482,
+        "encode_ms": 9.921,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12754.5,
+        "frame": 27490,
+        "latency_ms": 20.49817399994936,
+        "bytes": 13496,
+        "encode_ms": 2.347,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12856.599999999977,
+        "frame": 27493,
+        "latency_ms": 22.598173999926075,
+        "bytes": 13450,
+        "encode_ms": 2.336,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 12954.800000000047,
+        "frame": 27496,
+        "latency_ms": 21.798173999995925,
+        "bytes": 13515,
+        "encode_ms": 2.165,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13054.900000000023,
+        "frame": 27499,
+        "latency_ms": 20.89817399997264,
+        "bytes": 13496,
+        "encode_ms": 2.178,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13154.900000000023,
+        "frame": 27502,
+        "latency_ms": 20.89817399997264,
+        "bytes": 13493,
+        "encode_ms": 2.152,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13256.5,
+        "frame": 27505,
+        "latency_ms": 22.49817399994936,
+        "bytes": 13519,
+        "encode_ms": 2.34,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13368.599999999977,
+        "frame": 27508,
+        "latency_ms": 34.598173999926075,
+        "bytes": 13544,
+        "encode_ms": 2.254,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13464.900000000023,
+        "frame": 27511,
+        "latency_ms": 30.89817399997264,
+        "bytes": 13497,
+        "encode_ms": 10.028,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13565.099999999977,
+        "frame": 27514,
+        "latency_ms": 31.098173999926075,
+        "bytes": 13528,
+        "encode_ms": 2.321,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13664.900000000023,
+        "frame": 27517,
+        "latency_ms": 30.89817399997264,
+        "bytes": 13510,
+        "encode_ms": 2.2,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13764.800000000047,
+        "frame": 27520,
+        "latency_ms": 30.798173999995925,
+        "bytes": 13525,
+        "encode_ms": 2.212,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13865.599999999977,
+        "frame": 27523,
+        "latency_ms": 31.598173999926075,
+        "bytes": 13526,
+        "encode_ms": 2.276,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 13966.599999999977,
+        "frame": 27526,
+        "latency_ms": 32.598173999926075,
+        "bytes": 13450,
+        "encode_ms": 2.33,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14085.70000000007,
+        "frame": 27529,
+        "latency_ms": 51.69817400001921,
+        "bytes": 13498,
+        "encode_ms": 2.248,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14166.599999999977,
+        "frame": 27532,
+        "latency_ms": 32.598173999926075,
+        "bytes": 13491,
+        "encode_ms": 2.24,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14277.300000000047,
+        "frame": 27535,
+        "latency_ms": 43.298173999995925,
+        "bytes": 13484,
+        "encode_ms": 11.087,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14374.599999999977,
+        "frame": 27538,
+        "latency_ms": 40.598173999926075,
+        "bytes": 13503,
+        "encode_ms": 3.314,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14477.70000000007,
+        "frame": 27541,
+        "latency_ms": 43.69817400001921,
+        "bytes": 13513,
+        "encode_ms": 3.123,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14574.599999999977,
+        "frame": 27544,
+        "latency_ms": 40.598173999926075,
+        "bytes": 13517,
+        "encode_ms": 2.183,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14674.900000000023,
+        "frame": 27547,
+        "latency_ms": 44.89817399997264,
+        "bytes": 13478,
+        "encode_ms": 2.165,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14774.900000000023,
+        "frame": 27550,
+        "latency_ms": 44.89817399997264,
+        "bytes": 13551,
+        "encode_ms": 2.16,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14875.70000000007,
+        "frame": 27553,
+        "latency_ms": 45.69817400001921,
+        "bytes": 13501,
+        "encode_ms": 2.187,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 14975.400000000023,
+        "frame": 27556,
+        "latency_ms": 45.39817399997264,
+        "bytes": 13492,
+        "encode_ms": 2.202,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15084.900000000023,
+        "frame": 27559,
+        "latency_ms": 54.89817399997264,
+        "bytes": 13548,
+        "encode_ms": 9.526,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15174.300000000047,
+        "frame": 27562,
+        "latency_ms": 44.298173999995925,
+        "bytes": 13500,
+        "encode_ms": 2.158,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15274.800000000047,
+        "frame": 27565,
+        "latency_ms": 44.798173999995925,
+        "bytes": 13489,
+        "encode_ms": 2.185,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15374.5,
+        "frame": 27568,
+        "latency_ms": 44.49817399994936,
+        "bytes": 13515,
+        "encode_ms": 2.147,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15475.400000000023,
+        "frame": 27571,
+        "latency_ms": 45.39817399997264,
+        "bytes": 13515,
+        "encode_ms": 2.14,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15574.599999999977,
+        "frame": 27574,
+        "latency_ms": 44.598173999926075,
+        "bytes": 13461,
+        "encode_ms": 2.193,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15674.599999999977,
+        "frame": 27577,
+        "latency_ms": 44.598173999926075,
+        "bytes": 13504,
+        "encode_ms": 2.204,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      },
+      {
+        "time": 15775.300000000047,
+        "frame": 27580,
+        "latency_ms": 45.298173999995925,
+        "bytes": 13504,
+        "encode_ms": 2.165,
+        "level": 2,
+        "budget_bytes": 15000,
+        "budget_exceeded": false,
+        "parts": [
+          "base",
+          "process-A",
+          "process-B"
+        ]
+      }
+    ]
+  }
+}

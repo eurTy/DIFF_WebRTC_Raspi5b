@@ -5,22 +5,23 @@
 <header><div><strong>语义自适应传输实验台</strong><small>SVT / 独立研究版</small></div><span id="status" role="status">未连接</span></header>
 <main>
 <section class="toolbar" aria-label="实验参数">
+<label>运行档位<select id="preset"><option value="smooth">流畅观察</option><option value="experiment">受限对照</option><option value="custom">自定义</option></select></label>
 <label>传输策略<select id="mode"><option value="semantic">语义优先</option><option value="static-roi">固定区域优先</option><option value="uniform">全局自适应</option><option value="full">全帧 Q85</option></select></label>
-<label>上限 kbps<input id="kbps" type="number" min="128" max="12000" step="1" value="1200"></label>
-<label>目标 fps<input id="fps" type="number" min="2" max="20" value="10"></label>
+<label>上限 kbps<input id="kbps" type="number" min="128" max="12000" step="1" value="2400"></label>
+<label>目标 fps<input id="fps" type="number" min="2" max="20" value="20"></label>
 <label id="fixture-control">场景<select id="seed"><option value="6">低纹理</option><option value="7" selected>中纹理</option><option value="8">高纹理</option></select></label>
-<label>预算反馈<select id="feedback"><option value="single">单次确认</option><option value="median">五样本中值</option></select></label>
+<label>预算反馈<select id="feedback"><option value="realtime">新鲜度优先</option><option value="single">单次确认（对照）</option><option value="median">五样本中值（对照）</option></select></label>
 <div class="commands"><button id="connect" title="应用参数并连接" aria-label="应用参数并连接"><i data-lucide="play"></i></button><button id="pause" title="停止接收" aria-label="停止接收"><i data-lucide="pause"></i></button><button id="download" title="导出测量数据" aria-label="导出测量数据"><i data-lucide="download"></i></button></div>
 </section>
 <div class="workspace">
 <section class="visual">
 <div class="source-line"><span id="source">输入待确认</span><label class="check"><input id="overlay" type="checkbox" checked>区域标记</label></div>
-<div class="stage"><canvas id="video" width="1280" height="720" aria-label="重建视频画面"></canvas><canvas id="regions" width="1280" height="720" aria-label="重点区域框选"></canvas><span id="empty">等待帧</span></div>
+<div class="stage"><canvas id="video" width="1280" height="720" aria-label="重建视频画面"></canvas><canvas id="regions" width="1280" height="720" aria-label="重点区域框选"></canvas><span id="empty">等待帧</span><span id="stale" hidden>画面已过期</span></div>
 <div id="notice" role="alert"></div>
 <div class="metrics">
 <div><span>软件段延迟</span><strong id="latency">--</strong><small>ms</small></div>
 <div><span>当前帧龄</span><strong id="age">--</strong><small>ms</small></div>
-<div><span>接收帧率</span><strong id="rate">--</strong><small>fps</small></div>
+<div><span>显示帧率</span><strong id="rate">--</strong><small>fps</small></div>
 <div><span>有效载荷速率</span><strong id="bandwidth">--</strong><small>Mbps</small></div>
 <div><span>编码耗时</span><strong id="encoding">--</strong><small>ms</small></div>
 <div><span>本帧预算</span><strong id="budget">--</strong><small>KB</small></div>
@@ -36,6 +37,7 @@
 <button id="reset" title="重置区域" aria-label="重置区域"><i data-lucide="rotate-ccw"></i></button>
 <h2>传输状态</h2>
 <dl><dt>已显示帧</dt><dd id="frames">0</dd><dt>分层等级</dt><dd id="level">--</dd><dt>本帧重点块</dt><dd id="patches">--</dd><dt>超预算帧</dt><dd id="overruns">0</dd><dt>输入基准</dt><dd id="timing-kind">--</dd></dl>
+<dl class="recovery"><dt>过期丢弃</dt><dd id="dropped">0</dd><dt>自动重连</dt><dd id="reconnects">0</dd><dt>发送窗口</dt><dd id="window">--</dd></dl>
 <div class="boundary">仅视频测量 · 无设备控制</div>
 </aside>
 </div>

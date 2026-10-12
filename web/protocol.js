@@ -45,3 +45,4 @@ export class Clock {
     return value>=-estimate.rtt/2-2 ? Math.max(0,value) : null;
   }
 }
+export function watchdogMs(bytes,kbps,fps){return Math.max(2500,2*Math.max(1000/fps,bytes*8/kbps)+500);}

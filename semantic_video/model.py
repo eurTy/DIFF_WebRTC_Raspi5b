@@ -57,7 +57,7 @@ class BudgetController:
     def __init__(self, kbps=1200, fps=10, feedback="single"):
         if not math.isfinite(kbps) or not 128 <= kbps <= 12000 or not math.isfinite(fps) or not 2 <= fps <= 20:
             raise ValueError("Budget or FPS outside laboratory bounds")
-        if feedback not in ("single", "median"):
+        if feedback not in ("single", "median", "realtime"):
             raise ValueError("Unknown feedback filter")
         self.feedback = feedback
         self.history = deque(maxlen=5)
@@ -68,11 +68,42 @@ class BudgetController:
         self.budget = self.ceiling
         self.good = 0
         self.acks = 0
+        self.slow = 0
+        self.window = 2 if feedback == "realtime" else 1
+        self.window_good = 0
 
     def observe(self, service_ms, packet_bytes):
         if not math.isfinite(service_ms) or service_ms <= 0 or packet_bytes <= 0:
             return
         self.acks += 1
+        if self.feedback == "realtime":
+            if service_ms > max(150, self.period_ms * 1.8):
+                self.window = 1
+                self.window_good = 0
+            elif service_ms < min(100, self.period_ms * .8):
+                self.window_good += 1
+                if self.window_good >= 8:
+                    self.window = 2
+            else:
+                self.window_good = 0
+            # A bounded window absorbs moderate RTT. Persistent late delivery
+            # reduces quality; isolated stalls do not ratchet the budget down.
+            if service_ms > max(125, self.period_ms * 1.25):
+                self.slow += 1
+                self.good = 0
+                if self.slow >= 3:
+                    floor = min(self.ceiling, 1800)
+                    factor = .6 if service_ms > 500 else .85
+                    self.budget = max(floor, self.budget * factor)
+                    self.slow = 0
+            else:
+                self.slow = 0
+                self.good += 1
+                fast = service_ms < max(90, self.period_ms * .9)
+                if self.good >= (5 if fast else 20):
+                    self.budget = min(self.ceiling, self.budget * (1.08 if fast else 1.04) + 100)
+                    self.good = 0
+            return
         if self.feedback == "median":
             self.history.append((service_ms, packet_bytes))
             if len(self.history) < 5:

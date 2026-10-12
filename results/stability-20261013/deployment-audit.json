@@ -1,0 +1,54 @@
+{
+  "normalization": "CRLF to LF",
+  "runtime": {
+    "version": "0.2.0",
+    "files": {
+      "semantic_video/__init__.py": "200b09cc8b1dd862d1e3b8f251908f4fab2072a0fefcefa4deb3adcb65b9ed80",
+      "semantic_video/encoder.py": "dd6020428f42052f2cac3523422ee68f249a76f9c2c67b17dd88996722d3bdd3",
+      "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+      "semantic_video/model.py": "a069edddcf829b9269b7888a349789f0001636c0de682d8a6e47e1b516b99b0a",
+      "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+      "semantic_video/server.py": "2db753f9bc250362b7b39aecf70bc3a5dfe74ec53c0f87acc5a6a1e144932041",
+      "semantic_video/source.py": "07663c088a5ee7373bc3bdde0683782fb32161bacb564b5a12cba931d9271f66",
+      "web/app.js": "0970a7f8afe30680622cb746f6f20d47f825781200132caaab3154f94536da03",
+      "web/lucide.min.js": "3411692820cb8d47543f69496aa25fd603a358f4498046f41c508a5a3342210e",
+      "web/protocol.js": "c24fb92bcc1c09ed9af9d83384c9b26886a0f64cb2ea5db573c5744795708b0b",
+      "web/style.css": "000b56f42b91715487a82d8a9e750ec71f77442fd7e7336f48ac5e3e61d56cdb",
+      "web/index.html": "31df93b51f295ca0f7b5dd4fb4a9a2f46f581e838230baff684a133db86fc32d"
+    }
+  },
+  "runtime_differences": [],
+  "image_id": "sha256:7fe7a543e14470706f5e9004ad6d18896c942ded24cdd68b4be14094fbb83ec9",
+  "user": "10001:10001",
+  "read_only": true,
+  "cap_drop": [
+    "ALL"
+  ],
+  "security_opt": [
+    "no-new-privileges:true"
+  ],
+  "nano_cpus": 1000000000,
+  "memory_limit_bytes": 0,
+  "restart_policy": "unless-stopped",
+  "input_mount_readonly": true,
+  "input_mount_present": true,
+  "legacy_files_checked": 39,
+  "legacy_differences": [],
+  "temperature_c": 60.6,
+  "throttled": "throttled=0x0",
+  "wifi_power": "Power save: off",
+  "old_containers": [
+    {
+      "Name": "/video-processor",
+      "Image": "sha256:5a78eec29227702e2d6d6f4ebf270adf2d7dd534494447244481861bcd145f3c",
+      "running": true,
+      "started_at": "2026-10-12T15:08:45.208670208Z"
+    },
+    {
+      "Name": "/webrtc-gateway",
+      "Image": "sha256:ff80cb24d95b1c2150625a986c2acdae3b44ed8fc9c69487fab5a35a02951b9d",
+      "running": true,
+      "started_at": "2026-10-12T15:08:45.215555356Z"
+    }
+  ]
+}

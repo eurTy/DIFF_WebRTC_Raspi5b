@@ -1,0 +1,83 @@
+{
+  "url": "http://192.168.3.19:8088",
+  "checks": [
+    {
+      "test": "moving_canvas",
+      "first": {
+        "min": 5,
+        "max": 255,
+        "sum": 23440790
+      },
+      "second": {
+        "min": 8,
+        "max": 255,
+        "sum": 23414549
+      }
+    },
+    {
+      "test": "desktop",
+      "overflow": false,
+      "clipped": []
+    },
+    {
+      "test": "tablet",
+      "overflow": false,
+      "clipped": []
+    },
+    {
+      "test": "mobile",
+      "overflow": false,
+      "clipped": []
+    },
+    {
+      "test": "small",
+      "overflow": false,
+      "clipped": []
+    },
+    {
+      "test": "pause",
+      "pass": true
+    },
+    {
+      "test": "full",
+      "pass": true
+    },
+    {
+      "test": "uniform",
+      "pass": true
+    },
+    {
+      "test": "static-roi",
+      "pass": true
+    },
+    {
+      "test": "semantic",
+      "pass": true
+    },
+    {
+      "test": "feedback_single",
+      "pass": true
+    },
+    {
+      "test": "feedback_median",
+      "pass": true
+    },
+    {
+      "test": "feedback_realtime",
+      "pass": true
+    },
+    {
+      "test": "invalid_region_rejected",
+      "pass": true
+    },
+    {
+      "test": "region_drag",
+      "pass": true
+    },
+    {
+      "test": "reconfigure_export",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

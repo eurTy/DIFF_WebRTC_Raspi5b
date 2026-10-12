@@ -1,0 +1,29 @@
+{
+  "release": "0.2.0",
+  "date": "2026-10-13",
+  "baseline_commit": "268a35829fab87ed6d536489318a7ea74f20ae2a",
+  "python_tests": {"local": 24, "pi_container": 24, "failures": 0},
+  "javascript_tests": {"count": 3, "failures": 0},
+  "browser_checks": {"local_fixture": 16, "pi_live": 16, "page_errors": 0},
+  "recovery_checks": {"local_fixture": 3, "pi_live": 3, "page_errors": 0},
+  "runtime_files_checked_local_against_container": 12,
+  "runtime_file_differences": [],
+  "legacy_files_checked": 39,
+  "legacy_file_differences": [],
+  "old_thesis_sha256": "5088bccfffe80266300f5560d34a220851542c220cfeefbe946b9de7a436a69f",
+  "old_thesis_unchanged": true,
+  "live_camera_media_published": false,
+  "experiment_notes": {
+    "final-local.json": "Interrupted development candidate, 3 complete cells; excluded from final comparison",
+    "final-conservative-local.json": "4 completed local rate-mismatch cells; not Pi browser results",
+    "live-smooth-20fps.json": "180-second real-camera run before retry cap change; same normal transmission policy, not an all-day soak",
+    "live-realtime-blackhole-fast-retry.json": "Final image, 6-second stream fault; recovery observed within about 765 ms after restoration"
+  },
+  "limits": [
+    "Software timestamps, not optical glass-to-glass delay",
+    "No guarantee of low latency during real Wi-Fi outages",
+    "New controller does not dominate the single-frame baseline at every constrained capacity",
+    "No automatic AI semantic extraction or device control",
+    "No reboot performed to test restart policy; Docker configuration verified"
+  ]
+}

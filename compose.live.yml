@@ -1,6 +1,7 @@
 # Optional boundary adapter. Never opens USB or modifies the producer.
 services:
   stream:
+    restart: unless-stopped
     group_add: ["${SHM_READER_GID:?Set SHM_READER_GID to the input directory group}"]
     command: [python, -m, semantic_video.server, --host, 0.0.0.0, --port, "8088", --source, shm, --source-path, /input/video_shm]
     volumes:

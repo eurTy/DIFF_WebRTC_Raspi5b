@@ -1,5 +1,8 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs');
 const modulePromise=import('data:text/javascript;base64,'+fs.readFileSync(require('node:path').join(__dirname,'../web/protocol.js')).toString('base64'));
+test('watchdog allows legitimate low-rate full-frame pacing',async()=>{
+ const {watchdogMs}=await modulePromise;assert.equal(watchdogMs(15000,1200,10),2500);assert.equal(watchdogMs(250000,128,2),31750);
+});
 test('four-timestamp offset, min RTT, warmup and expiry',async()=>{
  const {Clock}=await modulePromise,c=new Clock();assert.equal(c.estimate(100),null);
  for(let i=0;i<3;i++)assert.equal(c.add(1000+i*100,1510+i*100,1511+i*100,1021+i*100),true);

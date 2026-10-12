@@ -1,0 +1,18 @@
+{
+  "url": "http://192.168.3.19:8088",
+  "checks": [
+    {
+      "test": "blackhole_recovery_keeps_config",
+      "recovery_ms": 1339
+    },
+    {
+      "test": "late_frames_discarded",
+      "count": 3
+    },
+    {
+      "test": "pause_cancels_retry",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

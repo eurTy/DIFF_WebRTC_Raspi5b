@@ -1,5 +1,6 @@
 import asyncio
 import unittest
+from unittest.mock import patch
 from aiohttp import ClientSession, WSMsgType, WSServerHandshakeError, web
 from semantic_video.protocol import unpack
 from semantic_video.server import application
@@ -72,6 +73,54 @@ class Server(unittest.IsolatedAsyncioTestCase):
         await asyncio.sleep(.03)
         async with self.client.get(self.url+'/api/status') as response:
             self.assertEqual((await response.json())['sessions'],0)
+
+    async def test_realtime_two_frames_bounded_and_ordered(self):
+        async with self.client.ws_connect(self.url+'/stream') as stream:
+            await stream.send_json({'type':'start','feedback':'realtime'})
+            self.assertEqual((await stream.receive_json())['window'], 2)
+            first,_=unpack((await stream.receive()).data)
+            second,_=unpack((await stream.receive()).data)
+            self.assertGreater(second['id'],first['id'])
+            with self.assertRaises(asyncio.TimeoutError):
+                await asyncio.wait_for(stream.receive(),.28)
+            await stream.send_json({'type':'ack','id':first['id'],'dropped':True})
+            # A late ACK shrinks the window; the second frame must drain first.
+            with self.assertRaises(asyncio.TimeoutError):
+                await asyncio.wait_for(stream.receive(),.05)
+            await stream.send_json({'type':'ack','id':second['id']})
+            third,_=unpack((await stream.receive()).data)
+            self.assertGreater(third['id'],second['id'])
+            await stream.send_json({'type':'ack','id':first['id']})
+            closed=await stream.receive()
+            self.assertEqual((closed.type,closed.data),(WSMsgType.CLOSE,1008))
+
+    async def test_realtime_timeout_is_retryable(self):
+        with patch('semantic_video.server.DELIVERY_TIMEOUT',.1):
+            async with self.client.ws_connect(self.url+'/stream') as stream:
+                await stream.send_json({'type':'start','feedback':'realtime'})
+                await stream.receive_json()
+                for _ in range(2): self.assertEqual((await stream.receive()).type,WSMsgType.BINARY)
+                closed=await asyncio.wait_for(stream.receive(),2)
+                self.assertEqual((closed.type,closed.data),(WSMsgType.CLOSE,1013))
+
+    async def test_realtime_rejects_non_boolean_discard(self):
+        async with self.client.ws_connect(self.url+'/stream') as stream:
+            await stream.send_json({'type':'start','feedback':'realtime'})
+            await stream.receive_json()
+            meta,_=unpack((await stream.receive()).data)
+            await stream.send_json({'type':'ack','id':meta['id'],'dropped':'false'})
+            closed=await stream.receive()
+            self.assertEqual((closed.type,closed.data),(WSMsgType.CLOSE,1008))
+
+    async def test_unresponsive_peer_does_not_hold_slot(self):
+        stream=await self.client.ws_connect(self.url+'/stream')
+        await stream.send_json({'type':'start','feedback':'realtime'})
+        await stream.receive_json()
+        # Deliberately do not read or answer the WebSocket closing handshake.
+        await asyncio.sleep(3.5)
+        async with self.client.get(self.url+'/api/status') as response:
+            self.assertEqual((await response.json())['sessions'],0)
+        await stream.close()
 
 
 if __name__=='__main__': unittest.main()

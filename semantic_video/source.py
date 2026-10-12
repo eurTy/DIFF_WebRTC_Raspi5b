@@ -60,8 +60,15 @@ class SharedMemorySource:
 
     def __init__(self, path):
         self.path = path
+        self.lock = threading.Lock()
+        self.cached_header = None
+        self.cached_frame = None
 
     def read(self):
+        with self.lock:
+            return self._read()
+
+    def _read(self):
         # This adapter implements the documented input ABI; no old Python module is imported.
         with open(self.path, "rb", buffering=0) as source:
             first = source.read(48)
@@ -71,6 +78,11 @@ class SharedMemorySource:
             published = struct.unpack_from("<Q", first, 40)[0]
             if sequence & 1 or flags & 1 or not 4 <= size <= 8 * 1024 * 1024:
                 raise ValueError("Uncommitted input")
+            age = mono_ms() - published
+            if not 0 <= age <= 500:
+                raise ValueError("Input is stale or timestamp invalid")
+            if first == self.cached_header:
+                return self.cached_frame
             jpeg = source.read(size)
             source.seek(0)
             if source.read(48) != first or len(jpeg) != size:
@@ -81,7 +93,11 @@ class SharedMemorySource:
         image = cv2.imdecode(np.frombuffer(jpeg, np.uint8), cv2.IMREAD_COLOR)
         if image is None or image.shape[:2] != (720, 1280):
             raise ValueError("Expected a valid 1280x720 source")
-        return Frame(image, identity, published, self.label)
+        # Concurrent viewers may share one immutable decode of a committed frame.
+        image.flags.writeable = False
+        self.cached_header = first
+        self.cached_frame = Frame(image, identity, published, self.label)
+        return self.cached_frame
 
     def close(self):
         pass

@@ -70,6 +70,39 @@ class Core(unittest.TestCase):
         invalid['parts'][0]['rect']=[0,0,100,100]
         with self.assertRaises(ValueError): unpack(pack(invalid,images))
 
+    def test_realtime_spike_floor_and_neutral_recovery(self):
+        control = BudgetController(1200, 10, 'realtime')
+        for delay in [100, 100, 900, 100, 100]:
+            control.observe(delay, 10000)
+        self.assertEqual(control.bytes(), 15000)
+        for _ in range(90): control.observe(500, 10000)
+        self.assertEqual(control.bytes(), 1800)
+        self.assertEqual(control.window, 1)
+        for _ in range(1000): control.observe(110, 5000)
+        self.assertEqual(control.bytes(), 15000)
+        self.assertEqual(control.window, 1)
+        for _ in range(8): control.observe(50, 10000)
+        self.assertEqual(control.window, 2)
+        low = BudgetController(128, 20, 'realtime')
+        for _ in range(90): low.observe(500, 1000)
+        self.assertLessEqual(low.bytes(), low.ceiling)
+
+    def test_discard_does_not_refresh_region(self):
+        encoder = Encoder(feedback='realtime')
+        encoder.acknowledge({'parts':[{}, {'name':'process-B'}]},600,4000,now=10001,dropped=True)
+        self.assertNotIn('process-B', encoder.refresh)
+        self.assertEqual(encoder.control.acks, 1)
+
+    def test_realtime_keeps_best_fitting_context(self):
+        encoder = Encoder(feedback='realtime')
+        encoder.last_level = 0
+        image = cv2.imencode('.jpg',np.zeros((32,32,3),dtype=np.uint8))[1].tobytes()
+        with patch.object(encoder,'candidate',return_value=([{'name':'base','rect':[0,0,1280,720],'quality':45}],[image])):
+            packet, meta = encoder.encode(self.frame)
+        self.assertEqual(meta['level'], 0)
+        self.assertEqual(meta['attempts'], 5)
+        self.assertFalse(meta['budget_exceeded'])
+
     def test_median_feedback_rejects_isolated_spike(self):
         single=BudgetController(1200,10,'single')
         robust=BudgetController(1200,10,'median')
@@ -109,7 +142,14 @@ class Core(unittest.TestCase):
                 path.write_bytes(header+jpeg)
             with patch('semantic_video.source.mono_ms',return_value=1050):
                 write()
-                self.assertEqual(SharedMemorySource(path).read().identity,1)
+                source = SharedMemorySource(path)
+                first = source.read()
+                self.assertEqual(first.identity,1)
+                with patch('semantic_video.source.cv2.imdecode',side_effect=AssertionError('Repeated decode')):
+                    self.assertIs(source.read(),first)
+                self.assertFalse(first.image.flags.writeable)
+                with patch('semantic_video.source.mono_ms',return_value=1600):
+                    with self.assertRaises(ValueError): source.read()
                 for kwargs in [{'sequence':3},{'published':0},{'published':1200},{'size':9999999}]:
                     write(**kwargs)
                     with self.assertRaises(ValueError): SharedMemorySource(path).read()
