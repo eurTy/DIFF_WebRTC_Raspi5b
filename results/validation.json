@@ -1,9 +1,9 @@
 {
   "date": "2026-10-12",
-  "python_tests": 16,
+  "python_tests": 17,
   "javascript_tests": 2,
-  "pi_python_tests": 16,
-  "browser_checks": 11,
+  "pi_python_tests": 17,
+  "browser_checks": 15,
   "browser_fixture": "PASS desktop1440 tablet1024 mobile390 small320",
   "browser_live": "PASS desktop1440 tablet1024 mobile390 small320",
   "browser_console_errors_live": [],
@@ -12,6 +12,11 @@
   "network_fixture_formal_seconds": 576,
   "network_fixture_received_frames": 2662,
   "rd_pi_samples": 1080,
+  "feedback_fixture_sessions": 24,
+  "feedback_live_sessions": 4,
+  "live_baseline_sessions": 8,
+  "all_network_cells_arithmetic_verified": 84,
+  "default_feedback": "single; median remains an experimental option",
   "legacy_runtime_core_files_checked": 39,
   "legacy_runtime_differences": [],
   "legacy_status": {"quality": "GOOD", "capture": "GOOD", "active_alarms": 0},
@@ -33,5 +38,6 @@
   "host_packages_modified": false,
   "old_services_restarted": false,
   "old_main_commit": "d31ff5420a3038e4f518ae7599b4690af371683f",
-  "new_container_config_id": "sha256:9ff108128edb02dc39d8fe831967bd9b0c73c66b4a4403e7436dd811a26bbe5a7"
+  "new_container_config_digest": "sha256:20aceaca61b945647d8f6e71733889180db17aa977dba82fa133347e028893047",
+  "new_container_manifest_list": "sha256:082a4371b535623a37ec78a6d61bb88bdd9dceeb9116fb1a499bdb28f352ebac"
 }

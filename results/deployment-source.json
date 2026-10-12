@@ -1,0 +1,26 @@
+{
+  "normalization": "CRLF to LF",
+  "runtime_root": "/app",
+  "files": {
+    "semantic_video/__init__.py": "3e71ba40a4ae7e670276f2d04f6eac789889c2fe6de649af757f957d9615f892",
+    "semantic_video/encoder.py": "72b36ef7dd64d3ebcdcabf191050eef2046951b8b0fd6fa6a5b436cf5cc387b3",
+    "semantic_video/metrics.py": "a9f2dcf2ececc0dff8fc9fdf035f3b2c239a276201bec5dd2b8d3b83bf9fea04",
+    "semantic_video/model.py": "32bff659cf597650e42e203cad2f3688d768f446ebc5efc6c5150b155bb603e0",
+    "semantic_video/protocol.py": "742e015a12584afcd788967c8374a236c750e82ec729780bc8a4b84fce5f3491",
+    "semantic_video/server.py": "7494794a672cd1c2d886232f914373abbb22cf2e13a02556bc519b1fcc4872fb",
+    "semantic_video/source.py": "323577e32b0ed397931454f5cac72aa065b399301f24884bd90ce26bf93b3ffd",
+    "experiments/__init__.py": "18134a842b3efaa3c33b17c8fe87dff2afd1ddc3d166006a97edb86b0f0dbfcd",
+    "experiments/feedback.py": "76362326bef21b6a5c8578396ecff5a34561c62b865a1fe0102233ebc6142447",
+    "experiments/link.py": "461b9fa6901e8fd47c29bb6dde7062d222a7b07d7b1e7b112b38133d61de91e7",
+    "experiments/network.py": "9ac11233afaf3e327394da57f46f97b8774a96f5b2260e15f22a6ce96be7b0e6",
+    "experiments/provenance.py": "d8af7306d64f942a0ef7ae9d36ed27ce3948462e8fca138c339e9545d17a46a5",
+    "experiments/rd.py": "a6dc0c1f0299e2670b7006c2a6cb3030a73c880639ace8d757783659994dfca1",
+    "experiments/summarize.py": "cb53139c2d2b83aeb5bf81d8b114b9c31ff26d599412dec14c79e34441816352",
+    "web/app.js": "8a33e990500a788fa2235e45388b1bd5ffd24b7ed15817b5fdf534497bffa0b7",
+    "web/index.html": "5a0485d6f9d6d23fd9799d9b6c9f8de252cd78b08bd940242400bd503424ec7c",
+    "web/lucide-LICENSE": "1e7290b35280a048667bbf0ebabac1c7fd52a75300e8b2946ac165715997f2bc",
+    "web/lucide.min.js": "3411692820cb8d47543f69496aa25fd603a358f4498046f41c508a5a3342210e",
+    "web/protocol.js": "b98a67d3128634a1da9830451e02b6c5758c70637a4e5e8074040846c1635c63",
+    "web/style.css": "eac681b98f5654a2b448a291f28531c65d062f6b94cea8e36e7b56e5722ea52d"
+  }
+}

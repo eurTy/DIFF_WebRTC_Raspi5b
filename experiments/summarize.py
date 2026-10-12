@@ -70,10 +70,31 @@ def summarize(root):
                               **{key:statistics.mean(r[key] for r in rows) for key in ['bytes','encode_ms','weighted_roi_psnr_db','background_psnr_db']},
                               'marker_fraction':statistics.mean(sum(v['weight']*v['marker_correct'] for v in r['regions'].values())/10 for r in rows),
                               'region_success':region_success,'minimum_region_success':min(region_success.values())})
+    ablations={}
+    for name in ['feedback-pi-fixture.json','feedback-pi-live.json']:
+        path=root/name
+        if not path.exists():continue
+        document=json.loads(path.read_text());assert document['complete']
+        assert len(document['cells'])==len(document['schedule'])
+        assert sorted((c['kbps'],c['seed'],c['feedback'],c['repeat']) for c in document['cells'])==sorted(tuple(row) for row in document['schedule'])
+        for cell in document['cells']:check_cell(cell)
+        data=[]
+        for kbps in sorted({c['kbps'] for c in document['cells']}):
+            for feedback in ['single','median']:
+                group=[c for c in document['cells'] if c['kbps']==kbps and c['feedback']==feedback]
+                rows=[r for c in group for r in c['records'] if c['warmup_s']*1000<=r['elapsed_ms']<(c['duration_s']+c['warmup_s'])*1000]
+                tasks=[c['fresh_weighted_task_fraction'] for c in group if c['fresh_weighted_task_fraction'] is not None]
+                data.append({'kbps':kbps,'feedback':feedback,'sessions':len(group),'fresh_fraction':statistics.mean(c['fresh_time_fraction_250ms'] for c in group),
+                             'task_fraction':statistics.mean(tasks) if tasks else None,'patch_frame_fraction':statistics.mean(len(r['parts'])>1 for r in rows) if rows else 0,
+                             'latency_p50_ms':percentile([r['latency_ms'] for r in rows],.5),'latency_p95_ms':percentile([r['latency_ms'] for r in rows],.95),
+                             'mean_bytes':statistics.mean(r['bytes'] for r in rows) if rows else 0,'clock_warnings':sum(c['clock_quality_warning'] for c in group),
+                             'failed_sessions':sum(bool(c['failures']) for c in group)})
+        ablations[name]={'groups':data,'sessions':len(document['cells']),'setup_failures':len(document['setup_failures']),
+                         'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
     return {'scope':'Engineering prototype; two independent runs per scene and condition, not a production validation',
-            'checks':{'cells_verified':len(network)+len(live),'rd_rows':1080,'arithmetic':'independently recomputed time grid and byte denominator'},
+            'checks':{'cells_verified':len(network)+len(live)+sum(a['sessions'] for a in ablations.values()),'rd_rows':1080,'arithmetic':'independently recomputed time grid and byte denominator'},
             'source_sha256':{name:hashlib.sha256((root/name).read_bytes()).hexdigest() for name in files},
-            'network':groups,'rd':rd_groups,'live':[{k:v for k,v in c.items() if k not in ['records','selected','age_samples_ms']} for c in live],
+            'network':groups,'rd':rd_groups,'live':[{k:v for k,v in c.items() if k not in ['records','selected','age_samples_ms']} for c in live],'feedback_ablations':ablations,
             'network_sessions':len(network),'network_seconds':sum(c['duration_s'] for c in network),
             'clock_warning_sessions':sum(c['clock_quality_warning'] for c in network),
             'failed_sessions':sum(bool(c['failures']) for c in network)}

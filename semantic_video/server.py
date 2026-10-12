@@ -76,13 +76,13 @@ class Service:
             fps, kbps = hello.get("fps", 10), hello.get("kbps", 1200)
             if any(isinstance(v, bool) or not isinstance(v, (int, float)) for v in (fps, kbps)):
                 raise ValueError("Numeric budget and FPS required")
-            encoder = Encoder(mode, regions, kbps, fps)
+            encoder = Encoder(mode, regions, kbps, fps, hello.get("feedback", "single"))
             seed = hello.get("seed", 7)
             if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 9999:
                 raise ValueError("Invalid fixture seed")
             source = FixtureSource(seed) if self.shared is None else self.shared
             await ws.send_json({"type": "ready", "session": identity, "source": source.label,
-                                "policy": mode, "regions": [asdict(r) for r in regions]})
+                                "policy": mode, "feedback": encoder.control.feedback, "regions": [asdict(r) for r in regions]})
             previous_id = -1
             failures = 0
             while not ws.closed:

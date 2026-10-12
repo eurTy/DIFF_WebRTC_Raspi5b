@@ -23,11 +23,11 @@ def jpeg(image, width, quality):
 
 
 class Encoder:
-    def __init__(self, mode="semantic", regions=None, kbps=1200, fps=10):
+    def __init__(self, mode="semantic", regions=None, kbps=1200, fps=10, feedback="single"):
         if mode not in MODES:
             raise ValueError("Unknown encoding policy")
         self.mode, self.regions = mode, regions or list(DEFAULT_REGIONS)
-        self.control = BudgetController(kbps, fps)
+        self.control = BudgetController(kbps, fps, feedback)
         self.previous = {}
         self.refresh = {}
         self.last_level = 2
@@ -80,7 +80,7 @@ class Encoder:
             attempts += 1
             base = {"id": frame.identity, "captured_ms": frame.captured_ms, "sent_ms": mono_ms(),
                     "width": 1280, "height": 720, "source": frame.source, "seed": frame.seed,
-                    "policy": self.mode, "level": level, "budget_bytes": budget,
+                    "policy": self.mode, "feedback": self.control.feedback, "level": level, "budget_bytes": budget,
                     "parts": parts, "regions": [asdict(r) for r in self.regions],
                     "encode_ms": (time.perf_counter()-started)*1000, "attempts": attempts,
                     "budget_exceeded": False}

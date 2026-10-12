@@ -2,6 +2,8 @@
 
 面向测控技术与仪器专业的独立研究项目。目标是在受限带宽与边缘算力下，衡量并改善远程观察中“重点细节是否可辨”和“所见状态是否足够新鲜”的矛盾。本系统没有执行器控制接口，不承担安全联锁或机器闭环控制。
 
+2026-10-12 实机验收完成：[更新与重启说明](CHANGELOG.md)、[30 页论文初稿](thesis/semantic-adaptive-thesis.docx)、[独立复核结果](results/analysis.json)。结果包含 1080 个配对样本和 84 个网络单元，不含伪造的工业任务真值。
+
 ## 与旧项目的关系
 
 本分支 `research/semantic-adaptive-v2` 从空目录和独立 Git 历史建立，不继承旧应用代码，也不使用旧容器镜像作为基础。第三方 Lucide 图标库及许可证独立保留。旧 `main` 固定在 `d31ff54`，冻结标签为 `observer-v1-frozen-20261011`，整合版在 `release/observer-integrated-v1`。不要把本分支合并覆盖旧 main。
@@ -14,6 +16,8 @@
 - 每个二进制帧包含同一时刻的低分辨率全景和重点 JPEG 块。浏览器完整解码后一次合成，不与历史补丁混用。
 - 四种策略：`full` 全帧 Q85、`uniform` 全局画质分辨率自适应、`static-roi` 固定优先权重、`semantic` 变化与等待时间参与优先级。
 - ACK 限制每会话最多一帧在途，源端读取最新帧；ACK 服务时间用于缩减预算。实际发帧周期同时受目标帧率和有效载荷上限约束。编码最低档仍超预算时明确计数并降低发送频率，不伪称一定能满足任务细节需求。
+- 预算反馈可以切换原始 `single` 与抗离群点 `median`。后者取最近五组确认服务时间的中间样本及其对应包长，减轻孤立慢确认的影响；代价是持续拥塞识别可能更慢。两者的消融实验独立保存，旧基线由 `semantic-single-ack-baseline-20261012` 固定。
+- 最终默认保持 `single`。中值反馈在合成 2048 kbps 试验中改善任务覆盖，但在本次真实摄像头试验中新鲜覆盖率为 48.3%，低于单次反馈的 81.7%；每模式仅两次短时重复且无线条件不完全相同，不足以证明普遍因果关系或支持默认替换。
 - WebSocket 基于 TCP，仍存在队头阻塞。没有证明优于硬件 H.264/WebRTC 或专用工业协议。
 - 独立四时间戳校时通道支持软件段延迟与当前帧龄显示。数值不是摄像头曝光到屏幕发光的光学端到端延迟。
 
@@ -58,6 +62,7 @@ python -m unittest discover -s tests -v
 node --test tests/protocol.cjs
 python -m experiments.rd --frames 30 --output results/rd.json
 python -m experiments.network --url http://127.0.0.1:8088 --output results/network.json
+python -m experiments.feedback --url http://127.0.0.1:8088 --output results/feedback.json
 ```
 
 浏览器验收脚本为 `tests/browser.cjs`，需测试环境提供 Playwright 和 Edge，执行 `node tests/browser.cjs http://127.0.0.1:8088 runtime/browser`。运行目录不提交；真实摄像头截图也不得公开上传。
@@ -67,6 +72,8 @@ python -m experiments.network --url http://127.0.0.1:8088 --output results/netwo
 网络实验同时报告收到帧的延迟和按 100 ms 网格采样的帧龄。超过 250 ms 或没有帧的时段算新鲜度失败。合成任务指标要求位置误差不超过 3 像素且颜色状态正确；它用于比较传输失真，不是 AI 检测准确率。软件接收端为 Python 解码，不等于浏览器最终显示。校时前后偏移、连接失败和所有低性能基线均保留。
 
 `results/rd-pc.json` 和 `results/network-pc.json` 为电脑首轮预实验，**不是树莓派最终性能**。论文与最终部署验收将使用分别标注的平台结果，不能把预实验数字换一个标题当作实机数据。
+
+树莓派配对实验为 `rd-pi.json`；原始单次反馈的 48 组主对照为 `network-pi-fixture.json` 和 `network-pi-confirmation.json`。`network.py` 默认显式请求原始单次反馈，用于稳定复现旧基线，不随网页默认值改变。反馈消融由 `feedback.py` 显式请求两种模式。真实输入与合成输入结果分开命名，合成代理任务分数不会用于真实摄像头。
 
 ## 可复现性与限制
 

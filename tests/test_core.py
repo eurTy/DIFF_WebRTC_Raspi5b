@@ -70,6 +70,17 @@ class Core(unittest.TestCase):
         invalid['parts'][0]['rect']=[0,0,100,100]
         with self.assertRaises(ValueError): unpack(pack(invalid,images))
 
+    def test_median_feedback_rejects_isolated_spike(self):
+        single=BudgetController(1200,10,'single')
+        robust=BudgetController(1200,10,'median')
+        for delay in [40,40,40,40,800,40,40,40,40]:
+            single.observe(delay,10000);robust.observe(delay,10000)
+        self.assertEqual(robust.bytes(),15000)
+        self.assertLess(single.bytes(),robust.bytes())
+        for _ in range(15):robust.observe(400,10000)
+        self.assertLess(robust.bytes(),5000)
+        with self.assertRaises(ValueError):BudgetController(feedback='invalid')
+
     def test_aging_and_ack_refresh(self):
         encoder = Encoder('semantic')
         encoder.refresh={'process-A':10000,'process-B':0}

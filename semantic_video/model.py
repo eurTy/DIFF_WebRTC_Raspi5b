@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from collections import deque
 import math
 
 
@@ -53,9 +54,13 @@ class Frame:
 
 class BudgetController:
     """ACK-service-time feedback, not a claim to estimate physical link capacity."""
-    def __init__(self, kbps=1200, fps=10):
+    def __init__(self, kbps=1200, fps=10, feedback="single"):
         if not math.isfinite(kbps) or not 128 <= kbps <= 12000 or not math.isfinite(fps) or not 2 <= fps <= 20:
             raise ValueError("Budget or FPS outside laboratory bounds")
+        if feedback not in ("single", "median"):
+            raise ValueError("Unknown feedback filter")
+        self.feedback = feedback
+        self.history = deque(maxlen=5)
         self.fps = fps
         self.kbps = kbps
         self.period_ms = 1000 / fps
@@ -68,6 +73,12 @@ class BudgetController:
         if not math.isfinite(service_ms) or service_ms <= 0 or packet_bytes <= 0:
             return
         self.acks += 1
+        if self.feedback == "median":
+            self.history.append((service_ms, packet_bytes))
+            if len(self.history) < 5:
+                return
+            # Retain the payload paired with the median service time, not an unrelated last size.
+            service_ms, packet_bytes = sorted(self.history, key=lambda pair: pair[0])[2]
         if service_ms > self.period_ms * 1.25:
             self.budget = max(min(1400, self.ceiling), min(self.budget * .78, packet_bytes * self.period_ms / service_ms * .85))
             self.good = 0

@@ -172,20 +172,22 @@ def main():
     doc.core_properties.title=TITLE;doc.core_properties.subject='测控技术与仪器本科论文初稿';doc.core_properties.author=''
     paragraph=doc.add_paragraph(style='Title');paragraph.alignment=WD_ALIGN_PARAGRAPH.CENTER
     paragraph.paragraph_format.space_before=Pt(80);paragraph.paragraph_format.space_after=Pt(26)
-    run=paragraph.add_run(TITLE);set_font(run,23,True)
+    run=paragraph.add_run(TITLE.replace('自适应视频','自适应\n视频'));set_font(run,23,True)
     for text in ['本科毕业论文初稿','测控技术与仪器','面向任务区域的资源分配与信息新鲜度实验','实验和文档日期 2026年10月12日']:
         p=writer.p(text,False);p.alignment=WD_ALIGN_PARAGRAPH.CENTER;p.paragraph_format.space_after=Pt(18)
     writer.p('本文包含可运行原型、合成输入与树莓派实测结果。尚未获得真实产线任务真值，未实现工业设备控制。作者、学校及导师信息须由学生依据学校要求补充。',False)
     doc.add_page_break();doc.add_heading('摘要',level=1)
     writer.p('针对带宽和边缘算力受限时整幅视频质量与远程观察新鲜度难以同时维持的问题，本文设计并实现一个独立的语义自适应视频传输原型。语义被限定为任务区域与重要性，而非自动场景理解。系统利用区域权重、局部变化和更新等待时间进行资源分配，以同帧低分辨率背景和重点 JPEG 块构成自包含消息，通过单帧在途确认机制抑制应用层积压，并利用四时间戳校时显示软件段延迟与当前帧龄。')
-    writer.p(f'实验包括树莓派离线配对编码 1080 个样本，以及 {analysis["network_sessions"]} 个受限链路测量单元，共 {analysis["network_seconds"]:.0f} s 正式观察窗口。除成功帧时延外，结果同时报告背景与区域质量、合成任务标记保真度及新鲜任务覆盖率。结果表明，区域资源分配可改变质量与新鲜度的取舍，但动态策略不保证在所有条件下优于固定权重；无线抖动和反馈退化会使较低的成功帧延迟与较低的任务覆盖率并存。')
+    writer.p(f'实验包括树莓派离线配对编码 1080 个样本，以及 {analysis["network_sessions"]} 个受限链路主对照单元，共 {analysis["network_seconds"]:.0f} s 正式观察窗口。此外进行了 8 个真实输入对照单元和 28 个反馈消融单元，共核对 84 个网络测量单元。除成功帧时延外，结果同时报告背景与区域质量、合成任务标记保真度及新鲜任务覆盖率。结果表明，区域资源分配可改变质量与新鲜度的取舍，但动态策略不保证在所有条件下优于固定权重；无线抖动和反馈退化会使较低的成功帧延迟与较低的任务覆盖率并存。')
     writer.p('本文将版本冻结、只读输入边界、可追溯实验和不确定性分析纳入系统实现。结论限于已测试的场景与配置，不等价于光学端到端时延，不证明生产线效率提升，也未与硬件 H.264 或所有通信协议进行对比。该原型为设备远程观察和测控链路验证提供可复现实验基础。')
     writer.p('关键词：任务区域；自适应传输；信息新鲜度；树莓派；测量不确定性',False)
     doc.add_page_break();doc.add_heading('Abstract',level=1)
     writer.p('This thesis implements an isolated task-oriented adaptive video prototype for constrained bandwidth and edge computation. Semantics are explicitly defined as operator-selected regions and priorities, not automatic scene understanding. A self-contained frame combines a low-resolution context image with same-frame JPEG region patches. One-frame acknowledgement flow control bounds application backlog, while a separate four-timestamp exchange estimates software latency and information age.',False)
-    writer.p(f'Evaluation includes 1,080 paired encoding samples and {analysis["network_sessions"]} Raspberry Pi network sessions. The study measures regional and background fidelity, synthetic marker preservation, received-frame latency and time-based freshness. Dynamic prioritization does not consistently dominate static regions. Wireless stalls and aggressive budget reduction can reduce task usefulness even when the latency of received frames remains small. Results are restricted to the tested prototype, and do not establish glass-to-glass latency, production benefits or superiority over hardware video codecs.',False)
+    writer.p(f'Evaluation includes 1,080 paired encoding samples, {analysis["network_sessions"]} primary Raspberry Pi network sessions, eight real-input comparison sessions and 28 feedback-ablation sessions. The study measures regional and background fidelity, synthetic marker preservation, received-frame latency and time-based freshness. Dynamic prioritization does not consistently dominate static regions. Wireless stalls and aggressive budget reduction can reduce task usefulness even when the latency of received frames remains small. Results are restricted to the tested prototype, and do not establish glass-to-glass latency, production benefits or superiority over hardware video codecs.',False)
     writer.p('Keywords: task region; adaptive streaming; information age; Raspberry Pi; measurement uncertainty',False)
-    doc.add_page_break();doc.add_heading('目录',level=1)
+    doc.add_page_break();toc_heading=doc.add_paragraph()
+    set_font(toc_heading.add_run('目录'),16,True)
+    toc_heading.paragraph_format.space_after=Pt(12)
     p=doc.add_paragraph();field=xml('w:fldSimple',**{'w:instr':'TOC \\o "1-2" \\h \\z \\u'});p._p.append(field)
     doc.add_page_break()
     tables={
@@ -211,12 +213,35 @@ def main():
             writer.p('P50 与 P95 由各组正式窗口内的全部成功帧合并计算；帧数越少，分位数越不稳定。覆盖率的分母包括关闭后的剩余观察时间。新鲜度阈值为 250 ms，任务列还要求合成标记保真。它们不能与无相同任务定义的外部论文百分比直接比较。')
             rows=[[r['kbps'],NAMES[r['policy']],f'{100*r["fresh_min"]:.1f} 至 {100*r["fresh_max"]:.1f}',f'{100*r["conservative_fresh_fraction"]:.1f}',r['clock_warning_sessions']] for r in analysis['network']]
             writer.table('表 6-4 波动范围与校时敏感性 非置信区间',['kbps','策略','新鲜率范围 %','保守新鲜 %','校时警告'],rows,[1.7,3,5.3,3.5,3])
-            doc.add_picture(str(freshness_chart(analysis['network'])),width=Inches(6.4))
+            doc.add_picture(str(freshness_chart(analysis['network'])),width=Inches(6.1))
+            doc.paragraphs[-1].paragraph_format.keep_with_next=True
             writer.caption('图 6-1 受限链路新鲜时间覆盖率 250 ms 门限 每组四个单元')
         elif key=='live':
             writer.p('真实摄像头通过只读共享内存接入。此次验收没有停止旧 USB 采集器，也没有为新容器授予 USB 设备权限。下表仅描述本次摄像头场景中的软件发布至 Python 解码链路，不代表工艺识别准确率。')
             rows=[[r['kbps'],NAMES[r['policy']],r['frames'],f'{r["fps"]:.2f}',f'{r["latency_p50_ms"]:.1f}' if r['latency_p50_ms'] is not None else '无帧',f'{100*r["fresh_time_fraction_250ms"]:.1f}'] for r in analysis['live']]
             writer.table('表 6-5 真实摄像头只读链路',['kbps','策略','帧数','fps','P50 ms','新鲜 %'],rows,[2,3.5,2,2.5,3.5,2.5])
+        elif key=='feedback':
+            fixture=analysis['feedback_ablations']['feedback-pi-fixture.json']
+            live=analysis['feedback_ablations']['feedback-pi-live.json']
+            writer.p(f'抗抖动反馈补充实验包含合成输入 {fixture["sessions"]} 个测量单元，以及真实摄像头 {live["sessions"]} 个测量单元。单次确认与五样本中值两种模式交替测试；编码策略均为动态区域优先。下表不与原始四策略数据混合求总体分位数。')
+            rows=[]
+            for r in fixture['groups']:
+                rows.append([r['kbps'],'单次确认' if r['feedback']=='single' else '五样本中值',f'{r["latency_p50_ms"]:.1f}' if r['latency_p50_ms'] is not None else '无帧',
+                             f'{r["latency_p95_ms"]:.1f}' if r['latency_p95_ms'] is not None else '无帧',f'{100*r["fresh_fraction"]:.1f}',f'{100*r["task_fraction"]:.1f}',f'{100*r["patch_frame_fraction"]:.1f}'])
+            writer.table('表 6-6 反馈消融 每档两场景各重复两次',['kbps','反馈','P50 ms','P95 ms','新鲜 %','任务 %','重点帧 %'],rows,[1.5,3.3,2.5,2.5,2.1,2.1,2.5])
+            comparisons=[]
+            for rate in (512,1024,2048):
+                single=next(r for r in fixture['groups'] if r['kbps']==rate and r['feedback']=='single')
+                median=next(r for r in fixture['groups'] if r['kbps']==rate and r['feedback']=='median')
+                comparisons.append(f'{rate} kbps 下，新鲜任务覆盖率从 {100*single["task_fraction"]:.1f}% 变为 {100*median["task_fraction"]:.1f}%，新鲜时间覆盖率从 {100*single["fresh_fraction"]:.1f}% 变为 {100*median["fresh_fraction"]:.1f}%')
+            writer.p('本次观测中，'+'；'.join(comparisons)+'。因此，中值反馈并非每档任务指标都更好，也不能将合成输入的优势直接推广至真实摄像头。')
+            rows=[]
+            for r in live['groups']:
+                rows.append(['单次确认' if r['feedback']=='single' else '五样本中值',f'{r["mean_bytes"]/1000:.2f}',f'{100*r["patch_frame_fraction"]:.1f}',
+                             f'{r["latency_p50_ms"]:.1f}' if r['latency_p50_ms'] is not None else '无帧',f'{100*r["fresh_fraction"]:.1f}',r['clock_warnings']])
+            writer.table('表 6-7 真实输入反馈对照 1200 kbps 每模式重复两次',['反馈','包 KB','重点帧 %','P50 ms','新鲜 %','校时警告'],rows,[3.5,2.4,2.8,2.8,2.5,2.5])
+            writer.p('本次真实输入的中值模式新鲜覆盖率和重点帧比例均低于单次反馈，且有一个单元出现校时质量警告。测量采用交替顺序但并非同时承受同一无线条件，不能把全部差异归因于滤波器。当前证据不足以支持全面替换，因此最终网页和服务器默认保持单次反馈，中值模式仅作为可选实验配置；两种模式均不构成工业性能保证。')
+            writer.p('重点帧比例表示正式窗口内至少带一个高质量区域块的成功帧占比，分母为成功收到的帧，不是全部观察时间。包长增加和该比例提高都不能替代任务真值。消融结果文件的完整 SHA256 见附录。')
     content=(OUT/'manuscript.md').read_text(encoding='utf-8')
     for block in content.split('\n\n'):
         block=block.strip()
@@ -228,12 +253,15 @@ def main():
         elif block.startswith('{{table:'): writer.table(*tables[block[8:-2]])
         elif block.startswith('{{equation:'): writer.equation(block[11:-2])
         elif block.startswith('{{figure:'):
-            doc.add_picture(str(architecture()),width=Inches(6.4));writer.caption('图 3-1 独立传输系统数据流与确认路径')
+            doc.add_picture(str(architecture()),width=Inches(6.4));doc.paragraphs[-1].paragraph_format.keep_with_next=True;writer.caption('图 3-1 独立传输系统数据流与确认路径')
         elif block.startswith('{{results:'): result_block(block[10:-2])
-        else: writer.p(block,not block.startswith('['))
+        else:
+            p=writer.p(block,not block.startswith('['))
+            if block.startswith('['):p.alignment=WD_ALIGN_PARAGRAPH.LEFT
     doc.add_page_break();doc.add_heading('附录 实验复现与文件索引',level=1)
     writer.p('公开代码保存在独立分支 research/semantic-adaptive-v2。先按 README 创建虚拟环境或独立容器，再运行单元测试、配对试验和网络试验。主机和容器路径、镜像来源以及依赖版本均有记录；不得把私有现场图像或数据库一并上传。')
-    for name,digest in analysis['source_sha256'].items():
+    digests={**analysis['source_sha256'],**{name:row['sha256'] for name,row in analysis['feedback_ablations'].items()}}
+    for name,digest in digests.items():
         writer.p(name,False);p=writer.p('SHA256 '+digest,False)
         for run in p.runs: set_font(run,9)
     writer.p('network-pi-fixture-pilot.json 是发现问题时保留的预实验，不进入正式汇总。network-pc.json 和 rd-pc.json 是电脑预实验，也不混入树莓派主表。analysis.json 记录独立复核后的数值和来源摘要。')

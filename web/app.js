@@ -17,16 +17,16 @@ function clockConnect(token){
 }
 async function connect(){
   for(const input of document.querySelectorAll('input[type=number]'))if(!input.reportValidity())return;
-  if(regions.some(r=>![r.x,r.y,r.w,r.h,r.weight].every(Number.isFinite)||r.x<0||r.y<0||r.w<.02||r.h<.02||r.x+r.w>1||r.y+r.h>1||r.weight<1||r.weight>10)||regions.reduce((n,r)=>n+r.w*r.h,0)>.5){$('notice').textContent='区域须位于画面内，合计面积不超过 50%，权重为 1 至 10。';return;}
+  if(regions.some(r=>![r.x,r.y,r.w,r.h,r.weight].every(Number.isFinite)||r.x<0||r.y<0||r.w<.02||r.h<.02||r.x+r.w>1||r.y+r.h>1||r.weight<1||r.weight>10)||regions.reduce((n,r)=>n+r.w*r.h,0)>.5){$('notice').dataset.kind='parameter';$('notice').textContent='区域须位于画面内，合计面积不超过 50%，权重为 1 至 10。';return;}
   const previous=ws;stop();const token=epoch;frames=overruns=0;latest=null;samples=[];history=[];$('frames').textContent='0';$('overruns').textContent='0';for(const id of ['latency','age','encoding','budget','level','patches'])$(id).textContent='--';$('notice').textContent='';$('empty').hidden=false;$('empty').textContent='等待帧';$('status').textContent='连接中';
   if(previous&&previous.readyState!==WebSocket.CLOSED)await new Promise(resolve=>{const timer=setTimeout(resolve,1000);previous.addEventListener('close',()=>{clearTimeout(timer);resolve();},{once:true});});
   if(token!==epoch)return;
   clockConnect(token);const connection=new WebSocket(url('/stream'));ws=connection;connection.binaryType='arraybuffer';
-  connection.onopen=()=>connection.send(JSON.stringify({type:'start',mode:$('mode').value,kbps:+$('kbps').value,fps:+$('fps').value,seed:+$('seed').value,regions}));
+  connection.onopen=()=>connection.send(JSON.stringify({type:'start',mode:$('mode').value,feedback:$('feedback').value,kbps:+$('kbps').value,fps:+$('fps').value,seed:+$('seed').value,regions}));
   let decoding=false;
   connection.onmessage=async event=>{
     if(token!==epoch)return;
-    if(typeof event.data==='string'){try{const m=JSON.parse(event.data);if(m.type==='ready'){$('status').textContent='传输中';$('source').textContent=m.source==='SYNTHETIC_TASK_FIXTURE'?'合成实验输入 · 非实机画面':'实时摄像头 · 只读输入';$('timing-kind').textContent=m.source==='LIVE_READ_ONLY_ADAPTER'?'采集发布时刻':m.source==='LIVE_USB_NEW_CAPTURE'?'读取完成时刻':'生成开始时刻';}else if(m.type==='source_error')$('notice').textContent='输入暂不可用：'+m.reason;}catch{}return;}
+    if(typeof event.data==='string'){try{const m=JSON.parse(event.data);if(m.type==='ready'){$('status').textContent='传输中';$('source').textContent=m.source==='SYNTHETIC_TASK_FIXTURE'?'合成实验输入 · 非实机画面':'实时摄像头 · 只读输入';$('timing-kind').textContent=m.source==='LIVE_READ_ONLY_ADAPTER'?'采集发布时刻':m.source==='LIVE_USB_NEW_CAPTURE'?'读取完成时刻':'生成开始时刻';}else if(m.type==='source_error'){$('notice').dataset.kind='source';$('notice').textContent='输入暂不可用：'+m.reason;}}catch{}return;}
     if(decoding){connection.close(1008,'Multiple in-flight frames');return;}decoding=true;const bitmaps=[];
     try{
       const {meta,images}=unpack(event.data);
@@ -37,7 +37,7 @@ async function connect(){
       const now=performance.now(),latency=clock.age(meta.captured_ms,now);latest={meta,shown:now};frames++;if(meta.budget_exceeded)overruns++;
       const point={time:now,frame:meta.id,latency_ms:latency,bytes:event.data.byteLength,encode_ms:meta.encode_ms,level:meta.level,budget_bytes:meta.budget_bytes,budget_exceeded:meta.budget_exceeded,parts:meta.parts.map(p=>p.name)};
       samples.push(point);history.push(point);if(history.length>10000)history.shift();samples=samples.filter(p=>now-p.time<60000);
-      metric('latency',latency);metric('encoding',meta.encode_ms);metric('budget',meta.budget_bytes/1000);$('frames').textContent=frames;$('overruns').textContent=overruns;$('level').textContent=meta.level;$('patches').textContent=meta.parts.slice(1).map(p=>p.name).join(', ')||'无';$('empty').hidden=true;$('notice').textContent='';
+      metric('latency',latency);metric('encoding',meta.encode_ms);metric('budget',meta.budget_bytes/1000);$('frames').textContent=frames;$('overruns').textContent=overruns;$('level').textContent=meta.level;$('patches').textContent=meta.parts.slice(1).map(p=>p.name).join(', ')||'无';$('empty').hidden=true;if($('notice').dataset.kind==='source')$('notice').textContent='';
       connection.send(JSON.stringify({type:'ack',id:meta.id}));
     }catch(error){if(token===epoch){$('notice').textContent=error.message;connection.close(1008,'Invalid frame');}}
     finally{bitmaps.forEach(b=>b.close());decoding=false;}

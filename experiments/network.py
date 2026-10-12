@@ -36,15 +36,17 @@ async def calibrate(client,url):
     return min(samples,key=lambda sample:sample['rtt_ms'])
 
 
-async def cell(url,policy,kbps,seed,duration,warmup):
+async def cell(url,policy,kbps,seed,duration,warmup,feedback="single"):
     parsed=urlsplit(url)
     records=[];raw=[];failures=[]
     async with ClientSession(timeout=ClientTimeout(total=None,sock_connect=5,sock_read=10)) as client:
         clock=await calibrate(client,url)
         async with RateRelay(parsed.hostname,parsed.port or 80,kbps) as relay:
             async with client.ws_connect(f'http://127.0.0.1:{relay.listen_port}/stream',compress=0,max_msg_size=4194304) as ws:
-                await ws.send_json({'type':'start','mode':policy,'kbps':kbps,'fps':10,'seed':seed})
+                await ws.send_json({'type':'start','mode':policy,'kbps':kbps,'fps':10,'seed':seed,'feedback':feedback})
                 ready=await asyncio.wait_for(ws.receive_json(),5)
+                if ready.get('feedback','single')!=feedback:
+                    raise ValueError('Server feedback mode does not match the requested experiment')
                 started=mono_ms();deadline=started+(duration+warmup)*1000
                 while mono_ms()<deadline:
                     try:
@@ -85,7 +87,7 @@ async def cell(url,policy,kbps,seed,duration,warmup):
         conservative.append(bool(age is not None and age>=0 and age+clock_error<=250))
         task.append((records[j].get('weighted_marker_success',0) if j>=0 else 0)*fresh[-1])
     latencies=[r['latency_ms'] for r in selected]
-    return {'policy':policy,'kbps':kbps,'seed':seed,'source':ready['source'],'duration_s':duration,'warmup_s':warmup,
+    return {'policy':policy,'feedback':feedback,'kbps':kbps,'seed':seed,'source':ready['source'],'duration_s':duration,'warmup_s':warmup,
             'clock':clock,'clock_after':clock_end,'clock_offset_shift_ms':clock_end['offset_ms']-clock['offset_ms'],
             'clock_diagnostic_envelope_ms':clock_error,'clock_quality_warning':clock['rtt_ms']>20 or abs(clock_end['offset_ms']-clock['offset_ms'])>20,
             'frames':len(selected),'fps':len(selected)/duration,'payload_mbps':sum(r['bytes'] for r in selected)*8/duration/1e6,

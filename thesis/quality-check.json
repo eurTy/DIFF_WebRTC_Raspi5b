@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-12",
+  "deliverable": "semantic-adaptive-thesis.docx",
+  "sha256": "5088bccfffe80266300f5560d34a220851542c220cfeefbe946b9de7a436a69f",
+  "pages": 30,
+  "editable_tables": 10,
+  "native_omml_equations": 8,
+  "figures": 2,
+  "word_toc": 1,
+  "renderer_attempt": "Packaged render_docx.py unavailable: soffice.exe not installed",
+  "verified_renderer": "Hidden Microsoft Word COM export, followed by pypdfium2 rasterization",
+  "raster_scale": 1.6,
+  "pages_visually_reviewed": 30,
+  "text_rectangles_outside_pages": 0,
+  "private_camera_media_in_document": false,
+  "school_template_applied": false,
+  "status": "RESEARCH_DRAFT_NOT_PRODUCTION_VALIDATION"
+}

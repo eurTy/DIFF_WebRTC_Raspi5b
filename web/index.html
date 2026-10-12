@@ -9,6 +9,7 @@
 <label>上限 kbps<input id="kbps" type="number" min="128" max="12000" step="1" value="1200"></label>
 <label>目标 fps<input id="fps" type="number" min="2" max="20" value="10"></label>
 <label id="fixture-control">场景<select id="seed"><option value="6">低纹理</option><option value="7" selected>中纹理</option><option value="8">高纹理</option></select></label>
+<label>预算反馈<select id="feedback"><option value="single">单次确认</option><option value="median">五样本中值</option></select></label>
 <div class="commands"><button id="connect" title="应用参数并连接" aria-label="应用参数并连接"><i data-lucide="play"></i></button><button id="pause" title="停止接收" aria-label="停止接收"><i data-lucide="pause"></i></button><button id="download" title="导出测量数据" aria-label="导出测量数据"><i data-lucide="download"></i></button></div>
 </section>
 <div class="workspace">
