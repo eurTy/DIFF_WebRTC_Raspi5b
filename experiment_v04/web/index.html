@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>任务新鲜度实验 | SVT</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div><strong>任务新鲜度实验</strong><small>SVT · v0.4 独立实验</small></div>
+    <span id="status" role="status">连接中</span>
+  </header>
+  <main>
+    <section class="controls" aria-label="实验配置">
+      <label>网络预算<select id="preset"><option value="smooth">流畅观察 · 2400 kbps</option><option value="limited">受限对照 · 1200 kbps</option><option value="custom">自定义</option></select></label>
+      <label>kbps<input id="kbps" type="number" min="128" max="12000" value="2400"></label>
+      <label>目标 fps<input id="fps" type="number" min="2" max="20" value="20"></label>
+      <div class="commands"><button id="connect" title="应用参数并连接" aria-label="应用参数并连接"><i data-lucide="play"></i></button><button id="pause" title="停止接收" aria-label="停止接收"><i data-lucide="pause"></i></button><button id="download" title="导出测量数据" aria-label="导出测量数据"><i data-lucide="download"></i></button></div>
+    </section>
+    <div class="viewer">
+      <div class="source-line"><span id="source">等待输入</span><span>只读观察 · 无设备控制</span></div>
+      <div class="stage"><canvas id="video" width="1280" height="720" aria-label="实时视频"></canvas><canvas id="regions" width="1280" height="720" aria-hidden="true"></canvas><span id="empty">等待帧</span><span id="stale" hidden>画面已过期</span></div>
+      <div id="notice" role="alert"></div>
+      <div class="metrics">
+        <div><span>当前帧龄</span><strong id="age">--</strong><small>ms</small></div>
+        <div><span>软件段延迟</span><strong id="latency">--</strong><small>ms</small></div>
+        <div><span>显示帧率</span><strong id="rate">--</strong><small>fps</small></div>
+        <div><span>重点块完成</span><strong id="patches">0</strong><small>次</small></div>
+        <div><span>过期拒绝</span><strong id="rejected">0</strong><small>帧</small></div>
+        <div><span>有效负载</span><strong id="bandwidth">--</strong><small>Mbps</small></div>
+      </div>
+      <div class="detail"><span id="sync">校时中</span><span id="region-age">重点区域待刷新</span></div>
+    </div>
+  </main>
+  <footer>720p 重建画布 · 软件时间戳估计，不等于曝光到屏幕的光学端到端延迟</footer>
+  <script src="/lucide.min.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

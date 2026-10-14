@@ -1,0 +1,6 @@
+**
+!Dockerfile.experiment
+!experiment_v04/
+!experiment_v04/*.py
+!experiment_v04/web/
+!experiment_v04/web/*

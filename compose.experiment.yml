@@ -1,0 +1,27 @@
+name: semantic-adaptive-v04
+services:
+  viewer:
+    build:
+      context: .
+      dockerfile: Dockerfile.experiment
+    image: semantic-adaptive-v04:local
+    command: [python, -m, experiment_v04.server, --host, 0.0.0.0, --port, "8089", --source, shm, --source-path, /input/video_shm]
+    ports: ["8089:8089"]
+    restart: unless-stopped
+    init: true
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    group_add: ["${SHM_READER_GID:?Set SHM_READER_GID to the input directory group}"]
+    volumes:
+      - type: bind
+        source: /dev/shm/pi-video
+        target: /input
+        read_only: true
+        bind: {create_host_path: false}
+    tmpfs: ["/tmp:size=64m,mode=1777"]
+    cpus: 1.0
+    pids_limit: 64
+    logging:
+      driver: json-file
+      options: {max-size: 5m, max-file: "2"}

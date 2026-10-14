@@ -1,0 +1,7 @@
+FROM semantic-adaptive-v2:local
+WORKDIR /app
+COPY --chown=10001:10001 experiment_v04 ./experiment_v04
+USER 10001:10001
+EXPOSE 8089
+HEALTHCHECK --interval=30s --timeout=3s CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8089/api/status',timeout=2)"
+CMD ["python","-m","experiment_v04.server","--host","0.0.0.0","--port","8089"]
