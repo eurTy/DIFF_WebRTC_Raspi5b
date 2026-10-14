@@ -21,7 +21,7 @@ class TaskFreshnessEncoder(Encoder):
             change = float(np.abs(small.astype(np.int16) - old).mean() / 255) if old is not None else 0.0
             self.previous[region.name] = small.astype(np.int16)
             age = max(0.0, now - self.refresh.get(region.name, self.started_ms))
-            # Confirmed display age is a task debt, not merely time since send.
+            # ACK arrival bounds confirmed display age; it is not the phone's draw timestamp.
             debt = 1.0 + min(age / 250.0, 6.0)
             expected_bytes = self.last_piece_bytes.get(region.name, max(2000, int(w * h * .035)))
             score = region.weight * (1.0 + min(change * 8.0, 2.0)) * debt / expected_bytes
