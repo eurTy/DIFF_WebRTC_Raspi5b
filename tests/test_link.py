@@ -5,6 +5,13 @@ from experiments.link import RateRelay
 
 
 class Relay(unittest.IsolatedAsyncioTestCase):
+    def test_profile_validation_and_boundaries(self):
+        relay=RateRelay('localhost',1,1200)
+        relay.set_profile([(8,128),(18,512),(28,1200)])
+        self.assertEqual([relay.rate_at(t) for t in [0,7.999,8,17.999,18,28]],[1200,1200,128,128,512,1200])
+        for values in [[(1,0)],[(1,128),(1,512)],[(float('nan'),128)]]:
+            with self.assertRaises(ValueError):relay.set_profile(values)
+
     async def test_payload_integrity_rate_and_cleanup(self):
         async def send(reader,writer):
             await reader.readexactly(1)

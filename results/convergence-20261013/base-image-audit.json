@@ -1,0 +1,19 @@
+{
+  "verified_at_date": "2026-10-14",
+  "method": "Read Docker Hub index, ARM64 manifest and config; compare rootfs diff_ids and environment with Pi docker image inspect",
+  "registry": "registry-1.docker.io/library/python",
+  "official_index_sha256": "34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+  "official_arm64_manifest_sha256": "739ba32ae445e8d58f3d90feb85f83bebc8346f8dd280fa1eb5848f4ff1ed163",
+  "official_config_sha256": "eb7d16fec874f15b584063275012ac719885a2b87574d124c0da9c156d504629",
+  "imported_local_image_id": "sha256:3a5f23a07785b83db970154ec61ff348c850d0c91cd99274776c9a0b00796a59",
+  "imported_id_is_registry_manifest": false,
+  "architecture": "arm64",
+  "python_version": "3.12.15",
+  "rootfs_and_env_match": true,
+  "rootfs_diff_ids": [
+    "sha256:dca69811453d69d10b6c0345a5c49147162abe20a2f77802d66efc60667949ea",
+    "sha256:aa7917539601453a983066ad360b759c92c30002edee05749dfe4baa9fa4dde8",
+    "sha256:54e908385c73b1f7a6708f9807d9da4cc2a1e7f4cc4f17e00e6e90a3d8c5007f",
+    "sha256:0e4e1e69caa145889e7738a6089b168f6c66c26184bba2c41b1c6a3e0bb21ff7"
+  ]
+}

@@ -1,0 +1,10 @@
+[Unit]
+Description=Recover known camera device-return failure only
+
+[Service]
+Type=oneshot
+User=eur
+ExecStart=/usr/bin/python3 /home/eur/semantic-adaptive-v2/ops/capture_guard.py --apply
+TimeoutStartSec=35
+NoNewPrivileges=yes
+UMask=0077

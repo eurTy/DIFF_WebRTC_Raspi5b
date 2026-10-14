@@ -1,0 +1,409 @@
+{
+  "started_at": "2026-10-14T07:47:42.804450+00:00",
+  "complete": true,
+  "url": "http://127.0.0.1:8088/api/status",
+  "platform": "Linux",
+  "scope": "Sequential read-only probes; not video latency or a synchronized path experiment",
+  "proxy": "Bypassed only inside this diagnostic process",
+  "http": [
+    {
+      "at": "2026-10-14T07:47:42.804506+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1273.427577331,
+        "sessions": 1,
+        "events": {
+          "displayed": 8362,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 3.491134000114471
+    },
+    {
+      "at": "2026-10-14T07:47:43.008078+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1273.631288355,
+        "sessions": 1,
+        "events": {
+          "displayed": 8366,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 3.542670999877373
+    },
+    {
+      "at": "2026-10-14T07:47:43.211692+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1273.832799358,
+        "sessions": 1,
+        "events": {
+          "displayed": 8370,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.4324460000807449
+    },
+    {
+      "at": "2026-10-14T07:47:43.413264+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1274.037057457,
+        "sessions": 1,
+        "events": {
+          "displayed": 8374,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 4.228245999911451
+    },
+    {
+      "at": "2026-10-14T07:47:43.617564+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1274.238647516,
+        "sessions": 1,
+        "events": {
+          "displayed": 8378,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.4172240000789316
+    },
+    {
+      "at": "2026-10-14T07:47:43.819056+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1274.441224613,
+        "sessions": 1,
+        "events": {
+          "displayed": 8382,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 2.475650999940626
+    },
+    {
+      "at": "2026-10-14T07:47:44.021601+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1274.642806764,
+        "sessions": 1,
+        "events": {
+          "displayed": 8386,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.4230760000373266
+    },
+    {
+      "at": "2026-10-14T07:47:44.223094+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1274.848993273,
+        "sessions": 1,
+        "events": {
+          "displayed": 8390,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 6.209303999867188
+    },
+    {
+      "at": "2026-10-14T07:47:44.429377+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1275.053986336,
+        "sessions": 1,
+        "events": {
+          "displayed": 8394,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 5.010246999972878
+    },
+    {
+      "at": "2026-10-14T07:47:44.636340+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1275.257719749,
+        "sessions": 1,
+        "events": {
+          "displayed": 8398,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.6245580000031623
+    },
+    {
+      "at": "2026-10-14T07:47:44.838035+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1275.459306048,
+        "sessions": 1,
+        "events": {
+          "displayed": 8402,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.6054830000484799
+    },
+    {
+      "at": "2026-10-14T07:47:45.039716+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1275.66106807,
+        "sessions": 1,
+        "events": {
+          "displayed": 8406,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.983243000040602
+    },
+    {
+      "at": "2026-10-14T07:47:45.241772+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1275.86290887,
+        "sessions": 1,
+        "events": {
+          "displayed": 8410,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.4611680001053173
+    },
+    {
+      "at": "2026-10-14T07:47:45.443340+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1276.064515318,
+        "sessions": 1,
+        "events": {
+          "displayed": 8414,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.493464000077438
+    },
+    {
+      "at": "2026-10-14T07:47:45.644909+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1276.266125599,
+        "sessions": 1,
+        "events": {
+          "displayed": 8418,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.419335000036881
+    },
+    {
+      "at": "2026-10-14T07:47:45.848337+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1276.469770493,
+        "sessions": 1,
+        "events": {
+          "displayed": 8422,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.6997059999539488
+    },
+    {
+      "at": "2026-10-14T07:47:46.050108+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1276.6713330889997,
+        "sessions": 1,
+        "events": {
+          "displayed": 8426,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.6086870000435738
+    },
+    {
+      "at": "2026-10-14T07:47:46.251792+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1276.873089629,
+        "sessions": 1,
+        "events": {
+          "displayed": 8430,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.6215949999605073
+    },
+    {
+      "at": "2026-10-14T07:47:46.453487+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1277.074601818,
+        "sessions": 1,
+        "events": {
+          "displayed": 8434,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1.3399270001173136
+    },
+    {
+      "at": "2026-10-14T07:47:46.654907+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1277.276929118,
+        "sessions": 1,
+        "events": {
+          "displayed": 8438,
+          "delivery_timeout": 37,
+          "discarded": 287,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 2.241836000166586
+    }
+  ],
+  "ping": {
+    "192.168.3.1": {
+      "returncode": 0,
+      "stdout": "PING 192.168.3.1 (192.168.3.1) 56(84) bytes of data.\n64 bytes from 192.168.3.1: icmp_seq=1 ttl=64 time=8.07 ms\n64 bytes from 192.168.3.1: icmp_seq=2 ttl=64 time=1.22 ms\n64 bytes from 192.168.3.1: icmp_seq=3 ttl=64 time=4.73 ms\n64 bytes from 192.168.3.1: icmp_seq=4 ttl=64 time=4.36 ms\n64 bytes from 192.168.3.1: icmp_seq=5 ttl=64 time=5.89 ms\n64 bytes from 192.168.3.1: icmp_seq=6 ttl=64 time=1.09 ms\n64 bytes from 192.168.3.1: icmp_seq=7 ttl=64 time=1.18 ms\n64 bytes from 192.168.3.1: icmp_seq=8 ttl=64 time=3.66 ms\n64 bytes from 192.168.3.1: icmp_seq=9 ttl=64 time=5.87 ms\n64 bytes from 192.168.3.1: icmp_seq=10 ttl=64 time=2.19 ms\n64 bytes from 192.168.3.1: icmp_seq=11 ttl=64 time=1.21 ms\n64 bytes from 192.168.3.1: icmp_seq=12 ttl=64 time=1.50 ms\n64 bytes from 192.168.3.1: icmp_seq=13 ttl=64 time=6.56 ms\n64 bytes from 192.168.3.1: icmp_seq=14 ttl=64 time=1.41 ms\n64 bytes from 192.168.3.1: icmp_seq=15 ttl=64 time=2.04 ms\n64 bytes from 192.168.3.1: icmp_seq=16 ttl=64 time=34.5 ms\n64 bytes from 192.168.3.1: icmp_seq=17 ttl=64 time=6.34 ms\n64 bytes from 192.168.3.1: icmp_seq=18 ttl=64 time=6.69 ms\n64 bytes from 192.168.3.1: icmp_seq=19 ttl=64 time=2.76 ms\n64 bytes from 192.168.3.1: icmp_seq=20 ttl=64 time=1.09 ms\n\n--- 192.168.3.1 ping statistics ---\n20 packets transmitted, 20 received, 0% packet loss, time 3813ms\nrtt min/avg/max/mdev = 1.087/5.115/34.463/7.102 ms\n",
+      "stderr": "",
+      "elapsed_s": 3.8170213770001737
+    },
+    "192.168.3.3": {
+      "returncode": 0,
+      "stdout": "PING 192.168.3.3 (192.168.3.3) 56(84) bytes of data.\n64 bytes from 192.168.3.3: icmp_seq=1 ttl=128 time=7.58 ms\n64 bytes from 192.168.3.3: icmp_seq=2 ttl=128 time=499 ms\n64 bytes from 192.168.3.3: icmp_seq=3 ttl=128 time=558 ms\n64 bytes from 192.168.3.3: icmp_seq=4 ttl=128 time=355 ms\n64 bytes from 192.168.3.3: icmp_seq=5 ttl=128 time=222 ms\n64 bytes from 192.168.3.3: icmp_seq=6 ttl=128 time=143 ms\n64 bytes from 192.168.3.3: icmp_seq=7 ttl=128 time=952 ms\n64 bytes from 192.168.3.3: icmp_seq=8 ttl=128 time=748 ms\n64 bytes from 192.168.3.3: icmp_seq=9 ttl=128 time=544 ms\n64 bytes from 192.168.3.3: icmp_seq=10 ttl=128 time=779 ms\n64 bytes from 192.168.3.3: icmp_seq=11 ttl=128 time=575 ms\n64 bytes from 192.168.3.3: icmp_seq=12 ttl=128 time=376 ms\n64 bytes from 192.168.3.3: icmp_seq=13 ttl=128 time=472 ms\n64 bytes from 192.168.3.3: icmp_seq=14 ttl=128 time=2312 ms\n64 bytes from 192.168.3.3: icmp_seq=15 ttl=128 time=2109 ms\n64 bytes from 192.168.3.3: icmp_seq=16 ttl=128 time=1908 ms\n64 bytes from 192.168.3.3: icmp_seq=17 ttl=128 time=1705 ms\n64 bytes from 192.168.3.3: icmp_seq=18 ttl=128 time=1501 ms\n64 bytes from 192.168.3.3: icmp_seq=19 ttl=128 time=1297 ms\n64 bytes from 192.168.3.3: icmp_seq=20 ttl=128 time=1093 ms\n\n--- 192.168.3.3 ping statistics ---\n20 packets transmitted, 20 received, 0% packet loss, time 3841ms\nrtt min/avg/max/mdev = 7.580/907.779/2312.018/663.517 ms, pipe 7\n",
+      "stderr": "",
+      "elapsed_s": 4.936166582999931
+    }
+  },
+  "power": {
+    "returncode": 0,
+    "stdout": "throttled=0x0\n",
+    "stderr": "",
+    "elapsed_s": 0.0015422980000039388
+  },
+  "wifi_power": {
+    "returncode": 0,
+    "stdout": "Power save: off\n",
+    "stderr": "",
+    "elapsed_s": 0.0008063160000801872
+  },
+  "uptime": {
+    "returncode": 0,
+    "stdout": "1319.60 5051.28\n",
+    "stderr": "",
+    "elapsed_s": 0.0016006129999368568
+  },
+  "boot_id": {
+    "returncode": 0,
+    "stdout": "7c25d3e1-7378-4f38-af6a-557eddc811b3\n",
+    "stderr": "",
+    "elapsed_s": 0.0016712429999188316
+  },
+  "finished_at": "2026-10-14T07:47:55.616229+00:00"
+}

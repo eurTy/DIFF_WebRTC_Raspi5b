@@ -1,0 +1,385 @@
+{
+  "started_at": "2026-10-14T07:47:03.138796+00:00",
+  "complete": true,
+  "url": "http://192.168.3.19:8088/api/status",
+  "platform": "Windows",
+  "scope": "Sequential read-only probes; not video latency or a synchronized path experiment",
+  "proxy": "Bypassed only inside this diagnostic process",
+  "http": [
+    {
+      "at": "2026-10-14T07:47:03.230509+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1233.646703018,
+        "sessions": 1,
+        "events": {
+          "displayed": 7771,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 47.000000000025466
+    },
+    {
+      "at": "2026-10-14T07:47:03.480183+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1233.868270582,
+        "sessions": 1,
+        "events": {
+          "displayed": 7776,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 16.000000000076398
+    },
+    {
+      "at": "2026-10-14T07:47:03.700693+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1234.1204464799998,
+        "sessions": 1,
+        "events": {
+          "displayed": 7780,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 47.000000000025466
+    },
+    {
+      "at": "2026-10-14T07:47:03.952536+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1234.3703287449998,
+        "sessions": 1,
+        "events": {
+          "displayed": 7785,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 47.000000000025466
+    },
+    {
+      "at": "2026-10-14T07:47:04.201359+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1234.6141031519999,
+        "sessions": 1,
+        "events": {
+          "displayed": 7790,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 47.000000000025466
+    },
+    {
+      "at": "2026-10-14T07:47:04.446777+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1234.8872758339999,
+        "sessions": 1,
+        "events": {
+          "displayed": 7795,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 62.00000000012551
+    },
+    {
+      "at": "2026-10-14T07:47:04.719954+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1235.148710225,
+        "sessions": 1,
+        "events": {
+          "displayed": 7800,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 62.99999999987449
+    },
+    {
+      "at": "2026-10-14T07:47:04.979774+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1235.378355984,
+        "sessions": 1,
+        "events": {
+          "displayed": 7804,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 31.000000000176442
+    },
+    {
+      "at": "2026-10-14T07:47:05.211551+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1235.62710273,
+        "sessions": 1,
+        "events": {
+          "displayed": 7809,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 47.000000000025466
+    },
+    {
+      "at": "2026-10-14T07:47:05.461569+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1235.846992737,
+        "sessions": 1,
+        "events": {
+          "displayed": 7814,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 15.999999999849024
+    },
+    {
+      "at": "2026-10-14T07:47:05.675998+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1236.0612801999998,
+        "sessions": 1,
+        "events": {
+          "displayed": 7818,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 15.000000000100044
+    },
+    {
+      "at": "2026-10-14T07:47:05.889877+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1236.2879778999998,
+        "sessions": 1,
+        "events": {
+          "displayed": 7822,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 31.99999999992542
+    },
+    {
+      "at": "2026-10-14T07:47:06.121826+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1236.520438589,
+        "sessions": 1,
+        "events": {
+          "displayed": 7826,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 30.99999999994907
+    },
+    {
+      "at": "2026-10-14T07:47:06.351722+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1236.7370688699998,
+        "sessions": 1,
+        "events": {
+          "displayed": 7831,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 16.000000000076398
+    },
+    {
+      "at": "2026-10-14T07:47:06.571318+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1236.956761803,
+        "sessions": 1,
+        "events": {
+          "displayed": 7835,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 15.000000000100044
+    },
+    {
+      "at": "2026-10-14T07:47:06.789904+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1237.181001037,
+        "sessions": 1,
+        "events": {
+          "displayed": 7839,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 15.000000000100044
+    },
+    {
+      "at": "2026-10-14T07:47:07.011141+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1237.399745895,
+        "sessions": 1,
+        "events": {
+          "displayed": 7844,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 15.999999999849024
+    },
+    {
+      "at": "2026-10-14T07:47:07.229824+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1237.7802882629999,
+        "sessions": 1,
+        "events": {
+          "displayed": 7845,
+          "delivery_timeout": 37,
+          "discarded": 277,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 1172.0000000000255
+    },
+    {
+      "at": "2026-10-14T07:47:08.605594+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1238.9962466789998,
+        "sessions": 1,
+        "events": {
+          "displayed": 7846,
+          "delivery_timeout": 37,
+          "discarded": 278,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 297.00000000002547
+    },
+    {
+      "at": "2026-10-14T07:47:09.100637+00:00",
+      "status": 200,
+      "service": {
+        "version": "0.3.0",
+        "source": "shm",
+        "uptime_s": 1239.500538215,
+        "sessions": 1,
+        "events": {
+          "displayed": 7849,
+          "delivery_timeout": 37,
+          "discarded": 278,
+          "invalid_message": 2,
+          "connection_error": 1
+        }
+      },
+      "rtt_ms": 16.000000000076398
+    }
+  ],
+  "ping": {
+    "192.168.3.1": {
+      "returncode": 0,
+      "stdout": "\nPinging 192.168.3.1 with 32 bytes of data:\nReply from 192.168.3.1: bytes=32 time=5ms TTL=64\nReply from 192.168.3.1: bytes=32 time=15ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=2ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=4ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=13ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=1ms TTL=64\nReply from 192.168.3.1: bytes=32 time=2ms TTL=64\nReply from 192.168.3.1: bytes=32 time=4ms TTL=64\nReply from 192.168.3.1: bytes=32 time=4ms TTL=64\nReply from 192.168.3.1: bytes=32 time=2ms TTL=64\nReply from 192.168.3.1: bytes=32 time=2ms TTL=64\n\nPing statistics for 192.168.3.1:\n    Packets: Sent = 20, Received = 20, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 1ms, Maximum = 15ms, Average = 3ms\n",
+      "stderr": "",
+      "elapsed_s": 19.21900000000005
+    },
+    "192.168.3.19": {
+      "returncode": 0,
+      "stdout": "\nPinging 192.168.3.19 with 32 bytes of data:\nReply from 192.168.3.19: bytes=32 time=2ms TTL=64\nReply from 192.168.3.19: bytes=32 time=2ms TTL=64\nReply from 192.168.3.19: bytes=32 time=32ms TTL=64\nReply from 192.168.3.19: bytes=32 time=13ms TTL=64\nReply from 192.168.3.19: bytes=32 time=3ms TTL=64\nReply from 192.168.3.19: bytes=32 time=28ms TTL=64\nReply from 192.168.3.19: bytes=32 time=5ms TTL=64\nReply from 192.168.3.19: bytes=32 time=1ms TTL=64\nReply from 192.168.3.19: bytes=32 time=2ms TTL=64\nReply from 192.168.3.19: bytes=32 time=2ms TTL=64\nReply from 192.168.3.19: bytes=32 time=3ms TTL=64\nReply from 192.168.3.19: bytes=32 time=393ms TTL=64\nReply from 192.168.3.19: bytes=32 time=1ms TTL=64\nReply from 192.168.3.19: bytes=32 time=2ms TTL=64\nReply from 192.168.3.19: bytes=32 time=1ms TTL=64\nReply from 192.168.3.19: bytes=32 time=1ms TTL=64\nReply from 192.168.3.19: bytes=32 time=5ms TTL=64\nReply from 192.168.3.19: bytes=32 time=2ms TTL=64\nReply from 192.168.3.19: bytes=32 time=8ms TTL=64\nReply from 192.168.3.19: bytes=32 time=12ms TTL=64\n\nPing statistics for 192.168.3.19:\n    Packets: Sent = 20, Received = 20, Lost = 0 (0% loss),\nApproximate round trip times in milli-seconds:\n    Minimum = 1ms, Maximum = 393ms, Average = 25ms\n",
+      "stderr": "",
+      "elapsed_s": 19.218000000000075
+    }
+  },
+  "finished_at": "2026-10-14T07:47:47.766749+00:00"
+}

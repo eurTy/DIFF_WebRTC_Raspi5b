@@ -69,40 +69,41 @@ class BudgetController:
         self.good = 0
         self.acks = 0
         self.slow = 0
-        self.window = 2 if feedback == "realtime" else 1
+        self.window = 1
         self.window_good = 0
+        self.neutral = 0
 
     def observe(self, service_ms, packet_bytes):
         if not math.isfinite(service_ms) or service_ms <= 0 or packet_bytes <= 0:
             return
         self.acks += 1
         if self.feedback == "realtime":
-            if service_ms > max(150, self.period_ms * 1.8):
+            # ACK time includes serialization, RTT and decode. Treat it as a
+            # service bound, not a bandwidth estimate. Drain before probing.
+            if service_ms > self.period_ms * 1.25:
                 self.window = 1
                 self.window_good = 0
-            elif service_ms < min(100, self.period_ms * .8):
-                self.window_good += 1
-                if self.window_good >= 8:
-                    self.window = 2
-            else:
-                self.window_good = 0
-            # A bounded window absorbs moderate RTT. Persistent late delivery
-            # reduces quality; isolated stalls do not ratchet the budget down.
-            if service_ms > max(125, self.period_ms * 1.25):
-                self.slow += 1
                 self.good = 0
-                if self.slow >= 3:
-                    floor = min(self.ceiling, 1800)
-                    factor = .6 if service_ms > 500 else .85
-                    self.budget = max(floor, self.budget * factor)
-                    self.slow = 0
+                self.neutral = 0
+                self.budget = max(min(1400, self.ceiling), min(
+                    self.budget * .78, packet_bytes * self.period_ms / service_ms * .85))
             else:
-                self.slow = 0
-                self.good += 1
-                fast = service_ms < max(90, self.period_ms * .9)
-                if self.good >= (5 if fast else 20):
-                    self.budget = min(self.ceiling, self.budget * (1.08 if fast else 1.04) + 100)
+                fast = service_ms < self.period_ms * .8
+                if fast and self.budget >= self.ceiling * .9:
+                    self.window_good += 1
+                    if self.window_good >= 8:
+                        self.window = 2
+                else:
+                    self.window_good = 0
+                    self.window = 1
+                # Recover after an isolated stall, including the neutral band.
+                # Probe slowly there so a barely adequate link is not flooded.
+                self.good = self.good + 1 if fast else 0
+                self.neutral = 0 if fast else self.neutral + 1
+                if self.good >= 3 or self.neutral >= 20:
+                    self.budget = min(self.ceiling, self.budget * (1.12 if fast else 1.02) + (100 if fast else 20))
                     self.good = 0
+                    self.neutral = 0
             return
         if self.feedback == "median":
             self.history.append((service_ms, packet_bytes))

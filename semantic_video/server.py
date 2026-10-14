@@ -90,7 +90,7 @@ class Service:
             source = FixtureSource(seed) if self.shared is None else self.shared
             await ws.send_json({"type": "ready", "session": identity, "source": source.label,
                                 "policy": mode, "feedback": encoder.control.feedback,
-                                "window": 2 if encoder.control.feedback == "realtime" else 1,
+                                "window": encoder.control.window,
                                 "regions": [asdict(r) for r in regions]})
             if encoder.control.feedback == "realtime":
                 await self.realtime(ws, source, encoder)
@@ -233,7 +233,7 @@ def check_origin(request):
 
 async def static(request):
     name = request.match_info.get("name") or "index.html"
-    allowed = {"index.html", "app.js", "protocol.js", "style.css", "lucide.min.js", "lucide-LICENSE"}
+    allowed = {"index.html", "app.js", "protocol.js", "settings.js", "style.css", "lucide.min.js", "lucide-LICENSE"}
     if name not in allowed:
         raise web.HTTPNotFound()
     return web.FileResponse(PUBLIC / name, headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"})

@@ -1,0 +1,11 @@
+[Unit]
+Description=Check for returned camera after Docker device failure
+
+[Timer]
+OnBootSec=60
+OnUnitInactiveSec=30
+AccuracySec=5
+Unit=semantic-capture-recovery.service
+
+[Install]
+WantedBy=timers.target

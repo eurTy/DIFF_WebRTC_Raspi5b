@@ -36,7 +36,7 @@ async def calibrate(client,url):
     return min(samples,key=lambda sample:sample['rtt_ms'])
 
 
-async def cell(url,policy,kbps,seed,duration,warmup,feedback="single",link_kbps=None):
+async def cell(url,policy,kbps,seed,duration,warmup,feedback="single",link_kbps=None,link_profile=None):
     parsed=urlsplit(url)
     records=[];raw=[];failures=[]
     async with ClientSession(timeout=ClientTimeout(total=None,sock_connect=5,sock_read=10)) as client:
@@ -47,6 +47,7 @@ async def cell(url,policy,kbps,seed,duration,warmup,feedback="single",link_kbps=
                 ready=await asyncio.wait_for(ws.receive_json(),5)
                 if ready.get('feedback','single')!=feedback:
                     raise ValueError('Server feedback mode does not match the requested experiment')
+                if link_profile is not None: relay.set_profile(link_profile)
                 started=mono_ms();deadline=started+(duration+warmup)*1000
                 while mono_ms()<deadline:
                     try:
@@ -61,7 +62,7 @@ async def cell(url,policy,kbps,seed,duration,warmup,feedback="single",link_kbps=
                         latency=shown+clock['offset_ms']-meta['captured_ms']
                         record={'elapsed_ms':shown-started,'latency_ms':latency,'id':meta['id'],'bytes':len(message.data),
                                 'encode_ms':meta['encode_ms'],'level':meta['level'],'budget_bytes':meta['budget_bytes'],'budget_exceeded':meta['budget_exceeded'],
-                                'parts':[p['name'] for p in meta['parts']]}
+                                'parts':[p['name'] for p in meta['parts']],'send_window':meta.get('send_window',1)}
                         records.append(record)
                         # JPEGs are retained only in memory until synthetic fidelity scoring.
                         if ready['source']=='SYNTHETIC_TASK_FIXTURE': raw.append((record,meta,images))
@@ -87,7 +88,7 @@ async def cell(url,policy,kbps,seed,duration,warmup,feedback="single",link_kbps=
         conservative.append(bool(age is not None and age>=0 and age+clock_error<=250))
         task.append((records[j].get('weighted_marker_success',0) if j>=0 else 0)*fresh[-1])
     latencies=[r['latency_ms'] for r in selected]
-    return {'policy':policy,'feedback':feedback,'kbps':kbps,'link_kbps':link_kbps or kbps,'seed':seed,'source':ready['source'],'duration_s':duration,'warmup_s':warmup,
+    return {'policy':policy,'feedback':feedback,'kbps':kbps,'link_kbps':link_kbps or kbps,'link_profile':link_profile,'seed':seed,'source':ready['source'],'duration_s':duration,'warmup_s':warmup,
             'clock':clock,'clock_after':clock_end,'clock_offset_shift_ms':clock_end['offset_ms']-clock['offset_ms'],
             'clock_diagnostic_envelope_ms':clock_error,'clock_quality_warning':clock['rtt_ms']>20 or abs(clock_end['offset_ms']-clock['offset_ms'])>20,
             'frames':len(selected),'fps':len(selected)/duration,'payload_mbps':sum(r['bytes'] for r in selected)*8/duration/1e6,

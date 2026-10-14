@@ -6,11 +6,17 @@
 
 2026-10-13 稳定性更新为 v0.2.0：[技术路线与本科贡献](docs/technical-route-v020.md)。新增保守自适应发送窗口、预算恢复、过期丢弃和自动重连。新实验独立保存在 `results/stability-20261013/`，不覆盖旧论文或旧数据。旧版基线标签为 `semantic-adaptive-v2-20261012`。
 
+当前 v0.3.0：[修正后的技术路线](docs/technical-route-v030.md)、[配对实验与长测证据](results/convergence-20261013/README.md)。修复弱网降预算滞后与混合确认误升档，采用单帧启动；首次断线可恢复，已应用参数和区域可跨刷新保存。新旧策略在本轮 128/512 kbps 对照中的 P95 已接近，但不能据此宣称任务细节全面占优。页面只保存参数，不保存摄像头图像；本地存储不可用时仍能观看。
+
+10 月 14 日续测发现无线客户端之间的严重间歇延迟，具体根因仍待路径隔离。程序回归通过不代表现场已经无卡顿，负面长测与只读网络诊断一并保存，不用前一晚的顺畅片段替代当前状态。
+
 ## 与旧项目的关系
 
 本分支 `research/semantic-adaptive-v2` 从空目录和独立 Git 历史建立，不继承旧应用代码，也不使用旧容器镜像作为基础。第三方 Lucide 图标库及许可证独立保留。旧 `main` 固定在 `d31ff54`，冻结标签为 `observer-v1-frozen-20261011`，整合版在 `release/observer-integrated-v1`。不要把本分支合并覆盖旧 main。
 
 默认输入是明确标记的合成实验场景。唯一可选的旧系统边界是 **只读** 48 字节共享内存头适配器；新版默认不依赖它。切换到该输入不占用 `/dev/video0`，不发送反馈，不修改旧文件。原生 USB 输入另有实现，但未证明可与旧采集器共用同一摄像头，禁止自动停掉旧采集器来抢设备。
+
+上述只读边界指视频容器。另有独立、可选的[主机恢复检查](ops/README.md)：仅在旧采集器因已知 USB 设备缺失错误退出、设备重新出现后，有限尝试启动它，不改旧代码、不处理手动停止、不向新容器挂载 Docker socket。本次现场已启用该 timer，并记录采集器恢复启动这一运行状态变化。
 
 ## 系统边界
 
@@ -55,7 +61,7 @@ SHM_READER_GID=$(stat -c %g /dev/shm/pi-video) docker compose -f compose.yml -f 
 
 只有新版容器会重建。输入共享路径不存在时明确失败，不自动创建替代输入。输入目录现场权限为 0750，因此只为新容器追加目录现有 GID，不对旧目录 chmod、不改所有者、不用 root 绕过权限；挂载仍是只读。默认实验服务不需要共享挂载或该组。远程页面仅用于可信局域网；当前没有用户身份认证、HTTPS 或互联网接入设计，禁止直接暴露公网。
 
-Pi 若不能稳定下载依赖，可使用 `Dockerfile.offline`：先将 `requirements.lock.txt` 对应 ARM64 wheel 放入 `wheelhouse/`，通过 `docker load` 导入官方 Python 基础镜像，再执行 `docker build --network=none -f Dockerfile.offline -t semantic-adaptive-v2:local .`。基础镜像和工具来源见 `deployment-provenance.json`。不把 wheel、镜像 tar 或现场媒体提交到 Git。
+Pi 若不能稳定下载依赖，可使用 `Dockerfile.offline`：先将 `requirements.lock.txt` 对应 ARM64 wheel 放入 `wheelhouse/`，通过 `docker load` 导入官方 Python 基础镜像，核对文件系统层后将其标为 `python:semantic-v030-base`，再执行 `docker build --network=none -f Dockerfile.offline -t semantic-adaptive-v2:local .`。基础镜像和工具来源见 `deployment-provenance.json`，本轮层摘要核对见 `results/convergence-20261013/base-image-audit.json`。在线 Dockerfile 固定官方多架构索引；离线导入的配置摘要不是官方清单摘要，不能拿它作为新的网络拉取地址。不把 wheel、镜像 tar 或现场媒体提交到 Git。
 
 ## 验证与实验
 

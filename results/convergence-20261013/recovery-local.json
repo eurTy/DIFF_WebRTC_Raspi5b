@@ -1,0 +1,18 @@
+{
+  "url": "http://127.0.0.1:18090",
+  "checks": [
+    {
+      "test": "blackhole_recovery_keeps_config",
+      "recovery_ms": 1315
+    },
+    {
+      "test": "late_frames_discarded",
+      "count": 2
+    },
+    {
+      "test": "pause_cancels_retry",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

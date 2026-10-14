@@ -98,7 +98,8 @@ class Encoder:
         else:
             # Preserve the best fitting context when no priority patch fits.
             # Historical modes remain unchanged for reproducible comparisons.
-            if self.control.feedback == "realtime" and fitting is not None:
+            if (self.control.feedback == "realtime" and fitting is not None
+                    and budget >= self.control.ceiling * .9):
                 chosen = fitting
         level, base, images, message = chosen
         base["attempts"] = attempts

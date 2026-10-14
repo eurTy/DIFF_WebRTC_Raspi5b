@@ -77,7 +77,18 @@ class Server(unittest.IsolatedAsyncioTestCase):
     async def test_realtime_two_frames_bounded_and_ordered(self):
         async with self.client.ws_connect(self.url+'/stream') as stream:
             await stream.send_json({'type':'start','feedback':'realtime'})
-            self.assertEqual((await stream.receive_json())['window'], 2)
+            self.assertEqual((await stream.receive_json())['window'], 1)
+            first,_=unpack((await stream.receive()).data)
+            with self.assertRaises(asyncio.TimeoutError):
+                await asyncio.wait_for(stream.receive(),.12)
+            await stream.send_json({'type':'ack','id':first['id']})
+            # Eight fast confirmations at full budget may open a second slot.
+            for _ in range(40):
+                meta,_=unpack((await stream.receive()).data)
+                await stream.send_json({'type':'ack','id':meta['id']})
+                if meta['send_window']==2:
+                    break
+            self.assertEqual(meta['send_window'],2)
             first,_=unpack((await stream.receive()).data)
             second,_=unpack((await stream.receive()).data)
             self.assertGreater(second['id'],first['id'])
@@ -99,7 +110,7 @@ class Server(unittest.IsolatedAsyncioTestCase):
             async with self.client.ws_connect(self.url+'/stream') as stream:
                 await stream.send_json({'type':'start','feedback':'realtime'})
                 await stream.receive_json()
-                for _ in range(2): self.assertEqual((await stream.receive()).type,WSMsgType.BINARY)
+                self.assertEqual((await stream.receive()).type,WSMsgType.BINARY)
                 closed=await asyncio.wait_for(stream.receive(),2)
                 self.assertEqual((closed.type,closed.data),(WSMsgType.CLOSE,1013))
 

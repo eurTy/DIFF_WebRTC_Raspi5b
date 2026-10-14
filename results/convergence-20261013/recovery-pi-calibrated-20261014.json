@@ -1,0 +1,58 @@
+{
+  "complete": true,
+  "url": "http://192.168.3.19:8088",
+  "started_at": "2026-10-14T07:50:21.427Z",
+  "before_status": {
+    "http": 200,
+    "body": {
+      "project": "semantic-adaptive-v2",
+      "version": "0.3.0",
+      "source": "shm",
+      "sessions": 1,
+      "uptime_s": 1431.83304566,
+      "control": "NO_DEVICE_COMMANDS",
+      "legacy_services_modified": false,
+      "events": {
+        "displayed": 10438,
+        "delivery_timeout": 39,
+        "discarded": 347,
+        "invalid_message": 3,
+        "connection_error": 1
+      }
+    }
+  },
+  "after_status": {
+    "http": 200,
+    "body": {
+      "project": "semantic-adaptive-v2",
+      "version": "0.3.0",
+      "source": "shm",
+      "sessions": 1,
+      "uptime_s": 1449.819865189,
+      "control": "NO_DEVICE_COMMANDS",
+      "legacy_services_modified": false,
+      "events": {
+        "displayed": 10794,
+        "delivery_timeout": 41,
+        "discarded": 352,
+        "invalid_message": 3,
+        "connection_error": 1
+      }
+    }
+  },
+  "checks": [
+    {
+      "test": "blackhole_recovery_keeps_config",
+      "recovery_ms": 1287
+    },
+    {
+      "test": "late_frames_discarded",
+      "count": 2
+    },
+    {
+      "test": "pause_cancels_retry",
+      "pass": true
+    }
+  ],
+  "errors": []
+}

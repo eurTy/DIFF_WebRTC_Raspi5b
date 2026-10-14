@@ -70,15 +70,16 @@ class Core(unittest.TestCase):
         invalid['parts'][0]['rect']=[0,0,100,100]
         with self.assertRaises(ValueError): unpack(pack(invalid,images))
 
-    def test_realtime_spike_floor_and_neutral_recovery(self):
+    def test_realtime_fast_contraction_and_neutral_recovery(self):
         control = BudgetController(1200, 10, 'realtime')
-        for delay in [100, 100, 900, 100, 100]:
-            control.observe(delay, 10000)
-        self.assertEqual(control.bytes(), 15000)
-        for _ in range(90): control.observe(500, 10000)
-        self.assertEqual(control.bytes(), 1800)
         self.assertEqual(control.window, 1)
-        for _ in range(1000): control.observe(110, 5000)
+        control.observe(400, 10000)
+        self.assertEqual(control.bytes(), 2125)
+        self.assertEqual(control.window, 1)
+        for _ in range(90): control.observe(500, 10000)
+        self.assertEqual(control.bytes(), 1400)
+        self.assertEqual(control.window, 1)
+        for _ in range(3000): control.observe(110, 5000)
         self.assertEqual(control.bytes(), 15000)
         self.assertEqual(control.window, 1)
         for _ in range(8): control.observe(50, 10000)
@@ -86,6 +87,22 @@ class Core(unittest.TestCase):
         low = BudgetController(128, 20, 'realtime')
         for _ in range(90): low.observe(500, 1000)
         self.assertLessEqual(low.bytes(), low.ceiling)
+
+    def test_realtime_weak_link_never_opens_pipeline(self):
+        control = BudgetController(1200, 10, 'realtime')
+        control.observe(800, 15000)
+        for _ in range(8): control.observe(50, 1600)
+        self.assertEqual(control.window, 1)
+
+    def test_realtime_mixed_acks_do_not_count_as_consecutive_fast(self):
+        control = BudgetController(1200,10,'realtime')
+        control.budget = 5000
+        for delay in [100,100,50,100,100,50]: control.observe(delay,4000)
+        self.assertEqual(control.bytes(),5000)
+        for _ in range(100): control.observe(40, 15000)
+        self.assertEqual(control.window, 2)
+        control.observe(200, 15000)
+        self.assertEqual(control.window, 1)
 
     def test_discard_does_not_refresh_region(self):
         encoder = Encoder(feedback='realtime')
@@ -113,6 +130,15 @@ class Core(unittest.TestCase):
         for _ in range(15):robust.observe(400,10000)
         self.assertLess(robust.bytes(),5000)
         with self.assertRaises(ValueError):BudgetController(feedback='invalid')
+
+    def test_realtime_constrained_context_falls_back_to_baseline(self):
+        encoder = Encoder(feedback='realtime')
+        encoder.last_level = 0
+        encoder.control.budget = 5000
+        image = cv2.imencode('.jpg',np.zeros((32,32,3),dtype=np.uint8))[1].tobytes()
+        with patch.object(encoder,'candidate',return_value=([{'name':'base','rect':[0,0,1280,720],'quality':45}],[image])):
+            _, meta = encoder.encode(self.frame)
+        self.assertEqual(meta['level'],4)
 
     def test_aging_and_ack_refresh(self):
         encoder = Encoder('semantic')

@@ -1,0 +1,11 @@
+{
+  "url": "http://127.0.0.1:18090",
+  "checks": [
+    "first-load outage recovers without status endpoint",
+    "reload restores applied settings, not pending edits",
+    "invalid storage falls back to defaults",
+    "pause cancels first-load retry",
+    "denied storage still streams"
+  ],
+  "errors": []
+}

@@ -1,4 +1,5 @@
 import {unpack,Clock,watchdogMs} from './protocol.js';
+import {loadSettings,saveSettings} from './settings.js';
 const $=id=>document.getElementById(id), ctx=$('video').getContext('2d'), overlay=$('regions').getContext('2d');
 const composed=document.createElement('canvas');composed.width=1280;composed.height=720;const target=composed.getContext('2d');
 const defaults=[{name:'process-A',x:.075,y:.19,w:.275,h:.28,weight:6},{name:'process-B',x:.70,y:.48,w:.18,h:.22,weight:4}];
@@ -23,6 +24,7 @@ async function connect(){
   for(const input of document.querySelectorAll('input[type=number]'))if(!input.reportValidity())return;
   if(regions.some(r=>![r.x,r.y,r.w,r.h,r.weight].every(Number.isFinite)||r.x<0||r.y<0||r.w<.02||r.h<.02||r.x+r.w>1||r.y+r.h>1||r.weight<1||r.weight>10)||regions.reduce((n,r)=>n+r.w*r.h,0)>.5){notice('parameter','区域须位于画面内，合计面积不超过 50%，权重为 1 至 10。');return;}
   applied={type:'start',mode:$('mode').value,feedback:$('feedback').value,kbps:+$('kbps').value,fps:+$('fps').value,seed:+$('seed').value,regions:structuredClone(regions)};
+  try{saveSettings(window.localStorage,applied);}catch{}
   stop();active=true;frames=overruns=dropped=reconnects=retryAttempt=0;latest=null;samples=[];history=[];events=[];
   for(const id of ['frames','overruns','dropped','reconnects'])$(id).textContent='0';
   for(const id of ['latency','age','encoding','budget','level','patches'])$(id).textContent='--';
@@ -86,6 +88,7 @@ async function openStream(){
       try{const m=JSON.parse(event.data);if(m.type==='ready'){
         record('ready',{feedback:m.feedback,window:m.window});$('status').textContent='传输中';
         $('source').textContent=m.source==='SYNTHETIC_TASK_FIXTURE'?'合成实验输入 · 非实机画面':'实时摄像头 · 只读输入';
+        $('fixture-control').hidden=m.source!=='SYNTHETIC_TASK_FIXTURE';
         $('timing-kind').textContent=m.source==='LIVE_READ_ONLY_ADAPTER'?'采集发布时刻':m.source==='LIVE_USB_NEW_CAPTURE'?'读取完成时刻':'生成开始时刻';
       }else if(m.type==='source_error')notice('source','输入暂不可用：'+m.reason);}catch{}return;
     }
@@ -117,7 +120,9 @@ $('weight').onchange=()=>{regions[+$('region-choice').value].weight=+$('weight')
 function position(e){const b=$('regions').getBoundingClientRect();return {x:Math.max(0,Math.min(1,(e.clientX-b.left)/b.width)),y:Math.max(0,Math.min(1,(e.clientY-b.top)/b.height))};}
 $('regions').onpointerdown=e=>{drag=position(e);$('regions').setPointerCapture(e.pointerId);};
 $('regions').onpointerup=e=>{if(!drag)return;const end=position(e),r=regions[+$('region-choice').value],w=Math.abs(end.x-drag.x),h=Math.abs(end.y-drag.y);if(w>=.02&&h>=.02){Object.assign(r,{x:+Math.min(end.x,drag.x).toFixed(4),y:+Math.min(end.y,drag.y).toFixed(4),w:+w.toFixed(4),h:+h.toFixed(4)});fields();}drag=null;};$('regions').onpointercancel=()=>drag=null;
-$('download').onclick=()=>{const payload={schema:2,exported_at:new Date().toISOString(),source:latest?.meta.source,measurement:'software timestamp estimate, not glass-to-glass',clock_assumption:'symmetric minimum-RTT path',config:applied,displayed:frames,discarded:dropped,reconnects,events,frames:history};const link=document.createElement('a'),blobUrl=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));link.href=blobUrl;link.download='semantic-measurement.json';link.click();setTimeout(()=>URL.revokeObjectURL(blobUrl),1000);};
+$('download').onclick=()=>{const payload={schema:3,exported_at:new Date().toISOString(),source:latest?.meta.source,measurement:'software timestamp estimate, not glass-to-glass',clock_assumption:'symmetric minimum-RTT path',config:applied,displayed:frames,discarded:dropped,reconnects,history_limit:10000,history_truncated:frames+dropped>history.length,events,frames:history};const link=document.createElement('a'),blobUrl=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));link.href=blobUrl;link.download='semantic-measurement.json';link.click();setTimeout(()=>URL.revokeObjectURL(blobUrl),1000);};
+try{const saved=loadSettings(window.localStorage);if(saved){for(const key of ['mode','feedback','kbps','fps','seed'])$(key).value=saved[key];regions=structuredClone(saved.regions);$('preset').value='custom';}}catch{}
 window.addEventListener('pagehide',stop);window.lucide?.createIcons();fields();
 window.addEventListener('online',()=>{if(active&&retryTimer!==null){reconnects++;$('reconnects').textContent=reconnects;openStream();}});
-fetch('/api/status').then(r=>r.json()).then(status=>{$('fixture-control').hidden=status.source!=='fixture';connect();}).catch(()=>{notice('network','服务不可达');});
+// Source details arrive with ready; a failed status probe cannot block startup.
+connect();

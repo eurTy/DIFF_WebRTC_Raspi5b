@@ -1,0 +1,27 @@
+{
+  "recorded_on": "2026-10-14",
+  "version": "0.3.0",
+  "scope": "Code regression and deployment checks; not a claim of fault-free Wi-Fi or industrial certification",
+  "python_local": {"passed": 31, "python": "3.12.3"},
+  "python_pi": {"passed": 31, "python": "3.12.15", "method": "Disposable network-none container, production dependency image, final source bind mounted read-only"},
+  "capture_guard_local": {"passed": 1},
+  "capture_guard_pi": {"passed": 1},
+  "javascript_protocol": {"passed": 3},
+  "javascript_settings": {"passed": true},
+  "browser_local": {"passed": 16, "artifact": "browser-local.json"},
+  "browser_pi": {"passed": 16, "artifact": "browser-pi.json"},
+  "startup_local": {"passed": 5, "artifact": "startup-local.json"},
+  "startup_pi": {"passed": 5, "artifact": "startup-pi-final.json"},
+  "recovery_local": {"passed": 3, "artifact": "recovery-local.json"},
+  "recovery_pi_calibrated": {"passed": 3, "artifact": "recovery-pi-calibrated-20261014.json"},
+  "endurance_20261014": {"collection_complete": true, "stability_pass": false, "artifact": "endurance-network-failure-20261014.json.gz", "reconnects": 85, "fresh_time_fraction_250ms": 0.48396951835802493},
+  "retained_failures": [
+    "2026-10-13 one Pi recovery attempt timed out before initial frames; root cause not established",
+    "recovery-clock-precondition-failure.json: fault injection before clock calibration; corrected test precondition",
+    "Two abandoned weak-link controller candidates retained as incomplete observations",
+    "2026-10-14 real Wi-Fi freezing and SSH reset; no stability pass"
+  ],
+  "old_source_files_unchanged": 39,
+  "old_thesis_sha256": "5088bccfffe80266300f5560d34a220851542c220cfeefbe946b9de7a436a69f",
+  "not_tested": ["Optical latency", "Intentional physical USB unplug", "Equal-rate protocol causal comparison", "Industrial safety certification"]
+}

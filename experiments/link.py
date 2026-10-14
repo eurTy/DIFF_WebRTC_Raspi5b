@@ -2,6 +2,7 @@
 import asyncio
 from contextlib import suppress
 import time
+import math
 
 
 class RateRelay:
@@ -12,6 +13,23 @@ class RateRelay:
         self.tasks=set()
         self.bytes=0
         self.server=None
+        self.profile=[]
+        self.profile_started=0
+
+    def set_profile(self, changes):
+        if any(len(c)!=2 or not all(isinstance(v,(int,float)) and math.isfinite(v) for v in c) or c[0]<0 or c[1]<=0 for c in changes):
+            raise ValueError('Finite nonnegative times and positive rates required')
+        if any(a[0]>=b[0] for a,b in zip(changes,changes[1:])):
+            raise ValueError('Profile times must increase')
+        self.profile=list(changes)
+        self.profile_started=time.perf_counter()
+
+    def rate_at(self, elapsed):
+        rate=self.kbps
+        for at,value in self.profile:
+            if elapsed<at:break
+            rate=value
+        return rate
 
     async def __aenter__(self):
         self.server=await asyncio.start_server(self.handle,'127.0.0.1',0,limit=8192)
@@ -28,7 +46,8 @@ class RateRelay:
         deadline=time.perf_counter()
         while data:=await reader.read(2048):
             if shaped:
-                deadline=max(deadline,time.perf_counter())+len(data)*8/(self.kbps*1000)
+                rate=self.rate_at(time.perf_counter()-self.profile_started)
+                deadline=max(deadline,time.perf_counter())+len(data)*8/(rate*1000)
                 await asyncio.sleep(max(0,deadline-time.perf_counter()))
                 self.bytes+=len(data)
             writer.write(data)

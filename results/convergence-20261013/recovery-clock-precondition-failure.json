@@ -1,0 +1,98 @@
+{
+  "complete": false,
+  "url": "http://192.168.3.19:8088",
+  "started_at": "2026-10-14T07:31:35.416Z",
+  "stage": "blackhole",
+  "error": "The expression evaluated to a falsy value:\n\n  assert.ok(Number(await page.locator('#age').textContent())>3000)\n",
+  "before_status": {
+    "http": 200,
+    "body": {
+      "project": "semantic-adaptive-v2",
+      "version": "0.3.0",
+      "source": "shm",
+      "sessions": 1,
+      "uptime_s": 305.858281076,
+      "control": "NO_DEVICE_COMMANDS",
+      "legacy_services_modified": false,
+      "events": {
+        "displayed": 383,
+        "delivery_timeout": 3,
+        "discarded": 14
+      }
+    }
+  },
+  "after_status": {
+    "http": 200,
+    "body": {
+      "project": "semantic-adaptive-v2",
+      "version": "0.3.0",
+      "source": "shm",
+      "sessions": 1,
+      "uptime_s": 313.661536495,
+      "control": "NO_DEVICE_COMMANDS",
+      "legacy_services_modified": false,
+      "events": {
+        "displayed": 446,
+        "delivery_timeout": 5,
+        "discarded": 16
+      }
+    }
+  },
+  "checks": [],
+  "errors": [],
+  "ready": [
+    {
+      "type": "ready",
+      "session": "b196e92f86f74e70b875b4a031a1191e",
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "policy": "semantic",
+      "feedback": "realtime",
+      "window": 1,
+      "regions": [
+        {
+          "name": "process-A",
+          "x": 0.075,
+          "y": 0.19,
+          "w": 0.275,
+          "h": 0.28,
+          "weight": 6
+        },
+        {
+          "name": "process-B",
+          "x": 0.7,
+          "y": 0.48,
+          "w": 0.18,
+          "h": 0.22,
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "type": "ready",
+      "session": "f03c6c4a90774fcb97e77b9760e91ef5",
+      "source": "LIVE_READ_ONLY_ADAPTER",
+      "policy": "semantic",
+      "feedback": "realtime",
+      "window": 1,
+      "regions": [
+        {
+          "name": "process-A",
+          "x": 0.075,
+          "y": 0.19,
+          "w": 0.275,
+          "h": 0.28,
+          "weight": 8
+        },
+        {
+          "name": "process-B",
+          "x": 0.7,
+          "y": 0.48,
+          "w": 0.18,
+          "h": 0.22,
+          "weight": 4
+        }
+      ]
+    }
+  ],
+  "ui": "语义自适应传输实验台SVT / 独立研究版\n等待重连\n运行档位\n流畅观察\n受限对照\n自定义\n传输策略\n语义优先\n固定区域优先\n全局自适应\n全帧 Q85\n上限 kbps\n目标 fps\n预算反馈\n新鲜度优先\n单次确认（对照）\n五样本中值（对照）\n实时摄像头 · 只读输入\n区域标记\n画面已过期\n连接中断，等待恢复\n软件段延迟\n--ms\n当前帧龄\n--ms\n显示帧率\n0.0fps\n有效载荷速率\n0.000Mbps\n编码耗时\n2.1ms\n本帧预算\n15.0KB\n软件段延迟 · 最近 60 秒\n时钟未校准 · 帧龄沿用上次估计\n任务区域\n当前区域\n工序 A\n工序 B\n优先权重\nX\nY\nW\nH\n传输状态\n已显示帧\n6\n分层等级\n2\n本帧重点块\nprocess-A\n超预算帧\n0\n输入基准\n采集发布时刻\n过期丢弃\n0\n自动重连\n2\n发送窗口\n1\n仅视频测量 · 无设备控制\n720p 重建画布\n软件时间戳估计，非光学端到端延迟"
+}
