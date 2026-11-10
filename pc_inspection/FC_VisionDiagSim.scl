@@ -1,0 +1,47 @@
+FUNCTION "FC_VisionDiagSim" : Void
+VAR_INPUT
+    SimulatedSource : Bool;
+    LinkOk : Bool;
+    QualityCode : Int;
+    CameraReady : Bool;
+    RoiVerified : Bool;
+    FrameAgeMs : DInt;
+    MaxFrameAgeMs : DInt;
+    SequenceAdvancedWithinWindow : Bool;
+    BootTagStable : Bool;
+    MotionCandidate : Bool;
+END_VAR
+VAR_OUTPUT
+    SimSampleQualified : Bool;
+    SimMotionObserved : Bool;
+    SimFaultCode : Int;
+END_VAR
+VAR_TEMP
+    FaultCodeLocal : Int;
+END_VAR
+BEGIN
+    IF NOT #SimulatedSource THEN
+        #FaultCodeLocal := 90;
+    ELSIF NOT #LinkOk THEN
+        #FaultCodeLocal := 10;
+    ELSIF #QualityCode <> 1 THEN
+        #FaultCodeLocal := 20;
+    ELSIF NOT #CameraReady THEN
+        #FaultCodeLocal := 30;
+    ELSIF NOT #RoiVerified THEN
+        #FaultCodeLocal := 40;
+    ELSIF (#MaxFrameAgeMs <= 0) OR (#FrameAgeMs < 0)
+          OR (#FrameAgeMs > #MaxFrameAgeMs) THEN
+        #FaultCodeLocal := 50;
+    ELSIF NOT #BootTagStable THEN
+        #FaultCodeLocal := 70;
+    ELSIF NOT #SequenceAdvancedWithinWindow THEN
+        #FaultCodeLocal := 60;
+    ELSE
+        #FaultCodeLocal := 0;
+    END_IF;
+
+    #SimFaultCode := #FaultCodeLocal;
+    #SimSampleQualified := (#FaultCodeLocal = 0);
+    #SimMotionObserved := #SimSampleQualified AND #MotionCandidate;
+END_FUNCTION

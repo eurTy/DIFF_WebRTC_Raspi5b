@@ -6,11 +6,37 @@ from aiohttp import ClientSession, WSMsgType, web
 from experiment_v04.pieces import pack_piece, unpack_piece
 from experiment_v04.policy import TaskFreshnessEncoder
 from experiment_v04.server import application
+from experiment_v04.server import read_latest
 from semantic_video.model import DEFAULT_REGIONS
 from semantic_video.source import FixtureSource, mono_ms
 
 
 class PieceAndPolicy(unittest.TestCase):
+    def test_transient_input_overwrite_is_retried(self):
+        class Source:
+            calls = 0
+
+            def read(self):
+                self.calls += 1
+                if self.calls < 3:
+                    raise ValueError("Input overwritten during read")
+                return "fresh"
+
+        self.assertEqual(read_latest(Source()), ("fresh", 2))
+
+    def test_other_input_errors_are_not_retried(self):
+        class Source:
+            calls = 0
+
+            def read(self):
+                self.calls += 1
+                raise ValueError("Input is stale or timestamp invalid")
+
+        source = Source()
+        with self.assertRaisesRegex(ValueError, "Input is stale"):
+            read_latest(source)
+        self.assertEqual(source.calls, 1)
+
     def test_piece_round_trip_and_corruption(self):
         image = b"\xff\xd8\xff\xd9"
         packet = pack_piece({"kind": "base", "id": 1}, image)
@@ -51,7 +77,9 @@ class ExperimentServer(unittest.IsolatedAsyncioTestCase):
 
     async def test_progressive_base_first_and_next_frame_after_ack(self):
         async with self.client.get(self.url + "/api/status") as response:
-            self.assertEqual((await response.json())["transport"], "websocket-tcp")
+            status = await response.json()
+            self.assertEqual(status["transport"], "websocket-tcp")
+            self.assertEqual((status["sessions"], status["viewer_limit"]), (0, 1))
         async with self.client.ws_connect(self.url + "/stream") as ws:
             await ws.send_json({"type": "start", "fps": 20, "kbps": 2400})
             ready = await asyncio.wait_for(ws.receive_json(), 5)
@@ -68,6 +96,16 @@ class ExperimentServer(unittest.IsolatedAsyncioTestCase):
             second, _ = unpack_piece((await asyncio.wait_for(ws.receive(), 3)).data)
             self.assertEqual(second["kind"], "base")
             self.assertGreater(second["id"], first["id"])
+
+    async def test_second_viewer_is_rejected_and_status_reports_occupancy(self):
+        async with self.client.ws_connect(self.url + "/stream") as first:
+            async with self.client.get(self.url + "/api/status") as response:
+                status = await response.json()
+                self.assertEqual((status["sessions"], status["viewer_limit"]), (1, 1))
+            async with self.client.get(self.url + "/stream") as response:
+                self.assertEqual(response.status, 503)
+        async with self.client.get(self.url + "/api/status") as response:
+            self.assertEqual((await response.json())["sessions"], 0)
 
     async def test_false_patch_confirmation_rejected(self):
         async with self.client.ws_connect(self.url + "/stream") as ws:

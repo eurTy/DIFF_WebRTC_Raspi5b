@@ -1,0 +1,33 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+
+(async()=>{
+  const source=fs.readFileSync('experiment_v05/web/telemetry.js','utf8');
+  const {MeasurementLog}=await import(`data:text/javascript;base64,${Buffer.from(source).toString('base64')}`);
+  let now=0;
+  const log=new MeasurementLog({url:'http://user:secret@100.80.123.16:8091/?token=private#secret',appVersion:'v0.7',now:()=>++now,limit:3});
+  assert.deepEqual(log.run.endpoint,{protocol:'http:',hostname:'100.80.123.16',port:8091});
+  const config={codec:'h264',kbps:2400,fps:20,semantic:true,regions:[{name:'A',x:.1}]};
+  const first=log.begin(config,'initial');
+  config.codec='jpeg';config.regions[0].x=.9;
+  assert.equal(first.config.codec,'h264');assert.equal(first.config.regions[0].x,.1);
+  log.entry('frames',first,{at:10,seq:0});log.end('user_pause');
+  assert.equal(log.active,null);assert.equal(first.end_reason,'user_pause');
+  log.setContext({phone_network:'4g',vpn_route:'unknown',note:'spikes'});
+  const second=log.begin(config,'user_start');
+  assert.notEqual(first.id,second.id);assert.equal(second.conditions_at_start.phone_network,'4g');
+  log.end('late_close',first);assert.equal(log.active,second);
+  for(let i=0;i<5;i++)log.entry('samples',second,{at:20+i});
+  const data=log.snapshot({controls:config});
+  assert.equal(data.schema,8);assert.equal(data.samples.length,3);assert.equal(data.retention.discarded.samples,2);
+  assert.deepEqual(data.codecs,['h264','jpeg']);assert.equal(data.frames[0].session_id,first.id);
+  assert.equal(data.sessions[0].conditions_at_start.phone_network,'unknown');
+  assert.match(log.filename(data),/^svt-8091-mixed-.*\.json$/);
+  data.sessions[1].config.kbps=1;assert.equal(second.config.kbps,2400);
+  const next=log.snapshot();assert.notEqual(data.export_id,next.export_id);assert.equal(data.run.id,next.run.id);
+  assert(!JSON.stringify(data).includes('private'));assert(!JSON.stringify(data).includes('secret'));
+  const legacy=new MeasurementLog({url:'https://example.test',appVersion:'unknown'});
+  assert.equal(legacy.run.endpoint.port,443);
+  assert.equal(legacy.snapshot().conditions.phone_network,'unknown');
+  console.log('PASS: endpoint privacy, immutable sessions, codec split, conditions, bounded retention, repeated exports');
+})().catch(error=>{console.error(error);process.exitCode=1;});

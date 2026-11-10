@@ -4,6 +4,7 @@ import asyncio
 from dataclasses import asdict
 import json
 from pathlib import Path
+import time
 
 from aiohttp import WSMsgType, web
 
@@ -19,10 +20,22 @@ LEGACY_WEB = Path(__file__).resolve().parent.parent / "web"
 PATCH_DEADLINE_MS = 80
 
 
+def read_latest(source):
+    for retry in range(3):
+        try:
+            return source.read(), retry
+        except ValueError as error:
+            if retry == 2 or str(error) not in ("Input overwritten during read", "Uncommitted input"):
+                raise
+            time.sleep(.001)
+
+
 class ExperimentService(BaseService):
     async def status(self, request):
         return web.json_response({"project": "semantic-adaptive-v04-experiment", "source": self.source_kind,
-                                  "sessions": len(self.sessions), "control": "NO_DEVICE_COMMANDS",
+                                  "sessions": len(self.sessions), "viewer_limit": 1,
+                                  "events": dict(self.events),
+                                  "control": "NO_DEVICE_COMMANDS",
                                   "legacy_services_modified": False, "transport": "websocket-tcp"})
 
     async def stream(self, request):
@@ -53,9 +66,11 @@ class ExperimentService(BaseService):
             while not ws.closed:
                 cycle = mono_ms()
                 try:
-                    frame = await asyncio.to_thread(source.read)
+                    frame, retries = await asyncio.to_thread(read_latest, source)
+                    self.events["input_read_retries"] += retries
                 except (ValueError, OSError) as error:
                     failures += 1
+                    self.events["source_failures"] += 1
                     await ws.send_json({"type": "source_error", "reason": str(error)})
                     if failures >= 10:
                         raise OSError("Input unavailable")
@@ -78,6 +93,12 @@ class ExperimentService(BaseService):
                                   "level": meta["level"], "encode_ms": meta["encode_ms"],
                                   "budget_bytes": meta["budget_bytes"], "source": meta["source"]}
                     pieces.append(pack_piece(piece_meta, image))
+                self.events[f"level_{meta['level']}"] += 1
+                self.events["sent_frames"] += 1
+                self.events["sent_bytes"] += sum(map(len, pieces))
+                self.events["last_base_bytes"] = len(pieces[0])
+                self.events["last_patch_bytes"] = len(pieces[1]) if len(pieces) > 1 else 0
+                self.events["last_budget_bytes"] = meta["budget_bytes"]
                 started = mono_ms()
                 for piece in pieces:
                     await asyncio.wait_for(ws.send_bytes(piece), 2)

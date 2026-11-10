@@ -1,0 +1,109 @@
+FUNCTION_BLOCK "FB_VirtualStationSim"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+VAR_INPUT
+    SimulatedSource : Bool;
+    VisionQualified : Bool;
+    MotionObserved : Bool;
+    StartButton : Bool;
+    StopButton : Bool;
+    ResetButton : Bool;
+    GuardClosed : Bool;
+    MotorReady : Bool;
+    GlueReady : Bool;
+    AtGlueStation : Bool;
+    MaxMoveTime : Time;
+    GlueDwellTime : Time;
+END_VAR
+VAR_OUTPUT
+    SimState : Int;
+    SimConveyorCmd : Bool;
+    SimGlueCmd : Bool;
+    SimFaultCode : Int;
+END_VAR
+VAR
+    StateLocal : Int;
+    FaultLocal : Int;
+    LastStartButton : Bool;
+    LastResetButton : Bool;
+    MoveTimer : TON_TIME;
+    GlueTimer : TON_TIME;
+END_VAR
+VAR_TEMP
+    StartEdge : Bool;
+    ResetEdge : Bool;
+    MoveExpired : Bool;
+    GlueElapsed : Bool;
+END_VAR
+BEGIN
+    #StartEdge := #StartButton AND NOT #LastStartButton;
+    #ResetEdge := #ResetButton AND NOT #LastResetButton;
+    #LastStartButton := #StartButton;
+    #LastResetButton := #ResetButton;
+
+    #MoveTimer(IN := (#StateLocal = 10), PT := #MaxMoveTime, Q => #MoveExpired);
+    #GlueTimer(IN := (#StateLocal = 20), PT := #GlueDwellTime, Q => #GlueElapsed);
+
+    IF NOT #SimulatedSource THEN
+        #StateLocal := 90;
+        #FaultLocal := 90;
+    ELSIF #StopButton THEN
+        #StateLocal := 90;
+        #FaultLocal := 10;
+    ELSIF NOT #GuardClosed THEN
+        #StateLocal := 90;
+        #FaultLocal := 20;
+    ELSIF (#MaxMoveTime <= T#0ms) OR (#GlueDwellTime <= T#0ms) THEN
+        #StateLocal := 90;
+        #FaultLocal := 70;
+    ELSIF ((#StateLocal = 10) OR (#StateLocal = 20)) AND NOT #VisionQualified THEN
+        #StateLocal := 90;
+        #FaultLocal := 30;
+    ELSIF (#StateLocal = 10) AND NOT #MotorReady THEN
+        #StateLocal := 90;
+        #FaultLocal := 40;
+    ELSIF ((#StateLocal = 10) OR (#StateLocal = 20)) AND NOT #GlueReady THEN
+        #StateLocal := 90;
+        #FaultLocal := 50;
+    ELSE
+        CASE #StateLocal OF
+            0:
+                IF #StartEdge AND #VisionQualified AND #MotionObserved
+                   AND #MotorReady AND #GlueReady AND NOT #AtGlueStation THEN
+                    #StateLocal := 10;
+                END_IF;
+            10:
+                IF #MoveExpired THEN
+                    #StateLocal := 90;
+                    #FaultLocal := 60;
+                ELSIF #AtGlueStation THEN
+                    #StateLocal := 20;
+                END_IF;
+            20:
+                IF #GlueElapsed THEN
+                    #StateLocal := 30;
+                END_IF;
+            30:
+                IF #ResetEdge THEN
+                    #StateLocal := 0;
+                END_IF;
+            90:
+                IF #ResetEdge AND #VisionQualified AND #MotorReady AND #GlueReady THEN
+                    #StateLocal := 0;
+                    #FaultLocal := 0;
+                END_IF;
+            ELSE
+                #StateLocal := 90;
+                #FaultLocal := 80;
+        END_CASE;
+    END_IF;
+
+    #SimState := #StateLocal;
+    #SimFaultCode := #FaultLocal;
+    #SimConveyorCmd := (#StateLocal = 10) AND #SimulatedSource
+                       AND #VisionQualified AND #GuardClosed AND #MotorReady
+                       AND #GlueReady AND NOT #StopButton;
+    #SimGlueCmd := (#StateLocal = 20) AND #SimulatedSource
+                   AND #VisionQualified AND #GuardClosed AND #GlueReady
+                   AND NOT #StopButton;
+END_FUNCTION_BLOCK

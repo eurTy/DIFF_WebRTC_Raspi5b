@@ -1,0 +1,57 @@
+DATA_BLOCK "DB_VisionScenarioSim"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+VAR
+    SimulatedSource : Bool;
+    LinkOk : Bool;
+    QualityCode : Int;
+    CameraReady : Bool;
+    RoiVerified : Bool;
+    FrameAgeMs : DInt;
+    MaxFrameAgeMs : DInt;
+    SampleSeq : UDInt;
+    BootTag : UDInt;
+    MaxStallTime : Time;
+    SequenceAdvancedWithinWindow : Bool;
+    BootTagStable : Bool;
+    MotionCandidate : Bool;
+    SimSampleQualified : Bool;
+    SimMotionObserved : Bool;
+    SimFaultCode : Int;
+END_VAR
+BEGIN
+    FrameAgeMs := 65535;
+    MaxFrameAgeMs := 250;
+    MaxStallTime := T#500ms;
+    SimFaultCode := 90;
+END_DATA_BLOCK
+
+FUNCTION "FC_VisionScenarioSim" : Void
+BEGIN
+    "DB_VisionSequenceSim"(
+        SimulatedSource := "DB_VisionScenarioSim".SimulatedSource,
+        LinkOk := "DB_VisionScenarioSim".LinkOk,
+        SampleSeq := "DB_VisionScenarioSim".SampleSeq,
+        BootTag := "DB_VisionScenarioSim".BootTag,
+        MaxStallTime := "DB_VisionScenarioSim".MaxStallTime,
+        SequenceAdvancedWithinWindow => "DB_VisionScenarioSim".SequenceAdvancedWithinWindow,
+        BootTagStable => "DB_VisionScenarioSim".BootTagStable
+    );
+
+    "FC_VisionDiagSim"(
+        SimulatedSource := "DB_VisionScenarioSim".SimulatedSource,
+        LinkOk := "DB_VisionScenarioSim".LinkOk,
+        QualityCode := "DB_VisionScenarioSim".QualityCode,
+        CameraReady := "DB_VisionScenarioSim".CameraReady,
+        RoiVerified := "DB_VisionScenarioSim".RoiVerified,
+        FrameAgeMs := "DB_VisionScenarioSim".FrameAgeMs,
+        MaxFrameAgeMs := "DB_VisionScenarioSim".MaxFrameAgeMs,
+        SequenceAdvancedWithinWindow := "DB_VisionScenarioSim".SequenceAdvancedWithinWindow,
+        BootTagStable := "DB_VisionScenarioSim".BootTagStable,
+        MotionCandidate := "DB_VisionScenarioSim".MotionCandidate,
+        SimSampleQualified => "DB_VisionScenarioSim".SimSampleQualified,
+        SimMotionObserved => "DB_VisionScenarioSim".SimMotionObserved,
+        SimFaultCode => "DB_VisionScenarioSim".SimFaultCode
+    );
+END_FUNCTION

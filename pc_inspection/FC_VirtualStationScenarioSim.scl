@@ -1,0 +1,22 @@
+FUNCTION "FC_VirtualStationScenarioSim" : Void
+BEGIN
+    "DB_VirtualStationSim"(
+        SimulatedSource := "DB_VirtualStationScenarioSim".SimulatedSource
+                           AND "DB_VisionScenarioSim".SimulatedSource,
+        VisionQualified := "DB_VisionScenarioSim".SimSampleQualified,
+        MotionObserved := "DB_VisionScenarioSim".SimMotionObserved,
+        StartButton := "DB_VirtualStationScenarioSim".StartButton,
+        StopButton := "DB_VirtualStationScenarioSim".StopButton,
+        ResetButton := "DB_VirtualStationScenarioSim".ResetButton,
+        GuardClosed := "DB_VirtualStationScenarioSim".GuardClosed,
+        MotorReady := "DB_VirtualStationScenarioSim".MotorReady,
+        GlueReady := "DB_VirtualStationScenarioSim".GlueReady,
+        AtGlueStation := "DB_VirtualStationScenarioSim".AtGlueStation,
+        MaxMoveTime := "DB_VirtualStationScenarioSim".MaxMoveTime,
+        GlueDwellTime := "DB_VirtualStationScenarioSim".GlueDwellTime,
+        SimState => "DB_VirtualStationScenarioSim".SimState,
+        SimConveyorCmd => "DB_VirtualStationScenarioSim".SimConveyorCmd,
+        SimGlueCmd => "DB_VirtualStationScenarioSim".SimGlueCmd,
+        SimFaultCode => "DB_VirtualStationScenarioSim".SimFaultCode
+    );
+END_FUNCTION

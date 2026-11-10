@@ -1,0 +1,26 @@
+DATA_BLOCK "DB_VirtualStationScenarioSim"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+VAR
+    SimulatedSource : Bool;
+    StartButton : Bool;
+    StopButton : Bool;
+    ResetButton : Bool;
+    GuardClosed : Bool;
+    MotorReady : Bool;
+    GlueReady : Bool;
+    AtGlueStation : Bool;
+    MaxMoveTime : Time;
+    GlueDwellTime : Time;
+    SimState : Int;
+    SimConveyorCmd : Bool;
+    SimGlueCmd : Bool;
+    SimFaultCode : Int;
+END_VAR
+BEGIN
+    MaxMoveTime := T#1500ms;
+    GlueDwellTime := T#400ms;
+    SimState := 90;
+    SimFaultCode := 90;
+END_DATA_BLOCK

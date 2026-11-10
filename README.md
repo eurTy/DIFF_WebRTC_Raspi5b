@@ -10,6 +10,14 @@
 
 独立 v0.4 实验：[运行说明](experiment_v04/README.md)、[技术路线与论文依据](docs/technical-route-v040.md)。它使用新的 8089 入口和只读输入；旧 8088 不受影响。先检验手机端同源帧渐进显示与任务区域真实确认时效，当前仍是 WebSocket/TCP，不将其写成已完成 WebRTC 传输优化。
 
+2026-10-15 手机 4G 访问验证：新增独立的 [Tailscale 私有接入部署与验收说明](ops/remote/README.md)，用户已确认关闭 Wi-Fi 后仍能看到实时画面。当前观察到中继连接，画质和时效未达标；这是跨网络连通性验证，不是超低延迟或长期可靠性验收。
+
+同日新增独立 [v0.5 手机实验入口 8090](experiment_v05/README.md)：H.264 原生 720p 与 JPEG 对照、有界连续发送、同源帧任务区域保护及手机数值反馈。用户确认画质和连续性改善，但 JPEG 观察延迟约 80–240 ms、H.264 约 120–400 ms，尚未达到稳定 20 fps 或超低延迟目标。随后一个 H.264 时间轴候选实机变差，已回退；原 8089 全程保留。[完整记录与负面结果](results/mobile-20261015/README.md)。
+
+新增独立 [v0.6 WebRTC/RTP 实验入口 8091](experiment_v06/README.md)：原生 720p、最新帧编码、独立内核 TUN 私有节点、TURN 备用路径与精确 RTP 显示帧关联。8089/8090 镜像及运行状态未变。本地浏览器和树莓派 RTP 解码验证已完成，但手机首轮 ICE 直连失败，不能将本地延迟作为手机优化结论；技术路线、回退方式与限制均单独记录。
+
+2026-10-18 起视频网页入口[固定为 8089、8090、8091，最多三个](docs/port-policy-20261018.md)。旧 8080/8088 服务已停用且不会自动重启；旧镜像和容器保留。后续媒体实验复用 8091，不另开网页端口。
+
 10 月 14 日续测发现无线客户端之间的严重间歇延迟，具体根因仍待路径隔离。程序回归通过不代表现场已经无卡顿，负面长测与只读网络诊断一并保存，不用前一晚的顺畅片段替代当前状态。
 
 ## 与旧项目的关系
@@ -61,7 +69,7 @@ docker compose -f compose.yml down
 SHM_READER_GID=$(stat -c %g /dev/shm/pi-video) docker compose -f compose.yml -f compose.live.yml up -d --no-build
 ```
 
-只有新版容器会重建。输入共享路径不存在时明确失败，不自动创建替代输入。输入目录现场权限为 0750，因此只为新容器追加目录现有 GID，不对旧目录 chmod、不改所有者、不用 root 绕过权限；挂载仍是只读。默认实验服务不需要共享挂载或该组。远程页面仅用于可信局域网；当前没有用户身份认证、HTTPS 或互联网接入设计，禁止直接暴露公网。
+只有新版容器会重建。输入共享路径不存在时明确失败，不自动创建替代输入。输入目录现场权限为 0750，因此只为新容器追加目录现有 GID，不对旧目录 chmod、不改所有者、不用 root 绕过权限；挂载仍是只读。默认实验服务不需要共享挂载或该组。原始视频页面面向可信局域网，没有应用层登录或 HTTPS，禁止直接暴露公网。手机外网观看可使用独立的 Tailscale 私有入口，由设备身份和 tailnet 策略控制访问。
 
 Pi 若不能稳定下载依赖，可使用 `Dockerfile.offline`：先将 `requirements.lock.txt` 对应 ARM64 wheel 放入 `wheelhouse/`，通过 `docker load` 导入官方 Python 基础镜像，核对文件系统层后将其标为 `python:semantic-v030-base`，再执行 `docker build --network=none -f Dockerfile.offline -t semantic-adaptive-v2:local .`。基础镜像和工具来源见 `deployment-provenance.json`，本轮层摘要核对见 `results/convergence-20261013/base-image-audit.json`。在线 Dockerfile 固定官方多架构索引；离线导入的配置摘要不是官方清单摘要，不能拿它作为新的网络拉取地址。不把 wheel、镜像 tar 或现场媒体提交到 Git。
 

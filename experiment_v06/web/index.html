@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>WebRTC 移动实验</title><link rel="stylesheet" href="/style.css"><script defer src="/lucide.min.js"></script><script type="module" src="/app.js"></script></head>
+<body><header><h1>移动视频实验 <span>v0.6 · RTP</span></h1><span id="state" role="status">待连接</span></header>
+<main><div class="source-line"><span id="source">等待输入</span><a href="http://100.80.123.16:8090/?codec=jpeg">保留版 8090</a></div>
+<div class="stage"><video id="video" autoplay muted playsinline></video><div id="regions" aria-hidden="true"><span class="roi a">process-A</span><span class="roi b">process-B</span></div></div>
+<p id="notice" role="status"></p>
+<section class="metrics" aria-label="实时测量">
+<div><span>软件段延迟</span><strong id="latency">--</strong><small>ms</small></div>
+<div><span>当前帧龄</span><strong id="age">--</strong><small>ms</small></div>
+<div><span>显示帧率</span><strong id="fps">0.0</strong><small>fps</small></div>
+<div><span>抖动缓冲</span><strong id="buffer">--</strong><small>ms</small></div>
+<div><span>媒体往返</span><strong id="rtt">--</strong><small>ms</small></div>
+<div><span>有效负载</span><strong id="rate">0.000</strong><small>Mbps</small></div>
+</section>
+<section class="controls" aria-label="会话参数"><label>码率上限 kbps<input id="kbps" type="number" min="1200" max="6000" step="100" value="2400"></label><label>目标 fps<input id="targetFps" type="number" min="10" max="20" step="1" value="20"></label>
+<div class="actions"><label class="check"><input id="showRegions" type="checkbox" checked>重点区域</label><button id="connect" class="primary" title="播放／应用参数" aria-label="播放／应用参数"><i data-lucide="play"></i></button><button id="pause" title="暂停" aria-label="暂停"><i data-lucide="pause"></i></button><button id="download" title="下载数值记录" aria-label="下载数值记录"><i data-lucide="download"></i></button></div></section>
+<section class="details"><p id="streamInfo">H.264 · 原生 1280 × 720</p><p id="path">ICE 等待连接</p><p id="timing">等待时钟校准</p><p id="roiInfo">重点区域：全画面同步刷新</p></section>
+<footer>只读观察 · 采集发布到浏览器呈现的软件时间戳估计，不等于曝光到屏幕的光学总延迟。</footer></main></body></html>

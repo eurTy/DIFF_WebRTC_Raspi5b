@@ -1,0 +1,61 @@
+FUNCTION_BLOCK "FB_VisionSequenceSim"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+VAR_INPUT
+    SimulatedSource : Bool;
+    LinkOk : Bool;
+    SampleSeq : UDInt;
+    BootTag : UDInt;
+    MaxStallTime : Time;
+END_VAR
+VAR_OUTPUT
+    SequenceAdvancedWithinWindow : Bool;
+    BootTagStable : Bool;
+END_VAR
+VAR
+    LastSeq : UDInt;
+    LastBootTag : UDInt;
+    HaveBaseline : Bool;
+    BootConfirmed : Bool;
+    Armed : Bool;
+    StallTimer : TON_TIME;
+END_VAR
+VAR_TEMP
+    AdvancedThisScan : Bool;
+    StallExpired : Bool;
+END_VAR
+BEGIN
+    #AdvancedThisScan := FALSE;
+
+    IF (NOT #SimulatedSource) OR (NOT #LinkOk) OR (#SampleSeq = 0)
+       OR (#BootTag = 0) OR (#MaxStallTime <= T#0ms) THEN
+        #HaveBaseline := FALSE;
+        #BootConfirmed := FALSE;
+        #Armed := FALSE;
+    ELSIF NOT #HaveBaseline OR (#BootTag <> #LastBootTag) THEN
+        #LastSeq := #SampleSeq;
+        #LastBootTag := #BootTag;
+        #HaveBaseline := TRUE;
+        #BootConfirmed := FALSE;
+        #Armed := FALSE;
+    ELSIF #SampleSeq > #LastSeq THEN
+        #LastSeq := #SampleSeq;
+        #BootConfirmed := TRUE;
+        #Armed := TRUE;
+        #AdvancedThisScan := TRUE;
+    ELSIF #SampleSeq < #LastSeq THEN
+        #Armed := FALSE;
+    END_IF;
+
+    #StallTimer(
+        IN := #Armed AND NOT #AdvancedThisScan,
+        PT := #MaxStallTime,
+        Q => #StallExpired
+    );
+    IF #StallExpired THEN
+        #Armed := FALSE;
+    END_IF;
+
+    #SequenceAdvancedWithinWindow := #Armed;
+    #BootTagStable := #BootConfirmed;
+END_FUNCTION_BLOCK

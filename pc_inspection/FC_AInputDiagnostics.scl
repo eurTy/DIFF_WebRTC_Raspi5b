@@ -1,0 +1,62 @@
+FUNCTION "FC_AInputDiagnostics" : Void
+VAR_INPUT
+    InfeedPhotoeye : Bool;
+    PartPresent : Bool;
+    MagazineLow : Bool;
+    ClampExtended : Bool;
+    ClampRetracted : Bool;
+    PusherExtended : Bool;
+    PusherRetracted : Bool;
+    LiftUp : Bool;
+    LiftDown : Bool;
+    VacuumOk : Bool;
+    MotorReady : Bool;
+    JamDetected : Bool;
+    StartButton : Bool;
+    StopButton : Bool;
+    ResetButton : Bool;
+    GuardDoorClosed : Bool;
+END_VAR
+VAR_OUTPUT
+    SensorConflict : Bool;
+    HomePositionOk : Bool;
+    FeedReady : Bool;
+    PickReady : Bool;
+    StartRequestAccepted : Bool;
+    ResetRequestObserved : Bool;
+    PartAtInfeed : Bool;
+    AlarmCode : Int;
+END_VAR
+BEGIN
+    #SensorConflict := (#ClampExtended AND #ClampRetracted)
+                       OR (#PusherExtended AND #PusherRetracted)
+                       OR (#LiftUp AND #LiftDown);
+    #HomePositionOk := #ClampRetracted AND #PusherRetracted AND #LiftDown
+                       AND NOT #ClampExtended AND NOT #PusherExtended
+                       AND NOT #LiftUp;
+    #FeedReady := NOT #SensorConflict AND #HomePositionOk AND #GuardDoorClosed
+                  AND NOT #StopButton AND NOT #JamDetected AND #MotorReady
+                  AND NOT #MagazineLow;
+    #PickReady := #FeedReady AND #PartPresent AND #VacuumOk;
+    #StartRequestAccepted := #StartButton AND #FeedReady;
+    #ResetRequestObserved := #ResetButton;
+    #PartAtInfeed := #InfeedPhotoeye;
+
+    IF #SensorConflict THEN
+        #AlarmCode := 10;
+    ELSIF NOT #GuardDoorClosed THEN
+        #AlarmCode := 20;
+    ELSIF #StopButton THEN
+        #AlarmCode := 30;
+    ELSIF #JamDetected THEN
+        #AlarmCode := 40;
+    ELSIF NOT #MotorReady THEN
+        #AlarmCode := 50;
+    ELSIF #MagazineLow THEN
+        #AlarmCode := 60;
+    ELSIF NOT #HomePositionOk THEN
+        #AlarmCode := 70;
+    ELSE
+        #AlarmCode := 0;
+    END_IF;
+END_FUNCTION

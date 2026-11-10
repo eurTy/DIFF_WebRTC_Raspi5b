@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>移动视频实验 · SVT v0.5</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/mobile.css"></head>
+<body data-app-version="v0.5">
+<header><strong>移动视频实验 <small>v0.5</small></strong><span id="status" role="status">待连接</span></header>
+<main>
+  <div class="source-line"><span id="source">等待输入</span><a id="baseline" href="#">原版 8089</a></div>
+  <div class="stage"><video id="video" muted autoplay playsinline disableRemotePlayback></video><canvas id="canvas" width="1280" height="720" hidden></canvas><canvas id="regions" width="1280" height="720"></canvas><span id="empty">等待帧</span><span id="stale" hidden>画面已过期</span></div>
+  <div id="notice" role="alert"></div>
+  <section class="controls" aria-label="传输设置">
+    <label>编码<select id="codec"><option value="h264">H.264 · 720p</option><option value="jpeg">JPEG · 对照</option></select></label>
+    <label>预算 kbps<input id="kbps" type="number" min="384" max="6000" step="1" value="2400"></label>
+    <label>目标 fps<input id="fps" type="number" min="4" max="20" step="1" value="20"></label>
+    <label class="toggle"><input id="semantic" type="checkbox" checked>重点优先</label>
+    <div class="commands"><button id="connect" title="应用并播放" aria-label="应用并播放"><i data-lucide="play"></i></button><button id="pause" title="暂停接收" aria-label="暂停接收"><i data-lucide="pause"></i></button><button id="download" title="导出测量记录" aria-label="导出测量记录"><i data-lucide="download"></i></button></div>
+  </section>
+  <section class="metrics" aria-label="显示测量">
+    <div><span>当前帧龄</span><strong id="age">--</strong><small>ms</small></div>
+    <div><span>呈现延迟估计</span><strong id="latency">--</strong><small>ms</small></div>
+    <div><span>显示帧率</span><strong id="rate">0</strong><small>fps</small></div>
+    <div><span>播放缓冲</span><strong id="buffer">--</strong><small>ms</small></div>
+    <div><span>有效负载</span><strong id="bandwidth">0</strong><small>Mbps</small></div>
+    <div><span>重连次数</span><strong id="reconnects">0</strong><small>次</small></div>
+  </section>
+  <div class="region-controls"><label class="toggle"><input id="edit" type="checkbox">区域编辑</label><select id="selected" aria-label="当前编辑区域"><option value="0">process-A</option><option value="1">process-B</option></select><button id="reset" title="恢复默认区域" aria-label="恢复默认区域"><i data-lucide="rotate-ccw"></i></button></div>
+  <details class="test-conditions"><summary>测试条件</summary><div class="test-fields">
+    <label>手机网络（手动确认）<select id="test-network"><option value="unknown">未确认</option><option value="4g">4G</option><option value="5g">5G</option><option value="wifi">Wi-Fi</option><option value="other">其他</option></select></label>
+    <label>VPN 路径（手动确认）<select id="test-route"><option value="unknown">未确认</option><option value="direct">直连</option><option value="relay">中继</option><option value="none">未使用 VPN</option></select></label>
+    <label class="test-note">现象 / 场景备注<input id="test-note" type="text" maxlength="200" autocomplete="off"></label>
+  </div></details>
+  <div class="detail"><span id="sync">校时中</span><span id="region-age">区域未更新</span><span id="dimensions">--</span></div>
+</main>
+<footer>只读观察 · 软件时间戳估计，不等于曝光到屏幕的光学总延迟</footer>
+<script src="/lucide.min.js"></script><script type="module" src="/app.js"></script>
+</body></html>

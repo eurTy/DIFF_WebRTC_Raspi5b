@@ -50,7 +50,7 @@ async function handlePiece(buffer,token){
     if(token!==epoch)return;
     video.clearRect(0,0,1280,720);video.drawImage(bitmap,...meta.rect);
     const shown=performance.now();current={id:meta.id,captured_ms:meta.captured_ms,shown,latency:clock.age(meta.captured_ms,shown)};
-    current.source=meta.source;lastFrameAt=shown;frames++;$('empty').hidden=true;$('status').textContent='传输中';$('source').textContent=meta.source==='SYNTHETIC_TASK_FIXTURE'?'合成实验输入 · 非实机画面':'实时摄像头 · 只读输入';
+    current.source=meta.source;lastFrameAt=shown;frames++;$('empty').hidden=true;$('status').textContent='传输中';$('notice').textContent='';$('source').textContent=meta.source==='SYNTHETIC_TASK_FIXTURE'?'合成实验输入 · 非实机画面':'实时摄像头 · 只读输入';
     metric('latency',current.latency);
     pending={id:meta.id,baseShown:true,patchName:meta.patch_name,baseDrawnAt:shown,latency:current.latency,source:meta.source,done:false};
     if(meta.patch_name)pending.timer=setTimeout(()=>finalize(false),patchDeadline);
@@ -62,6 +62,18 @@ function start(){
   stop();active=true;clock=new Clock();current=null;pending=null;frames=patches=rejected=reconnects=0;history=[];lastPatch={};bytes=[];$('empty').hidden=false;$('empty').textContent='等待帧';$('notice').textContent='';$('patches').textContent='0';$('rejected').textContent='0';
   open();
 }
+async function explainDisconnect(token){
+  try{
+    const response=await fetch('/api/status',{cache:'no-store'});
+    if(!response.ok)return;
+    const status=await response.json();
+    if(token!==epoch||!active)return;
+    if(status.sessions>=status.viewer_limit){
+      $('status').textContent='等待空闲会话';
+      $('notice').textContent='已有其他页面占用视频会话；关闭其他 8089 视频页后会自动恢复';
+    }
+  }catch{}
+}
 function open(){
   if(!active)return;epoch++;const token=epoch;startClock(token);$('status').textContent=reconnects?'重新连接中':'连接中';
   const connection=new WebSocket(address('/stream'));ws=connection;connection.binaryType='arraybuffer';let queue=Promise.resolve(),lastMessage=performance.now();
@@ -71,7 +83,7 @@ function open(){
     if(typeof e.data==='string'){try{const message=JSON.parse(e.data);if(message.type==='source_error')$('notice').textContent='输入暂不可用：'+message.reason;else if(message.type==='ready'&&Number.isInteger(message.patch_deadline_ms)&&message.patch_deadline_ms>=20&&message.patch_deadline_ms<=200)patchDeadline=message.patch_deadline_ms;}catch{}return;}
     queue=queue.then(()=>handlePiece(e.data,token)).catch(error=>{if(token===epoch){$('notice').textContent=error.message;connection.close(1008,'Invalid piece');}});
   };
-  connection.onclose=e=>{if(token!==epoch||!active)return;if(pending)finalize(false);clockWs?.close();$('status').textContent='等待重连';$('notice').textContent=e.code===1008?'配置或数据无效':'连接中断，等待恢复';if(e.code===1008){active=false;return;}setTimeout(()=>{if(token===epoch&&active){reconnects++;open();}},Math.min(2000,500*2**Math.min(reconnects,2)));};
+  connection.onclose=e=>{if(token!==epoch||!active)return;if(pending)finalize(false);clockWs?.close();$('status').textContent='等待重连';$('notice').textContent=e.code===1008?'配置或数据无效':'连接中断，等待恢复';if(e.code===1008){active=false;return;}explainDisconnect(token);setTimeout(()=>{if(token===epoch&&active){reconnects++;open();}},Math.min(2000,500*2**Math.min(reconnects,2)));};
   connection.onerror=()=>{if(token===epoch)$('notice').textContent='网络连接失败';};
   const watchdog=setInterval(()=>{if(token!==epoch){clearInterval(watchdog);return;}if(performance.now()-lastMessage>5000&&connection.readyState===1)connection.close(4001,'No fresh input');},1000);
 }

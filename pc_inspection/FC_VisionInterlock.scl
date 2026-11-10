@@ -1,0 +1,24 @@
+FUNCTION "FC_VisionInterlock" : Void
+VAR_INPUT
+    VisionValid : Bool;
+    Slot1Ok : Bool;
+    Slot2Ok : Bool;
+    Slot3Ok : Bool;
+    GuardClosed : Bool;
+    StopRequest : Bool;
+    MoveRequest : Bool;
+    GlueRequest : Bool;
+END_VAR
+VAR_OUTPUT
+    Ready : Bool;
+    ConveyorEnable : Bool;
+    GlueEnable : Bool;
+    Reject : Bool;
+END_VAR
+BEGIN
+    #Ready := #VisionValid AND #Slot1Ok AND #Slot2Ok AND #Slot3Ok
+              AND #GuardClosed AND NOT #StopRequest;
+    #ConveyorEnable := #Ready AND #MoveRequest AND NOT #GlueRequest;
+    #GlueEnable := #Ready AND #GlueRequest AND NOT #MoveRequest;
+    #Reject := NOT #Ready;
+END_FUNCTION
